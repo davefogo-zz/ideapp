@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @colaboradore.nombre %>
+</p>
+
+<p>
+  <strong>Cédula:</strong>
+  <%= @colaboradore.cédula %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @colaboradore.dirección %>
+</p>
+
+<p>
+  <strong>Teléfono personal:</strong>
+  <%= @colaboradore.teléfono_personal %>
+</p>
+
+<p>
+  <strong>Teléfono empresa:</strong>
+  <%= @colaboradore.teléfono_empresa %>
+</p>
+
+<p>
+  <strong>Cargo:</strong>
+  <%= @colaboradore.cargo %>
+</p>
+
+<p>
+  <strong>Departamento:</strong>
+  <%= @colaboradore.departamento %>
+</p>
+
+<p>
+  <strong>Jefe inmediato:</strong>
+  <%= @colaboradore.jefe_inmediato %>
+</p>
+
+<%= link_to 'Edit', edit_colaboradore_path(@colaboradore) %> |
+<%= link_to 'Back', colaboradores_path %>

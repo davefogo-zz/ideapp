@@ -1,0 +1,49 @@
+<%= form_for(@colaboradore) do |f| %>
+  <% if @colaboradore.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@colaboradore.errors.count, "error") %> prohibited this colaboradore from being saved:</h2>
+
+      <ul>
+      <% @colaboradore.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :cédula %><br>
+    <%= f.text_field :cédula %>
+  </div>
+  <div class="field">
+    <%= f.label :dirección %><br>
+    <%= f.text_field :dirección %>
+  </div>
+  <div class="field">
+    <%= f.label :teléfono_personal %><br>
+    <%= f.text_field :teléfono_personal %>
+  </div>
+  <div class="field">
+    <%= f.label :teléfono_empresa %><br>
+    <%= f.text_field :teléfono_empresa %>
+  </div>
+  <div class="field">
+    <%= f.label :cargo %><br>
+    <%= f.text_field :cargo %>
+  </div>
+  <div class="field">
+    <%= f.label :departamento %><br>
+    <%= f.text_field :departamento %>
+  </div>
+  <div class="field">
+    <%= f.label :jefe_inmediato %><br>
+    <%= f.text_field :jefe_inmediato %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,53 @@
+<%= form_for(@cliente) do |f| %>
+  <% if @cliente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+
+      <ul>
+      <% @cliente.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :nit %><br>
+    <%= f.text_field :nit %>
+  </div>
+  <div class="field">
+    <%= f.label :dirección_de_facturación %><br>
+    <%= f.text_field :dirección_de_facturación %>
+  </div>
+  <div class="field">
+    <%= f.label :teléfono %><br>
+    <%= f.text_field :teléfono %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_de_cliente %><br>
+    <%= f.text_field :tipo_de_cliente %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_comercial %><br>
+    <%= f.text_field :contacto_comercial %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_facturación %><br>
+    <%= f.text_field :contacto_facturación %>
+  </div>
+  <div class="field">
+    <%= f.label :cupo_de_crédito %><br>
+    <%= f.number_field :cupo_de_crédito %>
+  </div>
+  <div class="field">
+    <%= f.label :colaboradore_id %><br>
+    <%= f.text_field :colaboradore_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

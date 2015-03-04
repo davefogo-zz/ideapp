@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ordenes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha orden</th>
+      <th>Medida</th>
+      <th>Unidad</th>
+      <th>Costo unidad</th>
+      <th>Total</th>
+      <th>Presupuesto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ordenes.each do |ordene| %>
+      <tr>
+        <td><%= ordene.fecha_orden %></td>
+        <td><%= ordene.medida %></td>
+        <td><%= ordene.unidad %></td>
+        <td><%= ordene.costo_unidad %></td>
+        <td><%= ordene.total %></td>
+        <td><%= ordene.presupuesto %></td>
+        <td><%= link_to 'Show', ordene %></td>
+        <td><%= link_to 'Edit', edit_ordene_path(ordene) %></td>
+        <td><%= link_to 'Destroy', ordene, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ordene', new_ordene_path %>

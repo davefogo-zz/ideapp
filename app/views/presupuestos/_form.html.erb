@@ -1,0 +1,69 @@
+<%= form_for(@presupuesto) do |f| %>
+  <% if @presupuesto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@presupuesto.errors.count, "error") %> prohibited this presupuesto from being saved:</h2>
+
+      <ul>
+      <% @presupuesto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fecha %><br>
+    <%= f.datetime_select :fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :cliente %><br>
+    <%= f.text_field :cliente %>
+  </div>
+  <div class="field">
+    <%= f.label :nit %><br>
+    <%= f.text_field :nit %>
+  </div>
+  <div class="field">
+    <%= f.label :dirección %><br>
+    <%= f.text_field :dirección %>
+  </div>
+  <div class="field">
+    <%= f.label :teléfono %><br>
+    <%= f.text_field :teléfono %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_financiero %><br>
+    <%= f.text_field :contacto_financiero %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_comercial %><br>
+    <%= f.text_field :contacto_comercial %>
+  </div>
+  <div class="field">
+    <%= f.label :ejecutivo %><br>
+    <%= f.text_field :ejecutivo %>
+  </div>
+  <div class="field">
+    <%= f.label :agencia %><br>
+    <%= f.text_field :agencia %>
+  </div>
+  <div class="field">
+    <%= f.label :nit_agencia %><br>
+    <%= f.text_field :nit_agencia %>
+  </div>
+  <div class="field">
+    <%= f.label :titulo %><br>
+    <%= f.text_field :titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :producto %><br>
+    <%= f.text_field :producto %>
+  </div>
+  <div class="field">
+    <%= f.label :colaboradore_id %><br>
+    <%= f.text_field :colaboradore_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
