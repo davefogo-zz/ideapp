@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   resources :proveedores
 
-  resources :ordenes
-
-  resources :presupuestos
+  resources :presupuestos do 
+    resources :ordenes, except: [:index], controller: 'presupuesto/ordenes'
+  end
 
   resources :clientes
 

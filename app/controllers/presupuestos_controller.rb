@@ -10,6 +10,8 @@ class PresupuestosController < ApplicationController
   # GET /presupuestos/1
   # GET /presupuestos/1.json
   def show
+    @presupuesto = Presupuesto.find(params[:id])
+    @ordenes = @presupuesto.ordenes
   end
 
   # GET /presupuestos/new
