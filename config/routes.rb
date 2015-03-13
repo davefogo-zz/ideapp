@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'bienvenidos/index'
+
   resources :medios
 
   resources :proveedores
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :colaboradores
 
-  root to: 'welcome#index'
+  root to: 'bienvenidos#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
