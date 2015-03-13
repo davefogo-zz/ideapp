@@ -1,5 +1,4 @@
-class OrdenesController < ApplicationController
-  before_action :set_ordene, only: [:show, :edit, :update, :destroy]
+class Presupuestos::OrdenesController < ApplicationController
 
   # GET /ordenes
   # GET /ordenes.json
@@ -14,6 +13,7 @@ class OrdenesController < ApplicationController
 
   # GET /ordenes/new
   def new
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.new
   end
 
@@ -24,15 +24,17 @@ class OrdenesController < ApplicationController
   # POST /ordenes
   # POST /ordenes.json
   def create
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.new(ordene_params)
+    @ordene.presupuesto = @presupuesto
 
     respond_to do |format|
       if @ordene.save
-        format.html { redirect_to @ordene, notice: 'Ordene was successfully created.' }
-        format.json { render :show, status: :created, location: @ordene }
+        format.html { redirect_to @presupuesto, notice: 'Ordene was successfully created.' }
+        format.json { render :show, status: :created, location: @presupuesto }
       else
         format.html { render :new }
-        format.json { render json: @ordene.errors, status: :unprocessable_entity }
+        format.json { render json: @presupuesto.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   resources :proveedores
 
   resources :presupuestos do 
-    resources :ordenes, except: [:index], controller: 'presupuesto/ordenes'
+    resources :ordenes, except: [:index], controller: 'presupuestos/ordenes'
   end
 
   resources :clientes
 
   resources :colaboradores
+
+  root to: 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
