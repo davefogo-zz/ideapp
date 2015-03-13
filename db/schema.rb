@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150304181344) do
     t.integer  "presupuesto_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "presupuesto_id"
   end
 
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"

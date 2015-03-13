@@ -2,6 +2,12 @@
 
 <h1>Listing Presupuestos</h1>
 
+<%= form_tag presupuestos_path, method: :get do %>
+  <%= text_field_tag 'search[date_from]', @search.date_from %>
+  <%= text_field_tag 'search[date_to]', @search.date_to %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
 <table>
   <thead>
     <tr>
