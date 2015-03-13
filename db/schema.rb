@@ -11,47 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304181344) do
+ActiveRecord::Schema.define(version: 20150313191017) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
-    t.string   "dirección_de_facturación"
-    t.string   "teléfono"
     t.string   "tipo_de_cliente"
     t.string   "contacto_comercial"
-    t.string   "contacto_facturación"
-    t.integer  "cupo_de_crédito",          limit: 8
     t.integer  "colaboradore_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "direccion_de_facturacion"
+    t.string   "cupo_de_credito"
+    t.string   "contacto_facturacion"
+    t.string   "telefono"
   end
 
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "cédula"
-    t.string   "dirección"
-    t.string   "teléfono_personal"
-    t.string   "teléfono_empresa"
     t.string   "cargo"
     t.string   "departamento"
     t.string   "jefe_inmediato"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "cedula"
+    t.string   "telefono_empresa"
+    t.string   "telefono_personal"
+    t.string   "direccion"
   end
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
-    t.string   "dirección"
-    t.string   "teléfono"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
     t.integer  "proveedore_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "telefono"
+    t.string   "direccion"
   end
 
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
@@ -73,8 +73,6 @@ ActiveRecord::Schema.define(version: 20150304181344) do
     t.datetime "fecha"
     t.string   "cliente"
     t.string   "nit"
-    t.string   "dirección"
-    t.string   "teléfono"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
     t.string   "ejecutivo"
@@ -85,6 +83,8 @@ ActiveRecord::Schema.define(version: 20150304181344) do
     t.integer  "colaboradore_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "telefono"
+    t.string   "direccion"
   end
 
   add_index "presupuestos", ["colaboradore_id"], name: "index_presupuestos_on_colaboradore_id"
@@ -92,12 +92,12 @@ ActiveRecord::Schema.define(version: 20150304181344) do
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
-    t.string   "dirección"
-    t.string   "teléfono"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "telefono"
+    t.string   "direccion"
   end
 
 end
