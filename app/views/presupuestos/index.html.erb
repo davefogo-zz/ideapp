@@ -1,49 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Presupuestos</h1>
+<h1>Listado de Presupuestos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Cliente</th>
-      <th>Nit</th>
-      <th>Dirección</th>
-      <th>Teléfono</th>
-      <th>Contacto financiero</th>
-      <th>Contacto comercial</th>
-      <th>Ejecutivo</th>
-      <th>Agencia</th>
-      <th>Nit agencia</th>
-      <th>Titulo</th>
-      <th>Producto</th>
-      <th>Colaboradore</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Nit</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>Agencia</th>
+          <th>Nit agencia</th>
+          <th>Titulo</th>
+          <th>Producto</th>
+          <th>Colaboradore</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @presupuestos.each do |presupuesto| %>
-      <tr>
-        <td><%= presupuesto.fecha %></td>
-        <td><%= presupuesto.cliente %></td>
-        <td><%= presupuesto.nit %></td>
-        <td><%= presupuesto.direccion %></td>
-        <td><%= presupuesto.telefono %></td>
-        <td><%= presupuesto.ejecutivo %></td>
-        <td><%= presupuesto.agencia %></td>
-        <td><%= presupuesto.nit_agencia %></td>
-        <td><%= presupuesto.titulo %></td>
-        <td><%= presupuesto.producto %></td>
-        <td><%= presupuesto.colaboradore %></td>
-        <td><%= link_to 'Show', presupuesto %></td>
-        <td><%= link_to 'Edit', edit_presupuesto_path(presupuesto) %></td>
-        <td><%= link_to 'Destroy', presupuesto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+      <tbody>
+        <% @presupuestos.each do |presupuesto| %>
+          <tr>
+            <td><%= presupuesto.fecha %></td>
+            <td><%= presupuesto.cliente %></td>
+            <td><%= presupuesto.nit %></td>
+            <td><%= presupuesto.direccion %></td>
+            <td><%= presupuesto.telefono %></td>
+            <td><%= presupuesto.agencia %></td>
+            <td><%= presupuesto.nit_agencia %></td>
+            <td><%= presupuesto.titulo %></td>
+            <td><%= presupuesto.producto %></td>
+            <td><%= presupuesto.colaboradore %></td>
+            <td><%= link_to 'Show', presupuesto, class: 'btn btn-mini btn-default' %></td>
+            <td><%= link_to 'Edit', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Destroy', presupuesto, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <br>
 
 <%= link_to 'New Presupuesto', new_presupuesto_path %>
