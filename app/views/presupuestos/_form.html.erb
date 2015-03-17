@@ -32,10 +32,6 @@
     <%= f.text_field :telefono %>
   </div>
   <div class="field">
-    <%= f.label :ejecutivo %><br>
-    <%= f.text_field :ejecutivo %>
-  </div>
-  <div class="field">
     <%= f.label :agencia %><br>
     <%= f.text_field :agencia %>
   </div>
@@ -52,9 +48,9 @@
     <%= f.text_field :producto %>
   </div>
   <div class="field">
-    <%= f.label :colaboradore_id %><br>
-    <%= f.text_field :colaboradore_id %>
-  </div>
+    <%= f.label :colaboradore%><br>
+    <%= collection_select( :presupuesto, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
+  </div> 
   <div class="actions">
     <%= f.submit %>
   </div>

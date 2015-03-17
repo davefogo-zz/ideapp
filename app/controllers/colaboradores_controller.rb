@@ -69,6 +69,6 @@ class ColaboradoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def colaboradore_params
-      params.require(:colaboradore).permit(:nombre, :cédula, :dirección, :teléfono_personal, :teléfono_empresa, :cargo, :departamento, :jefe_inmediato)
+      params.require(:colaboradore).permit(:nombre, :cedula, :direccion, :telefono_personal, :telefono_empresa, :cargo, :departamento, :jefe_inmediato)
     end
 end
