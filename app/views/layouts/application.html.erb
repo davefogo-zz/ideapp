@@ -6,11 +6,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
+
 <body>
-<%= link_to 'inicio', root_path%>
-<%= link_to 'ingreso', root_path%>
+
+<div class="container">
+	<ul class="nav nav-tabs">
+		<%= link_to 'inicio', root_path %>
+		<%= link_to 'ingreso', root_path %>
+	</ul>
 
 <%= yield %>
+
+</div>
 
 </body>
 </html>
