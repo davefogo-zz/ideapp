@@ -1,4 +1,9 @@
 <%= form_for [@presupuesto, @ordene] do |f| %>
+  
+  <div class="field">
+    <%= f.label :proveedore%><br>
+    <%= collection_select( :proveedore, :proveedore_id, Proveedore.all, :id, :nombre, {}, {:multiple => false}) %>
+  </div> 
 
   <div class="field">
     <%= f.label :fecha_orden %><br>

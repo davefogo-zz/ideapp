@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317211747) do
+ActiveRecord::Schema.define(version: 20150319221641) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
     t.string   "tipo_de_cliente"
     t.string   "contacto_comercial"
-    t.integer  "colaboradore_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "direccion_de_facturacion"
@@ -26,8 +25,6 @@ ActiveRecord::Schema.define(version: 20150317211747) do
     t.string   "contacto_facturacion"
     t.string   "telefono"
   end
-
-  add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"
@@ -47,14 +44,11 @@ ActiveRecord::Schema.define(version: 20150317211747) do
     t.string   "nit"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
-    t.integer  "proveedore_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "telefono"
     t.string   "direccion"
   end
-
-  add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
 
   create_table "ordenes", force: :cascade do |t|
     t.datetime "fecha_orden"
