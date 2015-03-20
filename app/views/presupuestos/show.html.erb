@@ -67,6 +67,7 @@
       <tbody>
         <% @ordenes.each do |ordene| %>
         <tr>
+          <td><h4><%= ordene.proveedore_id %></h4></td>
           <td><h4><%= ordene.fecha_orden %></h4></td>
           <td><h4><%= ordene.medida %></h4></td>
           <td><h4><%= ordene.costo_unidad %></h4></td>
