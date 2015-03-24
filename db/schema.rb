@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320220037) do
+ActiveRecord::Schema.define(version: 20150324224759) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20150320220037) do
     t.string   "cupo_de_credito"
     t.string   "contacto_facturacion"
     t.string   "telefono"
+    t.integer  "colaboradore_id"
   end
+
+  add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"

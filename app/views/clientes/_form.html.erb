@@ -45,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :colaboradore %><br>
-    <%= collection_select( :colaboradore, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
+    <%= collection_select( :cliente, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
   </div> <br>
 
   <div class="actions">
