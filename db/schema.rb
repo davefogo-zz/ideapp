@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320220037) do
+ActiveRecord::Schema.define(version: 20150324165132) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -56,13 +56,9 @@ ActiveRecord::Schema.define(version: 20150320220037) do
     t.string   "unidad"
     t.integer  "costo_unidad"
     t.integer  "total"
-    t.integer  "presupuesto_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "proveedore_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
-
-  add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
 
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"
