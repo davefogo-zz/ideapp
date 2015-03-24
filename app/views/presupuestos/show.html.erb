@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @presupuesto.fecha %>
+</p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @presupuesto.cliente %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @presupuesto.nit %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @presupuesto.direccion %>
+</p>
+
+<p>
+  <strong>Teléfono:</strong>
+  <%= @presupuesto.telefono %>
+</p>
+
+<p>
+  <strong>Agencia:</strong>
+  <%= @presupuesto.agencia %>
+</p>
+
+<p>
+  <strong>Nit agencia:</strong>
+  <%= @presupuesto.nit_agencia %>
+</p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @presupuesto.titulo %>
+</p>
+
+<p>
+  <strong>Producto:</strong>
+  <%= @presupuesto.producto %>
+</p>
+
+<p>
+  <strong>Colaboradore:</strong>
+  <%= @presupuesto.colaboradore.nombre %>
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Proveedor</th>
+          <th>Medio</th>
+          <th>Fecha Orden</th>
+          <th>Medida</th>
+          <th>Unidad</th>
+          <th>Costo Unidad</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ordenes.each do |ordene| %>
+        <tr>
+          <td><h4><%= ordene.proveedore.nombre %></h4></td>
+          <td><h4><%= ordene.fecha_orden %></h4></td>
+          <td><h4><%= ordene.medida %></h4></td>
+          <td><h4><%= ordene.costo_unidad %></h4></td>
+          <td><h4><%= ordene.total %></h4></td>
+        </tr>
+        <% end %>
+    </tbody>
+ </table> 
+
+<%= link_to 'Edit', edit_presupuesto_path(@presupuesto) %> |
+<%= link_to 'Back', presupuestos_path %>
+<%= link_to 'Agregar nueva orden', new_presupuesto_ordene_path(@presupuesto) %>

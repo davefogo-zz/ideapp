@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ideapp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+
+<body>
+
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li><%= link_to 'inicio', root_path %></li>
+		<li><%= link_to 'colaboradores', colaboradores_path %></li>
+		<li><%= link_to 'clientes', clientes_path %></li>
+		<li><%= link_to 'presupuestos', presupuestos_path %></li>
+		<li><%= link_to 'proveedores', proveedores_path %></li>
+		<li><%= link_to 'medios', medios_path %></li>
+		<li><%= link_to 'ingreso', root_path %></li>
+	</ul>
+
+<%= yield %>
+
+</div>
+
+</body>
+</html>

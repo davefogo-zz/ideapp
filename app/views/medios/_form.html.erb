@@ -1,0 +1,45 @@
+<%= form_for(@medio) do |f| %>
+  <% if @medio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@medio.errors.count, "error") %> prohibited this medio from being saved:</h2>
+
+      <ul>
+      <% @medio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :nit %><br>
+    <%= f.text_field :nit %>
+  </div>
+  <div class="field">
+    <%= f.label :dirección %><br>
+    <%= f.text_field :dirección %>
+  </div>
+  <div class="field">
+    <%= f.label :teléfono %><br>
+    <%= f.text_field :teléfono %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_financiero %><br>
+    <%= f.text_field :contacto_financiero %>
+  </div>
+  <div class="field">
+    <%= f.label :contacto_comercial %><br>
+    <%= f.text_field :contacto_comercial %>
+  </div>
+  <div class="field">
+    <%= f.label :proveedore_id %><br>
+    <%= f.text_field :proveedore_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

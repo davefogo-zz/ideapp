@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2015-03-04 13:13:28
+  cliente: MyString
+  nit: MyString
+  dirección: MyString
+  teléfono: MyString
+  contacto_financiero: MyString
+  contacto_comercial: MyString
+  ejecutivo: MyString
+  agencia: MyString
+  nit_agencia: MyString
+  titulo: MyString
+  producto: MyString
+  colaboradore_id: 
+
+two:
+  fecha: 2015-03-04 13:13:28
+  cliente: MyString
+  nit: MyString
+  dirección: MyString
+  teléfono: MyString
+  contacto_financiero: MyString
+  contacto_comercial: MyString
+  ejecutivo: MyString
+  agencia: MyString
+  nit_agencia: MyString
+  titulo: MyString
+  producto: MyString
+  colaboradore_id: 

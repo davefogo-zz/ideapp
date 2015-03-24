@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Medios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Nit</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Contacto financiero</th>
+      <th>Contacto comercial</th>
+      <th>Proveedore</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medios.each do |medio| %>
+      <tr>
+        <td><%= medio.nombre %></td>
+        <td><%= medio.nit %></td>
+        <td><%= medio.dirección %></td>
+        <td><%= medio.teléfono %></td>
+        <td><%= medio.contacto_financiero %></td>
+        <td><%= medio.contacto_comercial %></td>
+        <td><%= medio.proveedore %></td>
+        <td><%= link_to 'Show', medio %></td>
+        <td><%= link_to 'Edit', edit_medio_path(medio) %></td>
+        <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medio', new_medio_path %>

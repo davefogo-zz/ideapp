@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @medio.nombre %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @medio.nit %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @medio.dirección %>
+</p>
+
+<p>
+  <strong>Teléfono:</strong>
+  <%= @medio.teléfono %>
+</p>
+
+<p>
+  <strong>Contacto financiero:</strong>
+  <%= @medio.contacto_financiero %>
+</p>
+
+<p>
+  <strong>Contacto comercial:</strong>
+  <%= @medio.contacto_comercial %>
+</p>
+
+<p>
+  <strong>Proveedore:</strong>
+  <%= @medio.proveedore %>
+</p>
+
+<%= link_to 'Edit', edit_medio_path(@medio) %> |
+<%= link_to 'Back', medios_path %>
