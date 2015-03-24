@@ -44,9 +44,10 @@
     <%= f.number_field :cupo_de_credito %>
   </div>
   <div class="field">
-    <%= f.label :colaboradore_id %><br>
-    <%= f.text_field :colaboradore_id %>
-  </div>
+    <%= f.label :colaboradore %><br>
+    <%= collection_select( :colaboradore, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
+  </div> <br>
+
   <div class="actions">
     <%= f.submit %>
   </div>
