@@ -1,4 +1,4 @@
-f# encoding: UTF-8
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@ f# encoding: UTF-8
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324224759) do
+ActiveRecord::Schema.define(version: 20150325172212) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -80,8 +80,10 @@ ActiveRecord::Schema.define(version: 20150324224759) do
     t.datetime "updated_at",      null: false
     t.string   "telefono"
     t.string   "direccion"
+    t.integer  "cliente_id"
   end
 
+  add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id"
   add_index "presupuestos", ["colaboradore_id"], name: "index_presupuestos_on_colaboradore_id"
 
   create_table "proveedores", force: :cascade do |t|
