@@ -1,4 +1,4 @@
 class Colaboradore < ActiveRecord::Base
-  has_many :clientes
   has_many :presupuestos
+   has_many :clientes, :through => :presupuestos
 end
