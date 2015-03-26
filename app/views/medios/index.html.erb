@@ -21,11 +21,11 @@
       <tr>
         <td><%= medio.nombre %></td>
         <td><%= medio.nit %></td>
-        <td><%= medio.dirección %></td>
-        <td><%= medio.teléfono %></td>
+        <td><%= medio.direccion %></td>
+        <td><%= medio.telefono %></td>
         <td><%= medio.contacto_financiero %></td>
         <td><%= medio.contacto_comercial %></td>
-        <td><%= medio.proveedore %></td>
+        <td><%= medio.proveedore.nombre %></td>
         <td><%= link_to 'Show', medio %></td>
         <td><%= link_to 'Edit', edit_medio_path(medio) %></td>
         <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -69,6 +69,6 @@ class MediosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medio_params
-      params.require(:medio).permit(:nombre, :nit, :dirección, :teléfono, :contacto_financiero, :contacto_comercial, :proveedore_id)
+      params.require(:medio).permit(:nombre, :nit, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :proveedore_id)
     end
 end

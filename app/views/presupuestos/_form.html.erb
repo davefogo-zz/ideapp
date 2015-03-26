@@ -16,28 +16,8 @@
     <%= f.datetime_select :fecha %>
   </div>
   <div class="field">
-    <%= f.label :cliente %><br>
-    <%= f.text_field :cliente %>
-  </div>
-  <div class="field">
-    <%= f.label :nit %><br>
-    <%= f.text_field :nit %>
-  </div>
-  <div class="field">
-    <%= f.label :direccion %><br>
-    <%= f.text_field :direccion %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono %>
-  </div>
-  <div class="field">
-    <%= f.label :agencia %><br>
-    <%= f.text_field :agencia %>
-  </div>
-  <div class="field">
-    <%= f.label :nit_agencia %><br>
-    <%= f.text_field :nit_agencia %>
+    <%= f.label :cliente%><br>
+    <%= collection_select( :presupuesto, :cliente_id, Cliente.all, :id, :nombre, {}, {:multiple => false}) %>
   </div>
   <div class="field">
     <%= f.label :titulo %><br>
@@ -47,10 +27,6 @@
     <%= f.label :producto %><br>
     <%= f.text_field :producto %>
   </div>
-  <div class="field">
-    <%= f.label :colaboradore%><br>
-    <%= collection_select( :presupuesto, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
-  </div> 
   <div class="actions">
     <%= f.submit %>
   </div>

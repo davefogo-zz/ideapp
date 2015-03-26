@@ -12,12 +12,12 @@
 
 <p>
   <strong>Dirección:</strong>
-  <%= @medio.dirección %>
+  <%= @medio.direccion %>
 </p>
 
 <p>
   <strong>Teléfono:</strong>
-  <%= @medio.teléfono %>
+  <%= @medio.telefono %>
 </p>
 
 <p>
@@ -32,7 +32,7 @@
 
 <p>
   <strong>Proveedore:</strong>
-  <%= @medio.proveedore %>
+  <%= @medio.proveedore.nombre %>
 </p>
 
 <%= link_to 'Edit', edit_medio_path(@medio) %> |

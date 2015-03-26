@@ -20,12 +20,12 @@
     <%= f.text_field :nit %>
   </div>
   <div class="field">
-    <%= f.label :dirección %><br>
-    <%= f.text_field :dirección %>
+    <%= f.label :direccion %><br>
+    <%= f.text_field :direccion %>
   </div>
   <div class="field">
-    <%= f.label :teléfono %><br>
-    <%= f.text_field :teléfono %>
+    <%= f.label :telefono %><br>
+    <%= f.text_field :telefono %>
   </div>
   <div class="field">
     <%= f.label :contacto_financiero %><br>
@@ -36,8 +36,8 @@
     <%= f.text_field :contacto_comercial %>
   </div>
   <div class="field">
-    <%= f.label :proveedore_id %><br>
-    <%= f.text_field :proveedore_id %>
+    <%= f.label :proveedore %><br>
+    <%= collection_select( :medio, :proveedore_id, Proveedore.all, :id, :nombre, {}, {:multiple => false}) %>
   </div>
   <div class="actions">
     <%= f.submit %>
