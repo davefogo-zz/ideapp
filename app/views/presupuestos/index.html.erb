@@ -25,15 +25,13 @@
         <% @presupuestos.each do |presupuesto| %>
           <tr>
             <td><%= presupuesto.fecha %></td>
-            <td><%= presupuesto.cliente %></td>
-            <td><%= presupuesto.nit %></td>
-            <td><%= presupuesto.direccion %></td>
-            <td><%= presupuesto.telefono %></td>
-            <td><%= presupuesto.agencia %></td>
-            <td><%= presupuesto.nit_agencia %></td>
+            <td><%= presupuesto.cliente.try(:nombre) %></td>
+            <td><%= presupuesto.cliente.try(:nit) %></td>
+            <td><%= presupuesto.cliente.try(:direccion_de_facturacion) %></td>
+            <td><%= presupuesto.cliente.try(:telefono) %></td>
             <td><%= presupuesto.titulo %></td>
             <td><%= presupuesto.producto %></td>
-            <td><%= presupuesto.colaboradore.nombre %></td>
+            <td><%= presupuesto.cliente.colaboradore.try(:nombre) %></td>
             <td><%= link_to 'Show', presupuesto, class: 'btn btn-mini btn-default' %></td>
             <td><%= link_to 'Edit', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Destroy', presupuesto, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>

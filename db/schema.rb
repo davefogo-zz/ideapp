@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326092602) do
+ActiveRecord::Schema.define(version: 20150326175158) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -45,19 +45,11 @@ ActiveRecord::Schema.define(version: 20150326092602) do
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
-    t.string   "contacto_financiero"
-    t.string   "contacto_comercial"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "telefono"
-    t.string   "direccion"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "proveedore_id"
-    t.integer  "ordene_id"
-    t.integer  "presupuesto_id"
   end
 
-  add_index "medios", ["ordene_id"], name: "index_medios_on_ordene_id"
-  add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id"
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
 
   create_table "ordenes", force: :cascade do |t|
@@ -78,24 +70,14 @@ ActiveRecord::Schema.define(version: 20150326092602) do
 
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"
-    t.string   "cliente"
-    t.string   "nit"
-    t.string   "agencia"
-    t.string   "nit_agencia"
     t.string   "titulo"
     t.string   "producto"
-    t.integer  "colaboradore_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "telefono"
-    t.string   "direccion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "cliente_id"
-    t.integer  "medio_id"
   end
 
   add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id"
-  add_index "presupuestos", ["colaboradore_id"], name: "index_presupuestos_on_colaboradore_id"
-  add_index "presupuestos", ["medio_id"], name: "index_presupuestos_on_medio_id"
 
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre"

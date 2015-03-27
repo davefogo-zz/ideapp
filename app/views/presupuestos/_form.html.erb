@@ -16,7 +16,7 @@
     <%= f.datetime_select :fecha %>
   </div>
   <div class="field">
-    <%= f.label :cliente%><br>
+    <%= f.label :cliente %><br>
     <%= collection_select( :presupuesto, :cliente_id, Cliente.all, :id, :nombre, {}, {:multiple => false}) %>
   </div>
   <div class="field">

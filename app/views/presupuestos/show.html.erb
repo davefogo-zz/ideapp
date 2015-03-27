@@ -7,32 +7,22 @@
 
 <p>
   <strong>Cliente:</strong>
-  <%= @presupuesto.cliente %>
+  <%= @presupuesto.cliente.try(:nombre) %>
 </p>
 
 <p>
   <strong>Nit:</strong>
-  <%= @presupuesto.nit %>
+  <%= @presupuesto.cliente.try(:nit)   %>
 </p>
 
 <p>
   <strong>Dirección:</strong>
-  <%= @presupuesto.direccion %>
+  <%= @presupuesto.cliente.try(:direccion_de_facturacion) %>
 </p>
 
 <p>
   <strong>Teléfono:</strong>
-  <%= @presupuesto.telefono %>
-</p>
-
-<p>
-  <strong>Agencia:</strong>
-  <%= @presupuesto.agencia %>
-</p>
-
-<p>
-  <strong>Nit agencia:</strong>
-  <%= @presupuesto.nit_agencia %>
+  <%= @presupuesto.cliente.try(:telefono) %>
 </p>
 
 <p>
@@ -47,7 +37,7 @@
 
 <p>
   <strong>Colaboradore:</strong>
-  <%= @presupuesto.colaboradore.nombre %>
+  <%= @presupuesto.cliente.colaboradore.try(:nombre) %>
 </p>
 
 <div class="media">
