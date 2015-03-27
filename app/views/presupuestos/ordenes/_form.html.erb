@@ -2,11 +2,11 @@
   
   <div class="field">
     <%= f.label :proveedore %><br>
-    <%= collection_select( :ordene, :proveedore_id, Proveedore.all, :id, :nombre, {}, {:multiple => false}) %>
+    <%= collection_select( :proveedore, :proveedore_id, Proveedore.all, :id, :nombre, {}, {:multiple => false}) %>
   </div> 
   <div class="field">
     <%= f.label :medio %><br>
-    <%= collection_select( :ordene, :medio_id, Medio.all, :id, :nombre, {}, {:multiple => false}) %>
+    <%= collection_select( :proveedore, :medio_id, Medio.all, :id, :nombre, {}, {:multiple => false}) %>
   </div> 
   <div class="field">
     <%= f.label :fecha_orden %><br>
