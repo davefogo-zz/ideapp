@@ -71,6 +71,6 @@ class Presupuestos::OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordene_params
-      params.require(:ordene).permit(:fecha_orden, :medida, :unidad, :costo_unidad, :total, :presupuesto_id, :proveedore_id, :medio_id)
+      params.require(:ordene).permit(:fecha_orden, :medida, :unidad, :costo_unidad, :total, :presupuesto_id, :medio_id)
     end
 end

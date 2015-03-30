@@ -57,13 +57,13 @@
       <tbody>
         <% @ordenes.each do |ordene| %>
         <tr>
-          <td><h4><%= ordene.proveedore.try(:nombre) %></h4></td>
-          <td><h4><%= ordene.proveedore.try(:medio) %></h4></td>
+          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
+          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
           <td><h4><%= ordene.fecha_orden %></h4></td>
           <td><h4><%= ordene.medida %></h4></td>
           <td><h4><%= ordene.costo_unidad %></h4></td>
           <td><h4><%= ordene.total %></h4></td>
-        </tr>
+          </tr>
         <% end %>
     </tbody>
  </table> 
