@@ -1,4 +1,3 @@
 class Proveedore < ActiveRecord::Base
-  belongs_to :ordenes
-  has_many :medios, dependent: :destroy
+  has_many :medios
 end

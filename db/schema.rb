@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327233059) do
+ActiveRecord::Schema.define(version: 20150330174555) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -61,8 +61,10 @@ ActiveRecord::Schema.define(version: 20150327233059) do
     t.integer  "presupuesto_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "medio_id"
   end
 
+  add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
 
   create_table "presupuestos", force: :cascade do |t|
@@ -85,7 +87,6 @@ ActiveRecord::Schema.define(version: 20150327233059) do
     t.datetime "updated_at",          null: false
     t.string   "telefono"
     t.string   "direccion"
-    t.integer  "ordene_id"
   end
 
 end
