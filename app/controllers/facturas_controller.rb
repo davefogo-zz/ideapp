@@ -5,10 +5,6 @@ class FacturasController < ApplicationController
   # GET /facturas.json
   def index
     @facturas = Factura.all
-
-    def factura_de_venta_id
-      id + 54000
-    end
   end
 
   # GET /facturas/1
@@ -18,7 +14,7 @@ class FacturasController < ApplicationController
 
   # GET /facturas/new
   def new
-    @factura = Factura.new
+    @aprobado_por_cliente = Presupuesto.find(params[:presupuesto_id]).ordenes.where(:aprobado_por_cliente => 1)
   end
 
   # GET /facturas/1/edit

@@ -63,6 +63,8 @@
           <td><h4><%= ordene.medida %></h4></td>
           <td><h4><%= ordene.costo_unidad %></h4></td>
           <td><h4><%= ordene.total %></h4></td>
+          <td><%= link_to 'Edit', edit_presupuesto_ordene_path(ordene) %></td>
+          <td><%= link_to 'Destroy', ordene, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
     </tbody>
