@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330174259) do
+ActiveRecord::Schema.define(version: 20150405150626) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -42,6 +42,22 @@ ActiveRecord::Schema.define(version: 20150330174259) do
     t.string   "direccion"
   end
 
+  create_table "facturas", force: :cascade do |t|
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.datetime "fecha_de_expedicion"
+  end
+
+  create_table "items_factura", force: :cascade do |t|
+    t.integer  "factura_id"
+    t.datetime "fecha_orden"
+    t.integer  "revisado"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "items_factura", ["factura_id"], name: "index_items_factura_on_factura_id"
+
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
     t.string   "nit"
@@ -59,9 +75,10 @@ ActiveRecord::Schema.define(version: 20150330174259) do
     t.integer  "costo_unidad"
     t.integer  "total"
     t.integer  "presupuesto_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "medio_id"
+    t.integer  "aprobado_por_cliente"
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"

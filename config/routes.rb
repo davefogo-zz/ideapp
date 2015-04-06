@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :facturas
+
   get 'bienvenidos/index'
 
   resources :medios
