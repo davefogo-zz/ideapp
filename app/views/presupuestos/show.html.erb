@@ -54,21 +54,19 @@
           <th>Total</th>
         </tr>
       </thead>
-      <tbody>
-        <% @ordenes.each do |ordene| %>
-        <tr>
-          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
-          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
-          <td><h4><%= ordene.fecha_orden %></h4></td>
-          <td><h4><%= ordene.medida %></h4></td>
-          <td><h4><%= ordene.costo_unidad %></h4></td>
-          <td><h4><%= ordene.total %></h4></td>
-          <td><%= link_to 'Edit', edit_presupuesto_ordene_path(ordene) %></td>
-          <td><%= link_to 'Destroy', ordene, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-    </tbody>
- </table> 
+	      <tbody>
+	        <% @ordenes.each do |ordene| %>
+	        <tr>
+	          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
+	          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
+	          <td><h4><%= ordene.fecha_orden %></h4></td>
+	          <td><h4><%= ordene.medida %></h4></td>
+	          <td><h4><%= ordene.costo_unidad %></h4></td>
+	          <td><h4><%= ordene.total %></h4></td>
+	        </tr>
+	        <% end %>
+	    </tbody>
+ 	 	</table> 
 
 <%= link_to 'Edit', edit_presupuesto_path(@presupuesto) %> |
 <%= link_to 'Back', presupuestos_path %>

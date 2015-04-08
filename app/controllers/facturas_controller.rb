@@ -14,7 +14,7 @@ class FacturasController < ApplicationController
 
   # GET /facturas/new
   def new
-    @aprobado_por_cliente = Presupuesto.find(params[:presupuesto_id]).ordenes.where(:aprobado_por_cliente => 1)
+    @aprobado_por_cliente = Presupuesto.find(params.require(:presupuesto_id)).ordenes.where(:aprobado_por_cliente => 1)
   end
 
   # GET /facturas/1/edit
