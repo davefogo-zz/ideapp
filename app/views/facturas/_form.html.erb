@@ -15,10 +15,12 @@
     <%= f.label :fecha_de_expedicion %><br>
     <%= f.datetime_select :fecha_de_expedicion %>
   </div>
-
-  <div class="field">
-    <%= f.label :ordene %><br>
-    <%= collection_select( :ordene, :ordene_id, Ordene.all, :id, :fecha_orden, {}, {:multiple => false}) %>
+	
+	<% Ordene.all.each do |ordene| %>
+	  <%= ordene.fecha_orden %>
+		<%= ordene.medio.nombre %>
+	<% end %>
+	
   <div class="actions">
     <%= f.submit %>
   </div>

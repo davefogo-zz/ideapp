@@ -3,7 +3,11 @@
 <p>
   <strong>Factura de venta:</strong>
   <%= @factura.fecha_de_expedicion %>
-  	
+  
+	<% Ordene.all.each do |ordene| %>
+	  <%= ordene.fecha_orden %>
+		<%= ordene.medio.nombre %>
+	<% end %>
 
 </p>
 
