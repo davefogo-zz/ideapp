@@ -14,7 +14,7 @@ class FacturasController < ApplicationController
 
   # GET /facturas/new
   def new
-    @aprobado_por_cliente = Ordene.where(:aprobado_por_cliente => 1)
+   @ordenes = Ordene.where(aprobado_por_cliente: 1) 
     @factura = Factura.new
   end
   
