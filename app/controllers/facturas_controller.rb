@@ -15,7 +15,7 @@ class FacturasController < ApplicationController
   # GET /facturas/new
   def new
    @ordenes = Ordene.where(aprobado_por_cliente: 1) 
-    @factura = Factura.new
+   @factura = Factura.new
   end
   
   # GET /facturas/1/edit
@@ -26,6 +26,7 @@ class FacturasController < ApplicationController
   # POST /facturas.json
   def create
     @factura = Factura.new(factura_params)
+    render plain: params[:article].inspect
 
     respond_to do |format|
       if @factura.save

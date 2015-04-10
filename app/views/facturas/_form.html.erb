@@ -17,9 +17,10 @@
   </div>
 	
 	<div class="field">
-	<%= collection_select( :ordene, :ordene_id, @ordenes, :id, :fecha_orden, {}, {:multiple => false}) %>
+	<%= f.label :ordene %><br>
+	<%= collection_select( :ordene, :ordene_id, @ordenes, :id, :medio_id,  {}, {:multiple => true}) %>
 	</div>
-	
+
   <div class="actions">
     <%= f.submit %>
   </div>
