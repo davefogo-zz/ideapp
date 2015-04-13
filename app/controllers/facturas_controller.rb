@@ -26,7 +26,7 @@ class FacturasController < ApplicationController
   # POST /facturas.json
   def create
     @factura = Factura.new(factura_params)
-    render plain: params[:article].inspect
+    
 
     respond_to do |format|
       if @factura.save

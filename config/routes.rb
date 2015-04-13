@@ -3,14 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :facturas
-  get "/presupuesto/presupuesto_id/facturas/new"
   
   get 'bienvenidos/index'
   resources :medios
   resources :proveedores
   resources :presupuestos do 
-  resources :ordenes, except: [:index], controller: 'presupuestos/ordenes'
+    resources :ordenes, controller: 'presupuestos/ordenes'
   end
   resources :clientes
   resources :colaboradores
+
 end

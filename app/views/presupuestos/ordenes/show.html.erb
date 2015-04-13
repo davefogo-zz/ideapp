@@ -2,30 +2,30 @@
 
 <p>
   <strong>Fecha orden:</strong>
-  <%= @ordene.fecha_orden %>
+  <%= @ordene.try(:fecha_orden) %>
 </p>
 
 <p>
   <strong>Medida:</strong>
-  <%= @ordene.medida %>
+  <%= @ordene.try(:medida)%>
 </p>
 
 <p>
   <strong>Unidad:</strong>
-  <%= @ordene.unidad %>
+  <%= @ordene.try(:unidad) %>
 </p>
 
 <p>
   <strong>Costo unidad:</strong>
-  <%= @ordene.costo_unidad %>
+  <%= @ordene.try(:costo_unidad) %>
 </p>
 
 <p>
   <strong>Total:</strong>
-  <%= @ordene.total %>
+  <%= @ordene.try(:total) %>
 </p>
 
 <p>
   <strong>Presupuesto:</strong>
-  <%= @ordene.presupuesto %>
+  <%= @ordene.try(:presupuesto) %>
 </p>

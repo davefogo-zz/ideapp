@@ -63,6 +63,7 @@
 	          <td><h4><%= ordene.medida %></h4></td>
 	          <td><h4><%= ordene.costo_unidad %></h4></td>
 	          <td><h4><%= ordene.total %></h4></td>
+						<td><%= link_to 'Edit', [@presupuesto, :ordenes] %></td>
 	        </tr>
 	        <% end %>
 	    </tbody>
