@@ -19,6 +19,7 @@ class Presupuestos::OrdenesController < ApplicationController
 
   # GET /ordenes/1/edit
   def edit
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
   end
 
   # POST /ordenes
@@ -42,6 +43,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # PATCH/PUT /ordenes/1
   # PATCH/PUT /ordenes/1.json
   def update
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
     respond_to do |format|
       if @ordene.update(ordene_params)
         format.html { redirect_to @ordene, notice: 'Ordene was successfully updated.' }
@@ -56,9 +58,11 @@ class Presupuestos::OrdenesController < ApplicationController
   # DELETE /ordenes/1
   # DELETE /ordenes/1.json
   def destroy
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    @ordene = Ordene.find(params[:id])
     @ordene.destroy
     respond_to do |format|
-      format.html { redirect_to ordenes_url, notice: 'Ordene was successfully destroyed.' }
+      format.html { redirect_to presupuesto_ordenes_url, notice: 'Ordene was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
