@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415084835) do
+ActiveRecord::Schema.define(version: 20150415214915) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -42,21 +42,21 @@ ActiveRecord::Schema.define(version: 20150415084835) do
     t.string   "direccion"
   end
 
+  create_table "factura_items", force: :cascade do |t|
+    t.integer  "factura_id"
+    t.integer  "ordene_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
+  add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
+
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.datetime "fecha_de_expedicion"
   end
-
-  create_table "items_factura", force: :cascade do |t|
-    t.integer  "factura_id"
-    t.datetime "fecha_orden"
-    t.integer  "revisado"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "items_factura", ["factura_id"], name: "index_items_factura_on_factura_id"
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
@@ -79,10 +79,8 @@ ActiveRecord::Schema.define(version: 20150415084835) do
     t.datetime "updated_at",           null: false
     t.integer  "medio_id"
     t.integer  "aprobado_por_cliente"
-    t.integer  "factura_id"
   end
 
-  add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id"
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
 
