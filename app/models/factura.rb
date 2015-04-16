@@ -1,3 +1,3 @@
 class Factura < ActiveRecord::Base
-   has_many :items_factura
+   has_many :factura_items
 end
