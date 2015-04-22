@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415214915) do
+ActiveRecord::Schema.define(version: 20150422000935) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -53,10 +53,14 @@ ActiveRecord::Schema.define(version: 20150415214915) do
   add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
 
   create_table "facturas", force: :cascade do |t|
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.datetime "fecha_de_expedicion"
+    t.date     "fecha_de_vencimiento"
+    t.integer  "cliente_id"
   end
+
+  add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id"
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
@@ -79,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150415214915) do
     t.datetime "updated_at",           null: false
     t.integer  "medio_id"
     t.integer  "aprobado_por_cliente"
+    t.integer  "emision_certificada"
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
