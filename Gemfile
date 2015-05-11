@@ -12,6 +12,7 @@ group :development do
   gem 'rails_apps_testing'
   gem 'rails_layout'
   gem 'rails_apps_pages'
+  gem 'better_errors'
 end
 group :development, :test do
   gem 'byebug'
@@ -28,6 +29,7 @@ group :test do
 end
 gem 'bootstrap-sass', '3.2.0.2'
 gem 'devise', '~> 3.4.1'
-gem 'pundit', '~> 0.3.0'
 gem 'foundation-rails'
 gem 'high_voltage', '~> 2.2.1'
+gem 'simple_form'
+gem 'devise-i18n'
