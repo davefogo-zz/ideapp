@@ -1,12 +1,19 @@
 <%# add navigation links to this file %>
 <li><%= link_to t('About'), page_path('about') %></li>
 <% if user_signed_in? %>
-  <li><%= link_to t('Edit Account'), edit_user_registration_path %></li>
+  <li><%= link_to t('Colaboradores'), colaboradores_path %></li>
+  <li><%= link_to t('Clientes'), clientes_path %></li>
+  <li><%= link_to t('Proveedores'), proveedores_path %></li>
+  <li><%= link_to t('Medios'), medios_path %></li>
+  <li><%= link_to t('Presupuestos'), presupuestos_path %></li>	
+  <li><%= link_to t('Facturas'), facturas_path %></li>
   <li><%= link_to t('Sign out'), destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to t('Sign in'), new_user_session_path %></li>
   <li><%= link_to t('Sign up'), new_user_registration_path %></li>
 <% end %>
 <% if user_signed_in? %>
-  <li><%= link_to t('Users'), users_path %></li>
+	<% if current_user.admin? %>
+  		<li><%= link_to t('Users'), users_path %></li>
+  	<% end %>
 <% end %>
