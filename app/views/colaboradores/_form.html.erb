@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+    <%= collection_select( :colaboradore, :user_id, User.all, :id, :name, {}, {:multiple => false}) %>
   </div>
   <div class="field">
     <%= f.label :cedula %><br>
@@ -32,12 +32,12 @@
     <%= f.text_field :telefono_empresa %>
   </div>
   <div class="field">
-    <%= f.label :cargo %><br>
-    <%= f.text_field :cargo %>
-  </div>
-  <div class="field">
     <%= f.label :departamento %><br>
     <%= f.text_field :departamento %>
+  </div>
+  <div class="field">
+    <%= f.label :cargo %><br>
+    <%= f.text_field :cargo %>
   </div>
   <div class="field">
     <%= f.label :jefe_inmediato %><br>
