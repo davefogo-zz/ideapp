@@ -7,6 +7,7 @@
   <li><%= link_to t('Medios'), medios_path %></li>
   <li><%= link_to t('Presupuestos'), presupuestos_path %></li>	
   <li><%= link_to t('Facturas'), facturas_path %></li>
+  <li><%= link_to t('Edit account'), edit_user_registration_path %></li>
   <li><%= link_to t('Sign out'), destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to t('Sign in'), new_user_session_path %></li>
