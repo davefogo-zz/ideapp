@@ -1,1 +1,27 @@
-this is the index for departamentos
+<p id="notice"><%= notice %></p>
+
+<h1>Departamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Jefe</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @departamento.each do |departamento| %>
+	    <tr>
+		    <td><%= departamento.nombre %></td>
+		    <td><%= departamento.jefe %></td>
+		</tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Departamento', new_departamento_path %>

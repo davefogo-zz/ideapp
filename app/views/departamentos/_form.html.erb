@@ -1,0 +1,11 @@
+<% content_for :title do %>Departamento<% end %>
+<h3>Departamento</h3>
+<div class="form">
+  <%= simple_form_for @departamento do |form| %>
+    <%= form.error_notification %>
+    <%= form.input :nombre %>
+    <%= form.input :jefe %>
+    <%= collection_select( :departamento, :colaboradore_id, Colaboradore.all, :id, :nombre, {}, {:multiple => false}) %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
+  <% end %>
+</div>

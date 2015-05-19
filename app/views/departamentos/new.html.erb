@@ -1,0 +1,9 @@
+<% content_for :title do %>Departamento<% end %>
+<h3>Departamento</h3>
+<div class="form">
+  <%= simple_form_for @departamento do |form| %>
+    <%= form.input :nombre %>
+    <%= form.association :colaboradore, :label_method => :cedula, include_blank: false, label: "Jefe"  %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
+  <% end %>
+</div>

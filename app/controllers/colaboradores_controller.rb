@@ -10,6 +10,7 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores/1
   # GET /colaboradores/1.json
   def show
+    @users = User.all
   end
 
   # GET /colaboradores/new
@@ -69,6 +70,6 @@ class ColaboradoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def colaboradore_params
-      params.require(:colaboradore).permit(:name, :cedula, :direccion, :telefono_personal, :telefono_empresa, :cargo, :departamento, :jefe_inmediato)
+      params.require(:colaboradore).permit(:user_id, :first_name, :last_name, :name, :cedula, :direccion, :telefono_personal, :telefono_empresa, :cargo, :departamento, :jefe_inmediato)
     end
 end

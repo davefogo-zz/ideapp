@@ -1,49 +1,15 @@
-<%= form_for(@colaboradore) do |f| %>
-  <% if @colaboradore.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@colaboradore.errors.count, "error") %> prohibited this colaboradore from being saved:</h2>
-
-      <ul>
-      <% @colaboradore.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= collection_select( :colaboradore, :user_id, User.all, :id, :name, {}, {:multiple => false}) %>
-  </div>
-  <div class="field">
-    <%= f.label :cedula %><br>
-    <%= f.text_field :cedula %>
-  </div>
-  <div class="field">
-    <%= f.label :direccion %><br>
-    <%= f.text_field :direccion %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono_personal %><br>
-    <%= f.text_field :telefono_personal %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono_empresa %><br>
-    <%= f.text_field :telefono_empresa %>
-  </div>
-  <div class="field">
-    <%= f.label :departamento %><br>
-    <%= f.text_field :departamento %>
-  </div>
-  <div class="field">
-    <%= f.label :cargo %><br>
-    <%= f.text_field :cargo %>
-  </div>
-  <div class="field">
-    <%= f.label :jefe_inmediato %><br>
-    <%= f.text_field :jefe_inmediato %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= content_for :title do %>Colaborador<% end %>
+  <h3>Colaborador</h3>
+  <div class="form">
+    <%= simple_form_for @colaboradore do |form|%>
+      <%= form.association :user, include_blank: false, :label => "Nombre" %>
+      <%= form.input :cedula %>
+      <%= form.input :direccion %>
+      <%= form.input :telefono_personal %>
+      <%= form.input :telefono_empresa %>
+      <%= form.input :departamento %>
+      <%= form.input :cargo %>
+      <%= form.input :jefe_inmediato %>
+      <%= form.button :submit, 'Submit', class: 'submit'%>
+    <% end %>
+</div>

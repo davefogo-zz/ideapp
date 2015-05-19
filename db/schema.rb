@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20150514205906) do
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
 
   create_table "colaboradores", force: :cascade do |t|
-    t.string   "nombre"
     t.string   "cargo"
     t.string   "departamento"
     t.string   "jefe_inmediato"
@@ -41,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150514205906) do
     t.string   "telefono_personal"
     t.string   "direccion"
     t.integer  "user_id"
+    t.string   "nombre"
   end
 
   add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id"
