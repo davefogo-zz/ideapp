@@ -1,0 +1,28 @@
+<h1>Cargos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Departamento</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cargo.each do |cargo| %>
+	    <tr>
+		    <td><%= cargo.nombre %></td>
+    <% end %>
+
+    <% @departamento.each do |departamento| %>
+        <td><%= departamento.nombre %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Cargo', new_cargo_path %>

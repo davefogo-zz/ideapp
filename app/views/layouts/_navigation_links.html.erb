@@ -15,5 +15,7 @@
 <% if user_signed_in? %>
 	<% if policy(current_user).index? %>
   		<li><%= link_to t('Users'), users_path %></li>
+      <li><%= link_to t('Departamentos'), departamentos_path %></li>
+      <li><%= link_to t('Cargos'), cargos_path %></li>
   	<% end %>
 <% end %>

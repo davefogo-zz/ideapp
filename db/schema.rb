@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514205906) do
+ActiveRecord::Schema.define(version: 20150520210531) do
+
+  create_table "cargos", force: :cascade do |t|
+    t.string   "nombre"
+    t.integer  "departamento_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "cargos", ["departamento_id"], name: "index_cargos_on_departamento_id"
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -41,19 +50,20 @@ ActiveRecord::Schema.define(version: 20150514205906) do
     t.string   "direccion"
     t.integer  "user_id"
     t.string   "nombre"
+    t.integer  "departamento_id"
+    t.integer  "cargo_id"
   end
 
+  add_index "colaboradores", ["cargo_id"], name: "index_colaboradores_on_cargo_id"
+  add_index "colaboradores", ["departamento_id"], name: "index_colaboradores_on_departamento_id"
   add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id"
 
   create_table "departamentos", force: :cascade do |t|
     t.string   "nombre"
     t.string   "jefe"
-    t.integer  "colaboradore_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "departamentos", ["colaboradore_id"], name: "index_departamentos_on_colaboradore_id"
 
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"

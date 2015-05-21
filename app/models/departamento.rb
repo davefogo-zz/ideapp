@@ -1,3 +1,4 @@
 class Departamento < ActiveRecord::Base
-  belongs_to :colaboradore
+  has_many :colaboradores
+  has_many :cargos
 end
