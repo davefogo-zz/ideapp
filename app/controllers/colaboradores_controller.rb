@@ -5,17 +5,20 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores.json
   def index
     @colaboradores = Colaboradore.all
+    authorize Colaboradore
   end
 
   # GET /colaboradores/1
   # GET /colaboradores/1.json
   def show
     @users = User.all
+    authorize @colaboradore
   end
 
   # GET /colaboradores/new
   def new
     @colaboradore = Colaboradore.new
+    authorize @colaboradore
   end
 
   # GET /colaboradores/1/edit
@@ -26,6 +29,7 @@ class ColaboradoresController < ApplicationController
   # POST /colaboradores.json
   def create
     @colaboradore = Colaboradore.new(colaboradore_params)
+    authorize @colaboradore
 
     respond_to do |format|
       if @colaboradore.save
@@ -41,6 +45,7 @@ class ColaboradoresController < ApplicationController
   # PATCH/PUT /colaboradores/1
   # PATCH/PUT /colaboradores/1.json
   def update
+    authorize @colaboradore
     respond_to do |format|
       if @colaboradore.update(colaboradore_params)
         format.html { redirect_to @colaboradore, notice: 'Colaboradore was successfully updated.' }
@@ -55,6 +60,7 @@ class ColaboradoresController < ApplicationController
   # DELETE /colaboradores/1
   # DELETE /colaboradores/1.json
   def destroy
+    authorize @colaboradore
     @colaboradore.destroy
     respond_to do |format|
       format.html { redirect_to colaboradores_url, notice: 'Colaboradore was successfully destroyed.' }

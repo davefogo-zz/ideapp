@@ -15,6 +15,7 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
+    @user = User.all
   end
 
   # GET /clientes/1/edit
