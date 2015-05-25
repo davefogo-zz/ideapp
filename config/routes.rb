@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :factura_items
   root to: 'visitors#index'
+  resources :factura_items
   devise_for :users
   resources :users
   resources :facturas

@@ -13,11 +13,7 @@
     <% @cargo.each do |cargo| %>
 	    <tr>
 		    <td><%= cargo.nombre %></td>
-    <% end %>
-
-    <% @departamento.each do |departamento| %>
-        <td><%= departamento.nombre %></td>
-    </tr>
+        <td><%= cargo.depatamento.nombre %></td>
     <% end %>
 
   </tbody>

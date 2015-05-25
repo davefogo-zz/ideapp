@@ -3,7 +3,7 @@
 <div class="form">
   <%= simple_form_for @departamento do |form| %>
     <%= form.input :nombre %>
-    <%= form.association :colaboradores, :label_method => :cedula,  label: "Jefe", :input_html => { :size =>'1' } %>
+    <%= form.association :colaboradores, :label_method => :cedula,  label: "Jefe" %>
     <%= form.button :submit, 'Submit', class: 'submit' %>
   <% end %>
 </div>

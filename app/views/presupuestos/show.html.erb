@@ -1,40 +1,31 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Fecha:</strong>
   <%= @presupuesto.fecha %>
 </p>
-
 <p>
   <strong>Cliente:</strong>
   <%= @presupuesto.cliente.try(:nombre) %>
 </p>
-
 <p>
   <strong>Nit:</strong>
   <%= @presupuesto.cliente.try(:nit)   %>
 </p>
-
 <p>
   <strong>Dirección:</strong>
   <%= @presupuesto.cliente.try(:direccion_de_facturacion) %>
 </p>
-
 <p>
   <strong>Teléfono:</strong>
   <%= @presupuesto.cliente.try(:telefono) %>
 </p>
-
 <p>
   <strong>Titulo:</strong>
   <%= @presupuesto.titulo %>
 </p>
-
 <p>
   <strong>Producto:</strong>
   <%= @presupuesto.producto %>
 </p>
-
 <p>
   <strong>Colaboradore:</strong>
   <%= @presupuesto.cliente.colaboradore.try(:nombre) %>

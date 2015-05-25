@@ -20,11 +20,9 @@
       <tr>
         <td><%= factura.id %></td>
         <td><%= factura.fecha_de_expedicion %></td>
-        <td><%= factura.cliente %></td>
+        <td><%= factura.cliente.nombre %></td>
         <td><%= link_to 'Show', factura %></td>
-        <td><%= link_to 'Edit', edit_factura_path(factura) %></td>
-        <td><%= link_to 'Destroy', factura, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        
     <% end %>
   </tbody>
 </table>

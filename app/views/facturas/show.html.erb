@@ -11,5 +11,32 @@
   <%= @cliente.nombre %>
 </p>
 
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Proveedor</th>
+          <th>Medio</th>
+          <th>Fecha Orden</th>
+          <th>Medida</th>
+          <th>Unidad</th>
+          <th>Costo Unidad</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+	      <tbody>
+	        <% @factura_items.each do |factura_item| %>
+		        <tr>
+		          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
+		          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
+		          <td><h4><%= ordene.fecha_orden %></h4></td>
+		          <td><h4><%= ordene.medida %></h4></td>
+		          <td><h4><%= ordene.costo_unidad %></h4></td>
+		          <td><h4><%= ordene.total %></h4></td>
+		        </tr>
+		    <% end %>
+
 <%= link_to 'Edit', edit_factura_path(@factura) %> |
 <%= link_to 'Back', facturas_path %>
+<%= link_to 'Agregar Nuevo Item', factura_items_path %>

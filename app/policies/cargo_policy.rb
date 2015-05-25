@@ -1,4 +1,4 @@
-class DepartamentoPolicy
+class CargoPolicy
   attr_reader :current_user, :model
 
   def initialize(current_user, model)
