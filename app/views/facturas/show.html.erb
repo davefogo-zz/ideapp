@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Factura de venta:</strong>
+  <%= @factura.id %>
+</p>
+<p>
+  <strong>Fecha de Expedicion:</strong>
   <%= @factura.fecha_de_expedicion %>
-  
-	<% Ordene.all.each do |ordene| %>
-	  <%= ordene.fecha_orden %>
-		<%= ordene.medio.nombre %>
-	<% end %>
-
+</p>
+<p>
+  <strong>Cliente:</strong>
+  <%= @cliente.nombre %>
 </p>
 
 <%= link_to 'Edit', edit_factura_path(@factura) %> |

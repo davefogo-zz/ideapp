@@ -5,15 +5,22 @@
 <table>
   <thead>
     <tr>
-      <th>Factura de venta</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+    <tr>
+      <td><strong>Factura de venta:</strong></td>
+      <td><strong>Fecha de expedicion:</strong></td>
+      <td><strong>Cliente:</strong></td>
+    </tr>
+      
     <% @facturas.each do |factura| %>
       <tr>
-        <td><%= factura %></td>
+        <td><%= factura.id %></td>
+        <td><%= factura.fecha_de_expedicion %></td>
+        <td><%= factura.cliente %></td>
         <td><%= link_to 'Show', factura %></td>
         <td><%= link_to 'Edit', edit_factura_path(factura) %></td>
         <td><%= link_to 'Destroy', factura, method: :delete, data: { confirm: 'Are you sure?' } %></td>

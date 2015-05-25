@@ -1,27 +1,10 @@
-<%= form_for(@factura) do |f| %>
-  <% if @factura.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@factura.errors.count, "error") %> prohibited this factura from being saved:</h2>
-
-      <ul>
-      <% @factura.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<% content_for :title do %>Factura<% end %>
+<h3>Factura</h3>
+<div class="form">
+  <%= simple_form_for @factura do |form| %>
+    <%= form.error_notification %>
+    <%= form.input :fecha_de_expedicion %>
+    <%= form.association :cliente, :label_method => :nombre,  label: "Cliente", :include_blank => false %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
   <% end %>
-
-   <div class="field">
-    <%= f.label :fecha_de_expedicion %><br>
-    <%= f.datetime_select :fecha_de_expedicion %>
-  </div>
-	
-	<div class="field">
-	<%= f.label :ordene %><br>
-	<%= collection_select( :ordene, :ordene_id, @ordenes, :id, :medio_id,  {}, {:multiple => true}) %>
-	</div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

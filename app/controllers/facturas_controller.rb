@@ -5,17 +5,21 @@ class FacturasController < ApplicationController
   # GET /facturas.json
   def index
     @facturas = Factura.all
+    @clientes = Cliente.all
   end
 
   # GET /facturas/1
   # GET /facturas/1.json
   def show
+    @factura = Factura.find(params[:id])
+    @cliente = Cliente.first
   end
 
   # GET /facturas/new
   def new
-   @ordenes = Ordene.where(aprobado_por_cliente: 1) 
    @factura = Factura.new
+   #@ordenes = Ordene.where(aprobado_por_cliente: 1) 
+  
   end
   
   # GET /facturas/1/edit
@@ -71,6 +75,6 @@ class FacturasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_params
-      params.require(:factura).permit(:fecha_de_expedicion, :ordene_id)
+      params.require(:factura).permit(:fecha_de_expedicion, :cliente)
     end
 end
