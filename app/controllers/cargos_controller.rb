@@ -3,12 +3,12 @@ class CargosController < ApplicationController
 	def index
 		@cargo = Cargo.all
 		@departamento = Departamento.all
-		authorize @cargo
+		authorize Cargo
 	end
 
 	def show
 		@cargo = Cargo.find(params[:id])
-		@departamento = Departamento.find(@cargo.departamento_id)
+		@departamento = @cargo.departamento
 		authorize @cargo
 	end
 
@@ -32,7 +32,7 @@ class CargosController < ApplicationController
 private
 
 	def cargo_params
-		params.require(:cargo).permit(:nombre, :departamento)
+		params.require(:cargo).permit(:nombre, :departamento_id)
 	end
 
 end
