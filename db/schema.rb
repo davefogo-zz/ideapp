@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520210531) do
+ActiveRecord::Schema.define(version: 20150526094717) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -68,12 +68,19 @@ ActiveRecord::Schema.define(version: 20150520210531) do
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "ordene_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "revisado"
+    t.date     "fecha_orden"
+    t.decimal  "medida"
+    t.string   "unidad"
+    t.integer  "costo_unidad"
+    t.integer  "total"
+    t.integer  "medio_id"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
+  add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id"
   add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
 
   create_table "facturas", force: :cascade do |t|

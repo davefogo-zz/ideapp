@@ -28,14 +28,16 @@
 	      <tbody>
 	        <% @factura_items.each do |factura_item| %>
 		        <tr>
-		          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
-		          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
-		          <td><h4><%= ordene.fecha_orden %></h4></td>
-		          <td><h4><%= ordene.medida %></h4></td>
-		          <td><h4><%= ordene.costo_unidad %></h4></td>
-		          <td><h4><%= ordene.total %></h4></td>
+		          <td><h4><%= factura_item.medio.proveedore.nombre %></h4></td>
+		          <td><h4><%= factura._item.medio.nombre %></h4></td>
+		          <td><h4><%= factura_item.fecha_orden %></h4></td>
+		          <td><h4><%= factura_item.medida %></h4></td>
+		          <td><h4><%= factura_item.costo_unidad %></h4></td>
+		          <td><h4><%= factura_item.total %></h4></td>
 		        </tr>
-		    <% end %>
+          <% end %>
+        </tbody>
+    </table> 
 
 <%= link_to 'Edit', edit_factura_path(@factura) %> |
 <%= link_to 'Back', facturas_path %>

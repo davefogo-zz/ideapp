@@ -5,16 +5,25 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items.json
   def index
     @factura_items = FacturaItem.all
+    @facturas = Factura.all
+    @ordenes = Ordene.all
+    @medios = Medio.all
   end
 
   # GET /factura_items/1
-  # GET /factura_items/1.json
+  # GET /factura_items/1.json 
   def show
+    @factura_items = FacturaItem.all
+    @facturas = Factura.find(params[:factura_id])
+    @ordene = Ordene.all
+    @medio = Medio.all
   end
 
   # GET /factura_items/new
   def new
-    @factura_item = FacturaItem.new
+    @factura_item =                                                                        
+    @ordenes = Ordene.all
+    @medio = Medio.all
   end
 
   # GET /factura_items/1/edit
@@ -25,6 +34,8 @@ class FacturaItemsController < ApplicationController
   # POST /factura_items.json
   def create
     @factura_item = FacturaItem.new(factura_item_params)
+    @ordenes = Ordene.all
+    @medio = Medio.all
 
     respond_to do |format|
       if @factura_item.save
@@ -69,6 +80,6 @@ class FacturaItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_item_params
-      params.require(:factura_item).permit(:factura_id, :ordene_id)
+      params.require(:factura_item).permit(:factura_id, :ordene_id, :medio_id, :revisado, :fecha_orden, :medida, :unidad, :costo_unidad, :total)
     end
 end
