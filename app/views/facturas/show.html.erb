@@ -8,8 +8,33 @@
 </p>
 <p>
   <strong>Cliente:</strong>
-  <%= @cliente.nombre %>
+  <%= @factura.cliente.nombre %>
 </p>
+<p>
+  <strong>Nit:</strong>
+  <%= @factura.cliente.try(:nit)   %>
+</p>
+<p>
+  <strong>Dirección:</strong>
+  <%= @factura.cliente.try(:direccion_de_facturacion) %>
+</p>
+<p>
+  <strong>Teléfono:</strong>
+  <%= @factura.cliente.try(:telefono) %>
+</p>
+<p>
+  <strong>Titulo:</strong>
+  <%= @factura.presupuesto.titulo %>
+</p>
+<p>
+  <strong>Producto:</strong>
+  <%= @factura.presupuesto.producto %>
+</p>
+<p>
+  <strong>Colaboradore:</strong>
+  <%= @factura.cliente.colaboradore_id %>
+</p>
+
 
 <div class="media">
   <div class="media-body">
@@ -23,22 +48,26 @@
           <th>Unidad</th>
           <th>Costo Unidad</th>
           <th>Total</th>
+      <th>Factura</th>
         </tr>
       </thead>
-	      <tbody>
-	        <% @factura_items.each do |factura_item| %>
-		        <tr>
-		          <td><h4><%= factura_item.medio.proveedore.nombre %></h4></td>
-		          <td><h4><%= factura._item.medio.nombre %></h4></td>
-		          <td><h4><%= factura_item.fecha_orden %></h4></td>
-		          <td><h4><%= factura_item.medida %></h4></td>
-		          <td><h4><%= factura_item.costo_unidad %></h4></td>
-		          <td><h4><%= factura_item.total %></h4></td>
-		        </tr>
+        <tbody>
+          <% @factura_item.each do |factura_item| %>
+          <tr>
+            <td><h4><%= factura_item.ordene.medio.try(:nombre) %></h4></td>
+            <td><h4><%= factura_item.fecha_orden %></h4></td>
+            <td><h4><%= factura_item.medida %></h4></td>
+            <td><h4><%= factura_item.costo_unidad %></h4></td>
+            <td><h4><%= factura_item.total %></h4></td>
+            <td><%= link_to 'Edit', edit_factura_item_path(FacturaItem) %></td>
+            <td><%= link_to 'Destroy', factura_item_path(FacturaItem), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
           <% end %>
-        </tbody>
+      </tbody>
     </table> 
+
+
 
 <%= link_to 'Edit', edit_factura_path(@factura) %> |
 <%= link_to 'Back', facturas_path %>
-<%= link_to 'Agregar Nuevo Item', factura_items_path %>
+<%= link_to 'Agregar Nuevo Item', factura_item_path %>
