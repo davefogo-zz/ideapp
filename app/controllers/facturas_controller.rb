@@ -11,7 +11,7 @@ class FacturasController < ApplicationController
   # GET /facturas/1.json
   def show
     @factura = Factura.find(params[:id])
-    @factura_item = FacturaItem.all
+    @factura_item = FacturaItem.where("facturar" => true, factura_id: @factura.id)
     #@presupuesto = @factura.presupuesto
   end
 

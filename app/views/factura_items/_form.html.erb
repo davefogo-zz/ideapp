@@ -1,9 +1,12 @@
 <% content_for :title do %>Factura Item<% end %>
 <h3>Factura Item</h3>
-<div class="form">
-<%= simple_form_for @factura_item do |form| %>
-    <%= form.association :ordene, :label_method => :ordene_id,  label: "Orden" %>
-  <div class="actions">
+	<div class="form">
+	<%= simple_form_for @factura_item do |form| %>
+	<div class="field">
+    <%= form.input :facturar %><br>
+	</div>
+	<%= form.association :factura, :label_method => :id, include_blank: true, label: "Factura"  %><br>
+	<div class="actions">
     <%= form.submit %>
-  </div>
+	</div>
 <% end %>

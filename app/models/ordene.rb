@@ -2,7 +2,7 @@ class Ordene < ActiveRecord::Base
 after_save :generate_factura_item, :if => :aprobado_por_cliente?
   
   def aprobado_por_cliente?
-  	if aprobado_por_cliente = 1
+  	if aprobado_por_cliente == 1
       true
       else 
         false

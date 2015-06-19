@@ -13,8 +13,7 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items/1
   # GET /factura_items/1.json                                                                                            
   def show
-    @factura_items = FacturaItem.all
-    @facturas = Factura.find(params[:factura_id])
+    @factura_items = FacturaItem.all,
     @ordene = Ordene.all
     @medio = Medio.all
   end
@@ -80,6 +79,6 @@ class FacturaItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_item_params
-      params.require(:factura_item).permit(:factura_id, :ordene_id, :medio_id, :revisado, :fecha_orden, :medida, :unidad, :costo_unidad, :total)
+      params.require(:factura_item).permit(:factura_id, :ordene_id, :medio_id, :revisado, :fecha_orden, :medida, :unidad, :costo_unidad, :total, :facturar)
     end
 end
