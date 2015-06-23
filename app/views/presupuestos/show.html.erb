@@ -39,28 +39,59 @@
           <th>Proveedor</th>
           <th>Medio</th>
           <th>Fecha Orden</th>
-          <th>Medida</th>
+          <th>Ref. Preventa</th>
+          <th>Ubicacion/Programa</th>
+          <th>Formato</th>
+          <th>Franja/Periodo</th>
           <th>Unidad</th>
+          <th>CM</th>
+          <th>COL</th>
           <th>Costo Unidad</th>
+          <th>Descuento</th>
+          <th>Cantidad<th>
           <th>Total</th>
-		  <th>Factura</th>
         </tr>
       </thead>
 	      <tbody>
+          <% total_general = 0 %>
+          <% dto = 0 %>
+          <% subtotal = 0 %>
+          <% area = 0 %>
+
 	        <% @ordenes.each do |ordene| %>
 	        <tr>
 	          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
 	          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
 	          <td><h4><%= ordene.fecha_orden %></h4></td>
-	          <td><h4><%= ordene.medida %></h4></td>
-	          <td><h4><%= ordene.costo_unidad %></h4></td>
-	          <td><h4><%= ordene.total %></h4></td>
+	          <td><h4><%= ordene.referencia_preventa %></h4></td>
+            <td><h4><%= ordene.ubicacion %></h4></td>
+            <td><h4><%= ordene.formato %></h4></td>
+            <td><h4><%= ordene.franja %></h4></td>
+            <td><h4><%= ordene.unidad %></h4></td>
+            <td><h4><%= ordene.cm %></h4></td>
+            <td><h4><%= ordene.col %></h4></td>
+            <td><h4><%= ordene.costo_unidad %></h4></td>
+            <td><h4><%= ordene.descuento %></h4></td>
+            <td><h4><%= ordene.cantidad %></h4></td>
+             <td><h4></h4></td>
+
+            <% dto = ordene.descuento * ordene.costo_unidad %>
+            <% if area == 0 %>
+                <td><h4><%= subtotal = ((ordene.costo_unidad - dto) * ordene.cantidad) %></h4></td>
+              <% else %>
+              <% area = ordene.cm * ordene.col %>
+                <td><h4><%= subtotal = (((area * ordene.costo_unidad) - dto) * ordene.cantidad) %></h4></td>
+            <% end %>
+            <td><h4><%= ordene.notas %></h4></td>
 						<td><%= link_to 'Edit', edit_presupuesto_ordene_path(@presupuesto, ordene) %></td>
 						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% total_general = total_general + subtotal%>
 	        </tr>
 	        <% end %>
 	    </tbody>
  	 	</table> 
+
+    <h4 class="pull-right">Total Factura:<%= number_to_currency(total_general) %></h4>
 
 <%= link_to 'Edit', edit_presupuesto_path(@presupuesto) %> |
 <%= link_to 'Back', presupuestos_path %>
