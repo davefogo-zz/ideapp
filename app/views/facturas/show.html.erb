@@ -43,29 +43,45 @@
         <tr>
           <th>Proveedor</th>
           <th>Medio</th>
-          <th>Fecha Orden</th>
-          <th>Medida</th>
+          <th>Fecha</th>
+          <th>Ubicacion/Programa</th>
           <th>Unidad</th>
           <th>Costo Unidad</th>
+          <th>Descuento</th>
+          <th>Cantidad</th>
           <th>Total</th>
-      <th>Factura</th>
         </tr>
       </thead>
         <tbody>
           <% total_general = 0 %>
+          <% dto = 0 %>
+          <% subtotal = 0 %>
+          <% area = 0 %>
+
           <% @factura_item.each do |factura_item| %>
           <tr>
+            <td><h4><%= factura_item.ordene.medio.proveedore.try(:nombre) %></h4></td>
             <td><h4><%= factura_item.ordene.medio.try(:nombre) %></h4></td>
             <td><h4><%= factura_item.fecha_orden %></h4></td>
-            <td><h4><%= factura_item.medida %></h4></td>
+            <td><h4><%= factura_item.ubicacion %></h4></td>
+            <td><h4><%= factura_item.unidad %></h4></td>
             <td><h4><%= factura_item.costo_unidad %></h4></td>
+            <td><h4><%= number_to_percentage((factura_item.descuento * 100)) %></h4></td>
             <td><h4><%= factura_item.cantidad %></h4></td>
-            <td><h4><%= number_to_currency(factura_item.cantidad * factura_item.costo_unidad) %></h4></td>
-            <td><h4><%= factura_item.total %></h4></td>
-            </h4></td>
+
+
+            <% dto = factura_item.descuento * factura_item.costo_unidad %>
+            <% if area == 0 %>
+                <td><h4><%= number_to_currency(subtotal = ((factura_item.costo_unidad - dto) * factura_item.cantidad)) %></h4></td>
+              <% else %>
+              <% area = ordene.cm * ordene.col %>
+                <td><h4><%= number_to_currency(subtotal = (((area * factura_item.costo_unidad) - dto) * factura_item.cantidad)) %></h4></td>
+            <% end %>
+
+
             <td><%= link_to 'Edit', edit_factura_item_path(@factura_item) %></td>
             <td><%= link_to 'Destroy', factura_item_path(@factura_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% total_general = total_general + (factura_item.cantidad * factura_item.costo_unidad) %>
+          <% total_general = total_general + subtotal%>
           </tr>
           <% end %>
       </tbody>

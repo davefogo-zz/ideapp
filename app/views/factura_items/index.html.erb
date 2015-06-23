@@ -16,9 +16,7 @@
       <tr>
         <td><h4><%= factura_item.ordene.medio.try(:nombre) %></h4></td>
         <td><h4><%= factura_item.fecha_orden %></h4></td>
-        <td><h4><%= factura_item.medida %></h4></td>
         <td><h4><%= factura_item.costo_unidad %></h4></td>
-        <td><h4><%= factura_item.total %></h4></td>
         <td><%= link_to 'Show', factura_item %></td>
         <td><%= link_to 'Edit', edit_factura_item_path(factura_item) %></td>
       </tr>

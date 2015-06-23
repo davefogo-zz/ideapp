@@ -10,7 +10,7 @@ after_save :generate_factura_item, :if => :aprobado_por_cliente?
   end
 
   def generate_factura_item
-  	FacturaItem.create!(fecha_orden: Time.now, medida: self.medida, unidad: self.unidad, costo_unidad: self.costo_unidad, total: self.total, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id)
+  	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: Time.now, unidad: self.unidad, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id, descuento: self.descuento)
   end
 
   belongs_to :presupuesto

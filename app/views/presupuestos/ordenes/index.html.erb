@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Ordenes</h1>
 
 <table>
@@ -19,10 +17,8 @@
     <% @ordenes.each do |ordene| %>
       <tr>
         <td><%= ordene.fecha_orden %></td>
-        <td><%= ordene.medida %></td>
         <td><%= ordene.unidad %></td>
         <td><%= ordene.costo_unidad %></td>
-        <td><%= ordene.total %></td>
         <td><%= ordene.presupuesto %></td>
         
       </tr>
