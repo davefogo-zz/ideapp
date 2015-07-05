@@ -1,0 +1,10 @@
+<% content_for :title do %>Cuenta<% end %>
+<h3>Cuenta</h3>
+<div class="form">
+  <%= simple_form_for @cuenta_puc do |form| %>
+    <%= form.input :cuenta %>
+    <%= form.input :descripcion %>
+    <%= form.association :grupo, :label_method => :descripcion,  label: "Grupo" %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
+  <% end %>
+</div>

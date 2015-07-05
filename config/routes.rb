@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get 'bienvenidos/index'
   resources :medios
   resources :proveedores
+  resources :clases
+  resources :grupos
+  resources :cuenta_pucs
+  resources :subcuenta_pucs
   resources :presupuestos do 
     resources :ordenes, controller: 'presupuestos/ordenes'
   end

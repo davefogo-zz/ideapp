@@ -1,0 +1,25 @@
+<h1>Cuentas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cuenta</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuenta_puc.each do |cuenta_puc| %>
+	    <tr>
+		    <td><%= cuenta_puc.cuenta %></td>
+		    <td><%= cuenta_puc.descripcion %></td>
+		</tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva Cuenta', new_cuenta_puc_path %>

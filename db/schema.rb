@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623151254) do
+ActiveRecord::Schema.define(version: 20150705004734) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20150623151254) do
   end
 
   add_index "cargos", ["departamento_id"], name: "index_cargos_on_departamento_id"
+
+  create_table "clases", force: :cascade do |t|
+    t.integer  "clase"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
@@ -57,6 +64,16 @@ ActiveRecord::Schema.define(version: 20150623151254) do
   add_index "colaboradores", ["cargo_id"], name: "index_colaboradores_on_cargo_id"
   add_index "colaboradores", ["departamento_id"], name: "index_colaboradores_on_departamento_id"
   add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id"
+
+  create_table "cuenta_pucs", force: :cascade do |t|
+    t.integer  "cuenta"
+    t.string   "descripcion"
+    t.integer  "grupo_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "cuenta_pucs", ["grupo_id"], name: "index_cuenta_pucs_on_grupo_id"
 
   create_table "departamentos", force: :cascade do |t|
     t.string   "nombre"
@@ -95,6 +112,16 @@ ActiveRecord::Schema.define(version: 20150623151254) do
 
   add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id"
   add_index "facturas", ["presupuesto_id"], name: "index_facturas_on_presupuesto_id"
+
+  create_table "grupos", force: :cascade do |t|
+    t.integer  "grupo"
+    t.string   "descripcion"
+    t.integer  "clase_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "grupos", ["clase_id"], name: "index_grupos_on_clase_id"
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
@@ -153,6 +180,16 @@ ActiveRecord::Schema.define(version: 20150623151254) do
     t.string   "telefono"
     t.string   "direccion"
   end
+
+  create_table "subcuenta_pucs", force: :cascade do |t|
+    t.integer  "subcuenta"
+    t.string   "descripcion"
+    t.integer  "CuentaPuc_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "subcuenta_pucs", ["CuentaPuc_id"], name: "index_subcuenta_pucs_on_CuentaPuc_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
