@@ -90,7 +90,11 @@
 	    </tbody>
  	 	</table> 
 
-    <h4 class="pull-right">Total Presupuesto:<%= number_to_currency(total_general) %></h4>
+
+       <h4 class="pull-right">SubTotal Presupuesto:<%= number_to_currency(total_general) %></h4><br>
+    <h4 class="pull-right">IVA:<%= number_to_currency(iva =total_general * 0.16) %></h4> <br>
+    <h4 class="pull-right">Total Presupuesto:<%= number_to_currency(total_general + iva) %></h4>
+
 
 <%= link_to 'Edit', edit_presupuesto_path(@presupuesto) %> |
 <%= link_to 'Back', presupuestos_path %>
