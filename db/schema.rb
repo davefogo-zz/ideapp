@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716105322) do
+ActiveRecord::Schema.define(version: 20150724100512) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20150716105322) do
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "ordene_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.date     "fecha_orden"
     t.string   "unidad"
     t.integer  "costo_unidad"
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 20150716105322) do
     t.string   "ubicacion"
     t.decimal  "descuento"
     t.integer  "total"
+    t.integer  "iva",          limit: 8
+    t.integer  "subtotal",     limit: 8
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"

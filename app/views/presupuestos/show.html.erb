@@ -46,9 +46,9 @@
           <th>Unidad</th>
           <th>CM</th>
           <th>COL</th>
+          <th>Cantidad<th>
           <th>Costo Unidad</th>
           <th>Descuento</th>
-          <th>Cantidad<th>
           <th>Total</th>
         </tr>
       </thead>
@@ -70,9 +70,9 @@
             <td><h4><%= ordene.unidad %></h4></td>
             <td><h4><%= ordene.cm %></h4></td>
             <td><h4><%= ordene.col %></h4></td>
+            <td><h4><%= ordene.cantidad %></h4></td>
             <td><h4><%= ordene.costo_unidad %></h4></td>
             <td><h4><%= number_to_percentage((ordene.descuento * 100)) %></h4></td>
-            <td><h4><%= ordene.cantidad %></h4></td>
              <td><h4></h4></td>
 
             <% dto = ordene.descuento * ordene.costo_unidad %>
