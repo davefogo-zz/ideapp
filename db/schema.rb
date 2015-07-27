@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724100512) do
+ActiveRecord::Schema.define(version: 20150727081400) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20150724100512) do
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "ordene_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.date     "fecha_orden"
     t.string   "unidad"
     t.integer  "costo_unidad"
@@ -95,14 +95,17 @@ ActiveRecord::Schema.define(version: 20150724100512) do
     t.integer  "cantidad"
     t.string   "ubicacion"
     t.decimal  "descuento"
-    t.integer  "total"
-    t.integer  "iva",          limit: 8
-    t.integer  "subtotal",     limit: 8
+    t.integer  "iva",                limit: 8
+    t.integer  "subtotal",           limit: 8
+    t.boolean  "facturar_proveedor"
+    t.integer  "subcuenta_puc_id"
+    t.boolean  "sin_iva"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
   add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id"
   add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
+  add_index "factura_items", ["subcuenta_puc_id"], name: "index_factura_items_on_subcuenta_puc_id"
 
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",           null: false
@@ -198,17 +201,17 @@ ActiveRecord::Schema.define(version: 20150724100512) do
     t.date     "fecha"
     t.integer  "comprobante"
     t.integer  "cliente_id"
-    t.integer  "subcuenta_id"
     t.integer  "debito"
     t.integer  "credito"
     t.integer  "presupuesto_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "descripcion"
     t.string   "nit"
+    t.integer  "subcuenta_puc_id"
   end
 
-  add_index "transaccions", ["subcuenta_id"], name: "index_transaccions_on_subcuenta_id"
+  add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

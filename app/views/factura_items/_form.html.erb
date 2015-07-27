@@ -5,6 +5,12 @@
 	<div class="field">
     <%= form.input :facturar %><br>
 	</div>
+	<div class="field">
+    <%= form.input :facturar_proveedor %><br>
+	</div>
+	<div class="field">
+    <%= form.input :sin_iva %><br>
+	</div>
 	<%= form.association :factura, :label_method => :id, include_blank: true, label: "Factura"  %><br>
 	<div class="actions">
     <%= form.submit %>
