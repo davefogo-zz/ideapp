@@ -80,8 +80,7 @@
               <% end %>
               <% iva = factura_item.iva %>
               <td><h4><%= number_to_currency(factura_item.iva) %></h4></td>
-              
-                <td><h4><%= number_to_currency(total = subtotal + iva) %></h4></td>
+              <td><h4><%= number_to_currency(total = subtotal + iva) %></h4></td>
               <td><%= link_to 'Edit', edit_factura_item_path(@factura_item) %></td>
               <td><%= link_to 'Destroy', factura_item_path(@factura_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <% total_general = total + total_general%>

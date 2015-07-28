@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727081400) do
+ActiveRecord::Schema.define(version: 20150728092309) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -233,5 +233,30 @@ ActiveRecord::Schema.define(version: 20150727081400) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "volumen", force: :cascade do |t|
+    t.integer  "medio_id_id"
+    t.string   "tipo_de_volumen"
+    t.decimal  "escala"
+    t.string   "rango"
+    t.string   "cobro"
+    t.integer  "factura_item_id_id"
+    t.integer  "valor"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.decimal  "escala2"
+    t.decimal  "escala3"
+    t.decimal  "escala4"
+    t.decimal  "escala5"
+    t.decimal  "escala6"
+    t.string   "rango2"
+    t.string   "rango3"
+    t.string   "rango4"
+    t.string   "rango5"
+    t.string   "rango6"
+  end
+
+  add_index "volumen", ["factura_item_id_id"], name: "index_volumen_on_factura_item_id_id"
+  add_index "volumen", ["medio_id_id"], name: "index_volumen_on_medio_id_id"
 
 end
