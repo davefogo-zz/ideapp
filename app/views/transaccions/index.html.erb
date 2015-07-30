@@ -1,2 +1,28 @@
-<h1>Transaccions#index</h1>
-<p>Find me in app/views/transaccions/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Listado de Transacciones</h1>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+    <% @transaccions.each do |transaccion| %>
+      <tr>
+        <td><%= transaccion.fecha %></td>
+        
+        <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medio', new_medio_path %>

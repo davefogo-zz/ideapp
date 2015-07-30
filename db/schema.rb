@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728093507) do
+ActiveRecord::Schema.define(version: 20150730102503) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20150728093507) do
     t.boolean  "facturar_proveedor"
     t.integer  "subcuenta_puc_id"
     t.boolean  "sin_iva"
+    t.integer  "presupuesto_id"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
@@ -223,8 +224,10 @@ ActiveRecord::Schema.define(version: 20150728093507) do
     t.string   "descripcion"
     t.string   "nit"
     t.integer  "subcuenta_puc_id"
+    t.integer  "factura_item_id"
   end
 
+  add_index "transaccions", ["factura_item_id"], name: "index_transaccions_on_factura_item_id"
   add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
 
   create_table "users", force: :cascade do |t|

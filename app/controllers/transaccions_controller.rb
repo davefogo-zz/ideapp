@@ -14,6 +14,6 @@ class TransaccionsController < ApplicationController
   private
 
 	def transaccion_params
-		params.require(:transaccion).permit(:fecha, :credito)
+		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva)
 	end
 end

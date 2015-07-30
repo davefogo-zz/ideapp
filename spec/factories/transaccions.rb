@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :transaccion do
-    fecha "2015-07-05"
+    fecha "2015-07-30"
 comprobante 1
 cliente_id 1
 subcuenta nil
