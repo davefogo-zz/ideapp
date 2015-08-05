@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730102503) do
+ActiveRecord::Schema.define(version: 20150805151303) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20150730102503) do
     t.integer  "subcuenta_puc_id"
     t.boolean  "sin_iva"
     t.integer  "presupuesto_id"
+    t.integer  "valor",              limit: 8
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
@@ -159,8 +160,8 @@ ActiveRecord::Schema.define(version: 20150730102503) do
     t.string   "unidad"
     t.integer  "costo_unidad"
     t.integer  "presupuesto_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "medio_id"
     t.integer  "aprobado_por_cliente"
     t.integer  "emision_certificada"
@@ -175,6 +176,7 @@ ActiveRecord::Schema.define(version: 20150730102503) do
     t.integer  "cm"
     t.integer  "col"
     t.string   "franja"
+    t.integer  "subtotal",             limit: 8
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
@@ -257,20 +259,12 @@ ActiveRecord::Schema.define(version: 20150730102503) do
     t.string   "rango"
     t.string   "cobro"
     t.integer  "valor"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.decimal  "escala2"
-    t.decimal  "escala3"
-    t.decimal  "escala4"
-    t.decimal  "escala5"
-    t.decimal  "escala6"
-    t.string   "rango2"
-    t.string   "rango3"
-    t.string   "rango4"
-    t.string   "rango5"
-    t.string   "rango6"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "medio_id"
     t.integer  "factura_item_id"
+    t.integer  "valor_volumen",   limit: 8
+    t.integer  "ordene_id"
   end
 
   add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
