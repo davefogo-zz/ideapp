@@ -1,6 +1,9 @@
 class FacturaItem < ActiveRecord::Base
-  
-  before_update :generate_transaccion_ingreso,  :generate_transaccion_iva
+  belongs_to :factura
+  belongs_to :medio
+  belongs_to :ordene
+  belongs_to :subcuenta_puc
+  before_update :generate_transaccion_ingreso,  :generate_transaccion_iva, :generate_transaccion_volumen
 
   def generate_transaccion_ingreso
     self.subtotal = (costo_unidad * cantidad) - (costo_unidad * descuento)
@@ -17,18 +20,10 @@ class FacturaItem < ActiveRecord::Base
   end
 
   def generate_transaccion_volumen
-    self.subcuenta_puc_id = 5 if self.tipo_de_volumen == 'Automatico' && self.cobro == 'Cruce'
-    self.subcuenta_puc_id = 6 if self.tipo_de_volumen == 'Automatico' && self.cobro == 'Facturacion' 
-    if self.tipo_de_volumen == 'Automatico'
-      self.valor = medio
+    self.subcuenta_puc_id = 5 if self.medio.tipo_de_volumen == 'Automatico' && self.medio.cobro == 'Cruce'
+    self.subcuenta_puc_id = 6 if self.medio.tipo_de_volumen == 'Automatico' && self.medio.cobro == 'Facturacion' 
     Transaccion.create!(factura_item_id: self.id, fecha: Time.now, credito: self.valor, subcuenta_puc_id: self.subcuenta_puc_id)
-    FacturaItem.create!(fecha: Time.now, fecha_orden: self.fecha_orden, subtotal: self.subtotal, subcuenta_puc_id: self.subcuenta_puc_id, medio_id: self.medio_id, ordene_id: self.ordene_id) if self.tipo_de_volumen == 'Automatico' && self.cobro == 'Facturacion'
+    FacturaItem.create!(fecha_orden: self.fecha_orden, subtotal: self.subtotal, subcuenta_puc_id: self.subcuenta_puc_id, medio_id: self.medio_id, ordene_id: self.ordene_id)
   end
-
-
-  belongs_to :factura
-  belongs_to :ordene
-  belongs_to :subcuenta_puc
-end
 end 
 

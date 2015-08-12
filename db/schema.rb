@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805151303) do
+ActiveRecord::Schema.define(version: 20150810155351) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -109,6 +109,21 @@ ActiveRecord::Schema.define(version: 20150805151303) do
   add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
   add_index "factura_items", ["subcuenta_puc_id"], name: "index_factura_items_on_subcuenta_puc_id"
 
+  create_table "factura_proveedors", force: :cascade do |t|
+    t.date     "fecha_recepcion"
+    t.integer  "ordene_id"
+    t.integer  "proveedore_id"
+    t.integer  "importe",           limit: 8
+    t.boolean  "devolucion"
+    t.integer  "iva",               limit: 8
+    t.date     "fecha_vencimiento"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
+  add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
+
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -202,6 +217,8 @@ ActiveRecord::Schema.define(version: 20150805151303) do
     t.datetime "updated_at",          null: false
     t.string   "telefono"
     t.string   "direccion"
+    t.decimal  "pronto_pago"
+    t.integer  "dias_pronto_pago"
   end
 
   create_table "subcuenta_pucs", force: :cascade do |t|
