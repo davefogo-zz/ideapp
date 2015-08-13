@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :factura_proveedors
   resources :recibo_de_cajas
   resources :gastos
+  resources :pagos
   resources :presupuestos do 
     resources :ordenes, controller: 'presupuestos/ordenes'
   end

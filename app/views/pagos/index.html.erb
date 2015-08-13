@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listado de Gastos</h1>
+<h1>Listado de Pagos</h1>
 
 <div class="media">
   <div class="media-body">
@@ -13,11 +13,11 @@
       </thead>
       
       <tbody>
-    <% @gastos.each do |gasto| %>
+    <% @pagos.each do |pago| %>
       <tr>
-        <td><%= gasto.fecha %></td>
+        <td><%= pago.fecha %></td>
         
-        <td><%= link_to 'Destroy', gasto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', pago, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'Nuevo Gasto', new_gasto_path %>
+<%= link_to 'Nuevo Pago', new_pago_path %>

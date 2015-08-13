@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813172635) do
+ActiveRecord::Schema.define(version: 20150813223537) do
+
+  create_table "activo_fijos", force: :cascade do |t|
+    t.date     "fecha_de_compra"
+    t.integer  "gasto_id"
+    t.string   "vida_util"
+    t.integer  "importe",         limit: 8
+    t.string   "depreciacion"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "descripcion"
+  end
+
+  add_index "activo_fijos", ["gasto_id"], name: "index_activo_fijos_on_gasto_id"
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -150,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150813172635) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "colaboradore_id"
+    t.boolean  "compra_de_activo"
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
@@ -218,6 +232,22 @@ ActiveRecord::Schema.define(version: 20150813172635) do
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
 
+  create_table "pagos", force: :cascade do |t|
+    t.date     "fecha"
+    t.integer  "proveedore_id"
+    t.integer  "factura_proveedor_id"
+    t.integer  "subcuenta_puc_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "importe",              limit: 8
+    t.string   "forma_de_pago"
+    t.boolean  "gasto"
+  end
+
+  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
+  add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
+  add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
+
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"
     t.string   "titulo"
@@ -271,20 +301,27 @@ ActiveRecord::Schema.define(version: 20150813172635) do
 
   create_table "transaccions", force: :cascade do |t|
     t.date     "fecha"
-    t.integer  "comprobante"
     t.integer  "cliente_id"
-    t.integer  "debito",           limit: 8
-    t.integer  "credito",          limit: 8
+    t.integer  "debito",               limit: 8
+    t.integer  "credito",              limit: 8
     t.integer  "presupuesto_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "descripcion"
     t.string   "nit"
     t.integer  "subcuenta_puc_id"
     t.integer  "factura_item_id"
+    t.integer  "pago_id"
+    t.integer  "recibo_de_caja_id"
+    t.integer  "gasto_id"
+    t.integer  "factura_proveedor_id"
   end
 
   add_index "transaccions", ["factura_item_id"], name: "index_transaccions_on_factura_item_id"
+  add_index "transaccions", ["factura_proveedor_id"], name: "index_transaccions_on_factura_proveedor_id"
+  add_index "transaccions", ["gasto_id"], name: "index_transaccions_on_gasto_id"
+  add_index "transaccions", ["pago_id"], name: "index_transaccions_on_pago_id"
+  add_index "transaccions", ["recibo_de_caja_id"], name: "index_transaccions_on_recibo_de_caja_id"
   add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
 
   create_table "users", force: :cascade do |t|
