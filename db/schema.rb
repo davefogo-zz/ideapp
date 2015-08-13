@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810155351) do
+ActiveRecord::Schema.define(version: 20150813162823) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20150810155351) do
     t.datetime "updated_at",                   null: false
     t.date     "fecha_orden"
     t.string   "unidad"
-    t.integer  "costo_unidad"
+    t.integer  "costo_unidad",       limit: 8
     t.integer  "medio_id"
     t.boolean  "facturar"
     t.integer  "cantidad"
@@ -119,10 +119,12 @@ ActiveRecord::Schema.define(version: 20150810155351) do
     t.date     "fecha_vencimiento"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "subcuenta_puc_id"
   end
 
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
   add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
+  add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"
 
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",           null: false
@@ -135,6 +137,25 @@ ActiveRecord::Schema.define(version: 20150810155351) do
 
   add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id"
   add_index "facturas", ["presupuesto_id"], name: "index_facturas_on_presupuesto_id"
+
+  create_table "gastos", force: :cascade do |t|
+    t.date     "fecha_recepcion"
+    t.integer  "proveedore_id"
+    t.integer  "importe",              limit: 8
+    t.integer  "iva",                  limit: 8
+    t.integer  "autorizado_por_id"
+    t.date     "fecha_de_vencimiento"
+    t.integer  "subcuenta_puc_id"
+    t.boolean  "asignar_a_cliente"
+    t.integer  "cliente_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "gastos", ["autorizado_por_id"], name: "index_gastos_on_autorizado_por_id"
+  add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
+  add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id"
+  add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id"
 
   create_table "grupos", force: :cascade do |t|
     t.integer  "grupo"
@@ -173,7 +194,7 @@ ActiveRecord::Schema.define(version: 20150810155351) do
   create_table "ordenes", force: :cascade do |t|
     t.datetime "fecha_orden"
     t.string   "unidad"
-    t.integer  "costo_unidad"
+    t.integer  "costo_unidad",         limit: 8
     t.integer  "presupuesto_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -221,6 +242,21 @@ ActiveRecord::Schema.define(version: 20150810155351) do
     t.integer  "dias_pronto_pago"
   end
 
+  create_table "recibo_de_cajas", force: :cascade do |t|
+    t.date     "fecha"
+    t.integer  "factura_id"
+    t.integer  "importe",          limit: 8
+    t.string   "concepto"
+    t.string   "forma_de_pago"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "codigo_de_banco"
+    t.integer  "numero_de_cheque"
+    t.integer  "numero_de_cuenta"
+  end
+
+  add_index "recibo_de_cajas", ["factura_id"], name: "index_recibo_de_cajas_on_factura_id"
+
   create_table "subcuenta_pucs", force: :cascade do |t|
     t.integer  "subcuenta"
     t.string   "descripcion"
@@ -235,11 +271,11 @@ ActiveRecord::Schema.define(version: 20150810155351) do
     t.date     "fecha"
     t.integer  "comprobante"
     t.integer  "cliente_id"
-    t.integer  "debito"
-    t.integer  "credito"
+    t.integer  "debito",           limit: 8
+    t.integer  "credito",          limit: 8
     t.integer  "presupuesto_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "descripcion"
     t.string   "nit"
     t.integer  "subcuenta_puc_id"
@@ -275,7 +311,6 @@ ActiveRecord::Schema.define(version: 20150810155351) do
     t.decimal  "escala"
     t.string   "rango"
     t.string   "cobro"
-    t.integer  "valor"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "medio_id"

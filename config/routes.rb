@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   resources :subcuenta_pucs
   resources :transaccions
   resources :volumenes
-  respurces :factura_proveedors
+  resources :factura_proveedors
+  resources :recibo_de_cajas
   resources :presupuestos do 
     resources :ordenes, controller: 'presupuestos/ordenes'
   end
