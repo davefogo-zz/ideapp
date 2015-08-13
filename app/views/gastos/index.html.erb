@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listado de Recibos</h1>
+<h1>Listado de Gastos</h1>
 
 <div class="media">
   <div class="media-body">
@@ -13,11 +13,11 @@
       </thead>
       
       <tbody>
-    <% @recibo_de_cajas.each do |recibo_de_caja| %>
+    <% @gastos.each do |gasto| %>
       <tr>
-        <td><%= recibo_de_caja.fecha %></td>
+        <td><%= gasto.fecha %></td>
         
-        <td><%= link_to 'Destroy', gasto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'Nuevo Recibo de Caja', new_recibo_de_caja_path %>
+<%= link_to 'Nuevo Gasto', new_gasto_path %>

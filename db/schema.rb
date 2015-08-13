@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813162823) do
+ActiveRecord::Schema.define(version: 20150813172635) do
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -143,17 +143,17 @@ ActiveRecord::Schema.define(version: 20150813162823) do
     t.integer  "proveedore_id"
     t.integer  "importe",              limit: 8
     t.integer  "iva",                  limit: 8
-    t.integer  "autorizado_por_id"
     t.date     "fecha_de_vencimiento"
     t.integer  "subcuenta_puc_id"
     t.boolean  "asignar_a_cliente"
     t.integer  "cliente_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "colaboradore_id"
   end
 
-  add_index "gastos", ["autorizado_por_id"], name: "index_gastos_on_autorizado_por_id"
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
+  add_index "gastos", ["colaboradore_id"], name: "index_gastos_on_colaboradore_id"
   add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id"
   add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id"
 
@@ -253,9 +253,11 @@ ActiveRecord::Schema.define(version: 20150813162823) do
     t.integer  "codigo_de_banco"
     t.integer  "numero_de_cheque"
     t.integer  "numero_de_cuenta"
+    t.integer  "subcuenta_puc_id"
   end
 
   add_index "recibo_de_cajas", ["factura_id"], name: "index_recibo_de_cajas_on_factura_id"
+  add_index "recibo_de_cajas", ["subcuenta_puc_id"], name: "index_recibo_de_cajas_on_subcuenta_puc_id"
 
   create_table "subcuenta_pucs", force: :cascade do |t|
     t.integer  "subcuenta"
