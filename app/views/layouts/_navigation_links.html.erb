@@ -19,15 +19,34 @@
     <% if policy(current_user).index? %>
       <li><%= link_to t('Presupuestos'), presupuestos_path %></li>
     <% end %>	
+
     <% if policy(current_user).index? %>
       <li><%= link_to t('Facturas'), facturas_path %></li>
     <% end %>
+    <% if policy(current_user).index? %>
+      <li><%= link_to t('Items'), factura_items_path %></li>
+    <% end %>
+    <% if policy(current_user).index? %>
+      <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
+    <% end %>
+     <% if policy(current_user).index? %>
+      <li><%= link_to t('Gastos'), gastos_path %></li>
+    <% end %>
+    <% if policy(current_user).index? %>
+      <li><%= link_to t('Pagos'), pagos_path %></li>
+    <% end %>
+    <% if policy(current_user).index? %>
+      <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
+    <% end %>
+
     <% if policy(Departamento).index? %>
       <li><%= link_to t('Departamentos'), departamentos_path %></li>
     <% end %>
-    <% if policy(Departamento).index? %>
+    <% if policy(Cargo).index? %>
       <li><%= link_to t('Cargos'), cargos_path %></li>
     <% end %>  
+
+
       <li><%= link_to t('Sign out'), destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
     <li><%= link_to t('Sign in'), new_user_session_path %></li>

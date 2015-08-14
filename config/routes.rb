@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :recibo_de_cajas
   resources :gastos
   resources :pagos
+  resources :activo_fijos
   resources :presupuestos do 
     resources :ordenes, controller: 'presupuestos/ordenes'
   end
