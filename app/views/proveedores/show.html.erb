@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Nombre:</strong>
   <%= @proveedore.nombre %>
@@ -30,5 +28,14 @@
   <%= @proveedore.contacto_comercial %>
 </p>
 
-<%= link_to 'Edit', edit_proveedore_path(@proveedore) %> |
-<%= link_to 'Back', proveedores_path %>
+<p>
+  <strong>Pronto pago:</strong>
+  <%= number_to_percentage(@proveedore.pronto_pago, precision: 0) %>
+</p>
+
+<p>
+  <strong>Dias pronto pago:</strong>
+  <%= @proveedore.dias_pronto_pago %>
+</p>
+<%= link_to 'Editar', edit_proveedore_path(@proveedore) %> |
+<%= link_to 'Regresar', proveedores_path %>

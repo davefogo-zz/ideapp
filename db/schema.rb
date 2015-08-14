@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813223537) do
+ActiveRecord::Schema.define(version: 20150814173658) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -126,13 +126,14 @@ ActiveRecord::Schema.define(version: 20150813223537) do
     t.date     "fecha_recepcion"
     t.integer  "ordene_id"
     t.integer  "proveedore_id"
-    t.integer  "importe",           limit: 8
+    t.integer  "importe",             limit: 8
     t.boolean  "devolucion"
-    t.integer  "iva",               limit: 8
+    t.integer  "iva",                 limit: 8
     t.date     "fecha_vencimiento"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "subcuenta_puc_id"
+    t.integer  "importe_pronto_pago", limit: 8
   end
 
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
@@ -242,9 +243,13 @@ ActiveRecord::Schema.define(version: 20150813223537) do
     t.integer  "importe",              limit: 8
     t.string   "forma_de_pago"
     t.boolean  "gasto"
+    t.integer  "gasto_id"
+    t.string   "banco"
+    t.integer  "numero_de_cheque"
   end
 
   add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
+  add_index "pagos", ["gasto_id"], name: "index_pagos_on_gasto_id"
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
   add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
 

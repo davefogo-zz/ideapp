@@ -8,16 +8,18 @@ class FacturaProveedor < ActiveRecord::Base
   end
 
   def generate_pronto_pago_calculation
-  	self.pronto_pago = self.proveedore.pronto_pago * self.importe
+  	self.importe_pronto_pago = self.proveedore.pronto_pago * self.importe
   end
 
   def generate_fecha_vencimiento_calculation
-  	self.fecha_vencimiento = (self.fecha_recepcion + 60.days) if self.pronto_pago.nil?
-  	self.fecha_vencimiento = (self.fecha_recepcion + 30.days) if self.dias_pronto_pago == 30
-  	self.fecha_vencimiento = (self.fecha_recepcion + 15.days) if self.dias_pronto_pago == 15
+    self.fecha_recepcion = Time.now
+  	self.fecha_vencimiento = (self.fecha_recepcion + 60.days) if self.importe_pronto_pago.nil?
+    self.fecha_vencimiento = (self.fecha_recepcion + 45.days) if self.proveedore.dias_pronto_pago == 45
+  	self.fecha_vencimiento = (self.fecha_recepcion + 30.days) if self.proveedore.dias_pronto_pago == 30
+  	self.fecha_vencimiento = (self.fecha_recepcion + 15.days) if self.proveedore.dias_pronto_pago == 15
   end
 
-  after_save :generate_transaccion_proveedor_is, :generate_transaccion_proveedor_bs, :generate_transaccion_iva_is, :generate_transaccion_iva_is
+  after_save :generate_transaccion_proveedor_is, :generate_transaccion_proveedor_bs, :generate_transaccion_iva_is, :generate_transaccion_iva_bs, :generate_transaccion_importe_pronto_pago
 
   def generate_transaccion_proveedor_is
   	self.subcuenta_puc_id = 6
@@ -37,6 +39,11 @@ class FacturaProveedor < ActiveRecord::Base
   def generate_transaccion_iva_bs
   	self.subcuenta_puc_id = 5
   	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
+  end
+
+  def generate_transaccion_importe_pronto_pago
+    self.subcuenta_puc_id = 4210
+    Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe_pronto_pago, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
 end

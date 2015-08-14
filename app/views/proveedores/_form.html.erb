@@ -1,41 +1,15 @@
-<%= form_for(@proveedore) do |f| %>
-  <% if @proveedore.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@proveedore.errors.count, "error") %> prohibited this proveedore from being saved:</h2>
-
-      <ul>
-      <% @proveedore.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<% content_for :title do %>Proveedor<% end %>
+<h3>Proveedor</h3>
+<div class="form">
+  <%= simple_form_for @proveedore do |form| %>
+    <%= form.input :nombre %>
+    <%= form.input :nit %>
+    <%= form.input :direccion %>
+    <%= form.input :telefono %>
+    <%= form.input :contacto_financiero %>
+    <%= form.input :contacto_comercial %>
+    <%= form.input :pronto_pago %>
+    <%= form.input :dias_pronto_pago, collection: [ 15, 30, 45 ] %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </div>
-  <div class="field">
-    <%= f.label :nit %><br>
-    <%= f.text_field :nit %>
-  </div>
-  <div class="field">
-    <%= f.label :direccion %><br>
-    <%= f.text_field :direccion %>
-  </div>
-  <div class="field">
-    <%= f.label :telefono %><br>
-    <%= f.text_field :telefono %>
-  </div>
-  <div class="field">
-    <%= f.label :contacto_financiero %><br>
-    <%= f.text_field :contacto_financiero %>
-  </div>
-  <div class="field">
-    <%= f.label :contacto_comercial %><br>
-    <%= f.text_field :contacto_comercial %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
