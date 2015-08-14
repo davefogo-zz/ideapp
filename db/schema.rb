@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814173658) do
+ActiveRecord::Schema.define(version: 20150814203354) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20150814173658) do
     t.string   "direccion"
     t.decimal  "pronto_pago"
     t.integer  "dias_pronto_pago"
+    t.boolean  "gasto"
   end
 
   create_table "recibo_de_cajas", force: :cascade do |t|
