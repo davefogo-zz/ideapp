@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <h1>Listado Factura Proveedor</h1>
+  <div class="pull-right range-query">
+     <%= form_tag factura_proveedors_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_vencimiento_from]', @search.fecha_vencimiento_from %>
+        <%= text_field_tag 'search[fecha_vencimiento_to]', @search.fecha_vencimiento_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Numero de Factura</th>
+              <th>Fecha de Recepcion</th>
+              <th>Fecha de Vencimiento</th>
+              <th>Orden</th>
+              <th>Proveedor</th>
+              <th>Importe</th>
+              <th>IVA</th>
+              <th>Devolucion</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @factura_proveedors.each do |factura_proveedor| %>
+              <tr>
+                <td><h4><%= factura_proveedor.numero_de_factura %></h4></td>
+                <td><h4><%= factura_proveedor.fecha_recepcion %></h4></td>
+                <td><h4><%= factura_proveedor.fecha_vencimiento %></h4></td>
+                <td><h4><%= factura_proveedor.ordene_id %></h4></td>
+                <td><h4><%= factura_proveedor.proveedore_id %></h4></td>
+                <td><h4><%= factura_proveedor.importe %></h4></td>
+                <td><h4><%= factura_proveedor.iva %></h4></td>
+                <td><h4><%= factura_proveedor.devolucion %></h4></td>
+                <td><%= link_to 'Mostrar', factura_proveedor %></td>
+                <td><%= link_to 'Editar', edit_factura_proveedor_path(factura_proveedor) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Nueva factura de proveedor', new_factura_proveedor_path %>

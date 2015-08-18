@@ -38,6 +38,9 @@
     <% if policy(current_user).index? %>
       <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
     <% end %>
+    <% if policy(current_user).index? %>
+      <li><%= link_to t('PUC'), subcuenta_pucs_path %></li>
+    <% end %>
 
     <% if policy(Departamento).index? %>
       <li><%= link_to t('Departamentos'), departamentos_path %></li>
