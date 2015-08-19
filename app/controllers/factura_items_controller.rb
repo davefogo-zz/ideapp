@@ -8,6 +8,8 @@ class FacturaItemsController < ApplicationController
     @facturas = Factura.all
     @ordenes = Ordene.all
     @medios = Medio.all
+    @search = FacturaItemSearch.new(params[:search])
+    @factura_items = @search.scope
   end
 
   # GET /factura_items/1

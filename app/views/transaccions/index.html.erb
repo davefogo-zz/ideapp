@@ -1,28 +1,41 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listado de Transacciones</h1>
-
+<div class="row">
+  <h1>Listado de Transacciones</h1>
+  <div class="pull-right range-query">
+     <%= form_tag transaccions_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
+        <%= text_field_tag 'search[fecha_to]', @search.fecha_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
+<div class="media">
 <div class="media">
   <div class="media-body">
     <table class="table table-hover">
       <thead>
         <tr>
           <th>Fecha</th>
+          <th>Debito</th>
+          <th>Credito</th>
+          <th>Subcuenta</th>
           <th colspan="3"></th>
         </tr>
       </thead>
-      
       <tbody>
-    <% @transaccions.each do |transaccion| %>
-      <tr>
-        <td><%= transaccion.fecha %></td>
-        
-        <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        <% @transaccions.each do |transaccion| %>
+          <tr>
+            <td><%= transaccion.fecha %></td>
+            <td><%= number_to_currency(transaccion.debito) %></td>
+            <td><%= number_to_currency(transaccion.credito) %></td>
+            <td><%= transaccion.subcuenta_puc_id %></td>
+            <td><%= link_to 'Mostrar', transaccion, class: 'btn btn-mini btn-default' %></td>
+                <td><%= link_to 'Editar', edit_transaccion_path(transaccion), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Eliminar', transaccion, class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Confirma?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <br>
-
-<%= link_to 'New Medio', new_medio_path %>
+<%= link_to 'Nueva transaccion', new_medio_path %>

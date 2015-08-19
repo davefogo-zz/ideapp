@@ -4,7 +4,8 @@ class GastosController < ApplicationController
   # GET /gastos
   # GET /gastos.json
   def index
-    @gastos = Gasto.all
+    @search = GastoSearch.new(params[:search])
+    @gastos = @search.scope
   end
 
   # GET /gastos/1

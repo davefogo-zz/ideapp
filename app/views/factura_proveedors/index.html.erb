@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="row">
   <h1>Listado Factura Proveedor</h1>
   <div class="pull-right range-query">
@@ -28,16 +27,16 @@
           <tbody>
             <% @factura_proveedors.each do |factura_proveedor| %>
               <tr>
-                <td><h4><%= factura_proveedor.numero_de_factura %></h4></td>
-                <td><h4><%= factura_proveedor.fecha_recepcion %></h4></td>
-                <td><h4><%= factura_proveedor.fecha_vencimiento %></h4></td>
-                <td><h4><%= factura_proveedor.ordene_id %></h4></td>
-                <td><h4><%= factura_proveedor.proveedore_id %></h4></td>
-                <td><h4><%= factura_proveedor.importe %></h4></td>
-                <td><h4><%= factura_proveedor.iva %></h4></td>
-                <td><h4><%= factura_proveedor.devolucion %></h4></td>
-                <td><%= link_to 'Mostrar', factura_proveedor %></td>
-                <td><%= link_to 'Editar', edit_factura_proveedor_path(factura_proveedor) %></td>
+                <td><%= factura_proveedor.numero_de_factura %></td>
+                <td><%= factura_proveedor.fecha_recepcion %></td>
+                <td><%= factura_proveedor.fecha_vencimiento %></td>
+                <td><%= factura_proveedor.ordene_id %></td>
+                <td><%= factura_proveedor.proveedore_id %></td>
+                <td><%= factura_proveedor.importe %></td>
+                <td><%= factura_proveedor.iva %></td>
+                <td><%= factura_proveedor.devolucion %></td>
+                <td><%= link_to 'Mostrar', factura_proveedor, class: 'btn btn-mini btn-default' %></td>
+                <td><%= link_to 'Editar', edit_factura_proveedor_path(factura_proveedor), class: 'btn btn-mini btn-success' %></td>
               </tr>
             <% end %>
           </tbody>

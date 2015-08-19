@@ -4,7 +4,8 @@ class PresupuestosController < ApplicationController
   # GET /presupuestos
   # GET /presupuestos.json
   def index
-    @presupuestos = Presupuesto.all
+    @search = PresupuestoSearch.new(params[:search])
+    @presupuestos = @search.scope
   end
 
   # GET /presupuestos/1

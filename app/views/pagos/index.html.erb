@@ -1,28 +1,41 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listado de Pagos</h1>
-
+<div class="row">
+  <h1>Listado de Pagos</h1>
+  <div class="pull-right range-query">
+     <%= form_tag pagos_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
+        <%= text_field_tag 'search[fecha_to]', @search.fecha_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
 <div class="media">
   <div class="media-body">
     <table class="table table-hover">
       <thead>
         <tr>
           <th>Fecha</th>
+          <th>Proveedor</th>
+          <th>Factura Proveedor</th>
+          <th>Factura Gasto</th>
+          <th>Valor</th>
           <th colspan="3"></th>
         </tr>
       </thead>
-      
       <tbody>
-    <% @pagos.each do |pago| %>
-      <tr>
-        <td><%= pago.fecha %></td>
-        
-        <td><%= link_to 'Destroy', pago, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        <% @pagos.each do |pago| %>
+          <tr>
+            <td><%= pago.fecha %></td>
+            <td><%= pago.proveedore.nombre %></td>
+            <td><%= pago.factura_proveedor_id %></td>
+            <td><%= pago.gasto_id %></td>
+            <td><%= pago.importe%></td>
+            <td><%= link_to 'Mostrar', pago, class: 'btn btn-mini btn-default' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <br>
 
 <%= link_to 'Nuevo Pago', new_pago_path %>

@@ -1,42 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listado de Gastos</h1>
-
+<div class="row">
+  <h1>Listado de Gastos</h1>
+  <div class="pull-right range-query">
+     <%= form_tag gastos_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_recepcion_from]', @search.fecha_recepcion_from %>
+        <%= text_field_tag 'search[fecha_recepcion_to]', @search.fecha_recepcion_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
 <div class="media">
   <div class="media-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Fecha de recepcion</th>
-          <th>Fecha de vencimiento</th>
-          <th>Proveedor</th>
-          <th>Importe</th>
-          <th>IVA</th>
-          <th>Asignar a cliente</th>
-          <th>Cliente</th>
-          <th>Gasto aprobado por</th>
-          <th>Compra de activo</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-    <% @gastos.each do |gasto| %>
-      <tr>
-        <td><%= gasto.fecha_recepcion %></td>
-        <td><%= gasto.fecha_de_vencimiento %></td>
-        <td><%= gasto.proveedore_id %></td>
-        <td><%= gasto.importe %></td>
-        <td><%= gasto.iva %></td>
-        <td><%= gasto.asignar_a_cliente %></td>
-        <td><%= gasto.cliente_id %></td>
-        <td><%= gasto.colaboradore_id %></td>
-        <td><%= gasto.compra_de_activo %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Fecha de recepcion</th>
+              <th>Fecha de vencimiento</th>
+              <th>Proveedor</th>
+              <th>Importe</th>
+              <th>IVA</th>
+              <th>Asignar a cliente</th>
+              <th>Cliente</th>
+              <th>Gasto aprobado por</th>
+              <th>Compra de activo</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @gastos.each do |gasto| %>
+              <tr>
+              <td><%= gasto.fecha_recepcion %></td>
+              <td><%= gasto.fecha_de_vencimiento %></td>
+              <td><%= gasto.proveedore_id %></td>
+              <td><%= gasto.importe %></td>
+              <td><%= gasto.iva %></td>
+              <td><%= gasto.asignar_a_cliente %></td>
+              <td><%= gasto.cliente_id %></td>
+              <td><%= gasto.colaboradore_id %></td>
+              <td><%= gasto.compra_de_activo %></td>
+              </tr>
+            <% end %>
+           </tbody>
+      </table>
+    </div>
 </div>
 <br>
 

@@ -1,7 +1,6 @@
 <%# add navigation links to this file %>
-  <li><%= link_to t('About'), page_path('about') %></li>
 <% if user_signed_in? %>
-  <li><%= link_to t('Sign out'), destroy_user_session_path, :method=>'delete' %></li>
+  <li><%= link_to t('Salir'), destroy_user_session_path, :method=>'delete' %></li>
   <div class='btn-group pull-right right-nav'>
      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
@@ -124,7 +123,7 @@
   </div>
   
 <% else %>
-    <li><%= link_to t('Sign in'), new_user_session_path %></li>
-    <li><%= link_to t('Sign up'), new_user_registration_path %></li>
+    <li><%= link_to t('Ingresar'), new_user_session_path %></li>
+    <li><%= link_to t('Registrarse'), new_user_registration_path %></li>
 <% end %>
 

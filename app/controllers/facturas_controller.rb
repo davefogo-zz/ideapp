@@ -3,7 +3,8 @@ class FacturasController < ApplicationController
   # GET /facturas
   # GET /facturas.json
   def index
-    @factura = Factura.all
+    @search = FacturaSearch.new(params[:search])
+    @factura = @search.scope
     @cliente = Cliente.all
   end
 

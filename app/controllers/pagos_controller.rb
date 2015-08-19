@@ -4,7 +4,8 @@ class PagosController < ApplicationController
   # GET /pagos
   # GET /pagos.json
   def index
-    @pagos = Pago.all
+    @search = PagoSearch.new(params[:search])
+    @pagos = @search.scope
   end
 
   # GET /pagos/1

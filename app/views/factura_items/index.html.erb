@@ -1,29 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <h1>Listado Items de Factura</h1>
+  <div class="pull-right range-query">
+     <%= form_tag factura_items_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_orden_from]', @search.fecha_orden_from %>
+        <%= text_field_tag 'search[fecha_orden_to]', @search.fecha_orden_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Factura</th>
+              <th>Orden</th>
+              <th>Fecha</th>
+              <th>Valor</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @factura_items.each do |factura_item| %>
+              <tr>
+                <td><h4><%= factura_item.factura_id %></h4></td>
+                <td><h4><%= factura_item.ordene_id %></h4></td>
+                <td><h4><%= factura_item.fecha_orden %></h4></td>
+                <td><h4><%= number_to_currency(factura_item.subtotal) %></h4></td>
+                <td><%= link_to 'Mostrar', factura_item, class: 'btn btn-mini btn-default'  %></td>
+                <td><%= link_to 'Editar', edit_factura_item_path(factura_item), class: 'btn btn-mini btn-success'  %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-<h1>Listing Factura Items</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Factura</th>
-      <th>Ordene</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @factura_items.each do |factura_item| %>
-      <tr>
-       
-        <td><h4><%= factura_item.fecha_orden %></h4></td>
-        <td><h4><%= factura_item.costo_unidad %></h4></td>
-        <td><%= link_to 'Show', factura_item %></td>
-        <td><%= link_to 'Edit', edit_factura_item_path(factura_item) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+        <br>
 
 <%= link_to 'New Factura item', new_factura_item_path %>
