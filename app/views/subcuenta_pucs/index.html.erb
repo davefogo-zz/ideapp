@@ -1,24 +1,33 @@
-<h1>Subcuentas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Subcuenta</th>
-      <th>Descripcion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @subcuenta_puc.each do |subcuenta_puc| %>
-	    <tr>
-		    <td><%= subcuenta_puc.subcuenta %></td>
-		    <td><%= subcuenta_puc.descripcion %></td>
-		</tr>
+<div class="row">
+  <h1>Listado de Subcuentas</h1>
+  <div class="pull-right range-query">
+    <%= form_tag(subcuenta_pucs_path, :method => 'get', id: 'search-form') do %>
+      <%= text_field_tag :search, params[:search], placeholder: "buscar el puc" %>
+      <%= submit_tag 'Buscar', class: 'btn search-button' %>
     <% end %>
-
-  </tbody>
-</table>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Subcuenta</th>
+              <th>Descripcion</th>
+              <th>Cuenta</th>
+            </tr>
+          </thead>
+        <tbody>
+          <% @subcuenta_pucs.each do |subcuenta_puc| %>
+      	    <tr>
+      		    <td><%= subcuenta_puc.subcuenta %></td>
+      		    <td><%= subcuenta_puc.descripcion %></td>
+      		</tr>
+          <% end %>
+        </tbody> 
+      </table>
+    </div>
+</div>
 
 <br>
 

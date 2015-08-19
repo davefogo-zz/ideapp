@@ -5,6 +5,11 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores.json
   def index
     @colaboradores = Colaboradore.all
+    if params[:search] 
+      @colaboradores = Colaboradore.search(params[:search])
+    else
+      @colaboradores = Colaboradore.all
+    end
     authorize Colaboradore
   end
 

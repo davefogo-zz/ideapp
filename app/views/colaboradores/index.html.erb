@@ -1,41 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Colaboradores</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Cédula</th>
-      <th>Dirección</th>
-      <th>Teléfono personal</th>
-      <th>Teléfono empresa</th>
-      <th>Cargo</th>
-      <th>Departamento</th>
-      <th>Jefe inmediato</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @colaboradores.each do |colaboradore| %>
-      <tr>
-        <td><%= colaboradore.nombre %></td>
-        <td><%= colaboradore.cedula %></td>
-        <td><%= colaboradore.direccion %></td>
-        <td><%= colaboradore.telefono_personal %></td>
-        <td><%= colaboradore.telefono_empresa %></td>
-        <td><%= colaboradore.cargo %></td>
-        <td><%= colaboradore.departamento %></td>
-        <td><%= colaboradore.jefe_inmediato %></td>
-        <td><%= link_to 'Show', colaboradore %></td>
-        <td><%= link_to 'Edit', edit_colaboradore_path(colaboradore) %></td>
-        <td><%= link_to 'Destroy', colaboradore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row">
+  <h1>Listado de Colaboradores</h1>
+  <div class="pull-right range-query">
+    <%= form_tag(colaboradores_path, :method => 'get', id: 'search-form') do %>
+      <%= text_field_tag :search, params[:search], placeholder: "buscar medios" %>
+      <%= submit_tag 'Buscar', class: 'btn search-button' %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cédula</th>
+              <th>Dirección</th>
+              <th>Teléfono personal</th>
+              <th>Teléfono empresa</th>
+              <th>Cargo</th>
+              <th>Departamento</th>
+              <th>Jefe inmediato</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+            <tbody>
+              <% @colaboradores.each do |colaboradore| %>
+                <tr>
+                  <td><%= colaboradore.nombre %></td>
+                  <td><%= colaboradore.cedula %></td>
+                  <td><%= colaboradore.direccion %></td>
+                  <td><%= colaboradore.telefono_personal %></td>
+                  <td><%= colaboradore.telefono_empresa %></td>
+                  <td><%= colaboradore.cargo %></td>
+                  <td><%= colaboradore.departamento %></td>
+                  <td><%= colaboradore.jefe_inmediato %></td>
+                  <td><%= link_to 'Mostrar', colaboradore, class: 'btn btn-mini btn-default'  %></td>
+                  <td><%= link_to 'Editar', edit_colaboradore_path(colaboradore), class: 'btn btn-mini btn-success'  %></td>
+                  <td><%= link_to 'Eliminar', colaboradore, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger'  %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 
-<br>
+          <br>
 
 <%= link_to 'New Colaboradore', new_colaboradore_path %>

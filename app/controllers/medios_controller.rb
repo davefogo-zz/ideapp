@@ -5,6 +5,11 @@ class MediosController < ApplicationController
   # GET /medios.json
   def index
     @medios = Medio.all
+    if params[:search] 
+      @medios = Medio.search(params[:search])
+    else
+      @medios = Medio.all
+    end
   end
 
   # GET /medios/1

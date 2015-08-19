@@ -4,7 +4,8 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas
   # GET /recibo_de_cajas.json
   def index
-    @recibo_de_cajas = ReciboDeCaja.all
+    @search = ReciboDeCajaSearch.new(params[:search])
+    @recibo_de_cajas = @search.scope
   end
 
   # GET /recibo_de_cajas/1

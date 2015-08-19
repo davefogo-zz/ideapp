@@ -1,9 +1,13 @@
 class SubcuentaPucsController < ApplicationController
 
 	def index
-		@subcuenta_puc = SubcuentaPuc.all
-		
-	end
+		@subcuenta_pucs = SubcuentaPuc.all
+		if params[:search] 
+      		@subcuenta_pucs = SubcuentaPuc.search(params[:search])
+    	else
+      		@subcuenta_pucs = SubcuentaPuc.all
+      	end
+    end
 
 	def new
 		@subcuenta_puc = SubcuentaPuc.new

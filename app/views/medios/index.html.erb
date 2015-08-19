@@ -1,37 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Medios</h1>
-
+<div class="row">
+  <h1>Listado de Medios</h1>
+  <div class="pull-right range-query">
+    <%= form_tag(medios_path, :method => 'get', id: 'search-form') do %>
+      <%= text_field_tag :search, params[:search], placeholder: "buscar medios" %>
+      <%= submit_tag 'Buscar', class: 'btn search-button' %>
+    <% end %>
+  </div>
+</div>
 <div class="media">
   <div class="media-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Nit</th>
-          <th>Dirección</th>
-          <th>Teléfono</th>
-          <th>Contacto financiero</th>
-          <th>Contacto comercial</th>
-          <th>Proveedore</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-    <% @medios.each do |medio| %>
-      <tr>
-        <td><%= medio.nombre %></td>
-        <td><%= medio.nit %></td>
-        <td><%= medio.proveedore.nombre %></td>
-        <td><%= link_to 'Show', medio %></td>
-        <td><%= link_to 'Edit', edit_medio_path(medio) %></td>
-        <td><%= link_to 'Destroy', medio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Nit</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Contacto financiero</th>
+              <th>Contacto comercial</th>
+              <th>Proveedor</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+        <tbody>
+          <% @medios.each do |medio| %>
+            <tr>
+              <td><%= medio.nombre %></td>
+              <td><%= medio.nit %></td>
+              <td><%= medio.proveedore.nombre %></td>
+              <td><%= link_to 'Mostrar', medio, class: 'btn btn-mini btn-default' %></td>
+              <td><%= link_to 'Editar', edit_medio_path(medio), class: 'btn btn-mini btn-success' %></td>
+              <td><%= link_to 'Eliminar', medio, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
 
 <br>
 
-<%= link_to 'New Medio', new_medio_path %>
+<%= link_to 'Nuevo Medio', new_medio_path %>
