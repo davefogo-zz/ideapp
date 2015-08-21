@@ -1,16 +1,17 @@
 class TransaccionsController < ApplicationController
-  
+  before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
   def index
     @search = TransaccionSearch.new(params[:search])
     @transaccions = @search.scope
   end
 
+  # GET /transaccions/1
+  # GET /transaccion_params/1.json
   def show
-    @transaccions = Transaccion.all
   end
 
   def new
-    @transaccion = Transaccion.all
+    @transaccion = Transaccion.new
   end
 
   def edit
@@ -56,6 +57,6 @@ class TransaccionsController < ApplicationController
     end
 
   	def transaccion_params
-  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subuenta_pucs, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id)
+  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subuenta_puc_id, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id)
   	end
 end

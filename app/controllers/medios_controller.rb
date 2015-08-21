@@ -33,7 +33,7 @@ class MediosController < ApplicationController
 
     respond_to do |format|
       if @medio.save
-        format.html { redirect_to @medio, notice: 'Medio was successfully created.' }
+        format.html { redirect_to @medio, notice: 'Medio creado.' }
         format.json { render :show, status: :created, location: @medio }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class MediosController < ApplicationController
   def update
     respond_to do |format|
       if @medio.update(medio_params)
-        format.html { redirect_to @medio, notice: 'Medio was successfully updated.' }
+        format.html { redirect_to @medio, notice: 'Medio actualizado.' }
         format.json { render :show, status: :ok, location: @medio }
       else
         format.html { render :edit }

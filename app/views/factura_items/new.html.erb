@@ -1,5 +1,19 @@
-<h1>New Factura Item</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', factura_items_path %>
+<% content_for :title do %>Factura Item<% end %>
+<h3>Factura Item</h3>
+	<div class="form">
+	<%= simple_form_for @factura_item do |form| %>
+	<div class="field">
+    <%= form.input :facturar %><br>
+	</div>
+	<div class="field">
+    <%= form.input :facturar_proveedor %><br>
+	</div>
+	<div class="field">
+    <%= form.input :sin_iva %><br>
+	</div>
+	<%= form.association :factura, :label_method => :id, include_blank: true, label: "Factura"  %><br>
+	<div class="actions">
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+	<% end %>
+</div>
+<%= link_to 'Regresar', factura_items_path %>

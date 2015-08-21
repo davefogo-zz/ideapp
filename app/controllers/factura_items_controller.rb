@@ -22,9 +22,7 @@ class FacturaItemsController < ApplicationController
 
   # GET /factura_items/new
   def new
-    @factura_item =                                                                        
-    @ordenes = Ordene.all
-    @medio = Medio.all
+    @factura_item =  FacturaItem.new                                                                      
   end
 
   # GET /factura_items/1/edit

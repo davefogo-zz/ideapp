@@ -62,9 +62,6 @@
           <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
         <% end %>
         <% if policy(current_user).index? %>
-          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
           <li><%= link_to t('Volumenes'), volumenes_path %></li>
         <% end %>
         <% if policy(current_user).index? %>

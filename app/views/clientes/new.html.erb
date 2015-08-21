@@ -1,5 +1,17 @@
-<h1>New Cliente</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', clientes_path %>
+<% content_for :title do %>Cliente<% end %>
+<h3>Nuevo Cliente</h3>
+<div class="form">
+	<%= simple_form_for @cliente do |form| %>
+    <%= form.input :nombre %>
+    <%= form.input :nit %>
+    <%= form.input :direccion_de_facturacion %>
+    <%= form.input :telefono %>
+    <%= form.input :tipo_de_cliente %>
+    <%= form.input :contacto_comercial %>
+    <%= form.input :contacto_facturacion %>
+    <%= form.input :cupo_de_credito %>
+    <%= form.association :colaboradore, :input_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
+  	<%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', clientes_path %>

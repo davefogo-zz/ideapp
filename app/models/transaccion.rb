@@ -1,3 +1,3 @@
 class Transaccion < ActiveRecord::Base
-  belongs_to :subcuenta
+  belongs_to :subcuenta_puc
 end
