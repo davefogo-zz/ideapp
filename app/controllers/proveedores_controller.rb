@@ -5,6 +5,11 @@ class ProveedoresController < ApplicationController
   # GET /proveedores.json
   def index
     @proveedores = Proveedore.all
+    if params[:search] 
+      @proveedores = Proveedore.search(params[:search])
+    else
+      @proveedores = Proveedore.all
+    end
   end
 
   # GET /proveedores/1
@@ -28,7 +33,7 @@ class ProveedoresController < ApplicationController
 
     respond_to do |format|
       if @proveedore.save
-        format.html { redirect_to @proveedore, notice: 'Proveedore was successfully created.' }
+        format.html { redirect_to @proveedore, notice: 'Proveedor creado.' }
         format.json { render :show, status: :created, location: @proveedore }
       else
         format.html { render :new }
@@ -42,7 +47,7 @@ class ProveedoresController < ApplicationController
   def update
     respond_to do |format|
       if @proveedore.update(proveedore_params)
-        format.html { redirect_to @proveedore, notice: 'Proveedore was successfully updated.' }
+        format.html { redirect_to @proveedore, notice: 'Proveedor actualizado.' }
         format.json { render :show, status: :ok, location: @proveedore }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class ProveedoresController < ApplicationController
   def destroy
     @proveedore.destroy
     respond_to do |format|
-      format.html { redirect_to proveedores_url, notice: 'Proveedore was successfully destroyed.' }
+      format.html { redirect_to proveedores_url, notice: 'Proveedor eliminado.' }
       format.json { head :no_content }
     end
   end

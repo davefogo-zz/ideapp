@@ -38,7 +38,7 @@ class ColaboradoresController < ApplicationController
 
     respond_to do |format|
       if @colaboradore.save
-        format.html { redirect_to @colaboradore, notice: 'Colaboradore was successfully created.' }
+        format.html { redirect_to @colaboradore, notice: 'Colaborador creado.' }
         format.json { render :show, status: :created, location: @colaboradore }
       else
         format.html { render :new }
@@ -53,7 +53,7 @@ class ColaboradoresController < ApplicationController
     authorize @colaboradore
     respond_to do |format|
       if @colaboradore.update(colaboradore_params)
-        format.html { redirect_to @colaboradore, notice: 'Colaboradore was successfully updated.' }
+        format.html { redirect_to @colaboradore, notice: 'Colaborador actualizado.' }
         format.json { render :show, status: :ok, location: @colaboradore }
       else
         format.html { render :edit }
@@ -68,7 +68,7 @@ class ColaboradoresController < ApplicationController
     authorize @colaboradore
     @colaboradore.destroy
     respond_to do |format|
-      format.html { redirect_to colaboradores_url, notice: 'Colaboradore was successfully destroyed.' }
+      format.html { redirect_to colaboradores_url, notice: 'Colaborador eliminado.' }
       format.json { head :no_content }
     end
   end
@@ -81,6 +81,6 @@ class ColaboradoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def colaboradore_params
-      params.require(:colaboradore).permit(:user_id, :first_name, :last_name, :name, :cedula, :direccion, :telefono_personal, :telefono_empresa, :cargo, :departamento, :jefe_inmediato)
+      params.require(:colaboradore).permit(:nombre, :user_id, :first_name, :last_name, :name, :cedula, :direccion, :telefono_personal, :telefono_empresa, :cargo_id, :departamento_id, :jefe_inmediato)
     end
 end

@@ -6,6 +6,7 @@ class FacturaProveedorsController < ApplicationController
   def index
     @search = FacturaProveedorSearch.new(params[:search])
     @factura_proveedors = @search.scope
+    @factura_proveedors = FacturaProveedor.all
   end
 
   # GET /factura_proveedors/1
@@ -71,6 +72,6 @@ class FacturaProveedorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_proveedor_params
-      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento)
+      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento, :numero_de_factura)
     end
 end

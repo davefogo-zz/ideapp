@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814212345) do
+ActiveRecord::Schema.define(version: 20150821021002) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -164,14 +164,14 @@ ActiveRecord::Schema.define(version: 20150814212345) do
     t.integer  "cliente_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "colaboradore_id"
     t.boolean  "compra_de_activo"
+    t.integer  "user_id"
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
-  add_index "gastos", ["colaboradore_id"], name: "index_gastos_on_colaboradore_id"
   add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id"
   add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id"
+  add_index "gastos", ["user_id"], name: "index_gastos_on_user_id"
 
   create_table "grupos", force: :cascade do |t|
     t.integer  "grupo"
@@ -363,8 +363,10 @@ ActiveRecord::Schema.define(version: 20150814212345) do
     t.integer  "factura_item_id"
     t.integer  "valor_volumen",   limit: 8
     t.integer  "ordene_id"
+    t.integer  "factura_id"
   end
 
+  add_index "volumen", ["factura_id"], name: "index_volumen_on_factura_id"
   add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
   add_index "volumen", ["medio_id"], name: "index_volumen_on_medio_id"
 

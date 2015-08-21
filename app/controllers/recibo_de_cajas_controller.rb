@@ -30,7 +30,7 @@ class ReciboDeCajasController < ApplicationController
 
     respond_to do |format|
       if @recibo_de_caja.save
-        format.html { redirect_to @recibo_de_caja, notice: 'Recibo de Caja was successfully created.' }
+        format.html { redirect_to @recibo_de_caja, notice: 'Recibo de Caja Creado.' }
         format.json { render :show, status: :created, location: @recibo_de_caja }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class ReciboDeCajasController < ApplicationController
   def destroy
     @recibo_de_caja.destroy
     respond_to do |format|
-      format.html { redirect_to recibo_de_cajas_url, notice: 'Recibo de Caja was successfully destroyed.' }
+      format.html { redirect_to recibo_de_cajas_url, notice: 'Recibo de Caja eliminado.' }
       format.json { head :no_content }
     end
   end

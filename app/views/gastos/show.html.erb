@@ -1,0 +1,40 @@
+<p>
+  <strong>Fecha de Recepcion:</strong>
+  <%= @gasto.fecha_recepcion %>
+</p>
+
+<p>
+  <strong>Fecha de Vencimiento:</strong>
+  <%= @gasto.fecha_de_vencimiento %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @gasto.proveedore.try(:nombre) %>
+</p>
+
+<p>
+  <strong>Importe:</strong>
+  <%= @gasto.importe %>
+</p>
+
+<p>
+  <strong>Aprobado por:</strong>
+  <%= @gasto.user.try(:name) %>
+</p>
+<% if :asignado_a_client == true %>
+<p>
+  <strong>Asignado a cliente:</strong>
+  <%= @gasto.cliente.try(:nombre) %>
+</p>
+<% end %>
+
+<% if :compra_de_activo == true %>
+  <p>
+    <strong>Compra de activo:</strong>
+    <%= @gasto.compra_de_activo %>
+  </p>
+<% end %>
+
+<%= link_to 'Editar', edit_gasto_path(@gasto) %> |
+<%= link_to 'Regresar', gastos_path %>

@@ -1,2 +1,15 @@
-<h1>Transaccions#new</h1>
-<p>Find me in app/views/transaccions/new.html.erb</p>
+<% content_for :title do %>Asiento contable<% end %>
+<h3>Asiento contable</h3>
+<div class="form">
+  <%= simple_form_for @gasto do |form| %>
+    <%= form.input :fecha %>
+    <%= form.input :cliente %>
+    <%= form.association :subcuenta_puc, :label_method => :id, include_blank: true, label: "Subcuenta"  %>
+    <%= form.input :debito %>
+    <%= form.input :credito %>
+    <%= form.input :descripcion %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+  <br>
+  <%= link_to 'Regresar', transaccions_path %>
+</div>

@@ -1,0 +1,15 @@
+<% content_for :title do %>Facturas de Proveedor<% end %>
+<h3>Facturas de Proveedor</h3>
+<div class="form">
+  <%= simple_form_for @factura_proveedor do |form| %>
+    <%= form.input :fecha_recepcion %>
+    <%= form.association :ordene, :label_method => :id, include_blank: true, label: "Orden"  %>
+    <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
+    <%= form.input :importe %>
+    <%= form.input :numero_de_factura %>
+    <%= form.input :devolucion %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+  <br>
+  <%= link_to 'Regresar', factura_proveedors_path %>
+</div>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Nombre:</strong>
   <%= @colaboradore.user.name %>
@@ -27,12 +25,12 @@
 
 <p>
   <strong>Cargo:</strong>
-  <%= @colaboradore.cargo %>
+  <%= @colaboradore.cargo.nombre %>
 </p>
 
 <p>
   <strong>Departamento:</strong>
-  <%= @colaboradore.departamento %>
+  <%= @colaboradore.departamento.nombre %>
 </p>
 
 <p>
@@ -40,5 +38,5 @@
   <%= @colaboradore.jefe_inmediato %>
 </p>
 
-<%= link_to 'Edit', edit_colaboradore_path(@colaboradore) %> |
-<%= link_to 'Back', colaboradores_path %>
+<%= link_to 'Editar', edit_colaboradore_path(@colaboradore) %> |
+<%= link_to 'Regresar', colaboradores_path %>

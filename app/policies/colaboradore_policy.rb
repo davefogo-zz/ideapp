@@ -14,6 +14,18 @@ class ColaboradorePolicy
     @current_user.admin? or @current_user.contador?
   end
 
+  def new?
+    @current_user.admin? or @current_user.contador?
+  end
+
+  def edit?
+    @current_user.admin? or @current_user.contador?
+  end
+
+  def create?
+    @current_user.admin? or @current_user.contador?
+  end
+
   def update?
     @current_user.admin? or @current_user.contador?
   end

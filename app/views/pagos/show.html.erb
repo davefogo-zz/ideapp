@@ -1,0 +1,42 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @pago.fecha %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @pago.proveedore.try(:nombre) %>
+</p>
+
+<%if :gasto == nil%>
+  <p>
+    <strong>Factura:</strong>
+    <%= @pago.factura_proveedor.try(:numero_de_facutra) %>
+  </p>
+<% else %>
+  <p>
+    <strong>Gasto:</strong>
+    <%= @pago.gasto_id %>
+  </p>
+<% end %>
+
+<p>
+  <strong>Forma de pago:</strong>
+  <%= @pago.forma_de_pago %>
+</p>
+
+<p>
+  <strong>Banco:</strong>
+  <%= @pago.banco %>
+</p>
+
+<%if :forma_de_pago == 'cheque'%>
+<p>
+  <strong>Numero de cheque:</strong>
+  <%= @pago.numero_de_cheque %>
+</p>
+<% end %>
+
+
+<%= link_to 'Editar', edit_pago_path(@pago) %> |
+<%= link_to 'Regresar', pagos_path %>

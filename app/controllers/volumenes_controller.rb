@@ -1,5 +1,8 @@
-class VolumenController < ApplicationController
+class VolumenesController < ApplicationController
   def index
+  	@search = VolumenSearch.new(params[:search])
+    @volumen = @search.scope
+    @volumen = Volumen.all
   end
 
   def show

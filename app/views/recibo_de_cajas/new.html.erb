@@ -1,0 +1,15 @@
+<% content_for :title do %>Recibos de Caja<% end %>
+<h3>Recibo de Caja</h3>
+<div class="form">
+  <%= simple_form_for @recibo_de_caja do |form| %>
+    <%= form.input :fecha %>
+    <%= form.association :factura, :label_method => :id, include_blank: false, label: "Factura"  %>
+    <%= form.input :importe %>
+    <%= form.input :concepto %>
+    <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
+    <%= form.input :numero_de_cheque %>
+    <%= form.input :numero_de_cuenta %>
+    <%= form.input :codigo_de_banco%>
+    <%= form.button :submit, 'Crear', class: 'submit' %>
+  <% end %>
+</div>

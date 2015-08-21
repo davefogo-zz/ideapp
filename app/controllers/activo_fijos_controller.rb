@@ -4,7 +4,8 @@ class ActivoFijosController < ApplicationController
   # GET /activo_fijos
   # GET /activo_fijos.json
   def index
-    @activo_fijos = ActivoFijo.all
+   @search = ActivoFijoSearch.new(params[:search])
+    @activo_fijos = @search.scope
   end
 
   # GET /activo_fijos/1

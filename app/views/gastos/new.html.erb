@@ -1,0 +1,18 @@
+<% content_for :title do %>Gastos<% end %>
+<h3>Gastos</h3>
+<div class="form">
+  <%= simple_form_for @gasto do |form| %>
+    <%= form.input :fecha_recepcion %>
+    <%= form.input :fecha_de_vencimiento %>
+    <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
+    <%= form.input :importe %>
+    <%= form.input :iva %>
+    <%= form.association :user, :label_method => :name, include_blank: true, label: "Aprobado por:"  %>
+    <%= form.input :compra_de_activo %>
+    <%= form.input :asignar_a_cliente %>
+    <%= form.association :cliente, :label_method => :nombre, include_blank: true, label: "Cliente"  %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+  <br>
+  <%= link_to 'Regresar', gastos_path %>
+</div>

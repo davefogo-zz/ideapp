@@ -1,6 +1,97 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
-  <li><%= link_to t('Salir'), destroy_user_session_path, :method=>'delete' %></li>
+  <li><%= link_to t('Salir'), destroy_user_session_path, :method=>'delete' %></li>  
+  <div class='btn-group pull-right right-nav'>
+       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span clas="sr-only">Tesoreria</span>
+       </button>
+      <ul class="dropdown-menu" role="menu">
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Pagos'), pagos_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Gastos'), gastos_path %></li>
+        <% end %>
+      </ul>
+  </div>
+<div class='btn-group pull-right right-nav'>
+       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span clas="sr-only">Medios</span>
+       </button>
+      <ul class="dropdown-menu" role="menu">
+        <% if policy(current_user).index? %> 
+          <li><%= link_to t('Medios'), medios_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Presupuestos'), presupuestos_path %></li>
+        <% end %> 
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Ordenes'), presupuestos_path %></li>
+       <% end %>  
+      </ul>
+  </div>
+<div class='btn-group pull-right right-nav'>
+       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span clas="sr-only">Facturacion</span>
+       </button>
+      <ul class="dropdown-menu" role="menu">
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Facturas'), facturas_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Items'), factura_items_path %></li>
+        <% end %>
+      </ul>
+  </div>
+<div class='btn-group pull-right right-nav'>
+       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span clas="sr-only">Contabilidad</span>
+       </button>
+      <ul class="dropdown-menu" role="menu">
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Proveedores'), proveedores_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Volumenes'), volumenes_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('PUC'), subcuenta_pucs_path %></li>
+        <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Libro Diario Oficial'), transaccions_path %></li>
+        <% end %>
+      </ul>
+  </div>
+<div class='btn-group pull-right right-nav'>
+     <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+      <span clas="sr-only">Cartera</span>
+     </button>
+    <ul class="dropdown-menu" role="menu">
+      <% if policy(current_user).index? %>
+        <li><%= link_to t('Recibos de Caja'), recibo_de_cajas_path %></li>
+        <% if policy(current_user).index? %> 
+          <li><%= link_to t('Clientes'), clientes_path %></li>
+        <% end %> 
+      <% end %>
+    </ul>
+  </div>
   <div class='btn-group pull-right right-nav'>
      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
@@ -21,107 +112,6 @@
      <% end %>  
     </ul>
   </div>
-  <div class='btn-group pull-right right-nav'>
-     <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-      <span clas="sr-only">Cartera</span>
-     </button>
-    <ul class="dropdown-menu" role="menu">
-      <% if policy(current_user).index? %>
-        <li><%= link_to t('Recibos de Caja'), recibo_de_cajas_path %></li>
-      <% end %>
-    </ul>
-  </div>
-  <div class='btn-group pull-right right-nav'>
-       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-        <span clas="sr-only">Contabilidad</span>
-       </button>
-      <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Proveedores'), proveedores_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Gastos'), gastos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('PUC'), subcuenta_pucs_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Libro Diario Oficial'), transaccions_path %></li>
-        <% end %>
-      </ul>
-  </div>
-  <div class='btn-group pull-right right-nav'>
-       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-        <span clas="sr-only">Facturacion</span>
-       </button>
-      <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Facturas'), facturas_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Items'), factura_items_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Gastos'), gastos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('PUC'), subcuenta_pucs_path %></li>
-        <% end %>
-      </ul>
-  </div>
-  <div class='btn-group pull-right right-nav'>
-       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-        <span clas="sr-only">Medios</span>
-       </button>
-      <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %> 
-          <li><%= link_to t('Medios'), medios_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %> 
-          <li><%= link_to t('Clientes'), clientes_path %></li>
-        <% end %> 
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Presupuestos'), presupuestos_path %></li>
-        <% end %> 
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Ordenes'), presupuestos_path %></li>
-       <% end %>  
-      </ul>
-  </div>
-  <div class='btn-group pull-right right-nav'>
-       <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-        <span clas="sr-only">Tesoreria</span>
-       </button>
-      <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Pagos'), pagos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Gastos'), gastos_path %></li>
-        <% end %>
-        <% if policy(current_user).index? %>
-          <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
-        <% end %>
-      </ul>
-  </div>
-  
 <% else %>
     <li><%= link_to t('Ingresar'), new_user_session_path %></li>
     <li><%= link_to t('Registrarse'), new_user_registration_path %></li>

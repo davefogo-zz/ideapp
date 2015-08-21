@@ -27,7 +27,8 @@
                   <td><%= recibo_de_caja.importe %></td>
                   <td><%= recibo_de_caja.factura_id %></td>
                   <td><%= recibo_de_caja.forma_de_pago %></td>
-                  <td><%= link_to 'Eliminar', recibo_de_caja, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-default' %></td>
+                  <td><%= link_to 'Mostrar', recibo_de_caja, class: 'btn btn-mini btn-default' %></td>
+                  <td><%= link_to 'Eliminar', recibo_de_caja, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
                 </tr>
               <% end %>
             </tbody>

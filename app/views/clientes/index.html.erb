@@ -20,7 +20,7 @@
               <th>Contacto comercial</th>
               <th>Contacto facturación</th>
               <th>Cupo de crédito</th>
-              <th>Colaboradore</th>
+              <th>Ejecutivo</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -35,7 +35,7 @@
               <td><%= cliente.contacto_comercial %></td>
               <td><%= cliente.contacto_facturacion %></td>
               <td><%= cliente.cupo_de_credito %></td>
-              <td><%= cliente.colaboradore.try(:nombre) %></td>
+              <td><%= cliente.colaboradore.user.name %></td>
               <td><%= link_to 'Mostrar', cliente, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_cliente_path(cliente), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>

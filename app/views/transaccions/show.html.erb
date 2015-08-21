@@ -1,2 +1,29 @@
-<h1>Transaccions#show</h1>
-<p>Find me in app/views/transaccions/show.html.erb</p>
+<p>
+  <strong>Nombre:</strong>
+  <%= @transaccion.fecha %>
+</p>
+
+<% if :credito == nil %>
+	<p>
+	  <strong>Debito:</strong>
+	  <%= @transaccion.debito %>
+	</p>
+ <% else %>
+	<p>
+	  <strong>Credito:</strong>
+	  <%= @transaccion.credito %>
+	</p>
+<% end %>
+
+<p>
+  <strong>Subcuenta:</strong>
+  <%= @transaccion.subcuenta_puc %>
+</p>
+
+<p>
+  <strong>Rubro:</strong>
+  <%= @transaccion.subcuenta_puc.descripcion %>
+</p>
+
+<%= link_to 'Editar', edit_transaccion_path(@transaccion) %> |
+<%= link_to 'Regresar', transaccions_path %>

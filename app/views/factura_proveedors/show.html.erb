@@ -1,0 +1,38 @@
+<p>
+  <strong>Fecha de recepcion:</strong>
+  <%= @factura_proveedor.fecha_recepcion %>
+</p>
+
+<p>
+  <strong>Fecha de vencimiento:</strong>
+  <%= @factura_proveedor.fecha_vencimiento %>
+</p>
+
+<p>
+  <strong>Orden:</strong>
+  <%= @factura_proveedor.ordene_id %>
+</p>
+
+<p>
+  <strong>Numero de factura:</strong>
+  <%= @factura_proveedor.numero_de_factura %>
+</p>
+
+<p>
+  <strong>Importe:</strong>
+  <%= @factura_proveedor.importe %>
+</p>
+
+<p>
+  <strong>Iva:</strong>
+  <%= @factura_proveedor.iva %>
+</p>
+
+<p>
+  <strong>Pronto Pago:</strong>
+  <%= @factura_proveedor.importe_pronto_pago %>
+</p>
+
+
+<%= link_to 'Editar', edit_factura_proveedor_path(@factura_proveedor) %> |
+<%= link_to 'Regresar', factura_proveedors_path %>

@@ -1,28 +1,39 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listado de Activos Fijos</h1>
-
+<div class="row">
+  <h1>Listado de Activos Fijos</h1>
+  <div class="pull-right range-query">
+     <%= form_tag activo_fijos_path, method: :get do %>
+        <%= text_field_tag 'search[fecha_de_compra_from]', @search.fecha_de_compra_from %>
+        <%= text_field_tag 'search[fecha_de_compra_to]', @search.fecha_de_compra_to %>
+        <%= submit_tag 'Buscar', class: 'btn search-button' %>
+      <% end %>
+  </div>
+</div>
 <div class="media">
   <div class="media-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-    <% @activo_fijos.each do |activo_fijo| %>
-      <tr>
-        <td><%= activo_fijo.fecha %></td>
-        
-        <td><%= link_to 'Destroy', activo_fijo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Fecha de Compra</th>
+              <th>Importe</th>
+              <th>Descripcion</th>
+              <th>Vida Util</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+            <tbody>
+              <% @activo_fijos.each do |activo_fijo| %>
+                <tr>
+                  <td><%= activo_fijo.fecha %></td>
+                  <td><%= activo_fijo.importe%></td>
+                  <td><%= activo_fijo.descripcion%></td>
+                  <td><%= activo_fijo.vida_util%></td>
+                  <td><%= link_to 'Eliminar', activo_fijo, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-success' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
 
-<%= link_to 'Nuevo Pago', new_activo_fijo_path %>
