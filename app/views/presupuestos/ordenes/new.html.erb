@@ -1,3 +1,24 @@
-<h1>New Ordene</h1>
-
-<%= render 'form' %>
+<%= content_for :title do %>Orden<% end %>
+  <h3>Nueva Orden</h3>
+  <div class="form">
+    <%= simple_form_for @presupuesto do |p|%>
+        <%= p.simple_fields_for :ordenes do |o|%>
+        	<%= o.association :medio, :label_method => :nombre, :label => 'Medio' %>
+            <%= o.input :fecha_orden, as: :date %>
+            <%= o.input :referencia_preventa %>
+            <%= o.input :ubicacion %>
+            <%= o.input :formato %>
+            <%= o.input :franja %>
+            <%= o.input :unidad %>
+            <%= o.input :cm %>
+            <%= o.input :col %>
+            <%= o.input :costo_unidad %>
+            <%= o.input :descuento %>
+            <%= o.input :cantidad %>
+            <%= o.input :notas %>
+            <%= o.input :emision_certificada %>
+            <%= o.input :aprobado_por_cliente %>
+            <%= o.button :submit, 'Guardar', class: 'submit'%>
+        <% end %>
+    <% end %>
+</div>

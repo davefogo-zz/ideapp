@@ -15,6 +15,7 @@ class Presupuestos::OrdenesController < ApplicationController
   def new
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.new
+    @presupuesto.ordenes.build
   end
 
   # GET /ordenes/1/edit

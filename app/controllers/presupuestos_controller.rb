@@ -6,6 +6,7 @@ class PresupuestosController < ApplicationController
   def index
     @search = PresupuestoSearch.new(params[:search])
     @presupuestos = @search.scope
+    @presupuestos = Presupuesto.all
   end
 
   # GET /presupuestos/1

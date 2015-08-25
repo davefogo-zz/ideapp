@@ -25,7 +25,7 @@
             <tbody>
               <% @colaboradores.each do |colaboradore| %>
                 <tr>
-                  <td><%= colaboradore.user.name %></td>
+                  <td><%= colaboradore.nombre %></td>
                   <td><%= colaboradore.cedula %></td>
                   <td><%= colaboradore.direccion %></td>
                   <td><%= colaboradore.telefono_personal %></td>
@@ -43,3 +43,11 @@
           <br>
 
 <%= link_to 'Nuevo Colaborador', new_colaboradore_path %>
+<br>
+<br>
+  
+
+<%= form_tag import_colaboradores_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos' %>
+<% end %>

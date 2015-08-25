@@ -73,6 +73,12 @@ class ColaboradoresController < ApplicationController
     end
   end
 
+  def import
+    Colaboradore.import(params[:file])
+    redirect_to colaboradores_path, notice: 'Datos subidos.'
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_colaboradore

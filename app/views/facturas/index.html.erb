@@ -21,13 +21,14 @@
         </tr>
       </thead>
       <tbody>
-        <% @factura.each do |factura| %>
+        <% @facturas.each do |factura| %>
           <tr>
             <td><%= factura.id %></td>
             <td><%= factura.fecha_de_expedicion %></td>
             <td><%= factura.fecha_de_vencimiento %></td>
             <td><%= factura.cliente.nombre %></td>
             <td><%= link_to 'Mostrar', factura, class: 'btn btn-mini btn-default' %></td> 
+            <td><%= link_to 'Eliminar', factura, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
           </tr>
         <% end %>
       </tbody>

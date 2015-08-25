@@ -3,13 +3,13 @@ class FacturaItem < ActiveRecord::Base
   belongs_to :medio
   belongs_to :ordene
   belongs_to :subcuenta_puc
-  before_save :generate_fecha_vencimiento_calculation
+ 
 
-  def generate_fecha_vencimiento_calculation
-    self.fecha_vencimiento = (self.fecha_recepcion + 30.days)
+  before_update :generate_transaccion_ingreso,  :generate_transaccion_iva, :generate_transaccion_volumen, :calculate_total
+
+  def calculate_total
+    self.total = subtotal + iva
   end
-
-  before_update :generate_transaccion_ingreso,  :generate_transaccion_iva, :generate_transaccion_volumen
 
   def generate_transaccion_ingreso
     self.subtotal = (costo_unidad * cantidad) - (costo_unidad * descuento)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821021002) do
+ActiveRecord::Schema.define(version: 20150825224246) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -54,9 +54,14 @@ ActiveRecord::Schema.define(version: 20150821021002) do
     t.string   "contacto_facturacion"
     t.string   "telefono"
     t.integer  "colaboradore_id"
+    t.string   "ciudad"
+    t.string   "codigo_postal"
+    t.string   "pais"
+    t.integer  "users_id"
   end
 
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
+  add_index "clientes", ["users_id"], name: "index_clientes_on_users_id"
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"
@@ -115,6 +120,7 @@ ActiveRecord::Schema.define(version: 20150821021002) do
     t.boolean  "sin_iva"
     t.integer  "presupuesto_id"
     t.integer  "valor",              limit: 8
+    t.integer  "total",              limit: 8
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
@@ -203,8 +209,10 @@ ActiveRecord::Schema.define(version: 20150821021002) do
     t.decimal  "escala6"
     t.string   "rango6"
     t.string   "cobro"
+    t.integer  "presupuesto_id"
   end
 
+  add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id"
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
 
   create_table "ordenes", force: :cascade do |t|
@@ -215,8 +223,6 @@ ActiveRecord::Schema.define(version: 20150821021002) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "medio_id"
-    t.integer  "aprobado_por_cliente"
-    t.integer  "emision_certificada"
     t.integer  "cantidad"
     t.string   "cobertura"
     t.string   "referencia_preventa"
@@ -229,6 +235,8 @@ ActiveRecord::Schema.define(version: 20150821021002) do
     t.integer  "col"
     t.string   "franja"
     t.integer  "subtotal",             limit: 8
+    t.boolean  "aprobado_por_cliente"
+    t.boolean  "emision_certificada"
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
@@ -353,6 +361,7 @@ ActiveRecord::Schema.define(version: 20150821021002) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "volumen", force: :cascade do |t|
+    t.integer  "medio_id_id"
     t.string   "tipo_de_volumen"
     t.decimal  "escala"
     t.string   "rango"
@@ -369,5 +378,6 @@ ActiveRecord::Schema.define(version: 20150821021002) do
   add_index "volumen", ["factura_id"], name: "index_volumen_on_factura_id"
   add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
   add_index "volumen", ["medio_id"], name: "index_volumen_on_medio_id"
+  add_index "volumen", ["medio_id_id"], name: "index_volumen_on_medio_id_id"
 
 end

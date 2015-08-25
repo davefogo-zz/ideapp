@@ -1,5 +1,24 @@
-<h1>Editing Ordene</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', presupuesto_ordenes_path %>
+<%= content_for :title do %>Orden<% end %>
+  <h3>Editar Orden</h3>
+  <div class="form">
+    <%= simple_form_for @presupuesto do |p|%>
+        <%= p.simple_fields_for :ordenes do |o|%>
+            <%= o.association :medio, :label_method => :nombre, :label => 'Medio' %>
+            <%= o.input :fecha_orden %>
+            <%= o.input :referencia_preventa %>
+            <%= o.input 'ubicacion/programa' %>
+            <%= o.input :oato %>
+            <%= o.input 'Franja/Periodo' %>
+            <%= o.input :unidad %>
+            <%= f.number_field :cm %>
+            <%= o.input :col %>
+            <%= o.input :costo_unidad %>
+            <%= o.input :descuento %>
+            <%= o.input :cantidad %>
+            <%= o.input :notas %>
+            <%= o.input :pauta_emitida %>
+            <%= o.input :aprobado_por_cliente %>
+            <%= o.button :submit, 'Guardar', class: 'submit'%>
+        <% end %>
+    <% end %>
+</div>

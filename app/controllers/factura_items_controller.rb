@@ -4,12 +4,9 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items
   # GET /factura_items.json
   def index
-    @factura_items = FacturaItem.all
-    @facturas = Factura.all
-    @ordenes = Ordene.all
-    @medios = Medio.all
     @search = FacturaItemSearch.new(params[:search])
     @factura_items = @search.scope
+    @factura_items = FacturaItem.all
   end
 
   # GET /factura_items/1

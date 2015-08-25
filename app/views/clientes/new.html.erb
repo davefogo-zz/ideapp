@@ -5,12 +5,15 @@
     <%= form.input :nombre %>
     <%= form.input :nit %>
     <%= form.input :direccion_de_facturacion %>
+    <%= form.input :ciudad %>
+    <%= form.input :codigo_postal %>
+    <%= form.input :pais %>
     <%= form.input :telefono %>
-    <%= form.input :tipo_de_cliente %>
+    <%= form.input :tipo_de_cliente, collection: ['Premium', 'Estandar'] %>
     <%= form.input :contacto_comercial %>
     <%= form.input :contacto_facturacion %>
     <%= form.input :cupo_de_credito %>
-    <%= form.association :colaboradore, :input_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
+    <%= form.association :colaboradore, :label_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
   	<%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>

@@ -1,5 +1,6 @@
 class Cliente < ActiveRecord::Base
   belongs_to :colaboradore
+  belongs_to :user
   has_many :presupuestos
   has_many :facturas
   validates :nombre, :nit, presence: true, uniqueness: true

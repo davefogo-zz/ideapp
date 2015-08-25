@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :facturas
   resources :departamentos
   resources :clientes
-  resources :colaboradores
+  resources :colaboradores do 
+    collection { post :import }
+  end
   resources :cargos
   get 'bienvenidos/index'
   resources :medios

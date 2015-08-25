@@ -24,15 +24,15 @@
 </p>
 <p>
   <strong>Titulo:</strong>
-  <%= @factura.presupuesto.titulo %>
+  <%= @factura.presupuesto.try(:titulo) %>
 </p>
 <p>
   <strong>Producto:</strong>
-  <%= @factura.presupuesto.producto %>
+  <%= @factura.presupuesto.try(:producto) %>
 </p>
 <p>
-  <strong>Colaboradore:</strong>
-  <%= @factura.cliente.colaboradore_id %>
+  <strong>Ejecutivo:</strong>
+  <%= @factura.cliente.try(:colaboradore_id) %>
 </p>
 
 
@@ -81,8 +81,8 @@
               <% iva = factura_item.iva %>
               <td><h4><%= number_to_currency(factura_item.iva) %></h4></td>
               <td><h4><%= number_to_currency(total = subtotal + iva) %></h4></td>
-              <td><%= link_to 'Edit', edit_factura_item_path(@factura_item) %></td>
-              <td><%= link_to 'Destroy', factura_item_path(@factura_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Editar', edit_factura_item_path(@factura_item) %></td>
+              <td><%= link_to 'Eliminar', factura_item_path(@factura_item), method: :delete, data: { confirm: 'Confirma?' } %></td>
               <% total_general = total + total_general%>
             </tr>
           <% end %>
@@ -93,6 +93,7 @@
     <h4 class="pull-right">Total Factura:<%= number_to_currency(total_general) %></h4>
 
 
-<%= link_to 'Edit', edit_factura_path(@factura) %> |
-<%= link_to 'Back', facturas_path %>
-<%= link_to 'Agregar Nuevo Item', factura_item_path %>
+<p><%= link_to 'Descargar Factura en PDF', factura_path(@factura, format: 'pdf') %></p>
+<p><%= link_to 'Editar', edit_factura_path(@factura) %> |
+<%= link_to 'Regresar', facturas_path %></p>
+
