@@ -14,11 +14,10 @@ class FacturasController < ApplicationController
     @factura = Factura.find(params[:id])
     #@factura_item = FacturaItem.all
     @factura_item = FacturaItem.where("facturar" => true, factura_id: @factura.id)
-
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = FacturaPdf.new(@factura)
+        pdf = FacturaPdf.new(@factura, view_context)
         send_data pdf.render, filename: 'factura_#{@factura.id}.pdf',
                               type: 'application/pdf',
                               disposition: 'inline'
@@ -38,6 +37,7 @@ class FacturasController < ApplicationController
   
   # GET /facturas/1/edit
   def edit
+    @factura = Factura.find(params[:id])
   end
 
   # POST /facturas
@@ -60,6 +60,7 @@ class FacturasController < ApplicationController
   # PATCH/PUT /facturas/1
   # PATCH/PUT /facturas/1.json
   def update
+    @factura = Factura.find(params[:id])
     respond_to do |format|
       if @factura.update(factura_params)
         format.html { redirect_to @factura, notice: 'Factura actualizada.' }
@@ -89,6 +90,6 @@ class FacturasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_params
-      params.require(:factura).permit(:fecha_de_expedicion, :cliente_id, :presupuesto_id )
+      params.require(:factura).permit(:fecha_de_expedicion, :cliente_id, :presupuesto_id, :facturar )
     end
 end

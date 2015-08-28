@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825224246) do
+ActiveRecord::Schema.define(version: 20150828104016) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -148,12 +148,14 @@ ActiveRecord::Schema.define(version: 20150825224246) do
   add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"
 
   create_table "facturas", force: :cascade do |t|
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.datetime "fecha_de_expedicion"
     t.date     "fecha_de_vencimiento"
     t.integer  "cliente_id"
     t.integer  "presupuesto_id"
+    t.integer  "total",                limit: 8
+    t.boolean  "facturar"
   end
 
   add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id"
