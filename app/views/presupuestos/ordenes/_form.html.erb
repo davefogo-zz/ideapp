@@ -1,0 +1,62 @@
+<%= form_for [@presupuesto, @ordene] do |f| %>
+  
+  <div class="field">
+    <%= f.label :medio %><br>
+    <%= collection_select( :ordene, :medio_id, Medio.all, :id, :nombre, {}, {:multiple => false}) %>
+  </div> 
+  <div class="field">
+    <%= f.label :fecha_orden %><br>
+    <%= f.datetime_select :fecha_orden %>
+  </div>
+  <div class="field">
+    <%= f.label :referencia_preventa %><br>
+    <%= f.text_field :referencia_preventa %>
+  </div>
+  <div class="field">
+    <%= f.label 'ubicacion/programa' %><br>
+    <%= f.text_field :ubicacion %>
+  </div>
+  <div class="field">
+    <%= f.label :formato %><br>
+    <%= f.text_field :formato %>
+  </div>
+  <div class="field">
+    <%= f.label 'Franja/Periodo' %><br>
+    <%= f.text_field :franja %>
+  </div>
+  <div class="field">
+    <%= f.label :unidad %><br>
+    <%= f.text_field :unidad %>
+  </div>
+  <div class="field">
+    <%= f.label :cm %><br>
+    <%= f.number_field :cm %>
+  </div>
+  <div class="field">
+    <%= f.label :col %><br>
+    <%= f.number_field :col %>
+  </div>
+  <div class="field">
+    <%= f.label :costo_unidad %><br>
+    <%= f.number_field :costo_unidad %>
+  </div>
+  <div class="field">
+    <%= f.label :descuento %><br>
+    <%= f.number_field :descuento %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :notas %><br>
+    <%= f.number_field :notas %>
+  </div>
+  <div class="field">
+    <%= f.label :pauta_emitida %><br>
+    <%= check_box(:ordene, :aprobado_por_cliente, options = {}, checked_value = "1", unchecked_value = "0") %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

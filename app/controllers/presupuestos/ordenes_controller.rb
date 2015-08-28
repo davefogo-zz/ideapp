@@ -15,7 +15,6 @@ class Presupuestos::OrdenesController < ApplicationController
   def new
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.new
-    @presupuesto.ordenes.build
   end
 
   # GET /ordenes/1/edit
@@ -34,7 +33,7 @@ class Presupuestos::OrdenesController < ApplicationController
 
     respond_to do |format|
       if @ordene.save
-        format.html { redirect_to @presupuesto, notice: 'Ordene was successfully created.' }
+        format.html { redirect_to @presupuesto, notice: 'Orden creada.' }
         format.json { render :show, status: :created, location: @presupuesto }
       else
         format.html { render :new }
@@ -50,7 +49,7 @@ class Presupuestos::OrdenesController < ApplicationController
      @ordene = Ordene.find(params[:id])
     respond_to do |format|
       if @ordene.update(ordene_params)
-        format.html { redirect_to presupuesto_ordenes_url, notice: 'Ordene was successfully updated.' }
+        format.html { redirect_to presupuesto_ordenes_url, notice: 'Orden actualizada.' }
         format.json { render :show, status: :ok, location: @ordene }
       else
         format.html { render :edit }
@@ -66,7 +65,7 @@ class Presupuestos::OrdenesController < ApplicationController
     @ordene = Ordene.find(params[:id])
     @ordene.destroy
     respond_to do |format|
-      format.html { redirect_to presupuesto_url, notice: 'Ordene was successfully destroyed.' }
+      format.html { redirect_to presupuesto_url, notice: 'Orden eliminada.' }
       format.json { head :no_content }
     end
   end

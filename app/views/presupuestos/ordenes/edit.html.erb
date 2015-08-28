@@ -1,24 +1,62 @@
-<%= content_for :title do %>Orden<% end %>
-  <h3>Editar Orden</h3>
-  <div class="form">
-    <%= simple_form_for @presupuesto do |p|%>
-        <%= p.simple_fields_for :ordenes do |o|%>
-            <%= o.association :medio, :label_method => :nombre, :label => 'Medio' %>
-            <%= o.input :fecha_orden %>
-            <%= o.input :referencia_preventa %>
-            <%= o.input 'ubicacion/programa' %>
-            <%= o.input :oato %>
-            <%= o.input 'Franja/Periodo' %>
-            <%= o.input :unidad %>
-            <%= f.number_field :cm %>
-            <%= o.input :col %>
-            <%= o.input :costo_unidad %>
-            <%= o.input :descuento %>
-            <%= o.input :cantidad %>
-            <%= o.input :notas %>
-            <%= o.input :pauta_emitida %>
-            <%= o.input :aprobado_por_cliente %>
-            <%= o.button :submit, 'Guardar', class: 'submit'%>
-        <% end %>
-    <% end %>
-</div>
+<%= form_for [@presupuesto, @ordene] do |f| %>
+  
+  <div class="field">
+    <%= f.label :medio %><br>
+    <%= collection_select( :ordene, :medio_id, Medio.all, :id, :nombre, {}, {:multiple => false}) %>
+  </div> 
+  <div class="field">
+    <%= f.label :fecha_orden %><br>
+    <%= f.datetime_select :fecha_orden %>
+  </div>
+  <div class="field">
+    <%= f.label :referencia_preventa %><br>
+    <%= f.text_field :referencia_preventa %>
+  </div>
+  <div class="field">
+    <%= f.label 'ubicacion/programa' %><br>
+    <%= f.text_field :ubicacion %>
+  </div>
+  <div class="field">
+    <%= f.label :formato %><br>
+    <%= f.text_field :formato %>
+  </div>
+  <div class="field">
+    <%= f.label 'Franja/Periodo' %><br>
+    <%= f.text_field :franja %>
+  </div>
+  <div class="field">
+    <%= f.label :unidad %><br>
+    <%= f.text_field :unidad %>
+  </div>
+  <div class="field">
+    <%= f.label :cm %><br>
+    <%= f.number_field :cm %>
+  </div>
+  <div class="field">
+    <%= f.label :col %><br>
+    <%= f.number_field :col %>
+  </div>
+  <div class="field">
+    <%= f.label :costo_unidad %><br>
+    <%= f.number_field :costo_unidad %>
+  </div>
+  <div class="field">
+    <%= f.label :descuento %><br>
+    <%= f.number_field :descuento %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad %>
+  </div>
+  <div class="field">
+    <%= f.label :notas %><br>
+    <%= f.number_field :notas %>
+  </div>
+  <div class="field">
+    <%= f.label :pauta_emitida %><br>
+    <%= check_box(:ordene, :emision_certificada, options = {}, checked_value = true, unchecked_value = false) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

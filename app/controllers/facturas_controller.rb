@@ -62,7 +62,7 @@ class FacturasController < ApplicationController
   def update
     respond_to do |format|
       if @factura.update(factura_params)
-        format.html { redirect_to @factura, notice: 'Factura was successfully updated.' }
+        format.html { redirect_to @factura, notice: 'Factura actualizada.' }
         format.json { render :show, status: :ok, location: @factura }
       else
         format.html { render :edit }

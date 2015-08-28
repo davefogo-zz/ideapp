@@ -1,4 +1,8 @@
 class Ordene < ActiveRecord::Base
+  belongs_to :presupuesto
+  belongs_to :medio
+  has_one :factura_item
+  validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, presence: true
   before_save :calculate_subtotal
 
     def calculate_subtotal
@@ -8,7 +12,7 @@ class Ordene < ActiveRecord::Base
   after_save :generate_factura_item, :generate_volumen, :if => :aprobado_por_cliente?
     
     def aprobado_por_cliente?
-    	if aprobado_por_cliente == 1
+    	if aprobado_por_cliente == true
         true
         else 
           false
@@ -23,8 +27,5 @@ class Ordene < ActiveRecord::Base
       Volumen.create!(valor_volumen: self.subtotal, medio_id: self.medio_id, ordene_id: self.id)
     end
 
-  belongs_to :presupuesto
-  belongs_to :medio
-  has_one :factura_item
-  validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, presence: true
+  
 end

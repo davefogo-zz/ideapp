@@ -14,6 +14,21 @@
 </p>
 
 <p>
+  <strong>Ciudad:</strong>
+  <%= @cliente.ciudad %>
+</p>
+
+<p>
+  <strong>Codigo postal:</strong>
+  <%= @cliente.codigo_postal %>
+</p>
+
+<p>
+  <strong>Pais:</strong>
+  <%= @cliente.pais %>
+</p>
+
+<p>
   <strong>Teléfono:</strong>
   <%= @cliente.telefono %>
 </p>
@@ -40,7 +55,7 @@
 
 <p>
   <strong>Ejecutivo:</strong>
-  <%= @cliente.colaboradore.user.name %>
+  <%= @cliente.colaboradore.nombre %>
 </p>
 
 <%= link_to 'Editar', edit_cliente_path(@cliente) %> |
