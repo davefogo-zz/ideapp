@@ -16,7 +16,7 @@ class PagosController < ApplicationController
 
   # GET /pagos/new
   def new
-    @pago =   Pago.new                                                                     
+    @pago =  Pago.new                                                                     
   end
 
   # GET /pagos/1/edit
@@ -71,6 +71,6 @@ class PagosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_params
-      params.require(:pago).permit(:fecha,:proveedore_id, :factura_proveedor_id, :importe, :forma_de_pago, :gasto, :subcuenta_puc_id)
+      params.require(:pago).permit(:fecha,:proveedore_id, :factura_proveedor_id, :importe, :forma_de_pago, :gasto, :subcuenta_puc_id, :banco)
     end
 end

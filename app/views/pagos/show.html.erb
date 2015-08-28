@@ -1,23 +1,24 @@
 <p>
-  <strong>Nombre:</strong>
+  <strong>Fecha:</strong>
   <%= @pago.fecha %>
 </p>
 
 <p>
-  <strong>Nit:</strong>
-  <%= @pago.proveedore.try(:nombre) %>
+  <strong>Proveedor:</strong>
+  <%= @pago.proveedore.nombre %>
 </p>
 
-<%if :gasto == nil%>
-  <p>
-    <strong>Factura:</strong>
-    <%= @pago.factura_proveedor.try(:numero_de_facutra) %>
-  </p>
-<% else %>
+<%if :numero_de_factura == nil%>
   <p>
     <strong>Gasto:</strong>
     <%= @pago.gasto_id %>
   </p>
+<% else %>
+<p>
+    <strong>Facturas:</strong>
+    <%= @pago.factura_proveedor.numero_de_factura %>
+  </p>
+  
 <% end %>
 
 <p>
@@ -30,7 +31,7 @@
   <%= @pago.banco %>
 </p>
 
-<%if :forma_de_pago == 'cheque'%>
+<%if :forma_de_pago == 'Cheque'%>
 <p>
   <strong>Numero de cheque:</strong>
   <%= @pago.numero_de_cheque %>

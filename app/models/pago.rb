@@ -2,6 +2,7 @@ class Pago < ActiveRecord::Base
   belongs_to :proveedore
   belongs_to :factura_proveedor
   belongs_to :subcuenta_puc
+  belongs_to :gasto
 
   after_save :gasto_o_proveedor, :transaccion_pago_credito
 

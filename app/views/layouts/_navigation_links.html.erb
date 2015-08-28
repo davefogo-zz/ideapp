@@ -8,7 +8,7 @@
        </button>
       <ul class="dropdown-menu" role="menu">
         <% if policy(current_user).index? %>
-          <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
+          <li><%= link_to t('Facturas Proveedor'), factura_proveedors_path %></li>
         <% end %>
         <% if policy(current_user).index? %>
           <li><%= link_to t('Pagos'), pagos_path %></li>
