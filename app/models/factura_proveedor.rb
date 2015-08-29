@@ -1,5 +1,6 @@
 class FacturaProveedor < ActiveRecord::Base
   belongs_to :ordene
+  belongs_to :pago
   belongs_to :proveedore
   before_save :generate_iva_calculation, :generate_pronto_pago_calculation, :generate_fecha_vencimiento_calculation
 

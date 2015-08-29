@@ -1,12 +1,9 @@
 <% content_for :title do %>Pagos<% end %>
-<h3>Pagos</h3>
+<h3>Nueva Orden de Pago</h3>
 <div class="form">
   <%= simple_form_for @pago do |form| %>
     <%= form.input :fecha %>
     <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
-    <%= form.association :factura_proveedor, :label_method => :numero_de_factura, include_blank: true, label: "Factura", multiple: true%>
-     <%= form.association :gasto, :label_method => :id, include_blank: true, label: "Gasto"  %>
-    <%= form.input :importe %>
     <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
    <%= form.input :banco, collection: ['Bogota 8414', 'Bancolombia', 'Citibank'] %>
    <%= form.input :numero_de_cheque %>

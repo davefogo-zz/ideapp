@@ -1,0 +1,9 @@
+<% content_for :title do %>Pagos<% end %>
+<h3>Pagar</h3>
+<div class="form">
+  <%= simple_form_for @pago do |form| %>
+   <%= form.input :pagar %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', pagos_path %>

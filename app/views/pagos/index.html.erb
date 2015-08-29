@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Listado de Pagos</h1>
+  <h1>Listado Ordenes de Pago</h1>
   <div class="pull-right range-query">
      <%= form_tag pagos_path, method: :get do %>
         <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
@@ -26,10 +26,11 @@
           <tr>
             <td><%= pago.fecha %></td>
             <td><%= pago.proveedore.nombre %></td>
-            <td><%= pago.factura_proveedor_id %></td>
-            <td><%= pago.gasto_id %></td>
+  
             <td><%= pago.importe%></td>
             <td><%= link_to 'Mostrar', pago, class: 'btn btn-mini btn-default' %></td>
+            <td><%= link_to 'Pagar', edit_pago_path(pago), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Eliminar', pago, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
           </tr>
         <% end %>
       </tbody>

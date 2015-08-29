@@ -1,0 +1,10 @@
+<% content_for :title do %>Facturas de Proveedor<% end %>
+<h3>Pagar Facturas de Proveedor </h3>
+<div class="form">
+  <%= simple_form_for @factura_proveedor do |form| %>
+    <%= form.association :pago, :label_method => :id, include_blank: true, label: "Orden de Pago"  %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+
+</div>
+<%= link_to 'Regresar', factura_proveedors_path %>

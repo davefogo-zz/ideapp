@@ -5,7 +5,7 @@ class Gasto < ActiveRecord::Base
 	belongs_to :cliente
 	belongs_to :colaboradore
 	belongs_to :user
-	has_many :pagos
+	belongs_to :pago
 
 	
 	after_save :activo, :transaccion_gasto_proveedor_bs, :transaccion_gasto_proveedor_is, :transaccion_gasto_iva_bs, :transaccion_gasto_iva_is

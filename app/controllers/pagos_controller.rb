@@ -11,7 +11,16 @@ class PagosController < ApplicationController
   # GET /pagos/1
   # GET /pagos/1.json                                                                                            
   def show
-    @pagos = Pago.all
+    @pagos = Pago.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PagoPdf.new(@pago, view_context)
+        send_data pdf.render, filename: 'orden_de_pago#{@orden.id}.pdf',
+                              type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   # GET /pagos/new
@@ -30,7 +39,7 @@ class PagosController < ApplicationController
 
     respond_to do |format|
       if @pago.save
-        format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
+        format.html { redirect_to @pago, notice: 'Orden de Pago creada.' }
         format.json { render :show, status: :created, location: @pago }
       else
         format.html { render :new }
@@ -44,7 +53,7 @@ class PagosController < ApplicationController
   def update
     respond_to do |format|
       if @pago.update(pago_params)
-        format.html { redirect_to @pago, notice: 'Pago was successfully updated.' }
+        format.html { redirect_to @pago, notice: 'Orden de Pago Pagada.' }
         format.json { render :show, status: :ok, location: @pago }
       else
         format.html { render :edit }
@@ -71,6 +80,6 @@ class PagosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_params
-      params.require(:pago).permit(:fecha,:proveedore_id, :factura_proveedor_id, :importe, :forma_de_pago, :gasto, :subcuenta_puc_id, :banco)
+      params.require(:pago).permit(:fecha,:proveedore_id, :factura_proveedor_id, :importe, :forma_de_pago, :gasto, :subcuenta_puc_id, :banco, :pagar, :importe_pronto_pago, :total)
     end
 end

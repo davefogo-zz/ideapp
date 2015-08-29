@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828172531) do
+ActiveRecord::Schema.define(version: 20150829024601) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -141,9 +141,11 @@ ActiveRecord::Schema.define(version: 20150828172531) do
     t.integer  "subcuenta_puc_id"
     t.integer  "importe_pronto_pago", limit: 8
     t.string   "numero_de_factura"
+    t.integer  "pago_id"
   end
 
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
+  add_index "factura_proveedors", ["pago_id"], name: "index_factura_proveedors_on_pago_id"
   add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
   add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"
 
@@ -174,9 +176,11 @@ ActiveRecord::Schema.define(version: 20150828172531) do
     t.datetime "updated_at",                     null: false
     t.boolean  "compra_de_activo"
     t.integer  "user_id"
+    t.integer  "pago_id"
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
+  add_index "gastos", ["pago_id"], name: "index_gastos_on_pago_id"
   add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id"
   add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id"
   add_index "gastos", ["user_id"], name: "index_gastos_on_user_id"
@@ -247,20 +251,19 @@ ActiveRecord::Schema.define(version: 20150828172531) do
   create_table "pagos", force: :cascade do |t|
     t.date     "fecha"
     t.integer  "proveedore_id"
-    t.integer  "factura_proveedor_id"
     t.integer  "subcuenta_puc_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "importe",              limit: 8
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "importe",             limit: 8
     t.string   "forma_de_pago"
     t.boolean  "gasto"
-    t.integer  "gasto_id"
     t.string   "banco"
     t.integer  "numero_de_cheque"
+    t.boolean  "pagar"
+    t.integer  "importe_pronto_pago", limit: 8
+    t.integer  "total",               limit: 8
   end
 
-  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
-  add_index "pagos", ["gasto_id"], name: "index_pagos_on_gasto_id"
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
   add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
 

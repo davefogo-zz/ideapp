@@ -45,7 +45,7 @@ class FacturaProveedorsController < ApplicationController
   def update
     respond_to do |format|
       if @factura_proveedor.update(factura_proveedor_params)
-        format.html { redirect_to @factura_proveedor, notice: 'Factura proveedor was successfully updated.' }
+        format.html { redirect_to @factura_proveedor, notice: 'Factura de Proveedor asignada a orden de pago.' }
         format.json { render :show, status: :ok, location: @factura_proveedor }
       else
         format.html { render :edit }
@@ -72,6 +72,6 @@ class FacturaProveedorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_proveedor_params
-      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento, :numero_de_factura)
+      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento, :numero_de_factura, :pago_id)
     end
 end

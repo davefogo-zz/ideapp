@@ -9,8 +9,13 @@
 </p>
 
 <p>
-  <strong>Orden:</strong>
+  <strong>Orden de Publicidad:</strong>
   <%= @factura_proveedor.ordene_id %>
+</p>
+
+<p>
+  <strong>Orden de Pago:</strong>
+  <%= @factura_proveedor.try(:pago_id) %>
 </p>
 
 <p>

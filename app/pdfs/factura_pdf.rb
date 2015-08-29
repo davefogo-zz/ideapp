@@ -91,9 +91,7 @@ class FacturaPdf < Prawn::Document
 		[['Fecha', 'Medio', 'Cantidad', 'Descuento', 'Iva', 'Subtotal', 'Total']] + @factura.factura_items.map do |item|
 			[item.fecha_orden, item.medio.nombre, item.cantidad, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
 		end	
-
-	
-
+		
 	end
 
 	def total

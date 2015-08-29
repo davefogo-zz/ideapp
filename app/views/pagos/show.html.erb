@@ -7,19 +7,10 @@
   <strong>Proveedor:</strong>
   <%= @pago.proveedore.nombre %>
 </p>
-
-<%if :numero_de_factura == nil%>
-  <p>
-    <strong>Gasto:</strong>
-    <%= @pago.gasto_id %>
-  </p>
-<% else %>
 <p>
-    <strong>Facturas:</strong>
-    <%= @pago.factura_proveedor.numero_de_factura %>
-  </p>
-  
-<% end %>
+  <strong>Importe:</strong>
+  <%= @pago.importe %>
+</p>
 
 <p>
   <strong>Forma de pago:</strong>
@@ -36,8 +27,14 @@
   <strong>Numero de cheque:</strong>
   <%= @pago.numero_de_cheque %>
 </p>
+
+<p>
+  <strong>Pagada:</strong>
+  <%= @pago.pagar %>
+</p>
+
 <% end %>
 
-
+<p><%= link_to 'Descargar en PDF', pago_path(@pago, format: 'pdf') %></p>
 <%= link_to 'Editar', edit_pago_path(@pago) %> |
 <%= link_to 'Regresar', pagos_path %>
