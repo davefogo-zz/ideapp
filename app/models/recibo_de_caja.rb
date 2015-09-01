@@ -1,5 +1,6 @@
 class ReciboDeCaja < ActiveRecord::Base
   belongs_to :factura
+  
   after_save :generate_transaccion_recibo_is, :generate_transaccion_recibo_bs
 	  def generate_transaccion_recibo_is
 	  	self.subcuenta_puc_id = 6  if self.forma_de_pago == 'Transferencia'

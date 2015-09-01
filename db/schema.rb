@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829024601) do
+ActiveRecord::Schema.define(version: 20150901211928) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -294,7 +294,6 @@ ActiveRecord::Schema.define(version: 20150829024601) do
 
   create_table "recibo_de_cajas", force: :cascade do |t|
     t.date     "fecha"
-    t.integer  "factura_id"
     t.integer  "importe",          limit: 8
     t.string   "concepto"
     t.string   "forma_de_pago"
@@ -304,6 +303,7 @@ ActiveRecord::Schema.define(version: 20150829024601) do
     t.integer  "numero_de_cheque"
     t.integer  "numero_de_cuenta"
     t.integer  "subcuenta_puc_id"
+    t.integer  "factura_id"
   end
 
   add_index "recibo_de_cajas", ["factura_id"], name: "index_recibo_de_cajas_on_factura_id"

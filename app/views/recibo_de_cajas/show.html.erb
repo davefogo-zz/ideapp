@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  <strong>Importe:</strong>
+  <strong>Abono:</strong>
   <%= @recibo_de_caja.importe %>
 </p>
 
@@ -37,5 +37,6 @@
   <strong>Numero de cuenta:</strong>
   <%= @recibo_de_caja.numero_de_cuenta %>
 </p>
-
+<p><%= link_to 'Descargar Factura en PDF', recibo_de_caja_path(@recibo_de_caja, format: 'pdf') %></p>
+<p><%= link_to 'Editar', edit_recibo_de_caja_path(@recibo_de_caja) %> |
 <%= link_to 'Regresar', recibo_de_cajas_path %>

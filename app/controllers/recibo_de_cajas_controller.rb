@@ -12,6 +12,15 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas/1.json                                                                                            
   def show
     @recibo_de_cajas = ReciboDeCaja.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReciboPdf.new(@recibo_de_caja, view_context)
+        send_data pdf.render, filename: 'recibo_de_caja_#{@recibo_de_caja.id}.pdf',
+                              type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   # GET /recibo_de_cajas/new
