@@ -25,7 +25,7 @@
               <% @recibo_de_cajas.each do |recibo_de_caja| %>
                 <tr>
                   <td><%= recibo_de_caja.fecha %></td>
-                  <td><%= recibo_de_caja.factura_id %></td>
+                  <td><%= link_to recibo_de_caja.factura_id, recibo_de_caja %></td>
                   <td><%= number_to_currency(recibo_de_caja.factura.total, :precision => 0) %></td>
                   <td><%= number_to_currency(recibo_de_caja.importe, :precision => 0)%></td>
                   <td><%= recibo_de_caja.forma_de_pago %></td>

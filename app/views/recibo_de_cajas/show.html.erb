@@ -2,10 +2,10 @@
   <strong>Fecha:</strong>
   <%= @recibo_de_caja.fecha %>
 </p>
-
+ 
 <p>
   <strong>Factura:</strong>
-  <%= @recibo_de_caja.factura_id %>
+  <%= link_to @recibo_de_caja.factura_id, recibo_de_cajas_path(@factura) %>
 </p>
 
 <p>

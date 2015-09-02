@@ -1,0 +1,41 @@
+<div class="row">
+  <h1>Listado de Ajustes Contables</h1>
+  <div class="pull-right range-query">
+     <%#= form_tag ajustes_path, method: :get do %>
+        <%#= text_field_tag 'search[fecha_de_expedicion_from]', @search.fecha_de_expedicion_from %>
+        <%#= text_field_tag 'search[fecha_de_expedicion_to]', @search.fecha_de_expedicion_to %>
+        <%#= submit_tag 'Buscar', class: 'btn search-button' %>
+      <%# end %>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+           <th>Fecha</th>
+          <th>Numero de Ajuste Contable </th>
+          <th>Cliente</th>
+           <th>Proveedor</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ajuste.each do |ajuste| %>
+          <tr>
+            <td><%= ajuste.fecha %></td>
+            <td><%= ajuste.id %></td>
+            <td><%= ajuste.cliente.nombre %></td>
+            <td><%= ajuste.proveedore.try(:nombre) %></td>
+            <td><%= link_to 'Mostrar', ajuste, class: 'btn btn-mini btn-default' %></td> 
+            <td><%= link_to 'Eliminar', ajuste, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Nuevo Ajuste Contable', new_transaccion_path(@ajuste) %>

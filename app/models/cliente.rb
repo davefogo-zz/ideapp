@@ -3,6 +3,8 @@ class Cliente < ActiveRecord::Base
   belongs_to :user
   has_many :presupuestos
   has_many :facturas
+  has_many :transaccions
+  has_many :ajustes
   validates :nombre, :nit, presence: true, uniqueness: true
   validates :nit, length: {is: 11} 
 

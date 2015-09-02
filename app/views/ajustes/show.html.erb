@@ -1,0 +1,64 @@
+<p>
+  <strong>Numero de Ajuste:</strong>
+  <%= @ajuste.try(:id) %>
+</p> 
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @ajuste.try(:fecha) %>
+</p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @ajuste.cliente.try(:nombre)%>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @ajuste.cliente.try(:nit)%>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @ajuste.proveedore.try(:nombre) %>
+</p>
+<p>
+  <strong>Nit:</strong>
+  <%= @ajuste.proveedore.try(:nit) %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @ajuste.try(:descripcion) %>
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Cuenta</th>
+          <th>Nombre de cuenta:</th>
+          <th>Debito</th>
+          <th>Credito</th>
+        </tr>
+      </thead>
+        <tbody>
+        <% @ajuste.each do |ajuste| %>
+            <tr>
+              <td><h4><%= ajuste.transaccion.subcuenta_puc.try(:id) %></h4></td>
+              <td><h4><%= ajuste.transccion.subcuenta_puc.try(:descripcion) %></h4></td>
+              <td><h4><%= ajuste.transaccion.subcuenta_puc.try(:debito) %></h4></td>
+              <td><h4><%= ajuste.transaccion.subcuenta_puc.try(:credito) %></h4></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<p><%= link_to 'Agregar Transaccion', new_transaccion_path(@ajuste)%></p>
+<p><%#= link_to 'Descargar Factura en PDF', factura_path(@factura, format: 'pdf') %></p>
+<p><%#= link_to 'Editar', edit_factura_path(@factura) %> |
+<%= link_to 'Regresar', ajustes_path %></p>
+

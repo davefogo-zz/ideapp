@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901211928) do
+ActiveRecord::Schema.define(version: 20150902031224) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20150901211928) do
   end
 
   add_index "activo_fijos", ["gasto_id"], name: "index_activo_fijos_on_gasto_id"
+
+  create_table "ajustes", force: :cascade do |t|
+    t.date     "fecha"
+    t.integer  "cliente_id"
+    t.integer  "proveedore_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "descripcion"
+  end
+
+  add_index "ajustes", ["cliente_id"], name: "index_ajustes_on_cliente_id"
+  add_index "ajustes", ["proveedore_id"], name: "index_ajustes_on_proveedore_id"
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -327,7 +339,6 @@ ActiveRecord::Schema.define(version: 20150901211928) do
     t.integer  "presupuesto_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.string   "descripcion"
     t.string   "nit"
     t.integer  "subcuenta_puc_id"
     t.integer  "factura_item_id"
@@ -335,12 +346,16 @@ ActiveRecord::Schema.define(version: 20150901211928) do
     t.integer  "recibo_de_caja_id"
     t.integer  "gasto_id"
     t.integer  "factura_proveedor_id"
+    t.integer  "proveedore_id"
+    t.integer  "ajuste_id"
   end
 
+  add_index "transaccions", ["ajuste_id"], name: "index_transaccions_on_ajuste_id"
   add_index "transaccions", ["factura_item_id"], name: "index_transaccions_on_factura_item_id"
   add_index "transaccions", ["factura_proveedor_id"], name: "index_transaccions_on_factura_proveedor_id"
   add_index "transaccions", ["gasto_id"], name: "index_transaccions_on_gasto_id"
   add_index "transaccions", ["pago_id"], name: "index_transaccions_on_pago_id"
+  add_index "transaccions", ["proveedore_id"], name: "index_transaccions_on_proveedore_id"
   add_index "transaccions", ["recibo_de_caja_id"], name: "index_transaccions_on_recibo_de_caja_id"
   add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
 

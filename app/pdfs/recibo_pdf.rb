@@ -70,7 +70,7 @@ class ReciboPdf < Prawn::Document
 			bounding_box([300, 550], :width => 150, :height => 15) do
 	    		text "Nro Cheque: #{@recibo_de_caja.numero_de_cheque}", size: 10, style: :bold
 	    	end
-	    	bounding_box([150, 550], :width => 150, :height => 15) do
+	    	bounding_box([165, 550], :width => 150, :height => 15) do
 	    		text "Banco: #{@recibo_de_caja.subcuenta_puc_id.try(:descripcion)}", size: 10, style: :bold
 	    	end
 	end	

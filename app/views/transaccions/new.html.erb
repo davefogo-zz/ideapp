@@ -6,8 +6,7 @@
     <%= form.association :subcuenta_puc, :label_method => :id, include_blank: true, label: "Subcuenta"  %>
     <%= form.input :debito %>
     <%= form.input :credito %>
-    <%= form.input :descripcion %>
     <%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>
-<%= link_to 'Regresar', transaccions_path %>
+<%= link_to 'Regresar', ajustes_path %>

@@ -73,6 +73,9 @@
         <% if policy(current_user).index? %>
           <li><%= link_to t('Libro Diario Oficial'), transaccions_path %></li>
         <% end %>
+        <% if policy(current_user).index? %>
+          <li><%= link_to t('Ajustes Contables'), ajustes_path %></li>
+        <% end %>
       </ul>
   </div>
 <div class='btn-group pull-right right-nav'>

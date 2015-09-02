@@ -29,7 +29,6 @@
             <td><%= number_to_currency(transaccion.debito) %></td>
             <td><%= number_to_currency(transaccion.credito) %></td>
             <td><%= transaccion.subcuenta_puc_id %></td>
-            <td><%= transaccion.descripcion %></td>
             <td><%= link_to 'Mostrar', transaccion, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_transaccion_path(transaccion), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Eliminar', transaccion, class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Confirma?' } %></td>

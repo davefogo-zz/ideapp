@@ -1,0 +1,12 @@
+<% content_for :title do %>Asiento Contable<% end %>
+<h3>Nuevo Asiento contable</h3>
+<div class="form">
+  <%= simple_form_for @ajuste do |form| %>
+    <%= form.input :fecha %>
+    <%= form.association :cliente, :label_method => :id, include_blank: true, label: "Cliente"  %>
+    <%= form.association :proveedore, :label_method => :id, include_blank: true, label: "Proveedor"  %>
+    <%= form.input :descripcion %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', ajustes_path %>
