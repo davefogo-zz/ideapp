@@ -1,8 +1,10 @@
-class TransaccionsController < ApplicationController
+class Ajustes::TransaccionsController < ApplicationController
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
+  
   def index
     @search = TransaccionSearch.new(params[:search])
     @transaccions = @search.scope
+    @transaccions = Transaccion.all
   end
 
   # GET /transaccions/1
@@ -11,6 +13,7 @@ class TransaccionsController < ApplicationController
   end
 
   def new
+    @ajuste = Ajuste.find(params[:ajuste_id])
     @transaccion = Transaccion.new
   end
 
@@ -18,15 +21,17 @@ class TransaccionsController < ApplicationController
   end
 
   def create
+    @ajuste = Ajuste.find(params[:ajuste_id])
     @transaccion = Transaccion.new(transaccion_params)
+    @transaccion.ajuste = @ajuste
 
     respond_to do |format|
       if @transaccion.save
-        format.html { redirect_to @transaccion, notice: 'Transaccion creada.' }
-        format.json { render :show, status: :created, location: @transaccion }
+        format.html { redirect_to @ajuste, notice: 'Transaccion creada.' }
+        format.json { render :show, status: :created, location: @ajuste }
       else
         format.html { render :new }
-        format.json { render json: @transaccion.errors, status: :unprocessable_entity }
+        format.json { render json: @ajuste.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,6 +62,6 @@ class TransaccionsController < ApplicationController
     end
 
   	def transaccion_params
-  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subuenta_puc_id, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id)
+  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subuenta_puc_id, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id, :ajuste_id)
   	end
 end

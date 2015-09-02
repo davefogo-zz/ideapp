@@ -11,8 +11,8 @@ class AjustesController < ApplicationController
   # GET /ajustes/1
   # GET /ajustes/1.json
   def show
-    
-    #@ajuste_item = AjusteItem.all
+    @ajuste = Ajuste.find(params[:id])
+    @transaccions = @ajuste.transaccions
    
     #respond_to do |format|
       #format.html

@@ -1,7 +1,7 @@
 <% content_for :title do %>Asiento Contable<% end %>
 <h3>Nuevo Asiento contable</h3>
 <div class="form">
-  <%= simple_form_for @transaccion do |form| %>
+  <%= simple_form_for([@ajuste, @transaccion]) do |form| %>
     <%= form.input :fecha %>
     <%= form.association :subcuenta_puc, :label_method => :id, include_blank: true, label: "Subcuenta"  %>
     <%= form.input :debito %>
