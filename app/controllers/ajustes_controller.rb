@@ -14,17 +14,15 @@ class AjustesController < ApplicationController
     @ajuste = Ajuste.find(params[:id])
     @transaccions = @ajuste.transaccions
    
-    #respond_to do |format|
-      #format.html
-      #format.pdf do
-        #pdf = AjustePdf.new(@ajuste, view_context)
-        #send_data pdf.render, filename: 'ajuste_#{@ajuste.id}.pdf',
-                             # type: 'application/pdf',
-                              #disposition: 'inline'
-      #end
-    #end
-
-    #@presupuesto = @ajuste.presupuesto
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = AjustePdf.new(@ajuste, view_context)
+        send_data pdf.render, filename: 'ajuste_#{@ajuste.id}.pdf',
+                             type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   # GET /ajustes/new

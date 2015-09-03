@@ -23,8 +23,6 @@ class FacturasController < ApplicationController
                               disposition: 'inline'
       end
     end
-
-    #@presupuesto = @factura.presupuesto
   end
 
   # GET /facturas/new
