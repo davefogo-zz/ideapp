@@ -5,6 +5,12 @@ class MediosController < ApplicationController
   # GET /medios.json
   def index
     @medios = Medio.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @ajustes.to_csv }
+    end
+    
     if params[:search] 
       @medios = Medio.search(params[:search])
     else
@@ -64,6 +70,11 @@ class MediosController < ApplicationController
       format.html { redirect_to medios_url, notice: 'Medio was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Ajuste.import(params[:file])
+    redirect_to ajustes_path, notice: 'Datos subidos.'
   end
 
   private

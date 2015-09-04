@@ -28,7 +28,13 @@
       </table>
     </div>
 </div>
-
 <br>
-
 <%= link_to 'Nueva Subcuenta', new_subcuenta_puc_path %>
+<br>
+<br>
+<%= form_tag import_subcuenta_pucs_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', subcuenta_pucs_path(format: "csv"), class: 'btn btn-default' %>

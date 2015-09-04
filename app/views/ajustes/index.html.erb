@@ -39,3 +39,12 @@
 <br>
 
 <%= link_to 'Nuevo Ajuste Contable', new_transaccion_path(@ajuste) %>
+<br>
+<br>
+<%= form_tag import_ajustes_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', ajustes_path(format: "csv"), class: 'btn btn-default' %>
+

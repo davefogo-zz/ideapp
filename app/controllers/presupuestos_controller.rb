@@ -7,6 +7,12 @@ class PresupuestosController < ApplicationController
     @search = PresupuestoSearch.new(params[:search])
     @presupuestos = @search.scope
     @presupuestos = Presupuesto.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @presupuestos.to_csv }
+    end
+
   end
 
   # GET /presupuestos/1
@@ -63,6 +69,11 @@ class PresupuestosController < ApplicationController
       format.html { redirect_to presupuestos_url, notice: 'Presupuesto was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Presupuesto.import(params[:file])
+    redirect_to presupuestos_path, notice: 'Datos subidos.'
   end
 
   private

@@ -4,9 +4,16 @@ class FacturaProveedorsController < ApplicationController
   # GET /factura_proveedors
   # GET /factura_proveedors.json
   def index
+    @factura_proveedors = FacturaProveedor.all
+
+     respond_to do |format|
+      format.html
+      format.csv {render text: @factura_proveedors.to_csv }
+    end
+
     @search = FacturaProveedorSearch.new(params[:search])
     @factura_proveedors = @search.scope
-    @factura_proveedors = FacturaProveedor.all
+    
   end
 
   # GET /factura_proveedors/1
@@ -62,6 +69,11 @@ class FacturaProveedorsController < ApplicationController
       format.html { redirect_to factura_proveedors_url, notice: 'Factura proveedor was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Colaboradore.import(params[:file])
+    redirect_to factura_proveedors_path, notice: 'Datos subidos.'
   end
 
   private

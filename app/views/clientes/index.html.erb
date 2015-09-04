@@ -35,7 +35,7 @@
               <td><%= cliente.contacto_comercial %></td>
               <td><%= cliente.contacto_facturacion %></td>
               <td><%= cliente.cupo_de_credito %></td>
-              <td><%= cliente.colaboradore.user.name %></td>
+              <td><%= cliente.colaboradore.nombre %></td>
               <td><%= link_to 'Mostrar', cliente, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_cliente_path(cliente), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
@@ -47,3 +47,12 @@
       <br>
 
       <%= link_to 'Nuevo Cliente', new_cliente_path %>
+      <br>
+      <br>
+
+<%= form_tag import_clientes_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', clientes_path(format: "csv"), class: 'btn btn-default' %>

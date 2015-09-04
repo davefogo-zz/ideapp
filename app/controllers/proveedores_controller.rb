@@ -5,6 +5,12 @@ class ProveedoresController < ApplicationController
   # GET /proveedores.json
   def index
     @proveedores = Proveedore.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @proveedores.to_csv }
+    end
+
     if params[:search] 
       @proveedores = Proveedore.search(params[:search])
     else
@@ -64,6 +70,11 @@ class ProveedoresController < ApplicationController
       format.html { redirect_to proveedores_url, notice: 'Proveedor eliminado.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Proveedore.import(params[:file])
+    redirect_to proveedores_path, notice: 'Datos subidos.'
   end
 
   private

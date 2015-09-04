@@ -4,6 +4,14 @@ class GastosController < ApplicationController
   # GET /gastos
   # GET /gastos.json
   def index
+
+    @gastos = Gasto.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @gastos.to_csv }
+    end
+
     @search = GastoSearch.new(params[:search])
     @gastos = @search.scope
   end
@@ -63,6 +71,11 @@ class GastosController < ApplicationController
     end
   end
 
+  def import
+    Gasto.import(params[:file])
+    redirect_to gastos_path, notice: 'Datos subidos.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gasto
@@ -71,6 +84,6 @@ class GastosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gasto_params
-      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :colaboradore_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo)
+      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :gasto_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo)
     end
 end

@@ -5,6 +5,11 @@ class ClientesController < ApplicationController
   # GET /clientes.json
   def index
     @clientes = Cliente.all
+    respond_to do |format|
+      format.html
+      format.csv {render text: @colaboradores.to_csv }
+    end
+
     if params[:search] 
       @clientes = Cliente.search(params[:search])
     else
@@ -65,6 +70,11 @@ class ClientesController < ApplicationController
       format.html { redirect_to clientes_url, notice: 'Cliente eliminado.' }
       format.json { head :no_content }
     end
+  end
+
+   def import
+    Cliente.import(params[:file])
+    redirect_to clientes_path, notice: 'Datos subidos.'
   end
 
   private

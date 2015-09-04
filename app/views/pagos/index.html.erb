@@ -40,3 +40,12 @@
 <br>
 
 <%= link_to 'Nuevo Pago', new_pago_path %>
+<br>
+<br>
+<%= form_tag import_pagos_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', pagos_path(format: "csv"), class: 'btn btn-default' %>
+

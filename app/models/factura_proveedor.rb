@@ -47,4 +47,19 @@ class FacturaProveedor < ActiveRecord::Base
     Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe_pronto_pago, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      FacturaProveedor.create! row.to_hash
+    end
+  end
+
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |factura_proveedore|
+        csv << factura_proveedor.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 end

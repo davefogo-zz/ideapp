@@ -35,3 +35,6 @@
           <br>
 
 <%= link_to 'Nuevo Recibo de Caja', new_recibo_de_caja_path %>
+<br>
+<br>
+<%= link_to 'Descargar Reporte', recibo_de_caja_path(format: "csv"), class: 'btn btn-default' %>

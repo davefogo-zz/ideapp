@@ -6,4 +6,18 @@ class Presupuesto < ActiveRecord::Base
   has_one :factura
   validates :fecha, :titulo, :cliente_id, :producto, presence: true
 
+  def self.import(file)
+	  CSV.foreach(file.path, headers: true) do |row|
+	  	Presupuesto.create! row.to_hash
+	  end
+	end
+
+	def self.to_csv
+		CSV.generate do |csv|
+			csv << column_names
+			all.each do |presupuesto|
+				csv << presupuesto.attributes.values_at(*column_names)
+			end
+		end
+	end
 end

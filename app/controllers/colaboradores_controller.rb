@@ -5,6 +5,12 @@ class ColaboradoresController < ApplicationController
   # GET /colaboradores.json
   def index
     @colaboradores = Colaboradore.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @colaboradores.to_csv }
+    end
+
     if params[:search] 
       @colaboradores = Colaboradore.search(params[:search])
     else
@@ -76,7 +82,6 @@ class ColaboradoresController < ApplicationController
   def import
     Colaboradore.import(params[:file])
     redirect_to colaboradores_path, notice: 'Datos subidos.'
-    
   end
 
   private

@@ -40,6 +40,15 @@
   </div>
 </div>
 
-
+<%#= link_to 'Registrar Volumen', new_volumen_path %>
 <br>
+<br>
+<%#= form_tag import_volumen_path, multipart: true do%>
+  <%#= file_field_tag :file %><br>
+  <%#= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<%# end %><br>
+
+<%#= link_to 'Descargar Reporte', volumen_path(format: "csv"), class: 'btn btn-default' %>
+
+
 

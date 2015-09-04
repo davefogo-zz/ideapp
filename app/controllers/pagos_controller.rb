@@ -4,6 +4,12 @@ class PagosController < ApplicationController
   # GET /pagos
   # GET /pagos.json
   def index
+    @pagos = Pago.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @pagos.to_csv }
+
     @search = PagoSearch.new(params[:search])
     @pagos = @search.scope
   end
@@ -70,6 +76,11 @@ class PagosController < ApplicationController
       format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Pago.import(params[:file])
+    redirect_to pagos_path, notice: 'Datos subidos.'
   end
 
   private

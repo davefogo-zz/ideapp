@@ -4,6 +4,13 @@ class ActivoFijosController < ApplicationController
   # GET /activo_fijos
   # GET /activo_fijos.json
   def index
+    @activo_fijo = ActivoFijo.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @activo_fijos.to_csv }
+    end
+
    @search = ActivoFijoSearch.new(params[:search])
     @activo_fijos = @search.scope
   end
@@ -61,6 +68,11 @@ class ActivoFijosController < ApplicationController
       format.html { redirect_to activo_fijos_url, notice: 'ActivoFijo was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    ActivoFijo.import(params[:file])
+    redirect_to activo_fijos_path, notice: 'Datos subidos.'
   end
 
   private

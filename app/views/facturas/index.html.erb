@@ -39,3 +39,12 @@
 <br>
 
 <%= link_to 'Nueva Factura', new_factura_path %>
+<br>
+<br>
+<%= form_tag import_facturas_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', facturas_path(format: "csv"), class: 'btn btn-default' %>
+

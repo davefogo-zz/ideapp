@@ -4,6 +4,13 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas
   # GET /recibo_de_cajas.json
   def index
+    @recibo_de_cajas = ReciboDeCaja.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @recibo_de_cajas.to_csv }
+    end
+
     @search = ReciboDeCajaSearch.new(params[:search])
     @recibo_de_cajas = @search.scope
   end

@@ -34,6 +34,14 @@
     </table>
   </div>
 </div>
-
+<%#= link_to 'Nuevo Activo Fijo', new_activo_fijo_path %>
 <br>
+<br>
+<%= form_tag import_activo_fijos_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', activo_fijos_path(format: "csv"), class: 'btn btn-default' %>
+
 

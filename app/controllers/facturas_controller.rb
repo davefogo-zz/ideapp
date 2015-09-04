@@ -6,6 +6,11 @@ class FacturasController < ApplicationController
     @search = FacturaSearch.new(params[:search])
     @facturas = @search.scope
     @facturas = Factura.all
+
+    respond_to do |format|
+      format.html
+      format.csv {render text: @facturas.to_csv }
+    end
   end
 
   # GET /facturas/1
@@ -78,6 +83,11 @@ class FacturasController < ApplicationController
       format.html { redirect_to facturas_url, notice: 'Factura eliminada.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Factura.import(params[:file])
+    redirect_to facturas_path, notice: 'Datos subidos.'
   end
 
   private

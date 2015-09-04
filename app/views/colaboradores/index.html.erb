@@ -36,18 +36,18 @@
                   <td><%= link_to 'Editar', edit_colaboradore_path(colaboradore), class: 'btn btn-mini btn-success'  %></td>
                   <td><%= link_to 'Eliminar', colaboradore, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger'  %></td>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
-
-          <br>
-
+            <% end %>
+      </tbody>
+    </table>
+  </div>
+</div> 
+<br>
 <%= link_to 'Nuevo Colaborador', new_colaboradore_path %>
 <br>
 <br>
-  
-
 <%= form_tag import_colaboradores_path, multipart: true do%>
   <%= file_field_tag :file %><br>
-  <%= submit_tag 'Subir Datos' %>
-<% end %>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', colaboradores_path(format: "csv"), class: 'btn btn-default' %>

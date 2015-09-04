@@ -45,4 +45,12 @@
 </div>
 <br>
 
-<%= link_to 'Nuevo Gasto', new_gasto_path %>
+<%= link_to 'Nuevo Gasto', new_gasto_path 
+<br>
+<br>
+<%= form_tag import_gastos_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', gastos_path(format: "csv"), class: 'btn btn-default' %>

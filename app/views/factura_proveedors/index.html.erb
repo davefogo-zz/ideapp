@@ -47,3 +47,11 @@
 <br>
 
 <%= link_to 'Nueva factura de proveedor', new_factura_proveedor_path %>
+<br>
+<br>
+<%= form_tag import_factura_proveedors_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+
+<%= link_to 'Descargar Reporte', factura_proveedors_path(format: "csv"), class: 'btn btn-default' %>

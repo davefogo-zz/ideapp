@@ -3,7 +3,13 @@ class AjustesController < ApplicationController
   # GET /ajustes
   # GET /ajustes.json
   def index
-     @ajuste = Ajuste.all
+     @ajustes = Ajuste.all
+
+     respond_to do |format|
+      format.html
+      format.csv {render text: @ajustes.to_csv }
+    end
+
     #@search = AjusteSearch.new(params[:search])
     #@ajustes = @search.scope
   end
@@ -75,6 +81,11 @@ class AjustesController < ApplicationController
       format.html { redirect_to ajustes_url, notice: 'Ajuste eliminada.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Ajuste.import(params[:file])
+    redirect_to ajustes_path, notice: 'Datos subidos.'
   end
 
   private

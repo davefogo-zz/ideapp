@@ -1,12 +1,24 @@
 class VolumenesController < ApplicationController
   def index
+    @volumen = Volumen.all
+
+    #respond_to do |format|
+      #format.html
+      #format.csv {render text: @volumen.to_csv }
+    #end
   	@search = VolumenSearch.new(params[:search])
     @volumen = @search.scope
-    @volumen = Volumen.all
+    
+
   end
 
   def show
   end
+
+  #def import
+   # Volumen.import(params[:file])
+   # redirect_to volumen_path, notice: 'Datos subidos.'
+  #end
 
   private
 
