@@ -11,7 +11,9 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas/1
   # GET /recibo_de_cajas/1.json                                                                                            
   def show
-    @recibo_de_cajas = ReciboDeCaja.all
+    @recibo_de_caja = ReciboDeCaja.find(params[:id])
+    @recibo_items = @recibo_de_caja.recibo_items
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -25,7 +27,7 @@ class ReciboDeCajasController < ApplicationController
 
   # GET /recibo_de_cajas/new
   def new
-    @recibo_de_caja =   ReciboDeCaja.new                                                                     
+    @recibo_de_caja =  ReciboDeCaja.new                                                                     
   end
 
   # GET /recibo_de_cajas/1/edit
@@ -80,6 +82,6 @@ class ReciboDeCajasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recibo_de_caja_params
-      params.require(:recibo_de_caja).permit(:fecha, :factura_id, :importe, :concepto, :forma_de_pago, :numero_de_cheque, :numero_de_cuenta, :codigo_de_banco, :subcuenta_puc_id)
+      params.require(:recibo_de_caja).permit(:fecha, :cliente_id)
     end
 end

@@ -5,10 +5,8 @@ class ReciboPdf < Prawn::Document
 		@view = view
 		logo
 		recibo_de_caja_id
-		ideamos
-		proveedor
-		recibo_de_caja_rows
-		forma_de_pago
+		cliente
+		factura_items
 		#pronto_pago_recibo_de_caja
 		
 	end
@@ -30,54 +28,42 @@ class ReciboPdf < Prawn::Document
 		end
 	end
 
-	def ideamos
-		bounding_box([0, 670], :width => 300, :height => 15) do
-			text "Ideamos Publicidad LTDA. 860.076.863-6", size: 10, style: :bold
-		end
-	end
-
-	def proveedor
+	def cliente
 	  		bounding_box([350, 710], :width => 150, :height => 15) do
 	    		text 'Cliente:', size: 10, style: :bold
 			end
-			bounding_box([370, 695], :width => 150, :height => 15) do
-	    		text "#{@recibo_de_caja.factura.cliente.nombre}", size: 10
+			bounding_box([350, 695], :width => 150, :height => 15) do
+	    		text "#{@recibo_de_caja.cliente.nombre}", size: 10
 			end
 			bounding_box([350, 670], :width => 150, :height => 15) do
 	    		text 'Nit:', size: 10, style: :bold
 	    	end
-	    	bounding_box([370, 655], :width => 150, :height => 15) do
-	    		text "#{@recibo_de_caja.factura.cliente.nit}", size: 10
+	    	bounding_box([350, 655], :width => 150, :height => 15) do
+	    		text "#{@recibo_de_caja.cliente.nit}", size: 10
 			end
 	  	end
 
-	def recibo_de_caja_rows
-		bounding_box([0, 600], :width => 150, :height => 15) do
-	    		text "Fecha: #{@recibo_de_caja.fecha}", size: 10, style: :bold
+	  def factura_items
+		move_down 50
+			table factura_item_rows, :width => 550 do
+				row(0..1000).border_width = 0
+				row(0).font_style = :bold
+				self.header = true
 			end
-			bounding_box([150, 600], :width => 150, :height => 15) do
-	    		text "Factura: #{@recibo_de_caja.factura.id}", size: 10, style: :bold
-	    	end
-			bounding_box([250, 600], :width => 150, :height => 15) do
-				text "Importe: #{price(@recibo_de_caja.importe)}", size: 10, style: :bold
-			end
-	end	
+	end
 
-	def forma_de_pago
-		bounding_box([0, 550], :width => 150, :height => 15) do
-	    		text "Forma de Pago: #{@recibo_de_caja.forma_de_pago}", size: 10, style: :bold
-			end
-			bounding_box([300, 550], :width => 150, :height => 15) do
-	    		text "Nro Cheque: #{@recibo_de_caja.numero_de_cheque}", size: 10, style: :bold
-	    	end
-	    	bounding_box([165, 550], :width => 150, :height => 15) do
-	    		text "Banco: #{@recibo_de_caja.subcuenta_puc_id.try(:descripcion)}", size: 10, style: :bold
-	    	end
-	end	
+	def factura_item_rows
+		[['Fecha', 'Importe', 'Forma de Pago', 'No. de Cheque', 'Banco Destino']] + @recibo_de_caja.recibo_items.map do |item|
+			[item.fecha, price(item.importe), item.forma_de_pago, item.numero_de_cheque, item.subcuenta_puc_id]
+		end	
+		
+	end
+
+	
 
 	#def pronto_pago_recibo_de_caja
 		#move_down 80
-		#text " + Pronto Pago #{price(@recibo_de_caja.factura.cliente.pronto_pago)}", :align => :right, style: :bold
+		#text " + Pronto Pago #{price(@recibo_de_caja.recibo_item.factura.cliente.pronto_pago)}", :align => :right, style: :bold
 	#end
 
 end

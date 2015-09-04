@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :transaccions
   resources :volumenes
   resources :factura_proveedors
-  resources :recibo_de_cajas
+  resources :recibo_de_cajas do
+    resources :recibo_items, controller: 'recibo_de_cajas/recibo_items'
+  end
   resources :gastos
   resources :pagos
   resources :activo_fijos

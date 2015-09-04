@@ -14,10 +14,8 @@
           <thead>
             <tr>
               <th>Fecha</th>
-              <th>Factura</th>
-              <th>Total Factura</th>
-              <th>Abono</th>
-              <th>Forma de Pago</th>
+              <th>Recibo de Caja Numero:</th>
+              <th>Cliente</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -25,10 +23,8 @@
               <% @recibo_de_cajas.each do |recibo_de_caja| %>
                 <tr>
                   <td><%= recibo_de_caja.fecha %></td>
-                  <td><%= link_to recibo_de_caja.factura_id, recibo_de_caja %></td>
-                  <td><%= number_to_currency(recibo_de_caja.factura.total, :precision => 0) %></td>
-                  <td><%= number_to_currency(recibo_de_caja.importe, :precision => 0)%></td>
-                  <td><%= recibo_de_caja.forma_de_pago %></td>
+                  <td><%= recibo_de_caja.id%></td>
+                  <td><%= recibo_de_caja.cliente.nombre %></td>
                   <td><%= link_to 'Mostrar', recibo_de_caja, class: 'btn btn-mini btn-default' %></td>
                   <td><%= link_to 'Eliminar', recibo_de_caja, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
                 </tr>
