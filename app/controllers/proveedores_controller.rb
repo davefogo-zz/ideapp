@@ -4,7 +4,7 @@ class ProveedoresController < ApplicationController
   # GET /proveedores
   # GET /proveedores.json
   def index
-    @proveedores = Proveedore.all
+    @proveedore = Proveedore.all
     authorize Proveedore
     respond_to do |format|
       format.html

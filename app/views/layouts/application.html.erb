@@ -12,9 +12,11 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
+  </body>
     <main role="main">
        <%= render 'layouts/messages' %>
+
        <%= yield %>
     </main>
-  </body>
+    <%= image_tag('Logo_Ideamos.jpg', size: "133x33") %>
 </html>

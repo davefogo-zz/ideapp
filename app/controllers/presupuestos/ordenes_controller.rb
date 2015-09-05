@@ -3,7 +3,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # GET /ordenes
   # GET /ordenes.json
   def index
-    @ordenes = Ordene.all
+    @ordene = Ordene.all
     authorize Ordene
   end
 

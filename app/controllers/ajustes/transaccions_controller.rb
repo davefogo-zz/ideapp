@@ -5,7 +5,7 @@ class Ajustes::TransaccionsController < ApplicationController
     @search = TransaccionSearch.new(params[:search])
     authorize Transaccion
     @transaccions = @search.scope
-    @transaccions = Transaccion.all
+    @transaccion = Transaccion.all
   end
 
   # GET /transaccions/1

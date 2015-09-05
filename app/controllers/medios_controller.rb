@@ -4,7 +4,7 @@ class MediosController < ApplicationController
   # GET /medios
   # GET /medios.json
   def index
-    @medios = Medio.all
+    @medio = Medio.all
     authorize Medio
     respond_to do |format|
       format.html

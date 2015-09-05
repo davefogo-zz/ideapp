@@ -5,19 +5,21 @@ class PagosController < ApplicationController
   # GET /pagos.json
   def index
     @pagos = Pago.all
-    authorize Pago
+    
     respond_to do |format|
       format.html
       format.csv {render text: @pagos.to_csv }
-
-    @search = PagoSearch.new(params[:search])
+    end
     @pagos = @search.scope
+    @search = PagoSearch.new(params[:search])
+    authorize Pago
+
   end
 
   # GET /pagos/1
   # GET /pagos/1.json                                                                                            
   def show
-    @pagos = Pago.find(params[:id])
+    @pago = Pago.find(params[:id])
     authorize @pago
     respond_to do |format|
       format.html
@@ -33,19 +35,19 @@ class PagosController < ApplicationController
   # GET /pagos/new
   def new
     @pago =  Pago.new 
-    authorize @gasto                                                                    
+    authorize @pago                                                                   
   end
 
   # GET /pagos/1/edit
   def edit
-    authorize @gasto
+    authorize @pago
   end
 
   # POST /pagos
   # POST /pagos.json
   def create
     @pago = Pago.new(pago_params)
-    authorize @gasto
+    authorize @pago
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Orden de Pago creada.' }

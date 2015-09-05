@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904005639) do
+ActiveRecord::Schema.define(version: 20150905190645) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -69,16 +69,12 @@ ActiveRecord::Schema.define(version: 20150904005639) do
     t.string   "ciudad"
     t.string   "codigo_postal"
     t.string   "pais"
-    t.integer  "users_id"
   end
 
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
-  add_index "clientes", ["users_id"], name: "index_clientes_on_users_id"
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "cargo"
-    t.string   "departamento"
     t.string   "jefe_inmediato"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
@@ -255,6 +251,7 @@ ActiveRecord::Schema.define(version: 20150904005639) do
     t.integer  "subtotal",             limit: 8
     t.boolean  "aprobado_por_cliente"
     t.boolean  "emision_certificada"
+    t.integer  "iva",                  limit: 8
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
@@ -356,6 +353,7 @@ ActiveRecord::Schema.define(version: 20150904005639) do
     t.integer  "factura_proveedor_id"
     t.integer  "proveedore_id"
     t.integer  "ajuste_id"
+    t.integer  "recibo_item_id"
   end
 
   add_index "transaccions", ["ajuste_id"], name: "index_transaccions_on_ajuste_id"
@@ -365,6 +363,7 @@ ActiveRecord::Schema.define(version: 20150904005639) do
   add_index "transaccions", ["pago_id"], name: "index_transaccions_on_pago_id"
   add_index "transaccions", ["proveedore_id"], name: "index_transaccions_on_proveedore_id"
   add_index "transaccions", ["recibo_de_caja_id"], name: "index_transaccions_on_recibo_de_caja_id"
+  add_index "transaccions", ["recibo_item_id"], name: "index_transaccions_on_recibo_item_id"
   add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
 
   create_table "users", force: :cascade do |t|
@@ -389,7 +388,6 @@ ActiveRecord::Schema.define(version: 20150904005639) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "volumen", force: :cascade do |t|
-    t.integer  "medio_id_id"
     t.string   "tipo_de_volumen"
     t.decimal  "escala"
     t.string   "rango"
@@ -406,6 +404,5 @@ ActiveRecord::Schema.define(version: 20150904005639) do
   add_index "volumen", ["factura_id"], name: "index_volumen_on_factura_id"
   add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
   add_index "volumen", ["medio_id"], name: "index_volumen_on_medio_id"
-  add_index "volumen", ["medio_id_id"], name: "index_volumen_on_medio_id_id"
 
 end
