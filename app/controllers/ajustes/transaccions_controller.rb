@@ -3,6 +3,7 @@ class Ajustes::TransaccionsController < ApplicationController
   
   def index
     @search = TransaccionSearch.new(params[:search])
+    authorize Transaccion
     @transaccions = @search.scope
     @transaccions = Transaccion.all
   end
@@ -10,18 +11,22 @@ class Ajustes::TransaccionsController < ApplicationController
   # GET /transaccions/1
   # GET /transaccion_params/1.json
   def show
+    authorize @transaccion
   end
 
   def new
     @ajuste = Ajuste.find(params[:ajuste_id])
+    authorize @transaccion
     @transaccion = Transaccion.new
   end
 
   def edit
+    authorize @transaccion
   end
 
   def create
     @ajuste = Ajuste.find(params[:ajuste_id])
+    authorize @transaccion
     @transaccion = Transaccion.new(transaccion_params)
     @transaccion.ajuste = @ajuste
 
@@ -38,6 +43,7 @@ class Ajustes::TransaccionsController < ApplicationController
 
   def update
     respond_to do |format|
+      authorize @transaccion
       if @transaccion.update(transaccion_params)
         format.html { redirect_to @transaccion, notice: 'Transaccion actualizada.' }
         format.json { render :show, status: :ok, location: @transaccion }
@@ -50,6 +56,7 @@ class Ajustes::TransaccionsController < ApplicationController
 
   def destroy
       @transaccion.destroy
+      authorize @transaccion
       respond_to do |format|
         format.html { redirect_to transaccions_url, notice: 'Transaccion eliminada.' }
         format.json { head :no_content }

@@ -7,13 +7,13 @@
         <span clas="sr-only">Tesoreria</span>
        </button>
       <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
+        <% if policy(FacturaProveedor).index? %>
           <li><%= link_to t('Facturas Proveedor'), factura_proveedors_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Pago).index? %>
           <li><%= link_to t('Pagos'), pagos_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Gasto).index? %>
           <li><%= link_to t('Gastos'), gastos_path %></li>
         <% end %>
       </ul>
@@ -24,13 +24,13 @@
         <span clas="sr-only">Medios</span>
        </button>
       <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %> 
+        <% if policy(Medio).index? %> 
           <li><%= link_to t('Medios'), medios_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Presupuesto).index? %>
           <li><%= link_to t('Presupuestos'), presupuestos_path %></li>
         <% end %> 
-        <% if policy(current_user).index? %>
+        <% if policy(Ordene).index? %>
           <li><%= link_to t('Ordenes'), presupuestos_path %></li>
        <% end %>  
       </ul>
@@ -41,10 +41,10 @@
         <span clas="sr-only">Facturacion</span>
        </button>
       <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
+        <% if policy(Factura).index? %>
           <li><%= link_to t('Facturas'), facturas_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(FacturaItem).index? %>
           <li><%= link_to t('Items'), factura_items_path %></li>
         <% end %>
       </ul>
@@ -55,25 +55,25 @@
         <span clas="sr-only">Contabilidad</span>
        </button>
       <ul class="dropdown-menu" role="menu">
-        <% if policy(current_user).index? %>
+        <% if policy(Proveedore).index? %>
           <li><%= link_to t('Proveedores'), proveedores_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(FacturaProveedor).index? %>
           <li><%= link_to t('Facturas de Proveedor'), factura_proveedors_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Volumen).index? %>
           <li><%= link_to t('Volumenes'), volumenes_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(ActivoFijo).index? %>
           <li><%= link_to t('Activos Fijos'), activo_fijos_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(SubcuentaPuc).index? %>
           <li><%= link_to t('PUC'), subcuenta_pucs_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Transaccion).index? %>
           <li><%= link_to t('Libro Diario Oficial'), transaccions_path %></li>
         <% end %>
-        <% if policy(current_user).index? %>
+        <% if policy(Ajuste).index? %>
           <li><%= link_to t('Ajustes Contables'), ajustes_path %></li>
         <% end %>
       </ul>
@@ -84,9 +84,9 @@
       <span clas="sr-only">Cartera</span>
      </button>
     <ul class="dropdown-menu" role="menu">
-      <% if policy(current_user).index? %>
+      <% if policy(ReciboDeCaja).index? %>
         <li><%= link_to t('Recibos de Caja'), recibo_de_cajas_path %></li>
-        <% if policy(current_user).index? %> 
+        <% if policy(Cliente).index? %> 
           <li><%= link_to t('Clientes'), clientes_path %></li>
         <% end %> 
       <% end %>

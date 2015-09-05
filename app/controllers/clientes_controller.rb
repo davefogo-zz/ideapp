@@ -5,6 +5,7 @@ class ClientesController < ApplicationController
   # GET /clientes.json
   def index
     @clientes = Cliente.all
+    authorize Cliente
     respond_to do |format|
       format.html
       format.csv {render text: @colaboradores.to_csv }
@@ -20,23 +21,26 @@ class ClientesController < ApplicationController
   # GET /clientes/1
   # GET /clientes/1.json
   def show
+    authorize @cliente
   end
 
   # GET /clientes/new
   def new
     @cliente = Cliente.new
+    authorize @cliente
     @user = User.all
   end
 
   # GET /clientes/1/edit
   def edit
+    authorize @cliente
   end
 
   # POST /clientes
   # POST /clientes.json
   def create
     @cliente = Cliente.new(cliente_params)
-
+    authorize @cliente
     respond_to do |format|
       if @cliente.save
         format.html { redirect_to @cliente, notice: 'Cliente creado.' }
@@ -52,6 +56,7 @@ class ClientesController < ApplicationController
   # PATCH/PUT /clientes/1.json
   def update
     respond_to do |format|
+      authorize @cliente
       if @cliente.update(cliente_params)
         format.html { redirect_to @cliente, notice: 'Cliente actualizado.' }
         format.json { render :show, status: :ok, location: @cliente }
@@ -66,6 +71,7 @@ class ClientesController < ApplicationController
   # DELETE /clientes/1.json
   def destroy
     @cliente.destroy
+    authorize @cliente
     respond_to do |format|
       format.html { redirect_to clientes_url, notice: 'Cliente eliminado.' }
       format.json { head :no_content }
@@ -74,6 +80,7 @@ class ClientesController < ApplicationController
 
    def import
     Cliente.import(params[:file])
+    authorize @cliente
     redirect_to clientes_path, notice: 'Datos subidos.'
   end
 

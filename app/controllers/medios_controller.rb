@@ -5,7 +5,7 @@ class MediosController < ApplicationController
   # GET /medios.json
   def index
     @medios = Medio.all
-
+    authorize Medio
     respond_to do |format|
       format.html
       format.csv {render text: @ajustes.to_csv }
@@ -21,22 +21,25 @@ class MediosController < ApplicationController
   # GET /medios/1
   # GET /medios/1.json
   def show
+    authorize @medio
   end
 
   # GET /medios/new
   def new
     @medio = Medio.new
+    authorize @medio
   end
 
   # GET /medios/1/edit
   def edit
+    authorize @medio
   end
 
   # POST /medios
   # POST /medios.json
   def create
     @medio = Medio.new(medio_params)
-
+    authorize @medio
     respond_to do |format|
       if @medio.save
         format.html { redirect_to @medio, notice: 'Medio creado.' }
@@ -52,6 +55,7 @@ class MediosController < ApplicationController
   # PATCH/PUT /medios/1.json
   def update
     respond_to do |format|
+      authorize @medio
       if @medio.update(medio_params)
         format.html { redirect_to @medio, notice: 'Medio actualizado.' }
         format.json { render :show, status: :ok, location: @medio }
@@ -66,6 +70,7 @@ class MediosController < ApplicationController
   # DELETE /medios/1.json
   def destroy
     @medio.destroy
+    authorize @medio
     respond_to do |format|
       format.html { redirect_to medios_url, notice: 'Medio was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,6 +79,7 @@ class MediosController < ApplicationController
 
   def import
     Ajuste.import(params[:file])
+    authorize @medio
     redirect_to ajustes_path, notice: 'Datos subidos.'
   end
 

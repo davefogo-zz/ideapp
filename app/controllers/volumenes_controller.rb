@@ -1,6 +1,7 @@
 class VolumenesController < ApplicationController
   def index
     @volumen = Volumen.all
+    authorize Volumen
 
     #respond_to do |format|
       #format.html
@@ -12,7 +13,8 @@ class VolumenesController < ApplicationController
 
   end
 
-  def show
+  def show  
+    authorize @volumen
   end
 
   #def import

@@ -5,6 +5,7 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items.json
   def index
     @search = FacturaItemSearch.new(params[:search])
+    authorize Factura
     @factura_items = @search.scope
     @factura_items = FacturaItem.all
   end
@@ -12,14 +13,16 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items/1
   # GET /factura_items/1.json                                                                                            
   def show
-    @factura_items = FacturaItem.all,
+    @factura_items = FacturaItem.all
+    authorize @factura
     @ordene = Ordene.all
     @medio = Medio.all
   end
 
   # GET /factura_items/new
   def new
-    @factura_item =  FacturaItem.new                                                                      
+    @factura_item =  FacturaItem.new  
+    authorize @factura                                                                    
   end
 
   # GET /factura_items/1/edit
@@ -30,6 +33,7 @@ class FacturaItemsController < ApplicationController
   # POST /factura_items.json
   def create
     @factura_item = FacturaItem.new(factura_item_params)
+    authorize @factura
     @ordenes = Ordene.all
     @medio = Medio.all
 
@@ -48,6 +52,7 @@ class FacturaItemsController < ApplicationController
   # PATCH/PUT /factura_items/1.json
   def update
     respond_to do |format|
+      authorize @factura
       if @factura_item.update(factura_item_params)
         format.html { redirect_to @factura_item, notice: 'Factura item was successfully updated.' }
         format.json { render :show, status: :ok, location: @factura_item }
@@ -62,6 +67,7 @@ class FacturaItemsController < ApplicationController
   # DELETE /factura_items/1.json
   def destroy
     @factura_item.destroy
+    authorize @factura
     respond_to do |format|
       format.html { redirect_to factura_items_url, notice: 'Factura item was successfully destroyed.' }
       format.json { head :no_content }

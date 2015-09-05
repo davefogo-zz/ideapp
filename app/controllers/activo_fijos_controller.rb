@@ -5,7 +5,7 @@ class ActivoFijosController < ApplicationController
   # GET /activo_fijos.json
   def index
     @activo_fijo = ActivoFijo.all
-
+    authorize ActivoFijo
     respond_to do |format|
       format.html
       format.csv {render text: @activo_fijos.to_csv }
@@ -19,22 +19,25 @@ class ActivoFijosController < ApplicationController
   # GET /activo_fijos/1.json                                                                                            
   def show
     @activo_fijos = ActivoFijo.all
+    authorize @activo_fijo
   end
 
   # GET /activo_fijos/new
   def new
-    @activo_fijo =   ActivoFijo.new                                                                     
+    @activo_fijo =   ActivoFijo.new   
+    authorize @activo_fijo                                                                  
   end
 
   # GET /activo_fijos/1/edit
   def edit
+    authorize @activo_fijo
   end
 
   # POST /activo_fijos
   # POST /activo_fijos.json
   def create
     @activo_fijo = ActivoFijo.new(activo_fijo_params)
-
+    authorize @activo_fijo
     respond_to do |format|
       if @activo_fijo.save
         format.html { redirect_to @activo_fijo, notice: 'ActivoFijo was successfully created.' }
@@ -50,6 +53,7 @@ class ActivoFijosController < ApplicationController
   # PATCH/PUT /activo_fijos/1.json
   def update
     respond_to do |format|
+      authorize @activo_fijo
       if @activo_fijo.update(activo_fijo_params)
         format.html { redirect_to @activo_fijo, notice: 'ActivoFijo was successfully updated.' }
         format.json { render :show, status: :ok, location: @activo_fijo }
@@ -64,6 +68,7 @@ class ActivoFijosController < ApplicationController
   # DELETE /activo_fijos/1.json
   def destroy
     @activo_fijo.destroy
+    authorize @activo_fijo
     respond_to do |format|
       format.html { redirect_to activo_fijos_url, notice: 'ActivoFijo was successfully destroyed.' }
       format.json { head :no_content }

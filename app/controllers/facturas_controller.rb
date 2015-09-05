@@ -4,6 +4,7 @@ class FacturasController < ApplicationController
   # GET /facturas.json
   def index
     @search = FacturaSearch.new(params[:search])
+    authorize Factura
     @facturas = @search.scope
     @facturas = Factura.all
 
@@ -17,6 +18,7 @@ class FacturasController < ApplicationController
   # GET /facturas/1.json
   def show
     @factura = Factura.find(params[:id])
+    authorize @factura
     #@factura_item = FacturaItem.all
     @factura_item = FacturaItem.where("facturar" => true, factura_id: @factura.id)
     respond_to do |format|
@@ -33,6 +35,7 @@ class FacturasController < ApplicationController
   # GET /facturas/new
   def new
    @factura = Factura.new
+   authorize @factura
    @presupuesto = Presupuesto.all
    @ordene = Ordene.all
    #@ordenes = Ordene.where(aprobado_por_cliente: 1) 
@@ -41,13 +44,14 @@ class FacturasController < ApplicationController
   # GET /facturas/1/edit
   def edit
     @factura = Factura.find(params[:id])
+    authorize @factura
   end
 
   # POST /facturas
   # POST /facturas.json
   def create
     @factura = Factura.new(factura_params)
-    
+    authorize @factura
 
     respond_to do |format|
       if @factura.save
@@ -64,6 +68,7 @@ class FacturasController < ApplicationController
   # PATCH/PUT /facturas/1.json
   def update
     @factura = Factura.find(params[:id])
+    authorize @factura
     respond_to do |format|
       if @factura.update(factura_params)
         format.html { redirect_to @factura, notice: 'Factura actualizada.' }
@@ -79,6 +84,7 @@ class FacturasController < ApplicationController
   # DELETE /facturas/1.json
   def destroy
     @factura.destroy
+    authorize @factura
     respond_to do |format|
       format.html { redirect_to facturas_url, notice: 'Factura eliminada.' }
       format.json { head :no_content }
@@ -87,6 +93,7 @@ class FacturasController < ApplicationController
 
   def import
     Factura.import(params[:file])
+    authorize @factura
     redirect_to facturas_path, notice: 'Datos subidos.'
   end
 

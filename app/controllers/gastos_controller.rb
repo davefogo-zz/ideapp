@@ -6,7 +6,7 @@ class GastosController < ApplicationController
   def index
 
     @gastos = Gasto.all
-
+    authorize Gasto
     respond_to do |format|
       format.html
       format.csv {render text: @gastos.to_csv }
@@ -20,22 +20,25 @@ class GastosController < ApplicationController
   # GET /gastos/1.json                                                                                            
   def show
     @gastos = Gasto.all
+    authorize @gasto
   end
 
   # GET /gastos/new
   def new
-    @gasto =   Gasto.new                                                                     
+    @gasto =   Gasto.new   
+    authorize @gasto                                                                 
   end
 
   # GET /gastos/1/edit
   def edit
+    authorize @gasto
   end
 
   # POST /gastos
   # POST /gastos.json
   def create
     @gasto = Gasto.new(gasto_params)
-
+    authorize @gasto
     respond_to do |format|
       if @gasto.save
         format.html { redirect_to @gasto, notice: 'Gasto was successfully created.' }
@@ -51,6 +54,7 @@ class GastosController < ApplicationController
   # PATCH/PUT /gastos/1.json
   def update
     respond_to do |format|
+      authorize @gasto
       if @gasto.update(gasto_params)
         format.html { redirect_to @gasto, notice: 'Gasto was successfully updated.' }
         format.json { render :show, status: :ok, location: @gasto }
@@ -65,6 +69,7 @@ class GastosController < ApplicationController
   # DELETE /gastos/1.json
   def destroy
     @gasto.destroy
+    authorize @gasto
     respond_to do |format|
       format.html { redirect_to gastos_url, notice: 'Gasto was successfully destroyed.' }
       format.json { head :no_content }
@@ -73,6 +78,7 @@ class GastosController < ApplicationController
 
   def import
     Gasto.import(params[:file])
+    authorize @gasto
     redirect_to gastos_path, notice: 'Datos subidos.'
   end
 

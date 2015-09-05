@@ -5,7 +5,7 @@ class FacturaProveedorsController < ApplicationController
   # GET /factura_proveedors.json
   def index
     @factura_proveedors = FacturaProveedor.all
-
+    authorize FacturaProveedor
      respond_to do |format|
       format.html
       format.csv {render text: @factura_proveedors.to_csv }
@@ -20,11 +20,13 @@ class FacturaProveedorsController < ApplicationController
   # GET /factura_proveedors/1.json                                                                                            
   def show
     @factura_proveedors = FacturaProveedor.all
+    authorize @factura_proveedor
   end
 
   # GET /factura_proveedors/new
   def new
-    @factura_proveedor =   FacturaProveedor.new                                                                     
+    @factura_proveedor =   FacturaProveedor.new   
+    authorize @factura_proveedor                                                                  
   end
 
   # GET /factura_proveedors/1/edit
@@ -35,7 +37,7 @@ class FacturaProveedorsController < ApplicationController
   # POST /factura_proveedors.json
   def create
     @factura_proveedor = FacturaProveedor.new(factura_proveedor_params)
-
+    authorize @factura_proveedor
     respond_to do |format|
       if @factura_proveedor.save
         format.html { redirect_to @factura_proveedor, notice: 'Factura proveedor was successfully created.' }
@@ -51,6 +53,7 @@ class FacturaProveedorsController < ApplicationController
   # PATCH/PUT /factura_proveedors/1.json
   def update
     respond_to do |format|
+      authorize @factura_proveedor
       if @factura_proveedor.update(factura_proveedor_params)
         format.html { redirect_to @factura_proveedor, notice: 'Factura de Proveedor asignada a orden de pago.' }
         format.json { render :show, status: :ok, location: @factura_proveedor }
@@ -65,6 +68,7 @@ class FacturaProveedorsController < ApplicationController
   # DELETE /factura_proveedors/1.json
   def destroy
     @factura_proveedor.destroy
+    authorize @factura_proveedor
     respond_to do |format|
       format.html { redirect_to factura_proveedors_url, notice: 'Factura proveedor was successfully destroyed.' }
       format.json { head :no_content }
@@ -73,6 +77,7 @@ class FacturaProveedorsController < ApplicationController
 
   def import
     Colaboradore.import(params[:file])
+    authorize @factura_proveedor
     redirect_to factura_proveedors_path, notice: 'Datos subidos.'
   end
 

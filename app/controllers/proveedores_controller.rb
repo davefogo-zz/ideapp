@@ -5,7 +5,7 @@ class ProveedoresController < ApplicationController
   # GET /proveedores.json
   def index
     @proveedores = Proveedore.all
-
+    authorize Proveedore
     respond_to do |format|
       format.html
       format.csv {render text: @proveedores.to_csv }
@@ -21,22 +21,25 @@ class ProveedoresController < ApplicationController
   # GET /proveedores/1
   # GET /proveedores/1.json
   def show
+    authorize @proveedore
   end
 
   # GET /proveedores/new
   def new
     @proveedore = Proveedore.new
+    authorize @proveedore
   end
 
   # GET /proveedores/1/edit
   def edit
+    authorize @proveedore
   end
 
   # POST /proveedores
   # POST /proveedores.json
   def create
     @proveedore = Proveedore.new(proveedore_params)
-
+    authorize @proveedore
     respond_to do |format|
       if @proveedore.save
         format.html { redirect_to @proveedore, notice: 'Proveedor creado.' }
@@ -52,6 +55,7 @@ class ProveedoresController < ApplicationController
   # PATCH/PUT /proveedores/1.json
   def update
     respond_to do |format|
+      authorize @proveedore
       if @proveedore.update(proveedore_params)
         format.html { redirect_to @proveedore, notice: 'Proveedor actualizado.' }
         format.json { render :show, status: :ok, location: @proveedore }
@@ -66,6 +70,7 @@ class ProveedoresController < ApplicationController
   # DELETE /proveedores/1.json
   def destroy
     @proveedore.destroy
+    authorize @proveedore
     respond_to do |format|
       format.html { redirect_to proveedores_url, notice: 'Proveedor eliminado.' }
       format.json { head :no_content }
@@ -74,6 +79,7 @@ class ProveedoresController < ApplicationController
 
   def import
     Proveedore.import(params[:file])
+    authorize @proveedore
     redirect_to proveedores_path, notice: 'Datos subidos.'
   end
 

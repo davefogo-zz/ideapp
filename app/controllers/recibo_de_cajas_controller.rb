@@ -5,7 +5,7 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas.json
   def index
     @recibo_de_cajas = ReciboDeCaja.all
-
+    authorize ReciboDeCaja
     respond_to do |format|
       format.html
       format.csv {render text: @recibo_de_cajas.to_csv }
@@ -14,11 +14,13 @@ class ReciboDeCajasController < ApplicationController
     @search = ReciboDeCajaSearch.new(params[:search])
     @recibo_de_cajas = @search.scope
   end
+ 
 
   # GET /recibo_de_cajas/1
   # GET /recibo_de_cajas/1.json                                                                                            
   def show
     @recibo_de_caja = ReciboDeCaja.find(params[:id])
+    authorize ReciboDeCaja
     @recibo_items = @recibo_de_caja.recibo_items
 
     respond_to do |format|
@@ -34,18 +36,20 @@ class ReciboDeCajasController < ApplicationController
 
   # GET /recibo_de_cajas/new
   def new
-    @recibo_de_caja =  ReciboDeCaja.new                                                                     
+    @recibo_de_caja =  ReciboDeCaja.new  
+    authorize @recibo_de_caja                                                                   
   end
 
   # GET /recibo_de_cajas/1/edit
   def edit
+    authorize @recibo_de_caja
   end
 
   # POST /recibo_de_cajas
   # POST /recibo_de_cajas.json
   def create
     @recibo_de_caja = ReciboDeCaja.new(recibo_de_caja_params)
-
+    authorize ReciboDeCaja
     respond_to do |format|
       if @recibo_de_caja.save
         format.html { redirect_to @recibo_de_caja, notice: 'Recibo de Caja Creado.' }
@@ -55,12 +59,14 @@ class ReciboDeCajasController < ApplicationController
         format.json { render json: @recibo_de_caja.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /recibo_de_cajas/1
   # PATCH/PUT /recibo_de_cajas/1.json
   def update
     respond_to do |format|
+      authorize @recibo_de_caja
       if @recibo_de_caja.update(recibo_de_caja_params)
         format.html { redirect_to @recibo_de_caja, notice: 'Recibo de Caja was successfully updated.' }
         format.json { render :show, status: :ok, location: @recibo_de_caja }
@@ -75,6 +81,7 @@ class ReciboDeCajasController < ApplicationController
   # DELETE /recibo_de_cajas/1.json
   def destroy
     @recibo_de_caja.destroy
+    authorize @recibo_de_caja
     respond_to do |format|
       format.html { redirect_to recibo_de_cajas_url, notice: 'Recibo de Caja eliminado.' }
       format.json { head :no_content }

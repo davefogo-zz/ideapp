@@ -4,22 +4,26 @@ class Presupuestos::OrdenesController < ApplicationController
   # GET /ordenes.json
   def index
     @ordenes = Ordene.all
+    authorize Ordene
   end
 
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show
+    authorize @ordene
   end
 
   # GET /ordenes/new
   def new
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize @ordene
     @ordene = Ordene.new
   end
 
   # GET /ordenes/1/edit
   def edit
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize @ordene
     @ordene = Ordene.find(params[:id])
     
   end
@@ -28,6 +32,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # POST /ordenes.json
   def create
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize @ordene
     @ordene = Ordene.new(ordene_params)
     @ordene.presupuesto = @presupuesto
 
@@ -46,6 +51,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # PATCH/PUT /ordenes/1.json
   def update
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize @ordene
      @ordene = Ordene.find(params[:id])
     respond_to do |format|
       if @ordene.update(ordene_params)
@@ -62,6 +68,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # DELETE /ordenes/1.json
   def destroy
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize @ordene
     @ordene = Ordene.find(params[:id])
     @ordene.destroy
     respond_to do |format|

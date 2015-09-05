@@ -5,7 +5,7 @@ class PagosController < ApplicationController
   # GET /pagos.json
   def index
     @pagos = Pago.all
-
+    authorize Pago
     respond_to do |format|
       format.html
       format.csv {render text: @pagos.to_csv }
@@ -18,6 +18,7 @@ class PagosController < ApplicationController
   # GET /pagos/1.json                                                                                            
   def show
     @pagos = Pago.find(params[:id])
+    authorize @pago
     respond_to do |format|
       format.html
       format.pdf do
@@ -31,18 +32,20 @@ class PagosController < ApplicationController
 
   # GET /pagos/new
   def new
-    @pago =  Pago.new                                                                     
+    @pago =  Pago.new 
+    authorize @gasto                                                                    
   end
 
   # GET /pagos/1/edit
   def edit
+    authorize @gasto
   end
 
   # POST /pagos
   # POST /pagos.json
   def create
     @pago = Pago.new(pago_params)
-
+    authorize @gasto
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Orden de Pago creada.' }
@@ -58,6 +61,7 @@ class PagosController < ApplicationController
   # PATCH/PUT /pagos/1.json
   def update
     respond_to do |format|
+      authorize @gasto
       if @pago.update(pago_params)
         format.html { redirect_to @pago, notice: 'Orden de Pago Pagada.' }
         format.json { render :show, status: :ok, location: @pago }
@@ -72,6 +76,7 @@ class PagosController < ApplicationController
   # DELETE /pagos/1.json
   def destroy
     @pago.destroy
+    authorize @gasto
     respond_to do |format|
       format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
       format.json { head :no_content }
@@ -80,6 +85,7 @@ class PagosController < ApplicationController
 
   def import
     Pago.import(params[:file])
+    authorize @gasto
     redirect_to pagos_path, notice: 'Datos subidos.'
   end
 

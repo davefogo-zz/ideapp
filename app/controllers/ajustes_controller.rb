@@ -4,7 +4,7 @@ class AjustesController < ApplicationController
   # GET /ajustes.json
   def index
      @ajustes = Ajuste.all
-
+     authorize Ajuste
      respond_to do |format|
       format.html
       format.csv {render text: @ajustes.to_csv }
@@ -19,7 +19,7 @@ class AjustesController < ApplicationController
   def show
     @ajuste = Ajuste.find(params[:id])
     @transaccions = @ajuste.transaccions
-   
+    authorize @ajuste
     respond_to do |format|
       format.html
       format.pdf do
@@ -34,18 +34,20 @@ class AjustesController < ApplicationController
   # GET /ajustes/new
   def new
    @ajuste = Ajuste.new
+   authorize @ajuste
   end
   
   # GET /ajustes/1/edit
   def edit
     @ajuste = Ajuste.find(params[:id])
+    authorize @ajuste
   end
 
   # POST /ajustes
   # POST /ajustes.json
   def create
     @ajuste = Ajuste.new(ajuste_params)
-    
+    authorize @ajuste
 
     respond_to do |format|
       if @ajuste.save
@@ -62,6 +64,7 @@ class AjustesController < ApplicationController
   # PATCH/PUT /ajustes/1.json
   def update
     @ajuste = Ajuste.find(params[:id])
+    authorize @ajuste
     respond_to do |format|
       if @ajuste.update(ajuste_params)
         format.html { redirect_to @ajuste, notice: 'Ajuste actualizada.' }
@@ -77,6 +80,7 @@ class AjustesController < ApplicationController
   # DELETE /ajustes/1.json
   def destroy
     @ajuste.destroy
+    authorize @ajuste
     respond_to do |format|
       format.html { redirect_to ajustes_url, notice: 'Ajuste eliminada.' }
       format.json { head :no_content }
@@ -85,6 +89,7 @@ class AjustesController < ApplicationController
 
   def import
     Ajuste.import(params[:file])
+    authorize @ajuste
     redirect_to ajustes_path, notice: 'Datos subidos.'
   end
 
