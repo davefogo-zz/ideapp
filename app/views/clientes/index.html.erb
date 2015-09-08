@@ -1,10 +1,10 @@
 <div class="row">
   <h1>Listado de Clientes</h1>
   <div class="pull-right range-query">
-    <%= form_tag(clientes_path, :method => 'get', id: 'search-form') do %>
-      <%= text_field_tag :search, params[:search], placeholder: "buscar clientes" %>
-      <%= submit_tag 'Buscar', class: 'btn search-button' %>
-    <% end %>
+    <%#= form_tag(clientes_path, :method => 'get', id: 'search-form') do %>
+      <%#= text_field_tag :search, params[:search], placeholder: "buscar clientes" %>
+      <%#= submit_tag 'Buscar', class: 'btn search-button' %>
+    <%# end %>
   </div>
 </div>
 <div class="media">
@@ -35,21 +35,20 @@
               <td><%= cliente.contacto_comercial %></td>
               <td><%= cliente.contacto_facturacion %></td>
               <td><%= cliente.cupo_de_credito %></td>
-              <td><%= cliente.colaboradore.present? %></td>
+              <td><%= cliente.colaboradore %></td>
               <td><%= link_to 'Mostrar', cliente, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_cliente_path(cliente), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
             </tr>
           <% end %>
-        </tbody>
-      </table>
-
-      <br>
-
-      <%= link_to 'Nuevo Cliente', new_cliente_path %>
-      <br>
-      <br>
-
+      </tbody>
+   </table>
+  </div>
+</div>
+<br>
+<%= link_to 'Nuevo Cliente', new_cliente_path %>
+<br>
+<br>
 <%= form_tag import_clientes_path, multipart: true do%>
   <%= file_field_tag :file %><br>
   <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>

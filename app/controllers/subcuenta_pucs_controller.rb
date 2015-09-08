@@ -1,7 +1,7 @@
 class SubcuentaPucsController < ApplicationController
 
 	def index
-		@subcuenta_puc = SubcuentaPuc.all
+		@subcuenta_pucs = SubcuentaPuc.all
 		authorize SubcuentaPuc
 		respond_to do |format|
 	      format.html

@@ -1,11 +1,11 @@
 <div class="row">
   <h1>Listado de Recibos de Caja</h1>
   <div class="pull-right range-query">
-     <%= form_tag recibo_de_cajas_path, method: :get do %>
-        <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
-        <%= text_field_tag 'search[fecha_to]', @search.fecha_to %>
-        <%= submit_tag 'Buscar', class: 'btn search-button' %>
-      <% end %>
+     <%#= form_tag recibo_de_cajas_path, method: :get do %>
+        <%#= text_field_tag 'search[fecha_from]', @search.fecha_from %>
+        <%#= text_field_tag 'search[fecha_to]', @search.fecha_to %>
+        <%#= submit_tag 'Buscar', class: 'btn search-button' %>
+      <%# end %>
   </div>
 </div>
 <div class="media">
@@ -37,4 +37,4 @@
 <%= link_to 'Nuevo Recibo de Caja', new_recibo_de_caja_path %>
 <br>
 <br>
-<%= link_to 'Descargar Reporte', recibo_de_caja_path(format: "csv"), class: 'btn btn-default' %>
+<%#= link_to 'Descargar Reporte', recibo_de_caja_path(format: "csv"), class: 'btn btn-default' %>

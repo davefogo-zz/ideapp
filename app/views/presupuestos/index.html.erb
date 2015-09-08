@@ -27,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-           <% @presupuesto.each do |presupuesto| %>
+           <% @presupuestos.each do |presupuesto| %>
               <tr>
                 <td><%= presupuesto.fecha %></td>
                 <td><%= presupuesto.cliente.try(:nombre) %></td>

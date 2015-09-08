@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905190645) do
+ActiveRecord::Schema.define(version: 20150907173052) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -261,18 +261,20 @@ ActiveRecord::Schema.define(version: 20150905190645) do
     t.date     "fecha"
     t.integer  "proveedore_id"
     t.integer  "subcuenta_puc_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "importe",             limit: 8
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "importe",              limit: 8
     t.string   "forma_de_pago"
     t.boolean  "gasto"
     t.string   "banco"
     t.integer  "numero_de_cheque"
     t.boolean  "pagar"
-    t.integer  "importe_pronto_pago", limit: 8
-    t.integer  "total",               limit: 8
+    t.integer  "importe_pronto_pago",  limit: 8
+    t.integer  "total",                limit: 8
+    t.integer  "factura_proveedor_id"
   end
 
+  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
   add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
 
@@ -329,12 +331,12 @@ ActiveRecord::Schema.define(version: 20150905190645) do
   create_table "subcuenta_pucs", force: :cascade do |t|
     t.integer  "subcuenta"
     t.string   "descripcion"
-    t.integer  "CuentaPuc_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "cuenta_puc_id"
   end
 
-  add_index "subcuenta_pucs", ["CuentaPuc_id"], name: "index_subcuenta_pucs_on_CuentaPuc_id"
+  add_index "subcuenta_pucs", ["cuenta_puc_id"], name: "index_subcuenta_pucs_on_cuenta_puc_id"
 
   create_table "transaccions", force: :cascade do |t|
     t.date     "fecha"

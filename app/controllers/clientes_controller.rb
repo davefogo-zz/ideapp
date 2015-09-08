@@ -4,17 +4,19 @@ class ClientesController < ApplicationController
   # GET /clientes
   # GET /clientes.json
   def index
-    authorize Cliente
+    @clientes = Cliente.all
+    
     respond_to do |format|
       format.html
-      format.csv {render text: @colaboradores.to_csv }
+      format.csv {render text: @clientes.to_csv }
     end
 
-    if params[:search] 
-      @clientes = Cliente.search(params[:search])
-    else
-      @clientes = Cliente.all
-    end
+    #if params[:search] 
+     # @clientes = Cliente.search(params[:search])
+    #else
+     # @clientes = Cliente.all
+    #end
+    authorize Cliente
   end
 
   # GET /clientes/1
@@ -79,7 +81,6 @@ class ClientesController < ApplicationController
 
    def import
     Cliente.import(params[:file])
-    authorize @cliente
     redirect_to clientes_path, notice: 'Datos subidos.'
   end
 

@@ -3,11 +3,10 @@ class FacturasController < ApplicationController
   # GET /facturas
   # GET /facturas.json
   def index
-    @search = FacturaSearch.new(params[:search])
     authorize Factura
+    @search = FacturaSearch.new(params[:search])
     @facturas = @search.scope
     @facturas = Factura.all
-
     respond_to do |format|
       format.html
       format.csv {render text: @facturas.to_csv }

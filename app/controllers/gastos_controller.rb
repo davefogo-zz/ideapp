@@ -4,16 +4,14 @@ class GastosController < ApplicationController
   # GET /gastos
   # GET /gastos.json
   def index
-
-    @gastos = Gasto.all
     authorize Gasto
+    @search = GastoSearch.new(params[:search])
+    @gastos = @search.scope
+    @gastos = Gasto.all
     respond_to do |format|
       format.html
       format.csv {render text: @gastos.to_csv }
     end
-
-    @search = GastoSearch.new(params[:search])
-    @gastos = @search.scope
   end
 
   # GET /gastos/1

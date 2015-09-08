@@ -4,16 +4,14 @@ class FacturaProveedorsController < ApplicationController
   # GET /factura_proveedors
   # GET /factura_proveedors.json
   def index
-    @factura_proveedors = FacturaProveedor.all
     authorize FacturaProveedor
+    @search = FacturaProveedorSearch.new(params[:search])
+    @factura_proveedors = @search.scope
+    @factura_proveedors = FacturaProveedor.all
      respond_to do |format|
       format.html
       format.csv {render text: @factura_proveedors.to_csv }
     end
-
-    @search = FacturaProveedorSearch.new(params[:search])
-    @factura_proveedors = @search.scope
-    
   end
 
   # GET /factura_proveedors/1

@@ -4,16 +4,14 @@ class PagosController < ApplicationController
   # GET /pagos
   # GET /pagos.json
   def index
+    authorize Pago
+    @search = PagoSearch.new(params[:search])
+    @pagos = @search.scope
     @pagos = Pago.all
-    
     respond_to do |format|
       format.html
       format.csv {render text: @pagos.to_csv }
     end
-    @pagos = @search.scope
-    @search = PagoSearch.new(params[:search])
-    authorize Pago
-
   end
 
   # GET /pagos/1

@@ -30,9 +30,6 @@
         <% if policy(Presupuesto).index? %>
           <li><%= link_to t('Presupuestos'), presupuestos_path %></li>
         <% end %> 
-        <% if policy(Ordene).index? %>
-          <li><%= link_to t('Ordenes'), presupuestos_path %></li>
-       <% end %>  
       </ul>
   </div>
 <div class='btn-group pull-right right-nav'>

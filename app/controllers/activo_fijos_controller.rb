@@ -4,15 +4,14 @@ class ActivoFijosController < ApplicationController
   # GET /activo_fijos
   # GET /activo_fijos.json
   def index
-    @activo_fijo = ActivoFijo.all
     authorize ActivoFijo
+    @search = ActivoFijoSearch.new(params[:search])
+    @activo_fijos = @search.scope
+    @activo_fijos = ActivoFijo.all
     respond_to do |format|
       format.html
       format.csv {render text: @activo_fijos.to_csv }
     end
-
-   @search = ActivoFijoSearch.new(params[:search])
-    @activo_fijos = @search.scope
   end
 
   # GET /activo_fijos/1

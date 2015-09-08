@@ -4,8 +4,8 @@ class MediosController < ApplicationController
   # GET /medios
   # GET /medios.json
   def index
-    @medio = Medio.all
     authorize Medio
+    @medios = Medio.all
     respond_to do |format|
       format.html
       format.csv {render text: @ajustes.to_csv }
