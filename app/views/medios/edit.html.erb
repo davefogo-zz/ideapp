@@ -3,7 +3,7 @@
 <div class="form">
   <%= simple_form_for @medio do |form| %>
     <%= form.input :nombre %>
-    <%= form.input :nit %>
+    <%= form.input :tipo_de_medio, collection: [ 'Radio', 'Revista', 'Internet', 'Medios Alternativos', 'Prensa', 'Produccion', 'Tv Cable'] =%>
     <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
     <%= form.input :tipo_de_volumen, collection: [ 'Automatico', 'Mensual', 'Bimestral', 'Semestral', 'Anual', 'Anual Grupo'] =%>
     <%= form.input :cobro, collection: [ 'Cruce', 'Facturacion' ] =%>

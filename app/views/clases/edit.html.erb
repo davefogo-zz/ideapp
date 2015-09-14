@@ -1,0 +1,10 @@
+<% content_for :title do %>Clase<% end %>
+<h3>Editar Clase</h3>
+<div class="form">
+  <%= simple_form_for @clase do |form| %>
+   <%= form.input :clase %>
+   <%= form.input :descripcion%>
+   <%= form.button :submit, 'Submit', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', clases_path %>

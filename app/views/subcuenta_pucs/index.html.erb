@@ -13,14 +13,15 @@
           <thead>
             <tr>
               <th>Subcuenta</th>
+               <th>Clase</th>
               <th>Descripcion</th>
-              <th>Cuenta</th>
             </tr>
           </thead>
         <tbody>
           <% @subcuenta_pucs.each do |subcuenta_puc| %>
       	    <tr>
       		    <td><%= subcuenta_puc.subcuenta %></td>
+              <td><%= subcuenta_puc.clase.try(:descripcion) %></td>
       		    <td><%= subcuenta_puc.descripcion %></td>
       		</tr>
           <% end %>

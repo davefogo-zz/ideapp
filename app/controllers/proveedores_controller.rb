@@ -4,17 +4,15 @@ class ProveedoresController < ApplicationController
   # GET /proveedores
   # GET /proveedores.json
   def index
-    @proveedore = Proveedore.all
     authorize Proveedore
-    respond_to do |format|
-      format.html
-      format.csv {render text: @proveedores.to_csv }
-    end
-
     if params[:search] 
       @proveedores = Proveedore.search(params[:search])
     else
       @proveedores = Proveedore.all
+    end
+    respond_to do |format|
+      format.html
+      format.csv {render text: @proveedores.to_csv }
     end
   end
 
@@ -91,6 +89,6 @@ class ProveedoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proveedore_params
-      params.require(:proveedore).permit(:nombre, :nit, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :pronto_pago, :dias_pronto_pago)
+      params.require(:proveedore).permit(:nombre, :nit, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :pronto_pago, :dias_pronto_pago, :tipo_de_documento, :tipo_de_responsable, :tipo_de_persona, :tipo_de_retencion_iva, :tipo_de_retencion_ica)
     end
 end

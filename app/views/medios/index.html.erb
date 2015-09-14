@@ -13,11 +13,9 @@
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Nit</th>
+              <th>Tipo de Medio</th>
               <th>Dirección</th>
               <th>Teléfono</th>
-              <th>Contacto financiero</th>
-              <th>Contacto comercial</th>
               <th>Proveedor</th>
               <th colspan="3"></th>
             </tr>
@@ -26,8 +24,10 @@
           <% @medios.each do |medio| %>
             <tr>
               <td><%= medio.nombre %></td>
-              <td><%= medio.nit %></td>
-              <td><%= medio.proveedore.nombre %></td>
+              <td><%= medio.tipo_de_medio %></td>
+              <td><%= medio.direccion %></td>
+              <td><%= medio.telefono %></td>
+              <td><%= medio.proveedore.try(:nombre) %></td>
               <td><%= link_to 'Mostrar', medio, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_medio_path(medio), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', medio, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
@@ -43,10 +43,10 @@
 <%= link_to 'Nuevo Medio', new_medio_path %>
 <br>
 <br>
-<%= form_tag import_ajustes_path, multipart: true do%>
+<%= form_tag import_medios_path, multipart: true do%>
   <%= file_field_tag :file %><br>
   <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
 <% end %><br>
 
-<%= link_to 'Descargar Reporte', ajustes_path(format: "csv"), class: 'btn btn-default' %>
+<%= link_to 'Descargar Reporte', medios_path(format: "csv"), class: 'btn btn-default' %>
 

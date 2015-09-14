@@ -13,6 +13,7 @@ group :development do
   gem 'rails_layout'
   gem 'rails_apps_pages'
   gem 'better_errors'
+  gem 'quiet_assets'
 end
 group :development, :test do
   gem 'byebug'

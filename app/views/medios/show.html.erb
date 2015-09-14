@@ -4,12 +4,12 @@
 </p>
 
 <p>
-  <strong>Nit:</strong>
-  <%= @medio.nit %>
+  <strong>Tipo de Medio:</strong>
+  <%= @medio.tipo_de_medio %>
 </p>
 <p>
   <strong>Proveedore:</strong>
-  <%= @medio.proveedore.nombre %>
+  <%= @medio.proveedore.try(:nombre) %>
 </p>
 
 <%= link_to 'Editar', edit_medio_path(@medio) %> |

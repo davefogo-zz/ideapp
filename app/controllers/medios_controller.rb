@@ -78,9 +78,9 @@ class MediosController < ApplicationController
   end
 
   def import
-    Ajuste.import(params[:file])
+    Medio.import(params[:file])
     authorize @medio
-    redirect_to ajustes_path, notice: 'Datos subidos.'
+    redirect_to medios_path, notice: 'Datos subidos.'
   end
 
   private
@@ -91,6 +91,6 @@ class MediosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medio_params
-      params.require(:medio).permit(:nombre, :nit, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :proveedore_id, :tipo_de_volumen, :escala, :rango, :escala2, :rango2, :escala3, :rango3, :escala4, :rango4, :escala5, :rango5, :escala6, :rango6 , :cobro)
+      params.require(:medio).permit(:nombre, :contacto_financiero, :contacto_comercial, :proveedore_id, :tipo_de_volumen, :escala, :rango, :escala2, :rango2, :escala3, :rango3, :escala4, :rango4, :escala5, :rango5, :escala6, :rango6 , :cobro)
     end
 end

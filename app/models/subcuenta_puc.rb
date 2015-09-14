@@ -1,5 +1,5 @@
 class SubcuentaPuc < ActiveRecord::Base
-  belongs_to :CuentaPuc
+  belongs_to :clase
   has_many :transaccions
   
 	def self.search(search)

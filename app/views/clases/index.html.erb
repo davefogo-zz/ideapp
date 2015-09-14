@@ -8,12 +8,14 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @clase.each do |clase| %>
+    <% @clases.each do |clase| %>
 	    <tr>
 		    <td><%= clase.clase %></td>
 		    <td><%= clase.descripcion %></td>
+        <td><%= link_to 'Mostrar', clase, class: 'btn btn-mini btn-default' %></td>
+        <td><%= link_to 'Editar', edit_clase_path(clase), class: 'btn btn-mini btn-success' %></td>
+        <td><%= link_to 'Eliminar', clase, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
 		</tr>
     <% end %>
 

@@ -6,8 +6,8 @@ class Cliente < ActiveRecord::Base
   has_many :recibo_de_cajas
   has_many :transaccions
   has_many :ajustes
-  validates :nombre, :nit, presence: true, uniqueness: true
-  validates :nit, length: {is: 11} 
+  validates :nombre, presence: true, uniqueness: true #,:nit
+  #validates :nit, length: {is: 11} 
 
   #def self.search(search)
   	#where("nombre LIKE ? OR nit LIKE ?", "%#{search}%", "%#{search}%")

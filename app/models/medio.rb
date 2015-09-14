@@ -4,8 +4,7 @@ class Medio < ActiveRecord::Base
   has_many :ordenes, dependent: :destroy
   has_many :presupuestos, :through => :ordenes
   has_many :factura_items
-  validates :proveedore_id, :nombre, :nit, presence: true
-  validates :nit, length: {is: 11}
+  validates  :nombre, presence: true #:proveedore_id,
  	
  def self.search(search)
   where("nombre LIKE ? OR nit LIKE ?", "%#{search}%", "%#{search}%")
@@ -13,7 +12,7 @@ class Medio < ActiveRecord::Base
 
  def self.import(file)
 	  CSV.foreach(file.path, headers: true) do |row|
-	  	Meido.create! row.to_hash
+	  	Medio.create! row.to_hash
 	  end
 	end
 

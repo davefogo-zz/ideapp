@@ -18,8 +18,6 @@
               <th>Nit</th>
               <th>Dirección</th>
               <th>Teléfono</th>
-              <th>Agencia</th>
-              <th>Nit agencia</th>
               <th>Titulo</th>
               <th>Producto</th>
               <th>Colaborador</th>
@@ -30,13 +28,13 @@
            <% @presupuestos.each do |presupuesto| %>
               <tr>
                 <td><%= presupuesto.fecha %></td>
-                <td><%= presupuesto.cliente.try(:nombre) %></td>
-                <td><%= presupuesto.cliente.try(:nit) %></td>
-                <td><%= presupuesto.cliente.try(:direccion_de_facturacion) %></td>
-                <td><%= presupuesto.cliente.try(:telefono) %></td>
+                <td><%= presupuesto.cliente.nombre %></td>
+                <td><%= presupuesto.cliente.nit %></td>
+                <td><%= presupuesto.cliente.direccion_de_facturacion %></td>
+                <td><%= presupuesto.cliente.telefono %></td>
                 <td><%= presupuesto.titulo %></td>
                 <td><%= presupuesto.producto %></td>
-                <td><%= presupuesto.cliente.try(:nombre) %></td>
+                <td><%= presupuesto.cliente.colaboradore.nombre %></td>
                 <td><%= link_to 'Mostrar', presupuesto, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
                 <td><%= link_to 'Borrar', presupuesto, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Confirma?' } %></td>

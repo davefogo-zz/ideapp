@@ -1,8 +1,8 @@
-<% content_for :title do %>Orden Nueva<% end %>
+<% content_for :title do %>Nueva Orden<% end %>
 <h3>Nueva Orden</h3>
 <div class="form">
   <%= simple_form_for([@presupuesto, @ordene]) do |form| %>
-      <%= form.association :medio, :label_method => :id, include_blank: true, label: 'Medio' %>
+      <%= form.association :medio, :label_method => :nombre, include_blank: true, label: 'Medio' %>
       <%= form.input :fecha_orden %>
       <%= form.input :referencia_preventa %>
       <%= form.input :ubicacion %>

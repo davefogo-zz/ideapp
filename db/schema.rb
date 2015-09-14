@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907173052) do
+ActiveRecord::Schema.define(version: 20150914181514) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -69,6 +69,9 @@ ActiveRecord::Schema.define(version: 20150907173052) do
     t.string   "ciudad"
     t.string   "codigo_postal"
     t.string   "pais"
+    t.string   "tipo_de_documento"
+    t.string   "tipo_de_persona"
+    t.string   "tipo_de_responsable"
   end
 
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
@@ -205,7 +208,6 @@ ActiveRecord::Schema.define(version: 20150907173052) do
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "nit"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "proveedore_id"
@@ -224,13 +226,17 @@ ActiveRecord::Schema.define(version: 20150907173052) do
     t.string   "rango6"
     t.string   "cobro"
     t.integer  "presupuesto_id"
+    t.string   "direccion"
+    t.string   "telefono"
+    t.string   "zona"
+    t.string   "tipo_de_medio"
   end
 
   add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id"
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
 
   create_table "ordenes", force: :cascade do |t|
-    t.datetime "fecha_orden"
+    t.date     "fecha_orden"
     t.string   "unidad"
     t.integer  "costo_unidad",         limit: 8
     t.integer  "presupuesto_id"
@@ -294,13 +300,16 @@ ActiveRecord::Schema.define(version: 20150907173052) do
     t.string   "nit"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "telefono"
-    t.string   "direccion"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.decimal  "pronto_pago"
     t.integer  "dias_pronto_pago"
     t.boolean  "gasto"
+    t.string   "tipo_de_documento"
+    t.string   "tipo_de_responsable"
+    t.string   "tipo_de_persona"
+    t.string   "tipo_de_retencion_iva"
+    t.string   "tipo_de_retencion_ica"
   end
 
   create_table "recibo_de_cajas", force: :cascade do |t|
@@ -331,12 +340,15 @@ ActiveRecord::Schema.define(version: 20150907173052) do
   create_table "subcuenta_pucs", force: :cascade do |t|
     t.integer  "subcuenta"
     t.string   "descripcion"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "cuenta_puc_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "clase_id"
+    t.string   "rubro"
+    t.string   "tipo_de_cuenta"
+    t.string   "moneda"
   end
 
-  add_index "subcuenta_pucs", ["cuenta_puc_id"], name: "index_subcuenta_pucs_on_cuenta_puc_id"
+  add_index "subcuenta_pucs", ["clase_id"], name: "index_subcuenta_pucs_on_clase_id"
 
   create_table "transaccions", force: :cascade do |t|
     t.date     "fecha"
