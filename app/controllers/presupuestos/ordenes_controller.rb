@@ -10,7 +10,18 @@ class Presupuestos::OrdenesController < ApplicationController
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show
-    authorize @presupuesto
+    @presupuesto = Presupuesto.find(params[:presupuesto_id])
+    authorize Ordene
+    @ordene = Ordene.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = OrdenePdf.new(@presupuesto, @ordene, view_context)
+        send_data pdf.render, filename: 'ordene#{@presupuesto.ordene.id}.pdf',
+                              type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   # GET /ordenes/new

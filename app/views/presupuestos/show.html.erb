@@ -74,7 +74,8 @@
                 <td><h4><%= subtotal = (((area * ordene.costo_unidad) - dto) * ordene.cantidad) %></h4></td>
             <% end %>
 						<td><%= link_to 'Edit', edit_presupuesto_ordene_path(@presupuesto, ordene) %></td>
-						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene) %></td>
+						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' } %></td>
             <% total_general = total_general + subtotal%>
 	        </tr>
 	        <% end %>
