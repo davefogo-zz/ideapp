@@ -35,19 +35,16 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Proveedor</th>
           <th>Medio</th>
           <th>Fecha Orden</th>
-          <th>Ref. Preventa</th>
-          <th>Ubicacion/Programa</th>
-          <th>Formato</th>
-          <th>Franja/Periodo</th> 
           <th>Unidad</th>
-          <th>CM</th>
-          <th>COL</th>
-          <th>Cantidad<th>
+          <th>Formato</th>
           <th>Costo Unidad</th>
           <th>Descuento</th>
+          <th>Cantidad<th>
+          <th>Ubicacion</th>
+          <th>Ref. Preventa</th>
+          <th>Notas</th>
           <th>Total</th>
         </tr>
       </thead>
@@ -59,20 +56,16 @@
 
 	        <% @ordenes.each do |ordene| %>
 	        <tr>
-	          <td><h4><%= ordene.medio.proveedore.try(:nombre) %></h4></td>
-	          <td><h4><%= ordene.medio.try(:nombre) %></h4></td>
+            <td><h4><%= ordene.medio.nombre %></h4></td>
 	          <td><h4><%= ordene.fecha_orden %></h4></td>
-	          <td><h4><%= ordene.referencia_preventa %></h4></td>
-            <td><h4><%= ordene.ubicacion %></h4></td>
-            <td><h4><%= ordene.formato %></h4></td>
-            <td><h4><%= ordene.franja %></h4></td>
             <td><h4><%= ordene.unidad %></h4></td>
-            <td><h4><%= ordene.cm %></h4></td>
-            <td><h4><%= ordene.col %></h4></td>
-            <td><h4><%= ordene.cantidad %></h4></td>
+            <td><h4><%= ordene.formato %></h4></td>
             <td><h4><%= ordene.costo_unidad %></h4></td>
             <td><h4><%= number_to_percentage((ordene.descuento * 100)) %></h4></td>
-
+            <td><h4><%= ordene.cantidad %></h4></td>
+            <td><h4><%= ordene.ubicacion %></h4></td>
+            <td><h4><%= ordene.referencia_preventa %></h4></td>
+            <td><h4><%= ordene.notas %></h4></td>
             <% dto = ordene.descuento * ordene.costo_unidad %>
             <% if area == 0 %>
                 <td><h4><%= number_to_currency(subtotal = ((ordene.costo_unidad - dto) * ordene.cantidad)) %></h4></td>
@@ -93,7 +86,7 @@
 <h4 >Total Presupuesto:<%= number_to_currency(total_general + iva) %></h4><br>
 
     
-
+<p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
 <%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br>
 <%= link_to 'Regresar', presupuestos_path %><br>
 <%= link_to 'Agregar nueva orden', new_presupuesto_ordene_path(@presupuesto) %>

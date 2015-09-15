@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914181514) do
+ActiveRecord::Schema.define(version: 20150915121300) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 20150914181514) do
     t.boolean  "aprobado_por_cliente"
     t.boolean  "emision_certificada"
     t.integer  "iva",                  limit: 8
+    t.integer  "total",                limit: 8
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"

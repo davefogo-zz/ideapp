@@ -22,6 +22,15 @@ class PresupuestosController < ApplicationController
     @presupuesto = Presupuesto.find(params[:id])
     authorize @presupuesto
     @ordenes = @presupuesto.ordenes
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PresupuestoPdf.new(@presupuesto, view_context)
+        send_data pdf.render, filename: 'presupuesto#{@presupuesto.id}.pdf',
+                              type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   # GET /presupuestos/new

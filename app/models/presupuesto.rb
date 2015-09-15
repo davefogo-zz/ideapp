@@ -5,6 +5,20 @@ class Presupuesto < ActiveRecord::Base
   has_many :medios, :through => :ordenes
   has_one :factura
   validates :fecha, :titulo, :cliente_id, :producto, presence: true
+  before_save :subtotal, :iva, :total 
+
+
+   def subtotal
+    self.ordenes.sum(:subtotal)
+   end
+
+   def iva
+    self.ordenes.sum(:iva)
+   end
+
+   def total
+    self.ordenes.sum(:total)
+   end
 
   def self.import(file)
 	  CSV.foreach(file.path, headers: true) do |row|

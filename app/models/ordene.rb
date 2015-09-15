@@ -3,13 +3,16 @@ class Ordene < ActiveRecord::Base
   belongs_to :medio
   has_one :factura_item
   validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, presence: true
-  before_save :calculate_subtotal
+  before_save :calculate_subtotal, :calculate_total
+  after_save :generate_factura_item, :generate_volumen, :if => :aprobado_por_cliente?
 
     def calculate_subtotal
       self.subtotal = ((costo_unidad * cantidad) - (costo_unidad * descuento)) * self.medio.escala
     end
-
-  after_save :generate_factura_item, :generate_volumen, :if => :aprobado_por_cliente?
+    
+    def calculate_total
+      self.total = subtotal + iva
+    end
     
     def aprobado_por_cliente?
     	if aprobado_por_cliente == true
