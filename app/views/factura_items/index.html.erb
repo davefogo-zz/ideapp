@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Listado Items</h1>
+  <h1>Listado Items de Factura</h1>
   <div class="pull-right range-query">
      <%= form_tag factura_items_path, method: :get do %>
         <%= text_field_tag 'search[fecha_orden_from]', @search.fecha_orden_from %>
@@ -27,7 +27,6 @@
                 <td><h4><%= factura_item.ordene_id %></h4></td>
                 <td><h4><%= factura_item.fecha_orden %></h4></td>
                 <td><h4><%= number_to_currency(factura_item.subtotal) %></h4></td>
-                <td><%= link_to 'Mostrar', factura_item, class: 'btn btn-mini btn-default'  %></td>
                 <td><%= link_to 'Editar', edit_factura_item_path(factura_item), class: 'btn btn-mini btn-success'  %></td>
               </tr>
             <% end %>
@@ -37,5 +36,3 @@
     </div>
 
         <br>
-
-<%= link_to 'Nuevo item', new_factura_item_path %>

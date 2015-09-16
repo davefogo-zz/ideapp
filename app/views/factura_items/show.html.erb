@@ -1,14 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Factura:</strong>
-  <%= @factura_item.factura %>
+  <%= @factura_item.factura.id %>
 </p>
 
 <p>
-  <strong>Ordene:</strong>
-  <%= @factura_item.ordene %>
+  <strong>Orden:</strong>
+  <%= @factura_item.ordene_id %>
 </p>
 
-<%= link_to 'Edit', edit_factura_item_path(@factura_item) %> |
-<%= link_to 'Back', factura_items_path %>
+<%= link_to 'Regresar', factura_items_path %>

@@ -73,9 +73,9 @@
               <% area = ordene.cm * ordene.col %>
                 <td><h4><%= subtotal = (((area * ordene.costo_unidad) - dto) * ordene.cantidad) %></h4></td>
             <% end %>
-						<td><%= link_to 'Edit', edit_presupuesto_ordene_path(@presupuesto, ordene) %></td>
-            <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene) %></td>
-						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' } %></td>
+						<td><%= link_to 'Edit', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
+						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
             <% total_general = total_general + subtotal%>
 	        </tr>
 	        <% end %>

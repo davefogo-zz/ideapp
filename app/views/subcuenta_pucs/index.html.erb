@@ -20,9 +20,9 @@
         <tbody>
           <% @subcuenta_pucs.each do |subcuenta_puc| %>
       	    <tr>
-      		    <td><%= subcuenta_puc.subcuenta %></td>
+      		    <td><%= subcuenta_puc.try(:subcuenta) %></td>
               <td><%= subcuenta_puc.clase.try(:descripcion) %></td>
-      		    <td><%= subcuenta_puc.descripcion %></td>
+      		    <td><%= subcuenta_puc.try(:descripcion) %></td>
       		</tr>
           <% end %>
         </tbody> 

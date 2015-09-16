@@ -1,6 +1,7 @@
 class SubcuentaPuc < ActiveRecord::Base
   belongs_to :clase
   has_many :transaccions
+  #validates :descripcion, presence: true, uniqueness: true 
   
 	def self.search(search)
 		 where("subcuenta LIKE ? OR descripcion LIKE ?", "%#{search}%", "%#{search}%")

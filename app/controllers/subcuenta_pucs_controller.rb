@@ -1,18 +1,16 @@
 class SubcuentaPucsController < ApplicationController
 
 	def index
-		@subcuenta_pucs = SubcuentaPuc.all
 		authorize SubcuentaPuc
-		respond_to do |format|
-	      format.html
-	      format.csv {render text: @subcuenta_pucs.to_csv }
-	    end
-
 		if params[:search] 
       		@subcuenta_pucs = SubcuentaPuc.search(params[:search])
     	else
       		@subcuenta_pucs = SubcuentaPuc.all
       	end
+      	respond_to do |format|
+	      format.html
+	      format.csv {render text: @subcuenta_pucs.to_csv }
+	    end
     end
 
 	def new

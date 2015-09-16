@@ -5,7 +5,7 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items.json
   def index
     @search = FacturaItemSearch.new(params[:search])
-    authorize Factura
+    authorize FacturaItem
     @factura_items = @search.scope
     @factura_items = FacturaItem.all
   end
@@ -14,7 +14,7 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items/1.json                                                                                            
   def show
     @factura_items = FacturaItem.all
-    authorize @factura
+    authorize @factura_item
     @ordene = Ordene.all
     @medio = Medio.all
   end
@@ -22,7 +22,7 @@ class FacturaItemsController < ApplicationController
   # GET /factura_items/new
   def new
     @factura_item =  FacturaItem.new  
-    authorize @factura                                                                    
+    authorize @factura_item                                                                    
   end
 
   # GET /factura_items/1/edit
@@ -33,7 +33,7 @@ class FacturaItemsController < ApplicationController
   # POST /factura_items.json
   def create
     @factura_item = FacturaItem.new(factura_item_params)
-    authorize @factura
+    authorize @factura_item
     @ordenes = Ordene.all
     @medio = Medio.all
 
@@ -51,10 +51,10 @@ class FacturaItemsController < ApplicationController
   # PATCH/PUT /factura_items/1
   # PATCH/PUT /factura_items/1.json
   def update
+    authorize @factura_item
     respond_to do |format|
-      authorize @factura
       if @factura_item.update(factura_item_params)
-        format.html { redirect_to @factura_item, notice: 'Factura item was successfully updated.' }
+        format.html { redirect_to @factura_item, notice: 'Item de factura asociado con factura.' }
         format.json { render :show, status: :ok, location: @factura_item }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class FacturaItemsController < ApplicationController
   # DELETE /factura_items/1.json
   def destroy
     @factura_item.destroy
-    authorize @factura
+    authorize @factura_item
     respond_to do |format|
       format.html { redirect_to factura_items_url, notice: 'Factura item was successfully destroyed.' }
       format.json { head :no_content }

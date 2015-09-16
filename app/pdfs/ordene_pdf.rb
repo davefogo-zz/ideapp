@@ -50,6 +50,10 @@ class OrdenePdf < Prawn::Document
 				 :at => [0, 650],
 				 :height => 15,
 				 :width => 200
+		text_box "Telefono: 3847777", size: 10, style: :bold,
+				 :at => [350, 650],
+				 :height => 15,
+				 :width => 200
 		text_box "Cliente:", size: 10, style: :bold,
 				 :at => [0, 620],
 				 :height => 15,
@@ -133,14 +137,29 @@ class OrdenePdf < Prawn::Document
 				 :at => [500, 495],
 				 :height => 15,
 				 :width => 200	
+			text_box "Ubicacion:", size: 10, style: :bold,
+				 :at => [0, 480],
+				 :height => 15,
+				 :width => 200
+			text_box "#{@ordene.ubicacion}", size:8,
+				 :at => [0, 465],
+				 :height => 15,
+				 :width => 200	
+			text_box "Unidad:", size: 10, style: :bold,
+				 :at => [150, 480],
+				 :height => 15,
+				 :width => 200
+			text_box "#{@ordene.unidad}", size:8,
+				 :at => [150, 465],
+				 :height => 15,
+				 :width => 200	
 			text_box "Notas:", size: 10, style: :bold,
-				 :at => [0, 470],
+				 :at => [0, 430],
 				 :height => 15,
 				 :width => 200
 			text_box "#{@ordene.notas}", size:8,
-				 :at => [40, 455],
+				 :at => [40, 430],
 				 :height => 15,
 				 :width => 200	
-
 	end
 end

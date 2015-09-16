@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915121300) do
+ActiveRecord::Schema.define(version: 20150916161958) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -343,13 +343,13 @@ ActiveRecord::Schema.define(version: 20150915121300) do
     t.string   "descripcion"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "clase_id"
     t.string   "rubro"
     t.string   "tipo_de_cuenta"
     t.string   "moneda"
+    t.integer  "cuenta_puc_id"
   end
 
-  add_index "subcuenta_pucs", ["clase_id"], name: "index_subcuenta_pucs_on_clase_id"
+  add_index "subcuenta_pucs", ["cuenta_puc_id"], name: "index_subcuenta_pucs_on_cuenta_puc_id"
 
   create_table "transaccions", force: :cascade do |t|
     t.date     "fecha"

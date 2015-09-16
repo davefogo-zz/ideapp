@@ -16,8 +16,33 @@
 </p>
 
 <p>
+  <strong>Ubicacion:</strong>
+  <%= @ordene.try(:ubicacion) %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @ordene.try(:cantidad) %>
+</p>
+
+<p>
   <strong>Costo unidad:</strong>
   <%= @ordene.try(:costo_unidad) %>
+</p>
+
+<p>
+  <strong>Descuento:</strong>
+  <%= @ordene.try(:descuento) %>
+</p>
+
+<p>
+  <strong>Iva:</strong>
+  <%= @ordene.try(:iva) %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @ordene.try(:subtotal) %>
 </p>
 
 <p>
@@ -26,8 +51,8 @@
 </p>
 
 <p>
-  <strong>Presupuesto:</strong>
-  <%= @ordene.try(:presupuesto) %>
+  <strong>Presupuesto No.:</strong>
+  <%= @ordene.presupuesto.id %>
 </p>
 <p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_ordene_path( :ordene_id => @ordene, format: 'pdf') %></p>
 <p><%#= link_to 'Regresar', presupuesto_ordene_path(@presupuesto) %><br>
