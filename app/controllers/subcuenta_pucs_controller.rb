@@ -2,6 +2,7 @@ class SubcuentaPucsController < ApplicationController
 
 	def index
 		authorize SubcuentaPuc
+		cuenta_puc = CuentaPuc.all
 		if params[:search] 
       		@subcuenta_pucs = SubcuentaPuc.search(params[:search])
     	else
@@ -13,10 +14,16 @@ class SubcuentaPucsController < ApplicationController
 	    end
     end
 
+    def show
+    	@subcuenta_puc = SubcuentaPuc.find(params[:id])
+	end	
+
 	def new
 		@subcuenta_puc = SubcuentaPuc.new
 		authorize @subcuenta_puc
 	end
+
+	
 
 	def create
 		@subcuenta_puc = SubcuentaPuc.new(subcuenta_puc_params)
@@ -42,7 +49,7 @@ private
     end
 
 	def subcuenta_puc_params
-		params.require(:subcuenta_puc).permit(:subcuenta, :descripcion, :cuenta)
+		params.require(:subcuenta_puc).permit(:subcuenta, :descripcion, :cuenta_puc_id)
 	end
 
 end

@@ -1,5 +1,5 @@
 class SubcuentaPuc < ActiveRecord::Base
-  belongs_to :clase
+  belongs_to :cuenta_puc
   has_many :transaccions
   #validates :descripcion, presence: true, uniqueness: true 
   
@@ -21,5 +21,4 @@ class SubcuentaPuc < ActiveRecord::Base
 			end
 		end
 	end
-
 end

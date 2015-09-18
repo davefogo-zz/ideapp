@@ -14,7 +14,7 @@ class Medio < ActiveRecord::Base
 	  CSV.foreach(file.path, headers: true) do |row|
 	  	Medio.create! row.to_hash
 	  end
-	end
+ end
 
 	def self.to_csv
 		CSV.generate do |csv|

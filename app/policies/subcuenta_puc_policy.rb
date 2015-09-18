@@ -34,4 +34,8 @@ class SubcuentaPucPolicy
     @current_user.admin? or @current_user.contador?
   end
 
+  def import?
+    @current_user.admin?
+  end
+
 end

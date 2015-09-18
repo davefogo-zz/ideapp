@@ -22,9 +22,15 @@ Rails.application.routes.draw do
   resources :proveedores do 
     collection { post :import }
   end
-  resources :clases
-  resources :grupos
-  resources :cuenta_pucs
+  resources :clases do
+    collection { post :import }
+  end
+  resources :grupos do 
+    collection { post :import }
+  end
+  resources :cuenta_pucs do 
+    collection { post :import }
+  end
   resources :subcuenta_pucs do 
     collection { post :import }
   end

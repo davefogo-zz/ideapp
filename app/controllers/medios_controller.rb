@@ -72,7 +72,7 @@ class MediosController < ApplicationController
     @medio.destroy
     authorize @medio
     respond_to do |format|
-      format.html { redirect_to medios_url, notice: 'Medio was successfully destroyed.' }
+      format.html { redirect_to medios_url, notice: 'Medio eliminado.' }
       format.json { head :no_content }
     end
   end

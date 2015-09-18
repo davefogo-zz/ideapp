@@ -3,6 +3,8 @@
 <table>
   <thead>
     <tr>
+      <th>Cuenta Id</th>
+      <th>Grupo</th>
       <th>Cuenta</th>
       <th>Descripcion</th>
       <th colspan="3"></th>
@@ -10,8 +12,10 @@
   </thead>
 
   <tbody>
-    <% @cuenta_puc.each do |cuenta_puc| %>
+    <% @cuenta_pucs.each do |cuenta_puc| %>
 	    <tr>
+        <td><%= cuenta_puc.id %></td>
+        <td><%= cuenta_puc.grupo.descripcion %></td>
 		    <td><%= cuenta_puc.cuenta %></td>
 		    <td><%= cuenta_puc.descripcion %></td>
 		</tr>
@@ -23,3 +27,10 @@
 <br>
 
 <%= link_to 'Nueva Cuenta', new_cuenta_puc_path %>
+<br>
+<br>
+<%= form_tag import_cuenta_pucs_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
+<%= link_to 'Descargar Reporte', cuenta_pucs_path(format: "csv"), class: 'btn btn-default' %>

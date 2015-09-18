@@ -1,3 +1,3 @@
 class Clase < ActiveRecord::Base
-	has_many :subcuenta_pucs
+	has_many :grupos
 end
