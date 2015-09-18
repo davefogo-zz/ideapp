@@ -21,6 +21,10 @@ class FacturaPdf < Prawn::Document
 		@view.number_to_currency(num, :precision => 0)
 	end
 
+	def per(num)
+		@view.number_to_percentage(num, :precision => 0)
+	end
+
 	def factura_id
 		bounding_box([0, 670], :width => 150, :height => 15) do
 		text "Factura de Venta No." , size: 10, style: :bold
@@ -64,17 +68,54 @@ class FacturaPdf < Prawn::Document
 
 
 	def cliente
-		bounding_box([0, 640], :width => 150, :height => 15) do
-			text "Cliente:", size: 10, style: :bold
-		end
-		bounding_box([0, 625], :width => 150, :height => 15) do
-			text " #{@factura.cliente.nombre}", size: 10
-		end
-		text " #{@factura.cliente.nit}", size: 10
-		text " #{@factura.cliente.direccion_de_facturacion}", size: 10
-		text " #{@factura.cliente.ciudad}", size: 10
-		text " #{@factura.cliente.codigo_postal}", size: 10
-		text " #{@factura.cliente.pais}", size: 10
+		text_box "Cliente:", size: 10, style: :bold,
+				 :at => [0, 620],
+				 :height => 15,
+				 :width => 200
+		text_box "#{@factura.cliente.nombre}", size: 10,
+				 :at => [40, 620],
+				 :height => 15,
+				 :width => 200
+		text_box "Nit:", size: 10, style: :bold,
+				 :at => [0, 610],
+				 :height => 15,
+				 :width => 200	
+		text_box "#{@factura.cliente.nit}", size:10,
+				 :at => [25, 610],
+				 :height => 15,
+				 :width => 200	
+		text_box "Direccion:", size: 10, style: :bold,
+				 :at => [0, 600],
+				 :height => 15,
+				 :width => 200	
+		text_box "#{@factura.cliente.direccion_de_facturacion}", size:10,
+				 :at => [50, 600],
+				 :height => 15,
+				 :width => 200 
+		text_box "Ciudad:", size: 10, style: :bold,
+				 :at => [0, 590],
+				 :height => 15,
+				 :width => 200	
+		text_box "#{@factura.cliente.ciudad}", size:10,
+				 :at => [50, 590],
+				 :height => 15,
+				 :width => 200 
+		text_box "Codigo Postal:", size: 10, style: :bold,
+				 :at => [0, 580],
+				 :height => 15,
+				 :width => 200	
+		text_box "#{@factura.cliente.codigo_postal}", size:10,
+				 :at => [80, 580],
+				 :height => 15,
+				 :width => 200 
+		text_box "Pais:", size: 10, style: :bold,
+				 :at => [0, 570],
+				 :height => 15,
+				 :width => 200	
+		text_box "#{@factura.cliente.pais}", size:10,
+				 :at => [50, 570],
+				 :height => 15,
+				 :width => 200 
 	end
 
 	def factura_items
@@ -86,10 +127,9 @@ class FacturaPdf < Prawn::Document
 			end
 	end
 
-
 	def factura_item_rows
-		[['Fecha', 'Medio', 'Cantidad', 'Costo Unidad', 'Descuento', 'Iva', 'Subtotal', 'Total']] + @factura.factura_items.map do |item|
-			[item.fecha_orden, item.medio.nombre, item.cantidad, price(item.costo_unidad), item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+		[['Fecha', 'Medio', 'Cantidad', 'Costo Unidad', 'Dto', 'Iva', 'Subtotal', 'Total']] + @factura.factura_items.map do |item|
+			[item.fecha_orden, item.medio.nombre, item.cantidad, price(item.costo_unidad), per(item.descuento), price(item.iva), price(item.subtotal), price(item.total)]
 		end	
 		
 	end

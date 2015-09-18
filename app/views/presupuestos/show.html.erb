@@ -35,17 +35,18 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Orden No.</th>
           <th>Medio</th>
           <th>Fecha Orden</th>
           <th>Unidad</th>
           <th>Formato</th>
           <th>Costo Unidad</th>
           <th>Descuento</th>
-          <th>Cantidad<th>
+          <th>Cantidad</th>
           <th>Ubicacion</th>
+          <th>Valor</th>
           <th>Ref. Preventa</th>
           <th>Notas</th>
-          <th>Total</th>
         </tr>
       </thead>
 	      <tbody>
@@ -56,24 +57,25 @@
 
 	        <% @ordenes.each do |ordene| %>
 	        <tr>
+            <td><h4><%= ordene.id %></h4></td>
             <td><h4><%= ordene.medio.nombre %></h4></td>
 	          <td><h4><%= ordene.fecha_orden %></h4></td>
             <td><h4><%= ordene.unidad %></h4></td>
             <td><h4><%= ordene.formato %></h4></td>
-            <td><h4><%= ordene.costo_unidad %></h4></td>
-            <td><h4><%= number_to_percentage((ordene.descuento * 100)) %></h4></td>
+            <td><h4><%= number_to_currency(ordene.costo_unidad, :precision => 0) %></h4></td>
+            <td><h4><%= number_to_percentage((ordene.descuento * 100), :precision =>0 ) %></h4></td>
             <td><h4><%= ordene.cantidad %></h4></td>
             <td><h4><%= ordene.ubicacion %></h4></td>
-            <td><h4><%= ordene.referencia_preventa %></h4></td>
-            <td><h4><%= ordene.notas %></h4></td>
             <% dto = ordene.descuento * ordene.costo_unidad %>
             <% if area == 0 %>
-                <td><h4><%= number_to_currency(subtotal = ((ordene.costo_unidad - dto) * ordene.cantidad)) %></h4></td>
+                <td><h4><%= number_to_currency(subtotal = ((ordene.costo_unidad - dto) * ordene.cantidad), :precision => 0) %></h4></td>
               <% else %>
               <% area = ordene.cm * ordene.col %>
                 <td><h4><%= subtotal = (((area * ordene.costo_unidad) - dto) * ordene.cantidad) %></h4></td>
             <% end %>
-						<td><%= link_to 'Edit', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
+            <td><h4><%= ordene.referencia_preventa %></h4></td>
+            <td><h4><%= ordene.notas %></h4></td>
+						<td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
 						<td><%= link_to 'Destroy', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
             <% total_general = total_general + subtotal%>
@@ -82,12 +84,11 @@
 	    </tbody>
  	 	</table> 
 
-<h4 >SubTotal Presupuesto:<%= number_to_currency(total_general) %></h4>
-<h4 >IVA:<%= number_to_currency(iva =total_general * 0.16) %></h4>
-<h4 >Total Presupuesto:<%= number_to_currency(total_general + iva) %></h4><br>
+<h4 >Subtotal Presupuesto:<%= number_to_currency(total_general, :precision => 0) %></h4>
+<h4 >IVA:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
+<h4 >Total Presupuesto:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
 
-    
+<p><%= link_to 'Agregar nueva orden', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
 <p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
-<%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br>
-<%= link_to 'Regresar', presupuestos_path %><br>
-<%= link_to 'Agregar nueva orden', new_presupuesto_ordene_path(@presupuesto) %>
+<p><%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br></p>
+<p><%= link_to 'Regresar', presupuestos_path %><br></p>

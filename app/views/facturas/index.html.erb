@@ -28,7 +28,9 @@
             <td><%= factura.fecha_de_vencimiento %></td>
             <td><%= factura.cliente.nombre %></td>
             <td><%= link_to 'Mostrar', factura, class: 'btn btn-mini btn-default' %></td> 
-            <td><%= link_to 'Eliminar', factura, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <% if policy(Colaboradore).index? %> 
+              <td><%= link_to 'Anular', factura, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <% end%>
           </tr>
         <% end %>
       </tbody>
