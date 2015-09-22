@@ -1,9 +1,9 @@
 class Ordene < ActiveRecord::Base
   belongs_to :presupuesto
   belongs_to :medio
-  has_one :factura_item
+  has_one :factura_item, dependent: :destroy
   validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, presence: true
-  before_save :calculate_iva, :calculate_subtotal, :calculate_total
+  before_save :calculate_iva, :calculate_subtotal, :calculate_incentivo, :calculate_total
   after_save :generate_factura_item, :generate_volumen, :if => :aprobado_por_cliente?
 
     def calculate_iva
@@ -11,11 +11,15 @@ class Ordene < ActiveRecord::Base
     end
 
     def calculate_subtotal
-      self.subtotal = ((costo_unidad * cantidad) - (costo_unidad * descuento)) * self.medio.escala
+      self.subtotal = ((costo_unidad * cantidad) - (costo_unidad * descuento))
     end
     
     def calculate_total
       self.total = subtotal + iva
+    end
+
+    def calculate_incentivo
+      self.incentivo = ((costo_unidad * cantidad) - (costo_unidad * descuento)) * self.medio.escala.escala
     end
     
     def aprobado_por_cliente?
@@ -27,12 +31,17 @@ class Ordene < ActiveRecord::Base
     end
 
     def generate_factura_item
-    	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: Time.now, unidad: self.unidad, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id, descuento: self.descuento, presupuesto_id: self.presupuesto_id)
+      if self.facturado.blank?
+      	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: Time.now, unidad: self.unidad, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id, descuento: self.descuento, presupuesto_id: self.presupuesto_id)
+        if self.medio.cobro == 'Facturacion'
+          self.cantidad = 1
+          FacturaItem.create!(ordene_id: self.id, presupuesto_id: self.presupuesto_id, cobro_proveedor: self.medio.cobro, cantidad: self.cantidad, costo_unidad: self.incentivo )
+        self.facturado = Time.now
+        end
+      end
     end
 
     def generate_volumen
-      Volumen.create!(valor_volumen: self.subtotal, medio_id: self.medio_id, ordene_id: self.id)
+      Volumen.create!(valor_volumen: self.incentivo, medio_id: self.medio_id, ordene_id: self.id)
     end
-
-  
 end

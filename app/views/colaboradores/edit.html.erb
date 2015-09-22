@@ -1,6 +1,16 @@
-<h1>Editing Colaboradore</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @colaboradore %> |
-<%= link_to 'Back', colaboradores_path %>
+<%= content_for :title do %>Colaborador<% end %>
+  <h3>Editar Colaborador</h3>
+  <div class="form">
+    <%= simple_form_for @colaboradore do |form|%>
+      <%= form.association :user, include_blank: false, :label_method => :email, :label => 'Usuario' %>
+      <%= form.input :nombre %>
+      <%= form.input :cedula %>
+      <%= form.input :direccion %>
+      <%= form.input :telefono_personal %>
+      <%= form.input :telefono_empresa %>
+      <%= form.association :departamento, include_blank: false, :label_method => :nombre %>
+     <%= form.association :cargo, include_blank: false, :label_method => :nombre %>
+      <%= form.button :submit, 'Actualizar', class: 'submit'%>
+    <% end %>
+</div>
+ <%= link_to 'Regresar', colaboradores_path %>

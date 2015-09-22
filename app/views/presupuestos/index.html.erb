@@ -49,12 +49,12 @@
 
 <br>
 
-<%= link_to 'Nuevo Presupuesto', new_presupuesto_path %>
+<%= link_to 'Nuevo Presupuesto', new_presupuesto_path , class: 'btn btn-mini btn-default'%>
 <br>
 <br>
 <%= form_tag import_presupuestos_path, multipart: true do%>
   <%= file_field_tag :file %><br>
-  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+  <%= submit_tag 'Subir Datos' %>
 <% end %><br>
 
-<%= link_to 'Descargar Reporte', presupuestos_path(format: "csv"), class: 'btn btn-default' %>
+<%= link_to 'Descargar Reporte', presupuestos_path(format: "csv") %>

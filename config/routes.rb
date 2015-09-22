@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     collection { post :import }
     resources :ordenes, controller: 'presupuestos/ordenes'
   end
+
+  resources :escalas
  
 
 end

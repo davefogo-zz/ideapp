@@ -14,6 +14,8 @@
           <thead>
             <tr>
               <th>Factura</th>
+              <th>Item No.</th>
+              <th>Cobro Proveedor</th>
               <th>Orden</th>
               <th>Fecha</th>
               <th>Valor</th>
@@ -24,9 +26,11 @@
             <% @factura_items.each do |factura_item| %>
               <tr>
                 <td><h4><%= factura_item.factura_id %></h4></td>
+                <td><h4><%= factura_item.id %></h4></td>
+                <td><h4><%= factura_item.cobro_proveedor %></h4></td>
                 <td><h4><%= factura_item.ordene_id %></h4></td>
                 <td><h4><%= factura_item.fecha_orden %></h4></td>
-                <td><h4><%= number_to_currency(factura_item.subtotal) %></h4></td>
+                <td><h4><%= number_to_currency(factura_item.subtotal, :precision => 0) %></h4></td>
                 <td><%= link_to 'Editar', edit_factura_item_path(factura_item), class: 'btn btn-mini btn-success'  %></td>
               </tr>
             <% end %>

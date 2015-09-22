@@ -1,0 +1,6 @@
+<p>
+  <strong>Escala:</strong>
+  <%= number_to_percentage((@escala.escala * 100), :precision => 2) %>
+</p>
+<%= link_to 'Editar', edit_escala_path(@escala) %> |
+<%= link_to 'Regresar', escalas_path %>

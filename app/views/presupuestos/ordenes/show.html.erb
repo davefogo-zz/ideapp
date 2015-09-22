@@ -55,4 +55,4 @@
   <%= @ordene.presupuesto.id %>
 </p>
 <p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_ordene_path( :ordene_id => @ordene, format: 'pdf') %></p>
-<p><%#= link_to 'Regresar', presupuesto_ordene_path(@presupuesto) %><br>
+<p><%= link_to 'Regresar', presupuesto_path(@presupuesto) %><br>

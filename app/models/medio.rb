@@ -1,6 +1,7 @@
 class Medio < ActiveRecord::Base
   belongs_to :proveedore
   belongs_to :presupuesto
+  belongs_to :escala
   has_many :ordenes, dependent: :destroy
   has_many :presupuestos, :through => :ordenes
   has_many :factura_items

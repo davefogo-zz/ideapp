@@ -66,7 +66,7 @@ class Presupuestos::OrdenesController < ApplicationController
      @ordene = Ordene.find(params[:id])
     respond_to do |format|
       if @ordene.update(ordene_params)
-        format.html { redirect_to presupuesto_ordenes_url, notice: 'Orden actualizada.' }
+        format.html { redirect_to presupuesto_path(@presupuesto), notice: 'Orden actualizada.' }
         format.json { render :show, status: :ok, location: @ordene }
       else
         format.html { render :edit }
@@ -96,6 +96,6 @@ class Presupuestos::OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordene_params
-      params.require(:ordene).permit(:fecha_orden, :medida, :unidad, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja)
+      params.require(:ordene).permit(:fecha_orden, :medida, :unidad, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo)
     end
 end

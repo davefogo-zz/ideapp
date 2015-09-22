@@ -1,0 +1,9 @@
+<% content_for :title do %>Editar Escala<% end %>
+<h3>Editar Escala</h3>
+<div class="form">
+  <%= simple_form_for @escala do |form| %>
+    <%= form.input :escala %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', escalas_path %>

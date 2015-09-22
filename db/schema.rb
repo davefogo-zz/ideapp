@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916161958) do
+ActiveRecord::Schema.define(version: 20150922182122) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -111,6 +111,12 @@ ActiveRecord::Schema.define(version: 20150916161958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "escalas", force: :cascade do |t|
+    t.decimal  "escala"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"
     t.integer  "ordene_id"
@@ -132,6 +138,7 @@ ActiveRecord::Schema.define(version: 20150916161958) do
     t.integer  "presupuesto_id"
     t.integer  "valor",              limit: 8
     t.integer  "total",              limit: 8
+    t.string   "cobro_proveedor"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
@@ -230,8 +237,10 @@ ActiveRecord::Schema.define(version: 20150916161958) do
     t.string   "telefono"
     t.string   "zona"
     t.string   "tipo_de_medio"
+    t.integer  "escala_id"
   end
 
+  add_index "medios", ["escala_id"], name: "index_medios_on_escala_id"
   add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id"
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
 
@@ -259,6 +268,8 @@ ActiveRecord::Schema.define(version: 20150916161958) do
     t.boolean  "emision_certificada"
     t.integer  "iva",                  limit: 8
     t.integer  "total",                limit: 8
+    t.date     "facturado"
+    t.integer  "incentivo",            limit: 8
   end
 
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
