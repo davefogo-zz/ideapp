@@ -1,8 +1,10 @@
 class FacturaProveedor < ActiveRecord::Base
   belongs_to :ordene
   belongs_to :pago
+  has_many :pago_items
   belongs_to :proveedore
-  before_save :generate_iva_calculation, :generate_pronto_pago_calculation, :generate_fecha_vencimiento_calculation
+  before_save :generate_iva_calculation, :generate_pronto_pago_calculation,
+   :generate_fecha_vencimiento_calculation
 
   def generate_iva_calculation
   	self.iva = self.importe * 0.16
@@ -20,32 +22,28 @@ class FacturaProveedor < ActiveRecord::Base
   	self.fecha_vencimiento = (self.fecha_recepcion + 15.days) if self.proveedore.dias_pronto_pago == 15
   end
 
-  after_save :generate_transaccion_proveedor_is, :generate_transaccion_proveedor_bs, :generate_transaccion_iva_is, :generate_transaccion_iva_bs, :generate_transaccion_importe_pronto_pago
+  after_save :generate_transaccion_proveedor_pasivo, :generate_transaccion_proveedor_intermediacion_pasivo, 
+  :generate_transaccion_intermediacion_iva_pasivo #:generate_transaccion_importe_pronto_pago
 
-  def generate_transaccion_proveedor_is
-  	self.subcuenta_puc_id = 6
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+  def generate_transaccion_proveedor_pasivo
+  	self.subcuenta_puc_id = 667
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
-  def generate_transaccion_proveedor_bs
-  	self.subcuenta_puc_id = 5
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+  def generate_transaccion_proveedor_intermediacion_pasivo
+  	self.subcuenta_puc_id = 882
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
-  def generate_transaccion_iva_is
-  	self.subcuenta_puc_id = 6
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
+  def generate_transaccion_intermediacion_iva_pasivo
+  	self.subcuenta_puc_id = 883
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
-  def generate_transaccion_iva_bs
-  	self.subcuenta_puc_id = 5
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
-  end
-
-  def generate_transaccion_importe_pronto_pago
-    self.subcuenta_puc_id = 4210
-    Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe_pronto_pago, subcuenta_puc_id: self.subcuenta_puc_id)
-  end
+  #def generate_transaccion_importe_pronto_pago
+   # self.subcuenta_puc_id = 4210
+    #Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe_pronto_pago, subcuenta_puc_id: self.subcuenta_puc_id)
+  #end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

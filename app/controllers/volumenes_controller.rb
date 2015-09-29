@@ -17,6 +17,14 @@ class VolumenesController < ApplicationController
     authorize @volumen
   end
 
+  def new
+    authorize @volumen
+  end
+
+  def edit
+ 
+  end
+
   #def import
    # Volumen.import(params[:file])
    # redirect_to volumen_path, notice: 'Datos subidos.'
@@ -25,6 +33,6 @@ class VolumenesController < ApplicationController
   private
 
 	def volumen_params
-		params.require(:volumen).permit(:tipo_de_volumen, :valor_volumen, :medio_id, :ordene_id, :rango, :escala)
+		params.require(:volumen).permit(:tipo_de_volumen, :valor_volumen, :medio_id, :ordene_id, :rango, :escala, :pago_id)
 	end
 end

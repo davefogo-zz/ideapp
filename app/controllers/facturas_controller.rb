@@ -19,7 +19,7 @@ class FacturasController < ApplicationController
     @factura = Factura.find(params[:id])
     authorize @factura
     #@factura_item = FacturaItem.all
-    @factura_item = FacturaItem.where("facturar" => true, factura_id: @factura.id)
+    @factura_item = FacturaItem.where(factura_id: @factura.id)
     respond_to do |format|
       format.html
       format.pdf do

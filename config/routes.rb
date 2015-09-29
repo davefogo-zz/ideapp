@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   end 
   resources :pagos do 
     collection { post :import }
+    resources :pago_items, controller: 'pagos/pago_items'
   end
   resources :activo_fijos do 
     collection { post :import }
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
   end
 
   resources :escalas
+  resources :incentivos
  
 
 end

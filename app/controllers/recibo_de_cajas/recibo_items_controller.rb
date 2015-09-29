@@ -79,6 +79,6 @@ class ReciboDeCajas::ReciboItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recibo_item_params
-      params.require(:recibo_item).permit(:recibo_de_caja_id, :factura_id, :fecha, :numero_de_cheque, :importe, :forma_de_pago, :subcuenta_puc_id )
+      params.require(:recibo_item).permit(:recibo_de_caja_id, :factura_id, :fecha, :numero_de_cheque, :importe, :forma_de_pago, :subcuenta_puc_id, :banco )
     end
 end

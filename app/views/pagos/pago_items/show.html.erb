@@ -1,0 +1,64 @@
+<p>
+  <strong>Orden de Pago No. :</strong>
+  <%= @pago.id %>
+</p>
+<p>
+  <strong>Fecha:</strong>
+  <%= @pago.fecha %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @pago.proveedore.nombre %>
+</p>
+
+<p>
+  <strong>Nit:</strong>
+  <%= @pago.proveedore.nit %>
+</p>
+
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Pago Item No.</th>
+          <th>Factura de Proveedor</th>
+          <th>Importe</th>
+          <th>Forma de Pago</th>
+        </tr>
+      </thead>
+        <tbody>
+          <% total_general = 0 %>
+          <% dto = 0 %>
+          <% subtotal = 0 %>
+          <% area = 0 %>
+
+          <% @pago_items.each do |pago_item| %>
+          <tr>
+            <td><h4><%= pago_item.id %></h4></td>
+            <td><h4><%#= pago_item.try(:factura_proveedor) %></h4></td>
+            <td><h4><%#= pago_item.factura_proveedor.importe %></h4></td>
+            <td><%#= number_to_currency(pago_item.importe, :precision => 0) %></td>
+            <td><h4><%#= pago_item.forma_de_pago %></h4></td>
+          <% end %>
+            <td><%= link_to 'Editar', edit_pago_pago_item_path(@pago, pago_item), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Mostrar', pago_pago_item_path(@presupuesto, pago_item), class: 'btn btn-mini btn-default' %></td>
+            <td><%= link_to 'Destroy', pago_pago_item_path(@presupuesto, pago_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+          </tr>
+        </tbody>
+    </table> 
+
+<h4 >Subtotal Orden de Pago:<%= number_to_currency(total_general, :precision => 0) %></h4>
+<h4 > - Incentivos:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
+<h4 > - Prontos Pagos:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
+<h4 >Total Orden de Pago:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
+<p>
+  <strong>Pagada:</strong>
+  <%= @pago.pagar %>
+</p>
+
+
+<p><%= link_to 'Descargar en PDF', pago_path(@pago, format: 'pdf') %></p>
+<%= link_to 'Editar', edit_pago_path(@pago) %> |
+<%= link_to 'Regresar', pagos_path %>

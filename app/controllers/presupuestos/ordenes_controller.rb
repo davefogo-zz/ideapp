@@ -35,8 +35,7 @@ class Presupuestos::OrdenesController < ApplicationController
   def edit
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
     authorize @presupuesto
-    @ordene = Ordene.find(params[:id])
-    
+    @ordene = Ordene.find(params[:id]) 
   end
 
   # POST /ordenes

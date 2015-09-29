@@ -1,0 +1,10 @@
+<% content_for :title do %>Volumenes<% end %>
+<h3>Editar Volumenes</h3>
+<div class="form">
+  <%= simple_form_for @volumenes do |form| %>
+    <%= form.input :fecha %>
+    <%= form.association :pago, :label_method => :id, include_blank: true, label: "Pago"  %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', volumenes_path %>

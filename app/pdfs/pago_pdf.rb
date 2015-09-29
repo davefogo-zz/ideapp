@@ -7,7 +7,7 @@ class PagoPdf < Prawn::Document
 		pago_id
 		ideamos
 		proveedor
-		factura_proveedor_items
+		pago_items
 		pronto_pago
 		total
 		
@@ -51,9 +51,9 @@ class PagoPdf < Prawn::Document
 			end
 	  	end
 
-  	def factura_proveedor_items
+  	def pago_items
 	move_down 60
-		table factura_proveedor_item_rows, :width => 550 do
+		table pago_item_rows, :width => 550 do
 			row(0..1000).border_width = 0
 			row(0).font_style = :bold
 			self.header = true
@@ -61,15 +61,20 @@ class PagoPdf < Prawn::Document
 	end
 
 
-	def factura_proveedor_item_rows
-		[['Fecha', 'Documento Numero', 'Importe']] + @pago.factura_proveedors.map do |item|
-			[item.fecha_recepcion, item.id, price(item.importe)]
+	def pago_item_rows
+		[[ 'Factura Proveedor Numero', 'Importe']] + @pago.pago_items.map do |item|
+			[item.facutra_proveedor.id, price(item.importe)]
 		end	
 	end	
 
 	def pronto_pago
 		move_down 80
-		text " - Pronto Pago #{price(@pago.importe_pronto_pago)}", :align => :right, style: :bold
+		text " - Pronto Pago #{price(@pago_item.importe_pronto_pago)}", :align => :right, style: :bold
+	end
+
+	def incentivo
+		move_down 80
+		text " - Incentivo #{price(@pago_item.incentivo)}", :align => :right, style: :bold
 	end
 
 	def total

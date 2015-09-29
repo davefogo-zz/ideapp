@@ -5,6 +5,7 @@ class Medio < ActiveRecord::Base
   has_many :ordenes, dependent: :destroy
   has_many :presupuestos, :through => :ordenes
   has_many :factura_items
+  has_many :incentivos
   validates  :nombre, presence: true #:proveedore_id,
  	
  def self.search(search)

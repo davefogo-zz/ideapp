@@ -1,6 +1,7 @@
 class SubcuentaPuc < ActiveRecord::Base
   belongs_to :cuenta_puc
   has_many :transaccions
+  has_many :pago_items
   #validates :descripcion, presence: true, uniqueness: true 
   
 	def self.search(search)

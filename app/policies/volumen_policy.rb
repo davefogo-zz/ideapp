@@ -18,6 +18,10 @@ class VolumenPolicy
     @current_user.admin? or @current_user.contador? or @current_user.analista_tesoreria? 
   end
 
+  def edit?
+    @current_user.admin? or @current_user.contador? or @current_user.analista_tesoreria? 
+  end
+
   def create?
     @current_user.admin? or @current_user.contador? or @current_user.analista_tesoreria? 
   end

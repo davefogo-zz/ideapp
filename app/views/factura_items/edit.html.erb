@@ -1,6 +1,12 @@
-<h1>Editing Factura Item</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Mostrar', @factura_item %> |
+<% content_for :title do %>Factura Item<% end %>
+<h3>Asignar Item a Factura</h3>
+	<div class="form">
+	<%= simple_form_for @factura_item do |form| %>
+    <%= form.input :facturar, label: 'Facturar a Cliente' %>
+    <%= form.input :facturar_proveedor, label: 'Facturar a Proveedor' %>
+    <%= form.input :sin_iva %>
+	<%= form.association :factura, :label_method => :id, include_blank: true, label: "Factura"  %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+	<% end %>
+</div>
 <%= link_to 'Regresar', factura_items_path %>

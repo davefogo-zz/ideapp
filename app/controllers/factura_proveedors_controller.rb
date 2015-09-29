@@ -38,7 +38,7 @@ class FacturaProveedorsController < ApplicationController
     authorize @factura_proveedor
     respond_to do |format|
       if @factura_proveedor.save
-        format.html { redirect_to @factura_proveedor, notice: 'Factura proveedor was successfully created.' }
+        format.html { redirect_to @factura_proveedor, notice: 'Factura de proveedor ingresada.' }
         format.json { render :show, status: :created, location: @factura_proveedor }
       else
         format.html { render :new }
@@ -53,7 +53,7 @@ class FacturaProveedorsController < ApplicationController
     respond_to do |format|
       authorize @factura_proveedor
       if @factura_proveedor.update(factura_proveedor_params)
-        format.html { redirect_to @factura_proveedor, notice: 'Factura de Proveedor asignada a orden de pago.' }
+        format.html { redirect_to @factura_proveedor, notice: 'Factura de proveedor asignada a orden de pago.' }
         format.json { render :show, status: :ok, location: @factura_proveedor }
       else
         format.html { render :edit }

@@ -4,9 +4,6 @@
   <%= simple_form_for @pago do |form| %>
     <%= form.input :fecha %>
     <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
-    <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
-   <%= form.input :banco, collection: ['Bogota 8414', 'Bancolombia', 'Citibank'] %>
-   <%= form.input :numero_de_cheque %>
     <%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>

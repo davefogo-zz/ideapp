@@ -1,0 +1,9 @@
+<% content_for :title do %>Incentivos<% end %>
+<h3>Editar Incentivos</h3>
+<div class="form">
+  <%= simple_form_for @incentivo do |form| %>
+    <%= form.association :pago, :label_method => :id, include_blank: true, label: "Pago"  %>
+    <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', incentivos_path %>

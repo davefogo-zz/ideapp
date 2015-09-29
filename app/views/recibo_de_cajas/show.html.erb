@@ -40,6 +40,7 @@
                 <tr>
                   <td><%= recibo_item.try(:fecha) %></td>
                   <td><%= recibo_item.try(:factura_id) %></td>
+                  <td><%= recibo_item.factura.importe %></td>
                   <td><%= number_to_currency(recibo_item.try(:importe), :precision => 0) %></td>
                   <td><%= recibo_item.try(:forma_de_pago) %></td>
 

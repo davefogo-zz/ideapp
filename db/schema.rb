@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922182122) do
+ActiveRecord::Schema.define(version: 20150926202852) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(version: 20150922182122) do
     t.boolean  "compra_de_activo"
     t.integer  "user_id"
     t.integer  "pago_id"
+    t.boolean  "pago"
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
@@ -212,6 +213,25 @@ ActiveRecord::Schema.define(version: 20150922182122) do
   end
 
   add_index "grupos", ["clase_id"], name: "index_grupos_on_clase_id"
+
+  create_table "incentivos", force: :cascade do |t|
+    t.string   "tipo_de_volumen"
+    t.string   "cobro"
+    t.integer  "medio_id"
+    t.integer  "factura_id"
+    t.integer  "factura_item_id"
+    t.integer  "pago_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "valor_incentivo", limit: 8
+    t.integer  "ordene_id"
+  end
+
+  add_index "incentivos", ["factura_id"], name: "index_incentivos_on_factura_id"
+  add_index "incentivos", ["factura_item_id"], name: "index_incentivos_on_factura_item_id"
+  add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id"
+  add_index "incentivos", ["ordene_id"], name: "index_incentivos_on_ordene_id"
+  add_index "incentivos", ["pago_id"], name: "index_incentivos_on_pago_id"
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
@@ -275,24 +295,40 @@ ActiveRecord::Schema.define(version: 20150922182122) do
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
 
+  create_table "pago_items", force: :cascade do |t|
+    t.integer  "pago_id"
+    t.integer  "factura_proveedor_id"
+    t.integer  "subcuenta_puc_id_id"
+    t.integer  "importe",              limit: 8
+    t.string   "forma_de_pago"
+    t.boolean  "gasto"
+    t.string   "banco"
+    t.string   "numero_de_cheque"
+    t.integer  "importe_pronto_pago",  limit: 8
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "pago_items", ["factura_proveedor_id"], name: "index_pago_items_on_factura_proveedor_id"
+  add_index "pago_items", ["pago_id"], name: "index_pago_items_on_pago_id"
+  add_index "pago_items", ["subcuenta_puc_id_id"], name: "index_pago_items_on_subcuenta_puc_id_id"
+
   create_table "pagos", force: :cascade do |t|
     t.date     "fecha"
     t.integer  "proveedore_id"
     t.integer  "subcuenta_puc_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "importe",              limit: 8
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "importe",             limit: 8
     t.string   "forma_de_pago"
     t.boolean  "gasto"
     t.string   "banco"
     t.integer  "numero_de_cheque"
     t.boolean  "pagar"
-    t.integer  "importe_pronto_pago",  limit: 8
-    t.integer  "total",                limit: 8
-    t.integer  "factura_proveedor_id"
+    t.integer  "importe_pronto_pago", limit: 8
+    t.integer  "total",               limit: 8
   end
 
-  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
   add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
 
@@ -343,6 +379,7 @@ ActiveRecord::Schema.define(version: 20150922182122) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "subcuenta_puc_id"
+    t.string   "banco"
   end
 
   add_index "recibo_items", ["factura_id"], name: "index_recibo_items_on_factura_id"
@@ -425,10 +462,12 @@ ActiveRecord::Schema.define(version: 20150922182122) do
     t.integer  "valor_volumen",   limit: 8
     t.integer  "ordene_id"
     t.integer  "factura_id"
+    t.integer  "pago_id"
   end
 
   add_index "volumen", ["factura_id"], name: "index_volumen_on_factura_id"
   add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
   add_index "volumen", ["medio_id"], name: "index_volumen_on_medio_id"
+  add_index "volumen", ["pago_id"], name: "index_volumen_on_pago_id"
 
 end

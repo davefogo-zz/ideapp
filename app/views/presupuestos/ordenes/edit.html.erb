@@ -1,6 +1,7 @@
 <% content_for :title do %>Editar Orden<% end %>
 <h3>Editar Orden</h3>
 <div class="form">
+<script>$('input[type=checkbox]').on('click', function(){$(this).attr("disabled", "true")})</script>
   <%= simple_form_for([@presupuesto, @ordene]) do |form| %>
       <%= form.association :medio, :label_method => :nombre, include_blank: true, label: 'Medio' %>
       <%= form.input :fecha_orden %>

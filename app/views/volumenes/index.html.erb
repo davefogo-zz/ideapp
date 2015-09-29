@@ -15,6 +15,7 @@
             <tr>
           <th>Medio</th>
           <th>Item</th>
+          <th>Orden</th>
           <th>Tipo de Volumen</th>
           <th>Escalas</th>
           <th>Rango</th>
@@ -28,11 +29,13 @@
           <tr>
             <td><%= volumen.medio_id %></td>
             <td><%= volumen.factura_item_id %></td>
+            <td><%= volumen.factura_item.try(:ordene_id) %></td>
             <td><%= volumen.tipo_de_volumen %></td>
             <td><%= volumen.escala %></td>
             <td><%= volumen.rango %></td>
     		    <td><%= volumen.cobro %></td>
             <td><%#= volumen.valor %></td>
+            <td><%= link_to 'Editar', edit_volumene_path(@volumen), class: 'btn btn-mini btn-success' %></td>
           </tr>
         <% end %>
       </tbody>
