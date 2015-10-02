@@ -4,7 +4,7 @@
   <%= simple_form_for @medio do |form| %>
     <%= form.input :nombre %>
     <%= form.input :tipo_de_medio, collection: [ 'Radio', 'Revista', 'Internet', 'Medios Alternativos', 'Prensa', 'Produccion', 'Tv Cable'] %>
-    <%= form.input :proveedore, :label_method => :nombre, include_blank: true, label: 'Proveedor' %>
+    <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: 'Proveedor' %>
     <%= form.input :tipo_de_volumen, collection: [ 'Automatico', 'Mensual', 'Bimestral', 'Semestral', 'Anual', 'Anual Grupo'] %>
     <%= form.input :cobro, collection: [ 'Cruce', 'Facturacion' ] %>
     <%= form.association :escala, :label_method => :escala, include_blank: true, label: 'Escala Automatica' %>

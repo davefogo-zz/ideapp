@@ -1,5 +1,4 @@
 class Presupuestos::OrdenesController < ApplicationController
-
   # GET /ordenes
   # GET /ordenes.json
   def index

@@ -3,7 +3,7 @@ class Pagos::PagoItemsController < ApplicationController
   # GET /pago_items
   # GET /pago_items.json
   def index
-    @pago_item = PagoItem.all
+    @pago_items = PagoItem.all
     @pago = Pago.find(params[:pago_id])
     authorize Pago
   end
@@ -56,7 +56,7 @@ class Pagos::PagoItemsController < ApplicationController
     @pago_item = PagoItem.find(params[:id])
     respond_to do |format|
       if @pago_item.update(pago_item_params)
-        format.html { redirect_to @pago_item, notice: 'Item de Pago actualizado.' }
+        format.html { redirect_to pago_path(@pago), notice: 'Item de Pago actualizado.' }
         format.json { render :show, status: :ok, location: @pago_item }
       else
         format.html { render :edit }
@@ -73,7 +73,7 @@ class Pagos::PagoItemsController < ApplicationController
     @pago_item = PagoItem.find(params[:id])
     @pago_item.destroy
     respond_to do |format|
-      format.html { redirect_to pago_items_url, notice: 'Pago Item eliminada.' }
+      format.html { redirect_to pagos_url, notice: 'Pago Item eliminado.' }
       format.json { head :no_content }
     end
   end
@@ -86,6 +86,6 @@ class Pagos::PagoItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_item_params
-      params.require(:pago_item).permit(:pago_id, :factura_proveedor_id, :fecha, :numero_de_cheque, :importe, :forma_de_pago, :subcuenta_puc_id, :banco )
+      params.require(:pago_item).permit(:pago_id, :factura_proveedor_id, :fecha, :numero_de_cheque, :importe, :forma_de_pago, :subcuenta_puc_id, :banco, :incentivo_id )
     end
 end   

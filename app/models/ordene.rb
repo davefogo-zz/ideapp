@@ -1,10 +1,11 @@
 class Ordene < ActiveRecord::Base
-  belongs_to :presupuesto
+  belongs_to :presupuesto, dependent: :destroy
   belongs_to :medio
   has_one :factura_item, dependent: :destroy
+  has_many :incentivos, dependent: :destroy
   validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, :cantidad, :descuento, presence: true
   before_save :calculate_iva, :calculate_subtotal, :calculate_incentivo, :calculate_total
-  after_save :generate_factura_item, :generate_incentivo, :if => :aprobado_por_cliente?
+  after_save :generate_factura_item, :if => :aprobado_por_cliente?
 
     def calculate_iva
       self.iva = (costo_unidad * 0.16)
@@ -43,6 +44,6 @@ class Ordene < ActiveRecord::Base
     end
 
     def generate_incentivo
-      Incentivo.create!(valor_incentivo: self.incentivo, medio_id: self.medio_id, ordene_id: self.id)
+      Incentivo.create!(valor_incentivo: self.incentivo, medio_id: self.medio_id, ordene_id: self.id, tipo_de_volumen: self.medio.tipo_de_volumen, cobro: self.medio.cobro)
     end
 end

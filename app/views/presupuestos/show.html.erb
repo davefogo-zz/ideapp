@@ -67,12 +67,14 @@
             <td><h4><%= ordene.cantidad %></h4></td>
             <td><h4><%= ordene.ubicacion %></h4></td>
             <% dto = ordene.descuento * ordene.costo_unidad %>
+
             <% if area == 0 %>
                 <td><h4><%= number_to_currency(subtotal = ((ordene.costo_unidad - dto) * ordene.cantidad), :precision => 0) %></h4></td>
               <% else %>
               <% area = ordene.cm * ordene.col %>
                 <td><h4><%= subtotal = (((area * ordene.costo_unidad) - dto) * ordene.cantidad) %></h4></td>
             <% end %>
+            
             <td><h4><%= ordene.referencia_preventa %></h4></td>
             <td><h4><%= ordene.notas %></h4></td>
 						<td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>

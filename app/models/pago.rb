@@ -4,8 +4,20 @@ class Pago < ActiveRecord::Base
   belongs_to :subcuenta_puc
   has_many :gastos
   has_many :incentivos
-  has_many :pago_items
+  has_many :pago_items, dependent: :destroy
+  after_initialize :subtotal, :calculo_total, :calculo_incentivo_total
 
+  def subtotal
+    self.pago_items.sum(:importe)
+  end
+
+  def calculo_total
+    self.total = self.subtotal - self.pago_items.sum(:importe_pronto_pago) 
+  end
+
+  def calculo_incentivo_total
+    self.incentivo_total = self.incentivos.sum(:valor_incentivo)
+  end
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

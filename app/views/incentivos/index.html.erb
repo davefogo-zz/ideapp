@@ -14,11 +14,10 @@
           <thead>
             <tr>
           <th>Medio</th>
-          <th>Item</th>
-          <th>Orden</th>
+          <th>Incentivo %</th>
+          <th>Orden No.</th>
+          <th>Orden de Pago No.</th>
           <th>Tipo de Volumen</th>
-          <th>Escalas</th>
-          <th>Rango</th>
           <th>Cobro</th>
           <th>Valor</th>
           <th colspan="3"></th>
@@ -27,13 +26,14 @@
       <tbody>
         <% @incentivo.each do |incentivo| %>
           <tr>
-            <td><%= incentivo.medio_id %></td>
-            <td><%= incentivo.factura_item_id %></td>
-            <td><%= incentivo.factura_item.try(:ordene_id) %></td>
+            <td><%= incentivo.medio.nombre %></td>
+            <td><%= number_to_percentage((incentivo.medio.escala.escala * 100), :precision => 1) %></td>
+            <td><%= incentivo.ordene_id %></td>
+            <td><%= incentivo.pago.try(:id) %></td>
             <td><%= incentivo.tipo_de_volumen %></td>
     		    <td><%= incentivo.cobro %></td>
-            <td><%#= incentivo.valor %></td>
-            <td><%= link_to 'Editar', edit_incentivo_path(@incentivo), class: 'btn btn-mini btn-success' %></td>
+            <td><%= number_to_currency(incentivo.valor_incentivo, :precision => 0) %></td>
+            <td><%= link_to 'Asignar', edit_incentivo_path(incentivo), class: 'btn btn-mini btn-success' %></td>
           </tr>
         <% end %>
       </tbody>

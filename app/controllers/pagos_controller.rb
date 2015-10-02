@@ -82,7 +82,7 @@ class PagosController < ApplicationController
     @pago.destroy
     authorize @pago
     respond_to do |format|
-      format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
+      format.html { redirect_to pagos_url, notice: 'Pago eliminado.' }
       format.json { head :no_content }
     end
   end

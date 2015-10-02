@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926202852) do
+ActiveRecord::Schema.define(version: 20151002220320) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -159,11 +159,11 @@ ActiveRecord::Schema.define(version: 20150926202852) do
     t.integer  "subcuenta_puc_id"
     t.integer  "importe_pronto_pago", limit: 8
     t.string   "numero_de_factura"
-    t.integer  "pago_id"
+    t.integer  "pago_item_id"
   end
 
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
-  add_index "factura_proveedors", ["pago_id"], name: "index_factura_proveedors_on_pago_id"
+  add_index "factura_proveedors", ["pago_item_id"], name: "index_factura_proveedors_on_pago_item_id"
   add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
   add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"
 
@@ -218,17 +218,13 @@ ActiveRecord::Schema.define(version: 20150926202852) do
     t.string   "tipo_de_volumen"
     t.string   "cobro"
     t.integer  "medio_id"
-    t.integer  "factura_id"
-    t.integer  "factura_item_id"
-    t.integer  "pago_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "valor_incentivo", limit: 8
     t.integer  "ordene_id"
+    t.integer  "pago_id"
   end
 
-  add_index "incentivos", ["factura_id"], name: "index_incentivos_on_factura_id"
-  add_index "incentivos", ["factura_item_id"], name: "index_incentivos_on_factura_item_id"
   add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id"
   add_index "incentivos", ["ordene_id"], name: "index_incentivos_on_ordene_id"
   add_index "incentivos", ["pago_id"], name: "index_incentivos_on_pago_id"
@@ -298,7 +294,6 @@ ActiveRecord::Schema.define(version: 20150926202852) do
   create_table "pago_items", force: :cascade do |t|
     t.integer  "pago_id"
     t.integer  "factura_proveedor_id"
-    t.integer  "subcuenta_puc_id_id"
     t.integer  "importe",              limit: 8
     t.string   "forma_de_pago"
     t.boolean  "gasto"
@@ -307,30 +302,31 @@ ActiveRecord::Schema.define(version: 20150926202852) do
     t.integer  "importe_pronto_pago",  limit: 8
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "subcuenta_puc_id"
+    t.integer  "incentivo_id"
   end
 
   add_index "pago_items", ["factura_proveedor_id"], name: "index_pago_items_on_factura_proveedor_id"
+  add_index "pago_items", ["incentivo_id"], name: "index_pago_items_on_incentivo_id"
   add_index "pago_items", ["pago_id"], name: "index_pago_items_on_pago_id"
-  add_index "pago_items", ["subcuenta_puc_id_id"], name: "index_pago_items_on_subcuenta_puc_id_id"
+  add_index "pago_items", ["subcuenta_puc_id"], name: "index_pago_items_on_subcuenta_puc_id"
 
   create_table "pagos", force: :cascade do |t|
     t.date     "fecha"
     t.integer  "proveedore_id"
-    t.integer  "subcuenta_puc_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "importe",             limit: 8
-    t.string   "forma_de_pago"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.boolean  "gasto"
-    t.string   "banco"
-    t.integer  "numero_de_cheque"
     t.boolean  "pagar"
-    t.integer  "importe_pronto_pago", limit: 8
-    t.integer  "total",               limit: 8
+    t.integer  "importe_pronto_pago",  limit: 8
+    t.integer  "total",                limit: 8
+    t.integer  "subtotal",             limit: 8
+    t.integer  "incentivo_total",      limit: 8
+    t.integer  "factura_proveedor_id"
   end
 
+  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
-  add_index "pagos", ["subcuenta_puc_id"], name: "index_pagos_on_subcuenta_puc_id"
 
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"

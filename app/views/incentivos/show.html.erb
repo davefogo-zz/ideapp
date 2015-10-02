@@ -1,6 +1,16 @@
 <p>
-  <strong>Incentivo:</strong>
-  <%= @incentivo.try(:pago) %>
+  <strong>Orden de Pago:</strong>
+  <%= @incentivo.pago.id%>
+</p>
+
+<p>
+  <strong>Incentivo No.:</strong>
+  <%= @incentivo.id %>
+</p>
+
+<p>
+  <strong>Valor:</strong>
+  <%= number_to_currency(@incentivo.valor_incentivo, :precision => 0) %>
 </p>
   
 

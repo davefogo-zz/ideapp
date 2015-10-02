@@ -1,9 +1,22 @@
-<% content_for :title do %>Incentivos<% end %>
-<h3>Incentivos</h3>
-<div class="form">
-  <%= simple_form_for @incentivo do |form| %>
-    <%= form.association :pago, :label_method => :id, include_blank: true, label: "Pago"  %>
-    <%= form.button :submit, 'Guardar', class: 'submit' %>
+<%= form_for(@incentivo) do |f| %>
+  <% if @incentivo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@incentivo.errors.count, "error") %> prohibited this incentivo from being saved:</h2>
+
+      <ul>
+      <% @incentivo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-</div>
-<%= link_to 'Regresar', incentivos_path %>
+
+  <div class="field">
+    <%= f.label :pago_item %><br>
+    <%= collection_select( :incentivo, :pago_item_id, PagoItem.all, :id, :id, {}, {:multiple => false}) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

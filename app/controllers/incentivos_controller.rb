@@ -1,6 +1,7 @@
 class IncentivosController < ApplicationController
+before_action :set_incentivo, only: [:show, :edit, :update, :destroy]
+
   def index
-    authorize Incentivo
     #respond_to do |format|
       #format.html
       #format.csv {render text: @incentivo.to_csv }
@@ -8,11 +9,12 @@ class IncentivosController < ApplicationController
   	@search = IncentivoSearch.new(params[:search])
     @incentivo = @search.scope
     @incentivo = Incentivo.all
+    authorize Incentivo
 
   end
 
   def show 
-    authorize Incentivo
+    authorize @incentivo
   end
 
   def new
@@ -20,26 +22,21 @@ class IncentivosController < ApplicationController
     authorize @incentivo
   end
 
+   def edit
+    authorize @incentivo
+  end
+
   def create
 		@incentivo = Incentivo.new(incentivo_params)
 		authorize @incentivo
-		
+		respond_to do |format|
 	    if @incentivo.save
-
 	    	redirect_to @incentivo	
 	    else 
 	    	render :action => "new"
 	    end
+    end
 	end
-
-  def edit
-  	authorize Incentivo
- 	@incentivo = Incentivo.new
-  end
-
-  def find
-  	
-  end
 
   def update
     respond_to do |format|
@@ -59,6 +56,10 @@ class IncentivosController < ApplicationController
   #end
 
   private
+
+  def set_incentivo
+      @incentivo = Incentivo.find(params[:id])
+    end
 
 	def incentivo_params
 		params.require(:incentivo).permit(:tipo_de_volumen , :valor_incentivo, :medio_id, :ordene_id, :rango, :escala, :pago_id)

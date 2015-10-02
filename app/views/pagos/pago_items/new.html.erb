@@ -1,13 +1,30 @@
-<% content_for :title do %>Items de Orden de Pago<% end %>
-<h3>Nuevo Item de Orden de Pago</h3>
-<div class="form">
-	<%= simple_form_for([@pago, @pago_item]) do |form| %>
-	    <%= form.association :factura_proveedor, :label_method => :id, include_blank: false, label: "Factura de Proveedor"  %>
-	    <%= form.input :importe %>
-	    <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
-	    <%= form.input :banco, collection: ['Banco de Bogota Corriente 8414', 'Bancolombia Corriente 6464', 'Citibank Corriente 0035'] %>
-	    <%= form.input :numero_de_cheque %>
-    <%= form.button :submit, 'Crear', class: 'submit' %>
-  <% end %>
-</div>
-<%= link_to 'Regresar', pago_pago_items_path %>
+<%= form_for [@pago, @pago_item] do |f| %>
+  
+  <div class="field">
+    <%= f.label :factura_proveedor %><br>
+    <%= collection_select( :pago_item, :factura_proveedor_id, FacturaProveedor.all, :id, :numero_de_factura, {}, {:multiple => false}) %>
+  </div> 
+  <div class="field">
+    <%= f.label :importe %><br>
+    <%= f.text_field :importe %>
+  </div>
+  <div class="field">
+    <%= f.label :incentivo %><br>
+    <%= collection_select( :pago_item, :incentivo_id, Incentivo.all, :id, :id, {}, {:multiple => false}) %>
+  </div>
+  <div class="field">
+    <%= f.label :forma_de_pago %><br>
+    <%= f.select :forma_de_pago, ['Cheque', 'Efectivo', 'Transferencia'] %>
+  </div> 
+  <div class="field">
+    <%= f.label :banco %><br>
+    <%= f.select :banco, ['Banco de Bogota Corriente 8414', 'Bancolombia Corriente 6464', 'Citibank Corriente 0035'] %>
+  </div> 
+  <div class="field">
+    <%= f.label :numero_de_cheque %><br>
+    <%= f.text_field :numero_de_cheque %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
