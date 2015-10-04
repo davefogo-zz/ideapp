@@ -1,13 +1,14 @@
-<% content_for :title do %>Editar Items de Orden de Pago<% end %>
-<h3>Editar Item de Orden de Pago</h3>
+<% content_for :title do %>Editar Item de Pago<% end %>
+<h3>Editar Item de Pago</h3>
 <div class="form">
-	<%= simple_form_for([@pago, @pago_item]) do |form| %>
-	    <%= form.association :factura_proveedor, :label_method => :id, include_blank: false, label: "Factura de Proveedor"  %>
-	    <%= form.input :importe %>
-	    <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
-	    <%= form.input :banco, collection: ['Banco de Bogota Corriente 8414', 'Bancolombia Corriente 6464', 'Citibank Corriente 0035'] %>
-	    <%= form.input :numero_de_cheque %>
-    <%= form.button :submit, 'Crear', class: 'submit' %>
-  <% end %>
-</div>
-<%= link_to 'Regresar', pago_pago_items_path %>
+    <%= simple_form_for ([@pago, @pago_item]) do |form| %>
+    <%= form.association :factura_proveedor, :label_method => :numero_de_factura, include_blank: false, label: "Factura a Pagar"  %>
+    <%= form.input :importe %>
+    <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
+    <%= form.input :banco, collection: ['Banco de Bogota Corriente 8414', 'Bancolombia Corriente 6464', 'Citibank Corriente 0035'] %>
+    <%= form.input :numero_de_cheque %>
+     <%= form.button :submit, 'Guardar', class: 'submit' %>
+    <% end %>
+  </div>
+
+<%= link_to 'Regresar', pagos_path %>

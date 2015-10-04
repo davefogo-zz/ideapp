@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002220320) do
+ActiveRecord::Schema.define(version: 20151004011744) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -160,9 +160,11 @@ ActiveRecord::Schema.define(version: 20151002220320) do
     t.integer  "importe_pronto_pago", limit: 8
     t.string   "numero_de_factura"
     t.integer  "pago_item_id"
+    t.integer  "pago_id"
   end
 
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
+  add_index "factura_proveedors", ["pago_id"], name: "index_factura_proveedors_on_pago_id"
   add_index "factura_proveedors", ["pago_item_id"], name: "index_factura_proveedors_on_pago_item_id"
   add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
   add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"

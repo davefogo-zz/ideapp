@@ -27,13 +27,10 @@
           <th>Importe Factura Proveedor</th>
           <th>Forma de Pago</th>
           <th>Importe</th>
-          <th>Incentivo</th>
+          <th>Orden</th>
         </tr>
       </thead>
         <tbody>
-        <% total_general = 0 %>
-        <% subtotal = 0 %>
-
           <% @pago_items.each do |pago_item| %>
             <tr>
               <td><h4><%= pago_item.id %></h4></td>
@@ -41,20 +38,18 @@
               <td><h4><%= number_to_currency(pago_item.factura_proveedor.importe, :precision => 0) %></h4></td>
               <td><h4><%= pago_item.forma_de_pago %></h4></td>
               <td><h4><%= number_to_currency(pago_item.importe, :precision => 0) %></h4></td>
-              <td><h4><%= number_to_currency(pago_item.incentivo.valor_incentivo, :precision => 0) %></h4></td>
-              <td><h4><% subtotal = pago_item.importe %></h4></td>
+              <td><h4><%= pago_item.factura_proveedor.ordene_id %></h4></td>
               <td><%= link_to 'Editar', edit_pago_pago_item_path(@pago, pago_item ), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Destroy', pago_pago_item_path(@pago, pago_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
-              <% total_general = total_general + subtotal %>
           <% end %>
             </tr>
         </tbody>
     </table> 
 
-<h4 >Subtotal Orden de Pago: <%= number_to_currency(subtotal , :precision => 0) %> </h4>
+<h4 >Subtotal Orden de Pago: <%= number_to_currency(@pago.subtotal, :precision => 0) %> </h4>
 <h4 > - Incentivos:<%= number_to_currency(@pago.incentivo_total, :precision => 0) %></h4>
-<h4 > - Prontos Pagos:<%#= number_to_currency(@pago.pago_item.importe_pronto_pago, :precision => 0) %></h4>
-<h4 >Total Orden de Pago:<%= number_to_currency(total_general - @pago.incentivo_total , :precision => 0) %></h4><br>
+<h4 > - Prontos Pagos:<%= number_to_currency(@pago.importe_pronto_pago, :precision => 0) %></h4>
+<h4 >Total Orden de Pago:<%= number_to_currency(@pago.total , :precision => 0) %></h4><br>
 <p>
   <strong>Pagada:</strong>
   <%= @pago.pagar %>

@@ -5,18 +5,22 @@ class Pago < ActiveRecord::Base
   has_many :gastos
   has_many :incentivos
   has_many :pago_items, dependent: :destroy
-  after_initialize :subtotal, :calculo_total, :calculo_incentivo_total
+  after_initialize :calculo_importe_pronto_pago, :calculo_incentivo_total,  :subtotal, :calculo_total
+
+  def calculo_importe_pronto_pago
+    self.importe_pronto_pago = self.pago_items.sum(:importe_pronto_pago)
+  end
+
+  def calculo_incentivo_total
+    self.incentivo_total = self.incentivos.sum(:valor_incentivo)
+  end
 
   def subtotal
     self.pago_items.sum(:importe)
   end
 
   def calculo_total
-    self.total = self.subtotal - self.pago_items.sum(:importe_pronto_pago) 
-  end
-
-  def calculo_incentivo_total
-    self.incentivo_total = self.incentivos.sum(:valor_incentivo)
+    self.total = self.subtotal - self.incentivo_total - self.importe_pronto_pago
   end
 
   def self.import(file)

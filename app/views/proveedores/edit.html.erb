@@ -1,6 +1,15 @@
-<h1>Editing Proveedore</h1>
+<% content_for :title do %>Proveedor<% end %>
+<h3>Editar Proveedor</h3>
+<div class="form">
+  <%= simple_form_for @proveedore do |form| %>
+    <%= form.input :nombre %>
+    <%= form.input :nit %>
+    <%= form.input :contacto_financiero %>
+    <%= form.input :contacto_comercial %>
+    <%= form.input :pronto_pago %>
+    <%= form.input :dias_pronto_pago, collection: [ 15, 30, 45 ] %>
+    <%= form.button :submit, 'Submit', class: 'submit' %>
+  <% end %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @proveedore %> |
-<%= link_to 'Back', proveedores_path %>
+<%= link_to 'Regresar', proveedores_path %>

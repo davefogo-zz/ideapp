@@ -20,7 +20,7 @@
 
 <p>
   <strong>Pronto pago:</strong>
-  <%= number_to_percentage(@proveedore.pronto_pago, precision: 0) %>
+  <%= number_to_percentage((@proveedore.pronto_pago * 100), precision: 0) %>
 </p>
 
 <p>
