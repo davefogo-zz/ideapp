@@ -3,11 +3,18 @@
 <div class="form">
   <%= simple_form_for @proveedore do |form| %>
     <%= form.input :nombre %>
-    <%= form.input :nit %>
-    <%= form.input :contacto_financiero %>
+    <%= form.input :tipo_de_documento, collection: ['CEDULA','EXTERIOR','NIT'] %>
+    <%= form.input :tipo_de_persona, collection: ['PERSONA NATURAL','PERSONA JURIDICA','EXTERIOR', 'GRAN CONTRIBUYENTE','GRAN CONTRIBUYENTE AUTORRETENEDOR', ] %>
+    <%= form.input :tipo_de_responsable, collection: ['REGIMEN SIMPLIFICADO','REGIMEN COMUN','EXTERIOR'] %>
+    <%= form.input :tipo_de_retencion_iva, collection: ['IVA REGIMEN SIMPLIFICADO','RETENCION REGIMEN COMUN','IVA REGIMEN EXTERIOR'] %>
+     <%= form.input :tipo_de_retencion_ica, collection: ['RETENCION 11.04*1000','RETENCION ICA 9.66*1000 RS','EXTERIOR'] %>
+    <%= form.input :numero_de_documento %>
+    <%= form.input :codigo_ciiu %>
+    <%= form.input :contacto_financiero %> 
     <%= form.input :contacto_comercial %>
     <%= form.input :pronto_pago %>
-    <%= form.input :dias_pronto_pago, collection: [ 15, 30, 45 ] %>
+    <%= form.input :dias_pronto_pago, collection: [ 15, 30, 35, 45 ] %>
+    <%= form.input :gasto %>
     <%= form.button :submit, 'Submit', class: 'submit' %>
   <% end %>
 </div>

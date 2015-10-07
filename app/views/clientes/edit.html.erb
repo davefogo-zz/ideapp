@@ -1,18 +1,22 @@
 <% content_for :title do %>Cliente<% end %>
 <h3>Editar Cliente</h3>
 <div class="form">
-	<%= simple_form_for @cliente do |form| %>
-    <%= form.input :nombre %>
-    <%= form.input :nit %>
+	<%= form.input :nombre %>
+    <%= form.input :tipo_de_documento, collection: ['CEDULA','EXTERIOR','NIT'] %>
+    <%= form.input :tipo_de_persona, collection: ['PERSONA NATURAL','PERSONA JURIDICA','EXTERIOR', 'GRAN CONTRIBUYENTE','GRAN CONTRIBUYENTE AUTORRETENEDOR', ] %>
+    <%= form.input :tipo_de_responsable, collection: ['REGIMEN SIMPLIFICADO','REGIMEN COMUN','EXTERIOR'] %>
+    <%= form.input :numero_de_documento %>
     <%= form.input :direccion_de_facturacion %>
     <%= form.input :ciudad %>
     <%= form.input :codigo_postal %>
     <%= form.input :pais %>
     <%= form.input :telefono %>
-    <%= form.input :tipo_de_cliente %>
     <%= form.input :contacto_comercial %>
     <%= form.input :contacto_facturacion %>
     <%= form.input :cupo_de_credito %>
+    <%= form.input :actividad, collection: ['ACTIVO','INACTIVO'] %>
+    <%= form.input :notas %>
+    <%= form.association :colaboradore, :label_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
     <%= form.association :colaboradore, :label_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
   	<%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>

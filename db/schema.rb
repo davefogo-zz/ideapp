@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004011744) do
+ActiveRecord::Schema.define(version: 20151007203803) do
 
   create_table "activo_fijos", force: :cascade do |t|
     t.date     "fecha_de_compra"
@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 20151004011744) do
 
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "nit"
-    t.string   "tipo_de_cliente"
     t.string   "contacto_comercial"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -72,6 +70,9 @@ ActiveRecord::Schema.define(version: 20151004011744) do
     t.string   "tipo_de_documento"
     t.string   "tipo_de_persona"
     t.string   "tipo_de_responsable"
+    t.string   "actividad"
+    t.string   "notas"
+    t.string   "numero_de_documento"
   end
 
   add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
@@ -343,7 +344,6 @@ ActiveRecord::Schema.define(version: 20151004011744) do
 
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre"
-    t.string   "nit"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
     t.datetime "created_at",            null: false
@@ -356,6 +356,7 @@ ActiveRecord::Schema.define(version: 20151004011744) do
     t.string   "tipo_de_persona"
     t.string   "tipo_de_retencion_iva"
     t.string   "tipo_de_retencion_ica"
+    t.string   "codigo_ciiu"
   end
 
   create_table "recibo_de_cajas", force: :cascade do |t|
