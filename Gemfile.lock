@@ -249,7 +249,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  pg
+  pg (~> 0.18.3)
   prawn
   prawn-table (~> 0.2.0)
   pundit

@@ -13,18 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20151007203803) do
 
-  create_table "activo_fijos", force: :cascade do |t|
-    t.date     "fecha_de_compra"
-    t.integer  "gasto_id"
-    t.string   "vida_util"
-    t.integer  "importe",         limit: 8
-    t.string   "depreciacion"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "descripcion"
-  end
-
-  add_index "activo_fijos", ["gasto_id"], name: "index_activo_fijos_on_gasto_id"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "ajustes", force: :cascade do |t|
     t.date     "fecha"
@@ -35,8 +25,8 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.string   "descripcion"
   end
 
-  add_index "ajustes", ["cliente_id"], name: "index_ajustes_on_cliente_id"
-  add_index "ajustes", ["proveedore_id"], name: "index_ajustes_on_proveedore_id"
+  add_index "ajustes", ["cliente_id"], name: "index_ajustes_on_cliente_id", using: :btree
+  add_index "ajustes", ["proveedore_id"], name: "index_ajustes_on_proveedore_id", using: :btree
 
   create_table "cargos", force: :cascade do |t|
     t.string   "nombre"
@@ -45,7 +35,7 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "cargos", ["departamento_id"], name: "index_cargos_on_departamento_id"
+  add_index "cargos", ["departamento_id"], name: "index_cargos_on_departamento_id", using: :btree
 
   create_table "clases", force: :cascade do |t|
     t.integer  "clase"
@@ -57,13 +47,13 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   create_table "clientes", force: :cascade do |t|
     t.string   "nombre"
     t.string   "contacto_comercial"
+    t.integer  "colaboradore_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "direccion_de_facturacion"
     t.string   "cupo_de_credito"
     t.string   "contacto_facturacion"
     t.string   "telefono"
-    t.integer  "colaboradore_id"
     t.string   "ciudad"
     t.string   "codigo_postal"
     t.string   "pais"
@@ -75,7 +65,7 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.string   "numero_de_documento"
   end
 
-  add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id"
+  add_index "clientes", ["colaboradore_id"], name: "index_clientes_on_colaboradore_id", using: :btree
 
   create_table "colaboradores", force: :cascade do |t|
     t.string   "nombre"
@@ -91,9 +81,9 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "cargo_id"
   end
 
-  add_index "colaboradores", ["cargo_id"], name: "index_colaboradores_on_cargo_id"
-  add_index "colaboradores", ["departamento_id"], name: "index_colaboradores_on_departamento_id"
-  add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id"
+  add_index "colaboradores", ["cargo_id"], name: "index_colaboradores_on_cargo_id", using: :btree
+  add_index "colaboradores", ["departamento_id"], name: "index_colaboradores_on_departamento_id", using: :btree
+  add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id", using: :btree
 
   create_table "cuenta_pucs", force: :cascade do |t|
     t.integer  "cuenta"
@@ -103,14 +93,17 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "cuenta_pucs", ["grupo_id"], name: "index_cuenta_pucs_on_grupo_id"
+  add_index "cuenta_pucs", ["grupo_id"], name: "index_cuenta_pucs_on_grupo_id", using: :btree
 
   create_table "departamentos", force: :cascade do |t|
     t.string   "nombre"
     t.string   "jefe"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "colaboradore_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "departamentos", ["colaboradore_id"], name: "index_departamentos_on_colaboradore_id", using: :btree
 
   create_table "escalas", force: :cascade do |t|
     t.decimal  "escala"
@@ -134,7 +127,6 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "iva",                limit: 8
     t.integer  "subtotal",           limit: 8
     t.boolean  "facturar_proveedor"
-    t.integer  "subcuenta_puc_id"
     t.boolean  "sin_iva"
     t.integer  "presupuesto_id"
     t.integer  "valor",              limit: 8
@@ -142,33 +134,28 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.string   "cobro_proveedor"
   end
 
-  add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id"
-  add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id"
-  add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id"
-  add_index "factura_items", ["subcuenta_puc_id"], name: "index_factura_items_on_subcuenta_puc_id"
+  add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id", using: :btree
+  add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id", using: :btree
+  add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id", using: :btree
 
   create_table "factura_proveedors", force: :cascade do |t|
     t.date     "fecha_recepcion"
     t.integer  "ordene_id"
     t.integer  "proveedore_id"
-    t.integer  "importe",             limit: 8
+    t.integer  "importe",              limit: 8
     t.boolean  "devolucion"
-    t.integer  "iva",                 limit: 8
+    t.integer  "iva",                  limit: 8
     t.date     "fecha_vencimiento"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "subcuenta_puc_id"
-    t.integer  "importe_pronto_pago", limit: 8
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "importe_pronto_pago",  limit: 8
     t.string   "numero_de_factura"
-    t.integer  "pago_item_id"
-    t.integer  "pago_id"
+    t.integer  "factura_proveedor_id"
   end
 
-  add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id"
-  add_index "factura_proveedors", ["pago_id"], name: "index_factura_proveedors_on_pago_id"
-  add_index "factura_proveedors", ["pago_item_id"], name: "index_factura_proveedors_on_pago_item_id"
-  add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id"
-  add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id"
+  add_index "factura_proveedors", ["factura_proveedor_id"], name: "index_factura_proveedors_on_factura_proveedor_id", using: :btree
+  add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id", using: :btree
+  add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id", using: :btree
 
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -181,31 +168,8 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.boolean  "facturar"
   end
 
-  add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id"
-  add_index "facturas", ["presupuesto_id"], name: "index_facturas_on_presupuesto_id"
-
-  create_table "gastos", force: :cascade do |t|
-    t.date     "fecha_recepcion"
-    t.integer  "proveedore_id"
-    t.integer  "importe",              limit: 8
-    t.integer  "iva",                  limit: 8
-    t.date     "fecha_de_vencimiento"
-    t.integer  "subcuenta_puc_id"
-    t.boolean  "asignar_a_cliente"
-    t.integer  "cliente_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.boolean  "compra_de_activo"
-    t.integer  "user_id"
-    t.integer  "pago_id"
-    t.boolean  "pago"
-  end
-
-  add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id"
-  add_index "gastos", ["pago_id"], name: "index_gastos_on_pago_id"
-  add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id"
-  add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id"
-  add_index "gastos", ["user_id"], name: "index_gastos_on_user_id"
+  add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id", using: :btree
+  add_index "facturas", ["presupuesto_id"], name: "index_facturas_on_presupuesto_id", using: :btree
 
   create_table "grupos", force: :cascade do |t|
     t.integer  "grupo"
@@ -215,28 +179,15 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "grupos", ["clase_id"], name: "index_grupos_on_clase_id"
-
-  create_table "incentivos", force: :cascade do |t|
-    t.string   "tipo_de_volumen"
-    t.string   "cobro"
-    t.integer  "medio_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "valor_incentivo", limit: 8
-    t.integer  "ordene_id"
-    t.integer  "pago_id"
-  end
-
-  add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id"
-  add_index "incentivos", ["ordene_id"], name: "index_incentivos_on_ordene_id"
-  add_index "incentivos", ["pago_id"], name: "index_incentivos_on_pago_id"
+  add_index "grupos", ["clase_id"], name: "index_grupos_on_clase_id", using: :btree
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "contacto_financiero"
     t.integer  "proveedore_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "ordene_id"
     t.string   "tipo_de_volumen"
     t.decimal  "escala"
     t.string   "rango"
@@ -259,9 +210,10 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "escala_id"
   end
 
-  add_index "medios", ["escala_id"], name: "index_medios_on_escala_id"
-  add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id"
-  add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id"
+  add_index "medios", ["escala_id"], name: "index_medios_on_escala_id", using: :btree
+  add_index "medios", ["ordene_id"], name: "index_medios_on_ordene_id", using: :btree
+  add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id", using: :btree
+  add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id", using: :btree
 
   create_table "ordenes", force: :cascade do |t|
     t.date     "fecha_orden"
@@ -270,7 +222,7 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "presupuesto_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.integer  "medio_id"
+    t.integer  "factura_id"
     t.integer  "cantidad"
     t.string   "cobertura"
     t.string   "referencia_preventa"
@@ -291,45 +243,8 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "incentivo",            limit: 8
   end
 
-  add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id"
-  add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id"
-
-  create_table "pago_items", force: :cascade do |t|
-    t.integer  "pago_id"
-    t.integer  "factura_proveedor_id"
-    t.integer  "importe",              limit: 8
-    t.string   "forma_de_pago"
-    t.boolean  "gasto"
-    t.string   "banco"
-    t.string   "numero_de_cheque"
-    t.integer  "importe_pronto_pago",  limit: 8
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "subcuenta_puc_id"
-    t.integer  "incentivo_id"
-  end
-
-  add_index "pago_items", ["factura_proveedor_id"], name: "index_pago_items_on_factura_proveedor_id"
-  add_index "pago_items", ["incentivo_id"], name: "index_pago_items_on_incentivo_id"
-  add_index "pago_items", ["pago_id"], name: "index_pago_items_on_pago_id"
-  add_index "pago_items", ["subcuenta_puc_id"], name: "index_pago_items_on_subcuenta_puc_id"
-
-  create_table "pagos", force: :cascade do |t|
-    t.date     "fecha"
-    t.integer  "proveedore_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.boolean  "gasto"
-    t.boolean  "pagar"
-    t.integer  "importe_pronto_pago",  limit: 8
-    t.integer  "total",                limit: 8
-    t.integer  "subtotal",             limit: 8
-    t.integer  "incentivo_total",      limit: 8
-    t.integer  "factura_proveedor_id"
-  end
-
-  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id"
-  add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id"
+  add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
+  add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id", using: :btree
 
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"
@@ -340,7 +255,7 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "cliente_id"
   end
 
-  add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id"
+  add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id", using: :btree
 
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre"
@@ -361,72 +276,19 @@ ActiveRecord::Schema.define(version: 20151007203803) do
 
   create_table "recibo_de_cajas", force: :cascade do |t|
     t.date     "fecha"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "cliente_id"
-  end
-
-  add_index "recibo_de_cajas", ["cliente_id"], name: "index_recibo_de_cajas_on_cliente_id"
-
-  create_table "recibo_items", force: :cascade do |t|
-    t.integer  "recibo_de_caja_id"
     t.integer  "factura_id"
+    t.integer  "importe",          limit: 8
+    t.string   "concepto"
     t.string   "forma_de_pago"
-    t.string   "numero_de_cheque"
-    t.integer  "importe",           limit: 8
-    t.date     "fecha"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "subcuenta_puc_id"
-    t.string   "banco"
-  end
-
-  add_index "recibo_items", ["factura_id"], name: "index_recibo_items_on_factura_id"
-  add_index "recibo_items", ["recibo_de_caja_id"], name: "index_recibo_items_on_recibo_de_caja_id"
-  add_index "recibo_items", ["subcuenta_puc_id"], name: "index_recibo_items_on_subcuenta_puc_id"
-
-  create_table "subcuenta_pucs", force: :cascade do |t|
-    t.integer  "subcuenta"
-    t.string   "descripcion"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "rubro"
-    t.string   "tipo_de_cuenta"
-    t.string   "moneda"
-    t.integer  "cuenta_puc_id"
-  end
-
-  add_index "subcuenta_pucs", ["cuenta_puc_id"], name: "index_subcuenta_pucs_on_cuenta_puc_id"
-
-  create_table "transaccions", force: :cascade do |t|
-    t.date     "fecha"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "codigo_de_banco"
+    t.integer  "numero_de_cheque"
     t.integer  "cliente_id"
-    t.integer  "debito",               limit: 8
-    t.integer  "credito",              limit: 8
-    t.integer  "presupuesto_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "nit"
-    t.integer  "subcuenta_puc_id"
-    t.integer  "factura_item_id"
-    t.integer  "pago_id"
-    t.integer  "recibo_de_caja_id"
-    t.integer  "gasto_id"
-    t.integer  "factura_proveedor_id"
-    t.integer  "proveedore_id"
-    t.integer  "ajuste_id"
-    t.integer  "recibo_item_id"
   end
 
-  add_index "transaccions", ["ajuste_id"], name: "index_transaccions_on_ajuste_id"
-  add_index "transaccions", ["factura_item_id"], name: "index_transaccions_on_factura_item_id"
-  add_index "transaccions", ["factura_proveedor_id"], name: "index_transaccions_on_factura_proveedor_id"
-  add_index "transaccions", ["gasto_id"], name: "index_transaccions_on_gasto_id"
-  add_index "transaccions", ["pago_id"], name: "index_transaccions_on_pago_id"
-  add_index "transaccions", ["proveedore_id"], name: "index_transaccions_on_proveedore_id"
-  add_index "transaccions", ["recibo_de_caja_id"], name: "index_transaccions_on_recibo_de_caja_id"
-  add_index "transaccions", ["recibo_item_id"], name: "index_transaccions_on_recibo_item_id"
-  add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id"
+  add_index "recibo_de_cajas", ["cliente_id"], name: "index_recibo_de_cajas_on_cliente_id", using: :btree
+  add_index "recibo_de_cajas", ["factura_id"], name: "index_recibo_de_cajas_on_factura_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -446,27 +308,34 @@ ActiveRecord::Schema.define(version: 20151007203803) do
     t.integer  "role"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "volumen", force: :cascade do |t|
-    t.string   "tipo_de_volumen"
-    t.decimal  "escala"
-    t.string   "rango"
-    t.string   "cobro"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "medio_id"
-    t.integer  "factura_item_id"
-    t.integer  "valor_volumen",   limit: 8
-    t.integer  "ordene_id"
-    t.integer  "factura_id"
-    t.integer  "pago_id"
-  end
-
-  add_index "volumen", ["factura_id"], name: "index_volumen_on_factura_id"
-  add_index "volumen", ["factura_item_id"], name: "index_volumen_on_factura_item_id"
-  add_index "volumen", ["medio_id"], name: "index_volumen_on_medio_id"
-  add_index "volumen", ["pago_id"], name: "index_volumen_on_pago_id"
-
+  add_foreign_key "ajustes", "clientes"
+  add_foreign_key "ajustes", "proveedores"
+  add_foreign_key "cargos", "departamentos"
+  add_foreign_key "clientes", "colaboradores"
+  add_foreign_key "colaboradores", "cargos"
+  add_foreign_key "colaboradores", "departamentos"
+  add_foreign_key "colaboradores", "users"
+  add_foreign_key "cuenta_pucs", "grupos"
+  add_foreign_key "departamentos", "colaboradores"
+  add_foreign_key "factura_items", "facturas"
+  add_foreign_key "factura_items", "medios"
+  add_foreign_key "factura_items", "ordenes"
+  add_foreign_key "factura_proveedors", "factura_proveedors"
+  add_foreign_key "factura_proveedors", "ordenes"
+  add_foreign_key "factura_proveedors", "proveedores"
+  add_foreign_key "facturas", "clientes"
+  add_foreign_key "facturas", "presupuestos"
+  add_foreign_key "grupos", "clases"
+  add_foreign_key "medios", "escalas"
+  add_foreign_key "medios", "ordenes"
+  add_foreign_key "medios", "presupuestos"
+  add_foreign_key "medios", "proveedores"
+  add_foreign_key "ordenes", "facturas"
+  add_foreign_key "ordenes", "presupuestos"
+  add_foreign_key "presupuestos", "clientes"
+  add_foreign_key "recibo_de_cajas", "clientes"
+  add_foreign_key "recibo_de_cajas", "facturas"
 end
