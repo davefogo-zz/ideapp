@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007203803) do
+ActiveRecord::Schema.define(version: 20151013175751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activo_fijos", force: :cascade do |t|
+    t.date     "fecha_de_compra"
+    t.integer  "gasto_id"
+    t.string   "vida_util"
+    t.integer  "importe",         limit: 8
+    t.string   "depreciacion"
+    t.string   "descripcion"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "activo_fijos", ["gasto_id"], name: "index_activo_fijos_on_gasto_id", using: :btree
 
   create_table "ajustes", force: :cascade do |t|
     t.date     "fecha"
@@ -171,6 +184,29 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id", using: :btree
   add_index "facturas", ["presupuesto_id"], name: "index_facturas_on_presupuesto_id", using: :btree
 
+  create_table "gastos", force: :cascade do |t|
+    t.date     "fecha_recepcion"
+    t.integer  "proveedore_id"
+    t.integer  "importe",              limit: 8
+    t.integer  "iva",                  limit: 8
+    t.date     "fecha_de_vencimiento"
+    t.integer  "subcuenta_puc_id"
+    t.boolean  "asignar_a_cliente"
+    t.integer  "cliente_id"
+    t.boolean  "compra_de_activo"
+    t.integer  "user_id"
+    t.integer  "pago_id"
+    t.boolean  "pago"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id", using: :btree
+  add_index "gastos", ["pago_id"], name: "index_gastos_on_pago_id", using: :btree
+  add_index "gastos", ["proveedore_id"], name: "index_gastos_on_proveedore_id", using: :btree
+  add_index "gastos", ["subcuenta_puc_id"], name: "index_gastos_on_subcuenta_puc_id", using: :btree
+  add_index "gastos", ["user_id"], name: "index_gastos_on_user_id", using: :btree
+
   create_table "grupos", force: :cascade do |t|
     t.integer  "grupo"
     t.string   "descripcion"
@@ -180,6 +216,21 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   end
 
   add_index "grupos", ["clase_id"], name: "index_grupos_on_clase_id", using: :btree
+
+  create_table "incentivos", force: :cascade do |t|
+    t.string   "tipo_de_volumen"
+    t.string   "cobro"
+    t.integer  "medio_id"
+    t.integer  "valor_incnetivo", limit: 8
+    t.integer  "ordene_id"
+    t.integer  "pago_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id", using: :btree
+  add_index "incentivos", ["ordene_id"], name: "index_incentivos_on_ordene_id", using: :btree
+  add_index "incentivos", ["pago_id"], name: "index_incentivos_on_pago_id", using: :btree
 
   create_table "medios", force: :cascade do |t|
     t.string   "nombre"
@@ -246,6 +297,43 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id", using: :btree
 
+  create_table "pago_items", force: :cascade do |t|
+    t.integer  "pago_id"
+    t.integer  "factura_proveedor_id"
+    t.integer  "importe",              limit: 8
+    t.string   "forma_de_pago"
+    t.boolean  "gasto"
+    t.string   "banco"
+    t.string   "numero_de_cheque"
+    t.integer  "importe_pronto_pago",  limit: 8
+    t.integer  "subcuenta_puc_id"
+    t.integer  "incentivo_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "pago_items", ["factura_proveedor_id"], name: "index_pago_items_on_factura_proveedor_id", using: :btree
+  add_index "pago_items", ["incentivo_id"], name: "index_pago_items_on_incentivo_id", using: :btree
+  add_index "pago_items", ["pago_id"], name: "index_pago_items_on_pago_id", using: :btree
+  add_index "pago_items", ["subcuenta_puc_id"], name: "index_pago_items_on_subcuenta_puc_id", using: :btree
+
+  create_table "pagos", force: :cascade do |t|
+    t.date     "fecha"
+    t.integer  "factura_proveedor_id"
+    t.integer  "proveedore_id"
+    t.boolean  "gasto"
+    t.boolean  "pagar"
+    t.integer  "importe_pronto_pago",  limit: 8
+    t.integer  "subtotal",             limit: 8
+    t.integer  "total",                limit: 8
+    t.integer  "incentivo_total",      limit: 8
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "pagos", ["factura_proveedor_id"], name: "index_pagos_on_factura_proveedor_id", using: :btree
+  add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id", using: :btree
+
   create_table "presupuestos", force: :cascade do |t|
     t.datetime "fecha"
     t.string   "titulo"
@@ -276,19 +364,71 @@ ActiveRecord::Schema.define(version: 20151007203803) do
 
   create_table "recibo_de_cajas", force: :cascade do |t|
     t.date     "fecha"
-    t.integer  "factura_id"
-    t.integer  "importe",          limit: 8
-    t.string   "concepto"
-    t.string   "forma_de_pago"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "codigo_de_banco"
-    t.integer  "numero_de_cheque"
     t.integer  "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "recibo_de_cajas", ["cliente_id"], name: "index_recibo_de_cajas_on_cliente_id", using: :btree
-  add_index "recibo_de_cajas", ["factura_id"], name: "index_recibo_de_cajas_on_factura_id", using: :btree
+
+  create_table "recibo_items", force: :cascade do |t|
+    t.integer  "recibo_de_caja_id"
+    t.integer  "factura_id"
+    t.string   "forma_de_pago"
+    t.string   "numero_de_cheque"
+    t.integer  "importe",           limit: 8
+    t.date     "fecha"
+    t.integer  "subcuenta_puc_id"
+    t.string   "banco"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "recibo_items", ["factura_id"], name: "index_recibo_items_on_factura_id", using: :btree
+  add_index "recibo_items", ["recibo_de_caja_id"], name: "index_recibo_items_on_recibo_de_caja_id", using: :btree
+  add_index "recibo_items", ["subcuenta_puc_id"], name: "index_recibo_items_on_subcuenta_puc_id", using: :btree
+
+  create_table "subcuenta_pucs", force: :cascade do |t|
+    t.integer  "subcuenta"
+    t.string   "descripcion"
+    t.integer  "cuenta_puc_id"
+    t.string   "moneda"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "subcuenta_pucs", ["cuenta_puc_id"], name: "index_subcuenta_pucs_on_cuenta_puc_id", using: :btree
+
+  create_table "transaccions", force: :cascade do |t|
+    t.date     "fecha"
+    t.integer  "cliente_id"
+    t.integer  "debito",               limit: 8
+    t.integer  "credito",              limit: 8
+    t.integer  "presupuesto_id"
+    t.integer  "subcuenta_puc_id"
+    t.integer  "factura_item_id"
+    t.integer  "pago_id"
+    t.integer  "recibo_de_caja_id"
+    t.integer  "gasto_id"
+    t.integer  "factura_proveedor_id"
+    t.integer  "proveedore_id"
+    t.integer  "ajuste_id"
+    t.integer  "recibo_item_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "transaccions", ["ajuste_id"], name: "index_transaccions_on_ajuste_id", using: :btree
+  add_index "transaccions", ["cliente_id"], name: "index_transaccions_on_cliente_id", using: :btree
+  add_index "transaccions", ["factura_item_id"], name: "index_transaccions_on_factura_item_id", using: :btree
+  add_index "transaccions", ["factura_proveedor_id"], name: "index_transaccions_on_factura_proveedor_id", using: :btree
+  add_index "transaccions", ["gasto_id"], name: "index_transaccions_on_gasto_id", using: :btree
+  add_index "transaccions", ["pago_id"], name: "index_transaccions_on_pago_id", using: :btree
+  add_index "transaccions", ["presupuesto_id"], name: "index_transaccions_on_presupuesto_id", using: :btree
+  add_index "transaccions", ["proveedore_id"], name: "index_transaccions_on_proveedore_id", using: :btree
+  add_index "transaccions", ["recibo_de_caja_id"], name: "index_transaccions_on_recibo_de_caja_id", using: :btree
+  add_index "transaccions", ["recibo_item_id"], name: "index_transaccions_on_recibo_item_id", using: :btree
+  add_index "transaccions", ["subcuenta_puc_id"], name: "index_transaccions_on_subcuenta_puc_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -311,6 +451,7 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "activo_fijos", "gastos"
   add_foreign_key "ajustes", "clientes"
   add_foreign_key "ajustes", "proveedores"
   add_foreign_key "cargos", "departamentos"
@@ -328,14 +469,42 @@ ActiveRecord::Schema.define(version: 20151007203803) do
   add_foreign_key "factura_proveedors", "proveedores"
   add_foreign_key "facturas", "clientes"
   add_foreign_key "facturas", "presupuestos"
+  add_foreign_key "gastos", "clientes"
+  add_foreign_key "gastos", "pagos"
+  add_foreign_key "gastos", "proveedores"
+  add_foreign_key "gastos", "subcuenta_pucs"
+  add_foreign_key "gastos", "users"
   add_foreign_key "grupos", "clases"
+  add_foreign_key "incentivos", "medios"
+  add_foreign_key "incentivos", "ordenes"
+  add_foreign_key "incentivos", "pagos"
   add_foreign_key "medios", "escalas"
   add_foreign_key "medios", "ordenes"
   add_foreign_key "medios", "presupuestos"
   add_foreign_key "medios", "proveedores"
   add_foreign_key "ordenes", "facturas"
   add_foreign_key "ordenes", "presupuestos"
+  add_foreign_key "pago_items", "factura_proveedors"
+  add_foreign_key "pago_items", "incentivos"
+  add_foreign_key "pago_items", "pagos"
+  add_foreign_key "pago_items", "subcuenta_pucs"
+  add_foreign_key "pagos", "factura_proveedors"
+  add_foreign_key "pagos", "proveedores"
   add_foreign_key "presupuestos", "clientes"
   add_foreign_key "recibo_de_cajas", "clientes"
-  add_foreign_key "recibo_de_cajas", "facturas"
+  add_foreign_key "recibo_items", "facturas"
+  add_foreign_key "recibo_items", "recibo_de_cajas"
+  add_foreign_key "recibo_items", "subcuenta_pucs"
+  add_foreign_key "subcuenta_pucs", "cuenta_pucs"
+  add_foreign_key "transaccions", "ajustes"
+  add_foreign_key "transaccions", "clientes"
+  add_foreign_key "transaccions", "factura_items"
+  add_foreign_key "transaccions", "factura_proveedors"
+  add_foreign_key "transaccions", "gastos"
+  add_foreign_key "transaccions", "pagos"
+  add_foreign_key "transaccions", "presupuestos"
+  add_foreign_key "transaccions", "proveedores"
+  add_foreign_key "transaccions", "recibo_de_cajas"
+  add_foreign_key "transaccions", "recibo_items"
+  add_foreign_key "transaccions", "subcuenta_pucs"
 end
