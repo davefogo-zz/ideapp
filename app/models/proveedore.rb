@@ -2,7 +2,7 @@ class Proveedore < ActiveRecord::Base
   has_many :medios, dependent: :destroy
   has_many :transaccions
   has_many :ajustes
-  validates :nombre, :nit, presence: true, uniqueness: true
+  validates :nombre, :numero_de_documento, presence: true, uniqueness: true
   
   def self.search(search)
   	where("nombre LIKE ? OR nit LIKE ?", "%#{search}%", "%#{search}%")

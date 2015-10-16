@@ -77,7 +77,7 @@ class ProveedoresController < ApplicationController
 
   def import
     Proveedore.import(params[:file])
-    authorize @proveedore
+    authorize Proveedore
     redirect_to proveedores_path, notice: 'Datos subidos.'
   end
 
@@ -89,6 +89,6 @@ class ProveedoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proveedore_params
-      params.require(:proveedore).permit(:nombre, :nit, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :pronto_pago, :dias_pronto_pago, :tipo_de_documento, :tipo_de_responsable, :tipo_de_persona, :tipo_de_retencion_iva, :tipo_de_retencion_ica)
+      params.require(:proveedore).permit(:nombre, :direccion, :telefono, :contacto_financiero, :contacto_comercial, :pronto_pago, :dias_pronto_pago, :tipo_de_documento, :tipo_de_responsable, :tipo_de_persona, :tipo_de_retencion_iva, :tipo_de_retencion_ica, :numero_de_documento)
     end
 end

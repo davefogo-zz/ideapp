@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013175751) do
+ActiveRecord::Schema.define(version: 20151016185237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 20151013175751) do
     t.string   "zona"
     t.string   "tipo_de_medio"
     t.integer  "escala_id"
+    t.integer  "iva"
   end
 
   add_index "medios", ["escala_id"], name: "index_medios_on_escala_id", using: :btree
@@ -360,6 +361,7 @@ ActiveRecord::Schema.define(version: 20151013175751) do
     t.string   "tipo_de_retencion_iva"
     t.string   "tipo_de_retencion_ica"
     t.string   "codigo_ciiu"
+    t.string   "numero_de_documento"
   end
 
   create_table "recibo_de_cajas", force: :cascade do |t|

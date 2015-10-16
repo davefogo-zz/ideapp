@@ -23,7 +23,7 @@
             <% @proveedores.each do |proveedore| %>
               <tr>
                 <td><%= proveedore.nombre %></td>
-                <td><%= proveedore.nit %></td>
+                <td><%= proveedore.numero_de_documento %></td>
                 <td><%= proveedore.contacto_financiero %></td>
                 <td><%= proveedore.contacto_comercial %></td>
                 <td><%= link_to 'Mostrar', proveedore, class: 'btn btn-mini btn-default' %></td>
