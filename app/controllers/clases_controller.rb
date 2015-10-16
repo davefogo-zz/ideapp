@@ -21,6 +21,11 @@ class ClasesController < ApplicationController
 	    end
 	end
 
+  def import
+    Clase.import(params[:file])
+    redirect_to clases_path, notice: 'Datos subidos.'
+  end
+
 	def update
     respond_to do |format|
       authorize @subcuenta_puc

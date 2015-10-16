@@ -78,8 +78,8 @@ class MediosController < ApplicationController
   end
 
   def import
+    authorize Medio
     Medio.import(params[:file])
-    authorize @medio
     redirect_to medios_path, notice: 'Datos subidos.'
   end
 

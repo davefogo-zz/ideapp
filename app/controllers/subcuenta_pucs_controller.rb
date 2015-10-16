@@ -37,8 +37,8 @@ class SubcuentaPucsController < ApplicationController
 
 
   def import
+  	authorize SubcuentaPuc
     SubcuentaPuc.import(params[:file])
-    authorize @subcuenta_puc
     redirect_to subcuenta_pucs_path, notice: 'Datos subidos.'
   end
 

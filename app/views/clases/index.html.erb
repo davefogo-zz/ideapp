@@ -21,7 +21,11 @@
 
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'Nueva Clase', new_clase_path %>
+<br>
+<br>
+<%= form_tag import_clases_path, multipart: true do%>
+  <%= file_field_tag :file %><br>
+  <%= submit_tag 'Subir Datos', class: 'btn btn-default' %>
+<% end %><br>
