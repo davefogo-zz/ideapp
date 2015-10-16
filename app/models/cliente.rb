@@ -6,7 +6,7 @@ class Cliente < ActiveRecord::Base
   has_many :recibo_de_cajas
   has_many :transaccions
   has_many :ajustes
-  validates :nombre, presence: true, uniqueness: true #,:nit
+  validates :nombre, :numero_de_documento, presence: true, uniqueness: true
   #validates :nit, length: {is: 11} 
 
   #def self.search(search)

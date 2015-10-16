@@ -27,13 +27,13 @@
           <% @clientes.each do |cliente| %>
             <tr>
               <td><%= cliente.nombre %></td>
-              <td><%= cliente.try(:nit) %></td>
+              <td><%= cliente.numero_de_documento %></td>
               <td><%= cliente.direccion_de_facturacion %></td>
               <td><%= cliente.telefono %></td>
               <td><%= cliente.contacto_comercial %></td>
               <td><%= cliente.contacto_facturacion %></td>
               <td><%= cliente.cupo_de_credito %></td>
-              <td><%= cliente.colaboradore.nombre %></td>
+              <td><%= cliente.colaboradore.try(:nombre) %></td>
               <td><%= link_to 'Mostrar', cliente, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_cliente_path(cliente), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', cliente, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
