@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019160831) do
+ActiveRecord::Schema.define(version: 20151019163930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,6 +266,20 @@ ActiveRecord::Schema.define(version: 20151019160831) do
   add_index "medios", ["ordene_id"], name: "index_medios_on_ordene_id", using: :btree
   add_index "medios", ["presupuesto_id"], name: "index_medios_on_presupuesto_id", using: :btree
   add_index "medios", ["proveedore_id"], name: "index_medios_on_proveedore_id", using: :btree
+
+  create_table "orden_anuladas", force: :cascade do |t|
+    t.date     "fecha_orden"
+    t.integer  "orden_reemplazada"
+    t.string   "unidad"
+    t.integer  "costo_unidad"
+    t.integer  "presupuesto"
+    t.integer  "cantidad"
+    t.decimal  "descuento"
+    t.integer  "iva"
+    t.integer  "total"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "ordenes", force: :cascade do |t|
     t.date     "fecha_orden"
