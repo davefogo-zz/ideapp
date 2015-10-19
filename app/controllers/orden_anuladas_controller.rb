@@ -86,4 +86,5 @@ class OrdenAnuladasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def orden_anulada_params
       params.require(:orden_anulada).permit(:fecha_orden, :orden_reemplazada, :unidad, :costo_unidad, :presupuesto, :cantidad, :iva, :total)
+    end 
 end      
