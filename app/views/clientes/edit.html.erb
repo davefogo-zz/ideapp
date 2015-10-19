@@ -1,6 +1,7 @@
 <% content_for :title do %>Cliente<% end %>
 <h3>Editar Cliente</h3>
 <div class="form">
+   <%= simple_form_for @cliente do |form|%>
 	<%= form.input :nombre %>
     <%= form.input :tipo_de_documento, collection: ['CEDULA','EXTERIOR','NIT'] %>
     <%= form.input :tipo_de_persona, collection: ['PERSONA NATURAL','PERSONA JURIDICA','EXTERIOR', 'GRAN CONTRIBUYENTE','GRAN CONTRIBUYENTE AUTORRETENEDOR', ] %>

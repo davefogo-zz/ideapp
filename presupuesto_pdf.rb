@@ -70,7 +70,7 @@ class FacturaPdf < Prawn::Document
 		bounding_box([0, 625], :width => 150, :height => 15) do
 			text " #{@factura.cliente.nombre}", size: 10
 		end
-		text " #{@factura.cliente.nit}", size: 10
+		text " #{@factura.cliente.numero_de_documento}", size: 10
 		text " #{@factura.cliente.direccion_de_facturacion}", size: 10
 		text " #{@factura.cliente.ciudad}", size: 10
 		text " #{@factura.cliente.codigo_postal}", size: 10

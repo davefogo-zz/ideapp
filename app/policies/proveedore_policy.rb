@@ -34,4 +34,8 @@ class ProveedorePolicy
     @current_user.admin? or @current_user.contador? or @current_user.analista_tesoreria? 
   end
 
+  def import?
+    @current_user.admin?
+  end
+
 end

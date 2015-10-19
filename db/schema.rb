@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016185237) do
+ActiveRecord::Schema.define(version: 20151019160831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -293,9 +293,11 @@ ActiveRecord::Schema.define(version: 20151016185237) do
     t.integer  "total",                limit: 8
     t.date     "facturado"
     t.integer  "incentivo",            limit: 8
+    t.integer  "medio_id"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
+  add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id", using: :btree
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id", using: :btree
 
   create_table "pago_items", force: :cascade do |t|
@@ -336,7 +338,7 @@ ActiveRecord::Schema.define(version: 20151016185237) do
   add_index "pagos", ["proveedore_id"], name: "index_pagos_on_proveedore_id", using: :btree
 
   create_table "presupuestos", force: :cascade do |t|
-    t.datetime "fecha"
+    t.date     "fecha"
     t.string   "titulo"
     t.string   "producto"
     t.datetime "created_at", null: false
@@ -485,6 +487,7 @@ ActiveRecord::Schema.define(version: 20151016185237) do
   add_foreign_key "medios", "presupuestos"
   add_foreign_key "medios", "proveedores"
   add_foreign_key "ordenes", "facturas"
+  add_foreign_key "ordenes", "medios"
   add_foreign_key "ordenes", "presupuestos"
   add_foreign_key "pago_items", "factura_proveedors"
   add_foreign_key "pago_items", "incentivos"

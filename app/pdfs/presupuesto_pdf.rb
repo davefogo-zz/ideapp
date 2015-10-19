@@ -72,7 +72,7 @@ class PresupuestoPdf < Prawn::Document
 				 :at => [0, 605],
 				 :height => 15,
 				 :width => 200	
-		text_box "#{@presupuesto.cliente.nit}", size:10,
+		text_box "#{@presupuesto.cliente.numero_de_documento}", size:10,
 				 :at => [20, 590],
 				 :height => 15,
 				 :width => 200	 

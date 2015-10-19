@@ -1,6 +1,13 @@
-<h1>Editing Presupuesto</h1>
+<% content_for :title do %>Presupuestos<% end %>
+<h3>Editar Presupuesto</h3>
+<div class="form">
+    <%= simple_form_for @presupuesto do |form| %>
+    <%= form.input :fecha %>
+    <%= form.association :cliente, :label_method => :nombre, include_blank: false, label: "Cliente"  %>
+    <%= form.input :titulo %>
+    <%= form.input :producto %>
+     <%= form.button :submit, 'Guardar', class: 'submit' %>
+    <% end %>
+  </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @presupuesto %> |
-<%= link_to 'Back', presupuestos_path %>
+<%= link_to 'Regresar', presupuestos_path %>
