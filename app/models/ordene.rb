@@ -6,7 +6,7 @@ class Ordene < ActiveRecord::Base
   validates :fecha_orden, :unidad, :costo_unidad, :presupuesto_id, :medio_id, :cantidad, :descuento, presence: true
   before_save :calculate_iva, :calculate_subtotal, :calculate_incentivo, :calculate_total
   after_save :generate_factura_item, :if => :aprobado_por_cliente?
-  before_destroy :generate_ordene_anulada
+  before_destroy :generate_orden_anulada
 
     def calculate_iva
       self.iva = (costo_unidad * 0.16)
@@ -48,7 +48,7 @@ class Ordene < ActiveRecord::Base
       Incentivo.create!(valor_incentivo: self.incentivo, medio_id: self.medio_id, ordene_id: self.id, tipo_de_volumen: self.medio.tipo_de_volumen, cobro: self.medio.cobro)
     end
 
-    def generate_ordene_anulada
+    def generate_orden_anulada
       OrdenAnulada.create!(fecha_orden: self.fecha_orden, orden_reemplazada: self.id, unidad: self.unidad, costo_unidad: self.costo_unidad, presupuesto: self.presupuesto_id, cantidad: self.cantidad, descuento: self.descuento, iva: self.iva, total: self.total)
     end
 end
