@@ -18,6 +18,11 @@
               <th>Dirección</th>
               <th>Teléfono</th>
               <th>Proveedor</th>
+              <th>Tipo de Volumen</th>
+              <th>Cobro</th>
+              <th>Escala</th>
+              <th>IVA</th>
+              <th>Notas</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -29,6 +34,11 @@
               <td><%= medio.direccion %></td>
               <td><%= medio.telefono %></td>
               <td><%= medio.proveedore.try(:nombre) %></td>
+              <td><%= medio.tipo_de_volumen %></td>
+              <td><%= medio.cobro %></td>
+              <td><%= medio.escala.try(:escala)%></td>
+              <td><%= medio.iva %></td>
+              <td><%= medio.notas %></td>
               <td><%= link_to 'Mostrar', medio, class: 'btn btn-mini btn-default' %></td>
               <td><%= link_to 'Editar', edit_medio_path(medio), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Eliminar', medio, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>

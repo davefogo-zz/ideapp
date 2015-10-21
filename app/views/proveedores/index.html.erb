@@ -14,8 +14,14 @@
             <tr>
               <th>Nombre</th>
               <th>Nit</th>
-              <th>Contacto financiero</th>
-              <th>Contacto comercial</th>
+              <th>Pronto Pago</th>
+              <th> % Pronto Pago</th>
+              <th>Tipo de Responsable</th>
+              <th>Tipo de Persona</th>
+              <th>Tipo de Retencion IVA</th>
+              <th>Tipo de Retencion ICA</th>
+              <th>Codigo CIIU</th>
+              <th>Dias Pronto Pago</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -24,8 +30,14 @@
               <tr>
                 <td><%= proveedore.nombre %></td>
                 <td><%= proveedore.numero_de_documento %></td>
-                <td><%= proveedore.contacto_financiero %></td>
-                <td><%= proveedore.contacto_comercial %></td>
+                <td><%= proveedore.pronto_pago %></td>
+                <td><%= number_to_percentage(proveedore.porcentaje_pronto_pago) %></td>
+                <td><%= proveedore.dias_pronto_pago %></td>
+                <td><%= proveedore.tipo_de_responsable %></td>
+                <td><%= proveedore.tipo_de_persona %></td>
+                <td><%= proveedore.tipo_de_retencion_iva %></td>
+                <td><%= proveedore.tipo_de_retencion_ica %></td>
+                <td><%= proveedore.codigo_ciiu %></td>
                 <td><%= link_to 'Mostrar', proveedore, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_proveedore_path(proveedore), class: 'btn btn-mini btn-success' %></td>
                 <td><%= link_to 'Eliminar', proveedore, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
