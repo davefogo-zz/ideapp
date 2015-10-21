@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019163930) do
+ActiveRecord::Schema.define(version: 20151021023344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,18 +240,6 @@ ActiveRecord::Schema.define(version: 20151019163930) do
     t.datetime "updated_at",          null: false
     t.integer  "ordene_id"
     t.string   "tipo_de_volumen"
-    t.decimal  "escala"
-    t.string   "rango"
-    t.decimal  "escala2"
-    t.string   "rango2"
-    t.decimal  "escala3"
-    t.string   "rango3"
-    t.decimal  "escala4"
-    t.string   "rango4"
-    t.decimal  "escala5"
-    t.string   "rango5"
-    t.decimal  "escala6"
-    t.string   "rango6"
     t.string   "cobro"
     t.integer  "presupuesto_id"
     t.string   "direccion"
@@ -260,6 +248,7 @@ ActiveRecord::Schema.define(version: 20151019163930) do
     t.string   "tipo_de_medio"
     t.integer  "escala_id"
     t.integer  "iva"
+    t.string   "notas"
   end
 
   add_index "medios", ["escala_id"], name: "index_medios_on_escala_id", using: :btree
@@ -366,8 +355,8 @@ ActiveRecord::Schema.define(version: 20151019163930) do
     t.string   "nombre"
     t.string   "contacto_financiero"
     t.string   "contacto_comercial"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.decimal  "pronto_pago"
     t.integer  "dias_pronto_pago"
     t.boolean  "gasto"
@@ -378,6 +367,7 @@ ActiveRecord::Schema.define(version: 20151019163930) do
     t.string   "tipo_de_retencion_ica"
     t.string   "codigo_ciiu"
     t.string   "numero_de_documento"
+    t.decimal  "porcentaje_pronto_pago"
   end
 
   create_table "recibo_de_cajas", force: :cascade do |t|
