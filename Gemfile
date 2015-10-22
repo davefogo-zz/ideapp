@@ -26,6 +26,7 @@ group :development, :test do
   gem 'spring', '~> 1.3.4'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'foreman'
 end
 group :test do
   gem 'capybara'
