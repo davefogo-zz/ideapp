@@ -1,7 +1,7 @@
 <div class="row">
   <h1>Listado de Transacciones</h1>
   <div class="pull-right range-query">
-     <%= form_tag transaccions_path, method: :get do %>
+     <%= form_tag ajuste_transaccions_path, method: :get do %>
         <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
         <%= text_field_tag 'search[fecha_to]', @search.fecha_to %>
         <%= submit_tag 'Buscar', class: 'btn search-button' %>
@@ -39,4 +39,4 @@
   </div>
 </div>
 <br>
-<%= link_to 'Nuevo asiento contable', new_transaccion_path %>
+<%= link_to 'Nuevo asiento contable', new_ajuste_transaccions_path(@ajuste) %>

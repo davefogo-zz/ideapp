@@ -3,7 +3,7 @@
 <div class="form">
   <%= simple_form_for([@ajuste, @transaccion]) do |form| %>
     <%= form.input :fecha %>
-    <%= form.association :subcuenta_puc, :label_method => :id, include_blank: true, label: "Subcuenta"  %>
+    <%= form.association :subcuenta_puc, :label_method => :descripcion, include_blank: true, label: "Subcuenta"  %>
     <%= form.input :debito %>
     <%= form.input :credito %>
     <%= form.button :submit, 'Guardar', class: 'submit' %>

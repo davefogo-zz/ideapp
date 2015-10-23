@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   resources :subcuenta_pucs do 
     collection { post :import }
   end
-  resources :transaccions
   resources :volumenes
   resources :factura_proveedors do 
     collection { post :import }

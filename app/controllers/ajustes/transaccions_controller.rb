@@ -16,7 +16,7 @@ class Ajustes::TransaccionsController < ApplicationController
 
   def new
     @ajuste = Ajuste.find(params[:ajuste_id])
-    authorize @transaccion
+    authorize Transaccion
     @transaccion = Transaccion.new
   end
 
@@ -26,7 +26,7 @@ class Ajustes::TransaccionsController < ApplicationController
 
   def create
     @ajuste = Ajuste.find(params[:ajuste_id])
-    authorize @transaccion
+    authorize Transaccion
     @transaccion = Transaccion.new(transaccion_params)
     @transaccion.ajuste = @ajuste
 
