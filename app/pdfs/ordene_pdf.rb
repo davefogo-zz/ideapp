@@ -66,7 +66,7 @@ class OrdenePdf < Prawn::Document
 				 :at => [0, 590],
 				 :height => 15,
 				 :width => 200	
-		text_box "#{@presupuesto.cliente.nit}", size:10,
+		text_box "#{@presupuesto.cliente.numero_de_documento}", size:10,
 				 :at => [25, 590],
 				 :height => 15,
 				 :width => 200	
@@ -147,6 +147,18 @@ class OrdenePdf < Prawn::Document
 				 :width => 200	
 			text_box "Unidad:", size: 10, style: :bold,
 				 :at => [150, 480],
+				 :height => 15,
+				 :width => 200
+			text_box "Medidas (CM X COL)", size: 10, style: :bold,
+				 :at => [250, 480],
+				 :height => 15,
+				 :width => 200
+			text_box "#{@ordene.cm}", size: 10, style: :bold,
+				 :at => [250, 465],
+				 :height => 15,
+				 :width => 200
+			text_box "#{@ordene.col}", size: 10, style: :bold,
+				 :at => [330, 465],
 				 :height => 15,
 				 :width => 200
 			text_box "#{@ordene.unidad}", size:8,

@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Medida:</strong>
-  <%= @ordene.try(:medida)%>
+  <strong>Medidas (CM x COL):</strong>
+  <%= @ordene.try(:cm)%> x <%= @ordene.try(:col)%>
 </p>
 
 <p>
@@ -54,5 +54,10 @@
   <strong>Presupuesto No.:</strong>
   <%= @ordene.presupuesto.id %>
 </p>
-<p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_ordene_path( :ordene_id => @ordene, format: 'pdf') %></p>
+
+<p>
+  <strong>Notas:</strong>
+  <%= @ordene.notas %>
+</p>
+<p><%= link_to 'Descargar Orden en PDF', presupuesto_ordene_path( :ordene_id => @ordene, format: 'pdf') %></p>
 <p><%= link_to 'Regresar', presupuesto_path(@presupuesto) %><br>
