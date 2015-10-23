@@ -14,7 +14,7 @@ class FacturaPdf < Prawn::Document
 	end
 
 	def logo
-		image "#{Rails.root}/app/assets/images/Logo_ideamos.jpg", :width => 150, :height => 30
+		image "#{Rails.root}/app/assets/images/Logo_Ideamos.jpg", :width => 150, :height => 30
 	end
 
 	def price(num)
