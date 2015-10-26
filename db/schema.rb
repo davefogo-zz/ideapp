@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021023344) do
+ActiveRecord::Schema.define(version: 20151026160922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,11 +145,13 @@ ActiveRecord::Schema.define(version: 20151021023344) do
     t.integer  "valor",              limit: 8
     t.integer  "total",              limit: 8
     t.string   "cobro_proveedor"
+    t.integer  "subcuenta_puc_id"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id", using: :btree
   add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id", using: :btree
   add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id", using: :btree
+  add_index "factura_items", ["subcuenta_puc_id"], name: "index_factura_items_on_subcuenta_puc_id", using: :btree
 
   create_table "factura_proveedors", force: :cascade do |t|
     t.date     "fecha_recepcion"
@@ -472,6 +474,7 @@ ActiveRecord::Schema.define(version: 20151021023344) do
   add_foreign_key "factura_items", "facturas"
   add_foreign_key "factura_items", "medios"
   add_foreign_key "factura_items", "ordenes"
+  add_foreign_key "factura_items", "subcuenta_pucs"
   add_foreign_key "factura_proveedors", "factura_proveedors"
   add_foreign_key "factura_proveedors", "ordenes"
   add_foreign_key "factura_proveedors", "proveedores"
