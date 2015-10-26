@@ -46,6 +46,7 @@
         <tbody>
         <% @transaccions.each do |transaccion| %>
             <tr>
+              <td><h4><%= transaccion.try(:fecha) %></h4></td>
               <td><h4><%= transaccion.subcuenta_puc_id %></h4></td>
               <td><h4><%= transaccion.subcuenta_puc.try(:descripcion) %></h4></td>
               <td><h4><%= transaccion.try(:debito) %></h4></td>

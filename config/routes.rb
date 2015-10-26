@@ -53,7 +53,9 @@ Rails.application.routes.draw do
   end
   resources :ajustes do
     collection { post :import }
+    collection { get :total }
     resources :transaccions, controller: 'ajustes/transaccions'
+    #get 'total'
   end
   resources :presupuestos do
     collection { post :import }

@@ -70,6 +70,9 @@
         <% if policy(Ajuste).index? %>
           <li><%= link_to 'Ajustes Contables', ajustes_path %></li>
         <% end %>
+        <% if policy(Ajuste).index? %>
+          <li><%= link_to 'Libro Diario Oficial', total_ajustes_path %></li>
+        <% end %>
         <% if policy(Escala).index? %>
           <li><%= link_to 'Escalas', escalas_path %></li>
         <% end %>

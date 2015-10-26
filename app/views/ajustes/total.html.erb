@@ -1,11 +1,11 @@
 <div class="row">
   <h1>Listado de Transacciones</h1>
   <div class="pull-right range-query">
-     <%= form_tag ajuste_totals_path, method: :get do %>
-        <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
-        <%= text_field_tag 'search[fecha_to]', @search.fecha_to %>
-        <%= submit_tag 'Buscar', class: 'btn search-button' %>
-      <% end %>
+     <%#= form_tag ajuste_transaccions_path, method: :get do %>
+        <%#= text_field_tag 'search[fecha_from]', @search.fecha_from %>
+        <%#= text_field_tag 'search[fecha_to]', @search.fecha_to %>
+        <%#= submit_tag 'Buscar', class: 'btn search-button' %>
+      <%# end %>
   </div>
 </div>
 <div class="media">
@@ -17,8 +17,8 @@
           <th>Fecha</th>
           <th>Debito</th>
           <th>Credito</th>
-          <th>Puc</th>
           <th>Cuenta</th>
+          <th>Numero de Ajuste</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -29,14 +29,16 @@
             <td><%= number_to_currency(transaccion.debito) %></td>
             <td><%= number_to_currency(transaccion.credito) %></td>
             <td><%= transaccion.subcuenta_puc_id %></td>
-            <td><%= link_to 'Mostrar', transaccion, class: 'btn btn-mini btn-default' %></td>
-                <td><%= link_to 'Editar', edit_transaccion_path(transaccion), class: 'btn btn-mini btn-success' %></td>
-            <td><%= link_to 'Eliminar', transaccion, class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Confirma?' } %></td>
+            <td><%= transaccion.ajuste_id %></td>
           </tr>
         <% end %>
+		<p>
+	  		<strong>Total Debito:</strong>
+	  		<%= Transaccion.sum(:debito) %>
+		</p>
       </tbody>
     </table>
   </div>
 </div>
 <br>
-<%= link_to 'Nuevo asiento contable', new_ajuste_transaccions_path(@ajuste) %>
+<%= link_to 'Descargar Reporte', total_ajustes_path(format: "csv"), class: 'btn btn-default' %>

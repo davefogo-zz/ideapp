@@ -87,6 +87,15 @@ class AjustesController < ApplicationController
     end
   end
 
+  def total
+    @ajustes = Ajuste.all
+    @transaccions = Transaccion.all
+    respond_to do |format|
+      format.html
+      format.csv {render text: @transaccions.to_csv }
+    end
+  end
+
   def import
     Ajuste.import(params[:file])
     authorize @ajuste
