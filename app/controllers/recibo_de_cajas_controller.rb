@@ -21,7 +21,7 @@ class ReciboDeCajasController < ApplicationController
   def show
     @recibo_de_caja = ReciboDeCaja.find(params[:id])
     authorize ReciboDeCaja
-    @recibo_items = @recibo_de_caja.recibo_items
+    @recibo_items = ReciboDeCaja.ReciboItems
 
     respond_to do |format|
       format.html

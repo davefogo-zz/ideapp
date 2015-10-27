@@ -80,7 +80,7 @@ class FacturaPdf < Prawn::Document
 				 :at => [0, 610],
 				 :height => 15,
 				 :width => 200	
-		text_box "#{@factura.cliente.nit}", size:10,
+		text_box "#{@factura.cliente.numero_de_documento}", size:10,
 				 :at => [25, 610],
 				 :height => 15,
 				 :width => 200	
