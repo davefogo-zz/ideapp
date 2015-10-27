@@ -27,7 +27,7 @@
           <tbody>
             <% @factura_items.each do |factura_item| %>
               <tr>
-                <td><h4><%= factura_item.factura.id %></h4></td>
+                <td><h4><%= factura_item.factura.try(:id) %></h4></td>
                 <td><h4><%= factura_item.id %></h4></td>
                 <td><h4><%= factura_item.ordene.presupuesto.id %></h4></td>
                 <td><h4><%= factura_item.ordene.id %></h4></td>

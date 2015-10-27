@@ -12,7 +12,7 @@
 </p>
 <p>
   <strong>Nit:</strong>
-  <%= @factura.cliente.try(:nit)   %>
+  <%= @factura.cliente.numero_de_documento   %>
 </p>
 <p>
   <strong>Dirección:</strong>
@@ -24,11 +24,11 @@
 </p>
 <p>
   <strong>Titulo:</strong>
-  <%= @factura.presupuesto.try(:titulo) %>
+  <%= @factura.presupuesto.titulo %>
 </p>
 <p>
   <strong>Producto:</strong>
-  <%= @factura.presupuesto.try(:producto) %>
+  <%= @factura.presupuesto.producto %>
 </p>
 <p>
   <strong>Ejecutivo:</strong>
