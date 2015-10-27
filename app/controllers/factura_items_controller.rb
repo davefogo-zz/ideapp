@@ -27,6 +27,7 @@ class FacturaItemsController < ApplicationController
 
   # GET /factura_items/1/edit
   def edit
+    authorize @factura_item
   end
 
   # POST /factura_items
@@ -51,8 +52,8 @@ class FacturaItemsController < ApplicationController
   # PATCH/PUT /factura_items/1
   # PATCH/PUT /factura_items/1.json
   def update
-    authorize @factura_item
     respond_to do |format|
+      authorize @factura_item
       if @factura_item.update(factura_item_params)
         format.html { redirect_to @factura_item, notice: 'Item de factura asociado con factura.' }
         format.json { render :show, status: :ok, location: @factura_item }
