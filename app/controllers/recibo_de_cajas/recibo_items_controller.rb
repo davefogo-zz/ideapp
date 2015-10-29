@@ -12,7 +12,7 @@ class ReciboDeCajas::ReciboItemsController < ApplicationController
   # GET /recibo_items/1.json
   def show
     @recibo_de_caja = ReciboDeCaja.find(params[:id])
-    @recibo_item = @recibo_de_caja.recibo_items
+    @recibo_item = ReciboItem.find(params[:id])
   end
 
   # GET /recibo_items/new

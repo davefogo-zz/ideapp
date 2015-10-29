@@ -14,7 +14,7 @@
 
 <p>
   <strong>Nit:</strong>
-  <%= @recibo_de_caja.cliente.nit %>
+  <%= @recibo_de_caja.cliente.numero_de_documento %>
 </p>
 
 <p>
@@ -30,7 +30,8 @@
        <tr>
               <th>Fecha</th>
               <th>Factura</th>
-              <th>Importe</th>
+              <th>Importe Factura</th>
+              <th>Importe Abono</th>
               <th>Forma de Pago</th>
               <th colspan="3"></th>
             </tr>
@@ -40,10 +41,10 @@
                 <tr>
                   <td><%= recibo_item.try(:fecha) %></td>
                   <td><%= recibo_item.try(:factura_id) %></td>
-                  <td><%= recibo_item.factura.importe %></td>
+                  <td><%= recibo_item.factura.try(:importe) %></td>
                   <td><%= number_to_currency(recibo_item.try(:importe), :precision => 0) %></td>
                   <td><%= recibo_item.try(:forma_de_pago) %></td>
-
+                  <td><%#= link_to 'Paga', edit_factura_path(factura), class: 'btn btn-mini btn-success' %></td>
                 </tr>
               <% end %>
             </tbody>

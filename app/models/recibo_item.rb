@@ -12,11 +12,11 @@ class ReciboItem < ActiveRecord::Base
 	  	self.subcuenta_puc_id = 6 if forma_de_pago == 'Cheque' && banco =='Bancolombia Corriente 6464'
 	  	self.subcuenta_puc_id = 7 if forma_de_pago == 'Cheque' && banco =='Citibank Corriente 0035'
 	  	self.subcuenta_puc_id = 1  if forma_de_pago == 'Efectivo'
-	    Transaccion.create!(recibo_de_caja_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+	    Transaccion.create!(recibo_de_caja_id: self.recibo_de_caja_id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
 	  end
 
 	  def generate_transaccion_recibo_item_credito_activo
 	  	self.subcuenta_puc_id = 127
-	    Transaccion.create!(recibo_de_caja_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+	    Transaccion.create!(recibo_de_caja_id: self.recibo_de_caja_id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
 	  end
 end

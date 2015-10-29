@@ -145,6 +145,9 @@ class FacturaPdf < Prawn::Document
 
 
 	def footer
+		stroke do
+				horizontal_rule
+		end
 		move_down 5
 			    text "Ingresos recibidos para terceros, NO efectuar Retención en la Fuente  o Retención de IVA e ICA o Retención del  CREE Con la firma de aceptado y recibido se entiende que el cliente (comprador y/o beneficiario del servicio)  acepta el contendio de la factura y confirma el recibo a satisfacción del bien y/o  servicio objeto de la factura, siendo  entendido que la firma diferente del cliente  implica que dicha persona se entiende autorizada para tales efectos por el cliente. La devolución de facturas y/o presentación de reclamos solo podra hacerse por escrito, en el termino previsto en la ley, en el Departamento de Cartera, Carrera 7 No. 74-56 Of. 1101, 384 7777. En caso de mora se causaran los intereses legales vigentes. Páguese con cheque cruzado a favor  de IDEAMOS PUBLICIDAD LTDA o páguese con transferencia a cualquiera de estas cuentas: Corriente Banco de Bogotá 223-46841-4, Corriente Citibank No. 1006676495 o consignado a el Crédito del Banco de Bogotá No. 418-510010-88. Conforme al concepto 009174 del 2002 por la DIAN, la solicitud del cliente para el cambio de fecha de la emisión de la presente factura no modificara el registro original de la operación, ni la fecha de vencimiento, la cual se determino a  partir de la fecha de circulación. Internacionales: páguese con cheque en  doláres o con transferencia a la cuenta corriente 53801 de Banco de Bogota Miami SWIFT:BBOGUS3 ABA:66010720 de IDEAMOS PUBLICIDAD LTDA", size: 7	         
 		move_down 2

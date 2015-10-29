@@ -1,11 +1,8 @@
 <% content_for :title do %>Factura<% end %>
-<h3>Editar Factura</h3>
+<h3>Marcar Factura como Paga</h3>
 <div class="form">
   <%= simple_form_for @factura do |form| %>
-    <%= form.input :fecha_de_expedicion %>
-    <%= form.association :cliente, :label_method => :nombre,  label: "Cliente", :include_blank => false %>
-    <%= form.association :presupuesto, :label_method => :titulo,  label: "Presupuesto", :include_blank => false %>
-    <%= form.input :facturar %>
+    <%= form.input :estado, collection: ['Sin Pago', 'Paga', 'Parcial'], :default => 'Sin Pago' %>
     <%= form.button :submit, 'Grabar', class: 'submit' %>
   <% end %>
 </div>

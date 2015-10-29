@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026160922) do
+ActiveRecord::Schema.define(version: 20151027225655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20151026160922) do
     t.integer  "presupuesto_id"
     t.integer  "total",                limit: 8
     t.boolean  "facturar"
+    t.string   "estado"
   end
 
   add_index "facturas", ["cliente_id"], name: "index_facturas_on_cliente_id", using: :btree

@@ -19,9 +19,9 @@ class ReciboDeCajasController < ApplicationController
   # GET /recibo_de_cajas/1
   # GET /recibo_de_cajas/1.json                                                                                            
   def show
-    @recibo_de_caja = ReciboDeCaja.find(params[:id])
+    @recibo_de_cajas = ReciboDeCaja.find(params[:id])
     authorize ReciboDeCaja
-    @recibo_items = ReciboDeCaja.ReciboItems
+    @recibo_items = @recibo_de_caja.recibo_items
 
     respond_to do |format|
       format.html
