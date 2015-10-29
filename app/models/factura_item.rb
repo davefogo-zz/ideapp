@@ -7,7 +7,7 @@ class FacturaItem < ActiveRecord::Base
  
 
   before_save :calculate_total
-  before_update :generate_transaccion_facturar_proveedor, :if => :facturar_proveedor?
+  before_update :generate_transaccion_facturar_proveedor, :calculate_ret, :if => :facturar_proveedor?
   #around_update :generate_transaccion_facturar_cliente, :if => :facturar?
   #running 1, 2 ,3 => before update,  4 => after_update OK
   after_update :generate_transaccion_facturar_cliente, :generate_transaccion_incentivo_automatico, :if => :facturar?
@@ -16,6 +16,11 @@ class FacturaItem < ActiveRecord::Base
     self.subtotal = (costo_unidad * cantidad) - (costo_unidad * descuento)
     self.iva = (subtotal * 0.16)
     self.total = subtotal + iva
+  end
+
+  def calculate_ret
+    self.ret_iva = (subtotal * 0.3)
+    self.ret_ica = (subtotal * 0.4)
   end
 
   def generate_transaccion_facturar_cliente

@@ -6,7 +6,7 @@ class Factura < ActiveRecord::Base
    belongs_to :presupuesto
    validates :fecha_de_expedicion, presence: true
    before_save :calculate_fecha_de_vencimiento
-   before_update :subtotal, :iva, :total 
+   before_update :subtotal, :iva, :total, :ret_iva, :ret_ica 
 
    def calculate_fecha_de_vencimiento
    	self.fecha_de_vencimiento = (self.fecha_de_expedicion + 30.days)
@@ -20,9 +20,19 @@ class Factura < ActiveRecord::Base
     self.factura_items.sum(:iva)
    end
 
+   def ret_iva
+     self.factura_items.sum(:ret_iva)
+   end
+
+   def ret_ica
+     self.factura_items.sum(:ret_ica)
+   end
+
    def total
     self.factura_items.sum(:total)
    end
+
+   
 
    def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

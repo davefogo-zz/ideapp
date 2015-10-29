@@ -83,6 +83,6 @@ class FacturaItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_item_params
-      params.require(:factura_item).permit(:factura_id, :ordene_id, :medio_id, :revisado, :fecha_orden, :medida, :unidad, :costo_unidad, :total, :facturar, :cantidad, :facturar_proveedor, :sin_iva, :subcuenta_puc_id)
+      params.require(:factura_item).permit(:factura_id, :ordene_id, :medio_id, :revisado, :fecha_orden, :medida, :unidad, :costo_unidad, :total, :facturar, :cantidad, :facturar_proveedor, :sin_iva, :subcuenta_puc_id, :notas)
     end
 end

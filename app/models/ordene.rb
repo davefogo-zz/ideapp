@@ -34,7 +34,7 @@ class Ordene < ActiveRecord::Base
 
     def generate_factura_item
       if self.facturado.blank?
-      	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_orden, unidad: self.unidad, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id, descuento: self.descuento, presupuesto_id: self.presupuesto_id)
+      	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_orden, unidad: self.unidad, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, ordene_id: self.id, descuento: self.descuento, presupuesto_id: self.presupuesto_id, notas: self.notas)
         if self.medio.cobro == 'Facturacion'
           self.cantidad = 1
           self.descuento = 0
