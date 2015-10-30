@@ -43,7 +43,7 @@ class FacturaPdf < Prawn::Document
 	def fechas
 		repeat(:all) do
 	  		text_box 'Fecha de Vencimiento:', size: 10, style: :bold,
-	  				 :at => [385, 710], 
+	  				 :at => [390, 710], 
 	  				 :width => 150,
 	  		 		 :height => 15
 			text_box "#{@factura.fecha_de_vencimiento}", size: 10,
@@ -51,7 +51,7 @@ class FacturaPdf < Prawn::Document
 					 :width => 150,
 			 		 :height => 15
 			text_box 'Fecha de Expedicion:', size: 10, style: :bold,
-					 :at => [385, 695], 
+					 :at => [390, 695], 
 					 :width => 150,
 			         :height => 15
 	    	text_box "#{@factura.fecha_de_expedicion}", size: 10,
@@ -64,7 +64,7 @@ class FacturaPdf < Prawn::Document
   	def producto
   		repeat(:all) do
 	  		text_box 'Producto:', size: 10, style: :bold,
-	  				:at => [385, 680], 
+	  				:at => [390, 680], 
 	  				:width => 150,
 	  		 		:height => 15
 			text_box "#{@factura.presupuesto.producto}", size: 10,
@@ -72,7 +72,7 @@ class FacturaPdf < Prawn::Document
 					:width => 150,
 			 		:height => 15
 			text_box 'Presupuesto:', size: 10, style: :bold,
-					:at => [385, 665], 
+					:at => [390, 665], 
 					:width => 150,
 			 		:height => 15
 			text_box "#{@factura.presupuesto.id}", size: 10,
@@ -80,7 +80,7 @@ class FacturaPdf < Prawn::Document
 					:width => 150,
 			 		:height => 15
 			text_box 'Ejecutivo:', size: 10, style: :bold,
-	  				:at => [385, 650], 
+	  				:at => [390, 650], 
 	  				:width => 150,
 	  		 		:height => 15
 			text_box "#{@factura.cliente.colaboradore.nombre}", size: 10,
@@ -114,7 +114,7 @@ class FacturaPdf < Prawn::Document
 					 :height => 15,
 					 :width => 200	
 			text_box "#{@factura.cliente.direccion_de_facturacion}", size:10,
-					 :at => [230, 680],
+					 :at => [220, 680],
 					 :height => 15,
 					 :width => 200 
 			text_box "Ciudad:", size: 10, style: :bold,
