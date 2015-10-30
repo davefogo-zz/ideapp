@@ -64,7 +64,7 @@ class FacturaPdf < Prawn::Document
   	def producto
   		repeat(:all) do
 	  		text_box 'Producto:', size: 10, style: :bold,
-	  				:at => [390, 680], 
+	  				:at => [410, 680], 
 	  				:width => 150,
 	  		 		:height => 15
 			text_box "#{@factura.presupuesto.producto}", size: 10,
@@ -84,7 +84,7 @@ class FacturaPdf < Prawn::Document
 	  				:width => 150,
 	  		 		:height => 15
 			text_box "#{@factura.cliente.colaboradore.nombre}", size: 10,
-					:at => [480, 650], 
+					:at => [455, 650], 
 					:width => 150,
 			 		:height => 15
 		end	
