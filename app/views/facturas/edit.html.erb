@@ -1,5 +1,5 @@
 <% content_for :title do %>Factura<% end %>
-<h3>Marcar Factura como Paga</h3>
+<h3>Marcar Factura Paga</h3>
 <div class="form">
   <%= simple_form_for @factura do |form| %>
     <%= form.input :estado, collection: ['Sin Pago', 'Paga', 'Parcial'], :default => 'Sin Pago' %>

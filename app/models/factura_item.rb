@@ -15,12 +15,14 @@ class FacturaItem < ActiveRecord::Base
   def calculate_total
     self.subtotal = (costo_unidad * cantidad) - (costo_unidad * descuento)
     self.iva = (subtotal * 0.16)
-    self.total = subtotal + iva
+    self.total = subtotal + iva - ret_iva - ret_ica
   end
 
   def calculate_ret
     self.ret_iva = (subtotal * 0.3)
+    Transaccion.create!(factura_item_id: self.id, fecha: Time.now, debito: self.total, subcuenta_puc_id: self.subcuenta_puc_id)
     self.ret_ica = (subtotal * 0.4)
+    Transaccion.create!(factura_item_id: self.id, fecha: Time.now, debito: self.total, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
   def generate_transaccion_facturar_cliente

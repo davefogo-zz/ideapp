@@ -39,7 +39,7 @@ class GastosController < ApplicationController
     authorize @gasto
     respond_to do |format|
       if @gasto.save
-        format.html { redirect_to @gasto, notice: 'Gasto was successfully created.' }
+        format.html { redirect_to @gasto, notice: 'Gasto registrado.' }
         format.json { render :show, status: :created, location: @gasto }
       else
         format.html { render :new }
@@ -88,6 +88,6 @@ class GastosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gasto_params
-      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :gasto_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo, :pago)
+      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :gasto_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo, :gasto_pago, :user_id, :importe_fte, :importe_ica, :importe_iva_teo, :importe_ret_iva, :ret_fte, :ret_ica, :iva_teo, :ret_iva)
     end
 end

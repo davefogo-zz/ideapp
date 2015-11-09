@@ -12,6 +12,7 @@
       <table class="table table-hover">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Clase</th>
                <th>Grupo</th>
               <th>Cuenta</th>
@@ -22,7 +23,8 @@
         <tbody>
           <% @subcuenta_pucs.each do |subcuenta_puc| %>
       	    <tr>
-            <td><%= subcuenta_puc.cuenta_puc.grupo.clase.try(:descripcion) %></td>
+              <td><%= subcuenta_puc.id %></td>
+              <td><%= subcuenta_puc.cuenta_puc.grupo.clase.try(:descripcion) %></td>
               <td><%= subcuenta_puc.cuenta_puc.grupo.descripcion %></td>
               <td><%= subcuenta_puc.cuenta_puc.descripcion%></td>
       		    <td><%= subcuenta_puc.subcuenta %></td>

@@ -69,6 +69,6 @@ class Ajustes::TransaccionsController < ApplicationController
     end
 
   	def transaccion_params
-  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subuenta_puc_id, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id, :ajuste_id)
+  		params.require(:transaccion).permit(:fecha, :credito, :debito, :iva, :subcuenta_puc_id, :factura_item_id, :factura_proveedor_id, :gasto_id, :recibo_de_caja_id, :nit, :cliente_id, :ajuste_id)
   	end
 end

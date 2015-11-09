@@ -44,7 +44,7 @@
                   <td><%= recibo_item.factura.try(:importe) %></td>
                   <td><%= number_to_currency(recibo_item.try(:importe), :precision => 0) %></td>
                   <td><%= recibo_item.try(:forma_de_pago) %></td>
-                  <td><%#= link_to 'Paga', edit_factura_path(factura), class: 'btn btn-mini btn-success' %></td>
+                  <td><%= link_to 'Paga', facturas_path, class: 'btn btn-mini btn-success' %></td>
                 </tr>
               <% end %>
             </tbody>

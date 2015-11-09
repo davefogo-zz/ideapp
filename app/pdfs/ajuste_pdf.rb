@@ -45,7 +45,7 @@ class AjustePdf < Prawn::Document
 		bounding_box([0, 625], :width => 150, :height => 15) do
 			text " #{@ajuste.cliente.nombre}", size: 10
 		end
-		text " #{@ajuste.cliente.nit}", size: 10
+		text " #{@ajuste.cliente.numero_de_documento}", size: 10
 		text " #{@ajuste.cliente.direccion_de_facturacion}", size: 10
 		text " #{@ajuste.cliente.ciudad}", size: 10
 		text " #{@ajuste.cliente.codigo_postal}", size: 10
@@ -59,7 +59,7 @@ def proveedore
 		bounding_box([200, 625], :width => 150, :height => 15) do
 			text " #{@ajuste.proveedore.nombre}", size: 10
 		end
-		text " #{@ajuste.proveedore.nit}", size: 10
+		text " #{@ajuste.proveedore.numero_de_documento}", size: 10
 		text " #{@ajuste.proveedore.direccion}", size: 10
 	end
 

@@ -94,6 +94,7 @@ GEM
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     high_voltage (2.2.1)
+    hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
@@ -249,6 +250,7 @@ DEPENDENCIES
   foreman
   foundation-rails
   high_voltage (~> 2.2.1)
+  hirb
   jbuilder (~> 2.0)
   jquery-rails
   launchy

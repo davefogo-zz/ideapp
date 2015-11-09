@@ -35,7 +35,7 @@
               <td><%= gasto.iva %></td>
               <td><%= gasto.asignar_a_cliente %></td>
               <td><%= gasto.cliente_id %></td>
-              <td><%= gasto.user.name %></td>
+              <td><%= gasto.user.try(:name) %></td>
               <td><%= gasto.compra_de_activo %></td>
               </tr>
             <% end %>

@@ -1,5 +1,5 @@
 class AjustesController < ApplicationController
-
+  before_action :set_ajuste, only: [:show, :edit, :update, :destroy]
   # GET /ajustes
   # GET /ajustes.json
   def index
@@ -80,9 +80,9 @@ class AjustesController < ApplicationController
   # DELETE /ajustes/1.json
   def destroy
     @ajuste.destroy
-    authorize @ajuste
+    #authorize @ajuste
     respond_to do |format|
-      format.html { redirect_to ajustes_url, notice: 'Ajuste eliminada.' }
+      format.html { redirect_to ajustes_url, notice: 'Ajuste eliminado.' }
       format.json { head :no_content }
     end
   end
@@ -110,6 +110,6 @@ class AjustesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ajuste_params
-      params.require(:ajuste).permit(:fecha, :cliente_id, :proveedor_id, :descripcion)
+      params.require(:ajuste).permit(:fecha, :cliente_id, :proveedore_id, :descripcion)
     end
 end

@@ -37,8 +37,9 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Fecha</th>
+          <th>Codigo</th>
           <th>Cuenta</th>
-          <th>Nombre de cuenta:</th>
           <th>Debito</th>
           <th>Credito</th>
         </tr>
@@ -46,11 +47,12 @@
         <tbody>
         <% @transaccions.each do |transaccion| %>
             <tr>
+              
               <td><h4><%= transaccion.try(:fecha) %></h4></td>
-              <td><h4><%= transaccion.subcuenta_puc_id %></h4></td>
-              <td><h4><%= transaccion.subcuenta_puc.try(:descripcion) %></h4></td>
-              <td><h4><%= transaccion.try(:debito) %></h4></td>
-              <td><h4><%= transaccion.try(:credito) %></h4></td>
+              <td><h4><%= transaccion.subcuenta_puc.subcuenta %></h4></td>
+              <td><h4><%= transaccion.subcuenta_puc.descripcion %></h4></td>
+              <td><h4><%= number_to_currency(transaccion.debito, :precision => 0) %></h4></td>
+              <td><h4><%= number_to_currency(transaccion.credito, :precision => 0) %></h4></td>
             </tr>
           <% end %>
         </tbody>

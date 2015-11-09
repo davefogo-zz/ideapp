@@ -7,11 +7,14 @@ class Gasto < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :pago
 
-	
-	after_save :activo,:transaccion_proveedor_gasto, 
-	:transaccion_iva_descontable_gasto, :transaccion_gasto_proveedor_por_pagar_pasivo, 
-	:transaccion_gasto_iva_por_pagar_pasivo 
+	before_save :transaccion_proveedor_gasto, :activo, :retenciones,  
+	:transaccion_iva_descontable_gasto 
 
+	after_save :transaccion_gasto_proveedor_por_pagar_pasivo, :unless => :gasto_pago?
+
+	def transaccion_proveedor_gasto
+		Transaccion.create!(gasto_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+	end
 
 	def activo
 		if compra_de_activo == true
@@ -19,27 +22,58 @@ class Gasto < ActiveRecord::Base
 		end
 	end
 
-	def transaccion_proveedor_gasto
-		Transaccion.create!(gasto_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+	def retenciones
+		self.importe_fte =0
+		self.importe_ica =0
+		self.importe_ret_iva =0
+		self.importe_iva_teo =0
+		unless self.ret_fte == 0
+			self.importe_fte = importe * ret_fte
+			self.subcuenta_puc_id = 715
+			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_fte, subcuenta_puc_id: self.subcuenta_puc_id)
+		end
+		unless self.ret_ica == 0
+			self.importe_ica = importe * ret_ica
+			self.subcuenta_puc_id = 719
+			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_ica, subcuenta_puc_id: self.subcuenta_puc_id)
+		end
+		if self.ret_iva == true
+			self.importe_ret_iva = iva * 0.15
+			self.subcuenta_puc_id = 717
+			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_ret_iva, subcuenta_puc_id: self.subcuenta_puc_id)
+		end
+		if self.iva_teo == true
+			self.importe_iva_teo = iva * 0.15
+			self.subcuenta_puc_id = 1716
+			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_iva_teo, subcuenta_puc_id: self.subcuenta_puc_id)
+		end
 	end
 
 	def transaccion_iva_descontable_gasto
-		self.subcuenta_puc_id = 1716
+		self.subcuenta_puc_id = 742
 		Transaccion.create!(gasto_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
 	end
 
 	def transaccion_gasto_proveedor_por_pagar_pasivo
-		self.subcuenta_puc_id = 693 if self.pago == false
+		self.importe_fte =0
+		self.importe_ica =0
+		self.importe_iva_teo =0
+		unless self.ret_fte == 0
+			self.importe_fte = importe * ret_fte
+		end
+		unless self.ret_ica == 0
+			self.importe_ica = importe * ret_ica
+		end
+		if self.ret_iva == true
+			self.importe_ret_iva = iva * 0.15
+		end
+		if self.iva_teo == true
+			self.importe_iva_teo = iva * 0.15
+		end
+		self.importe = importe - importe_fte - importe_ica - importe_iva_teo - importe_ret_iva + iva
+		self.subcuenta_puc_id = 669 if self.gasto_pago == false
 		Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
 	end
-
-	def transaccion_gasto_iva_por_pagar_pasivo
-		self.subcuenta_puc_id = 742 if self.pago == false
-		Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
-	end
-
-	
-
 
 	def self.import(file)
 	  CSV.foreach(file.path, headers: true) do |row|

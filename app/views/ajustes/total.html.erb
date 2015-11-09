@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Listado de Transacciones</h1>
+  <h1>Libro Diario</h1>
   <div class="pull-right range-query">
      <%#= form_tag ajuste_transaccions_path, method: :get do %>
         <%#= text_field_tag 'search[fecha_from]', @search.fecha_from %>
@@ -15,9 +15,10 @@
       <thead>
         <tr>
           <th>Fecha</th>
+          <th>Codigo</th>
+          <th>Cuenta</th>
           <th>Debito</th>
           <th>Credito</th>
-          <th>Cuenta</th>
           <th>Numero de Ajuste</th>
           <th colspan="3"></th>
         </tr>
@@ -26,16 +27,26 @@
         <% @transaccions.each do |transaccion| %>
           <tr>
             <td><%= transaccion.fecha %></td>
-            <td><%= number_to_currency(transaccion.debito) %></td>
-            <td><%= number_to_currency(transaccion.credito) %></td>
-            <td><%= transaccion.subcuenta_puc_id %></td>
+            <td><%= transaccion.subcuenta_puc.try(:subcuenta) %></td>
+            <td><%= transaccion.subcuenta_puc.try(:descripcion) %></td>
+            <td><%= number_to_currency(transaccion.debito, :precision => 0) %></td>
+            <td><%= number_to_currency(transaccion.credito, :precision => 0) %></td>
             <td><%= transaccion.ajuste_id %></td>
           </tr>
         <% end %>
 		<p>
 	  		<strong>Total Debito:</strong>
-	  		<%= Transaccion.sum(:debito) %>
+	  		<%= total_debito = Transaccion.sum(:debito) %>
 		</p>
+    <p>
+        <strong>Total Credito:</strong>
+        <%= total_credito = Transaccion.sum(:credito) %>
+    </p>
+
+    <p>
+        <strong>Saldo:</strong>
+        <%= saldo = total_debito - total_credito %>
+    </p>
       </tbody>
     </table>
   </div>

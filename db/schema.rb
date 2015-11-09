@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029235358) do
+ActiveRecord::Schema.define(version: 20151109164359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,9 +202,17 @@ ActiveRecord::Schema.define(version: 20151029235358) do
     t.boolean  "compra_de_activo"
     t.integer  "user_id"
     t.integer  "pago_id"
-    t.boolean  "pago"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.decimal  "ret_fte"
+    t.decimal  "ret_ica"
+    t.boolean  "iva_teo"
+    t.integer  "importe_fte",          limit: 8
+    t.integer  "importe_ica",          limit: 8
+    t.integer  "importe_iva_teo",      limit: 8
+    t.boolean  "ret_iva"
+    t.integer  "importe_ret_iva",      limit: 8
+    t.boolean  "gasto_pago"
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id", using: :btree

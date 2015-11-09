@@ -64,11 +64,11 @@ class FacturaPdf < Prawn::Document
   	def producto
   		repeat(:all) do
 	  		text_box 'Producto:', size: 10, style: :bold,
-	  				:at => [410, 680], 
+	  				:at => [390, 680], 
 	  				:width => 150,
 	  		 		:height => 15
 			text_box "#{@factura.presupuesto.producto}", size: 10,
-					:at => [480, 680], 
+					:at => [455, 680], 
 					:width => 150,
 			 		:height => 15
 			text_box 'Presupuesto:', size: 10, style: :bold,
@@ -109,12 +109,12 @@ class FacturaPdf < Prawn::Document
 					 :at => [230, 695],
 					 :height => 15,
 					 :width => 200	
-			text_box "Direccion:", size: 10, style: :bold,
+			text_box "Pais:", size: 10, style: :bold,
 					 :at => [170, 680],
 					 :height => 15,
 					 :width => 200	
-			text_box "#{@factura.cliente.direccion_de_facturacion}", size:10,
-					 :at => [220, 680],
+			text_box "#{@factura.cliente.pais}", size:10,
+					 :at => [230, 680],
 					 :height => 15,
 					 :width => 200 
 			text_box "Ciudad:", size: 10, style: :bold,
@@ -133,11 +133,11 @@ class FacturaPdf < Prawn::Document
 					 :at => [250, 650],
 					 :height => 15,
 					 :width => 200 
-			text_box "Pais:", size: 10, style: :bold,
+			text_box "Direccion:", size: 10, style: :bold,
 					 :at => [170, 635],
 					 :height => 15,
 					 :width => 200	
-			text_box "#{@factura.cliente.pais}", size:10,
+			text_box "#{@factura.cliente.direccion_de_facturacion}", size:10,
 					 :at => [230, 635],
 					 :height => 15,
 					 :width => 200 
