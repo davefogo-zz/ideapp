@@ -5,16 +5,14 @@ class MediosController < ApplicationController
   # GET /medios.json
   def index
     authorize Medio
-    @medios = Medio.all
-    respond_to do |format|
-      format.html
-      format.csv {render text: @ajustes.to_csv }
-    end
-    
     if params[:search] 
       @medios = Medio.search(params[:search])
     else
       @medios = Medio.all
+    end
+    respond_to do |format|
+      format.html
+      format.csv {render text: @ajustes.to_csv }
     end
   end
 

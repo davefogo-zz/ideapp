@@ -4,15 +4,15 @@ class SubcuentaPuc < ActiveRecord::Base
   has_many :pago_items
   #validates :descripcion, presence: true, uniqueness: true 
   
-	def self.search(search)
-		 where("subcuenta LIKE ? OR descripcion LIKE ?", "%#{search}%", "%#{search}%")
-	end
+ def self.search(search)
+	where("subcuenta LIKE ? OR descripcion LIKE ?", "%#{search}%", "%#{search}%")
+ end
 
-	def self.import(file)
-	  	CSV.foreach(file.path, headers: true) do |row|
-	  		SubcuentaPuc.create! row.to_hash
-	  	end
-	end
+ def self.import(file)
+  	CSV.foreach(file.path, headers: true) do |row|
+  		SubcuentaPuc.create! row.to_hash
+  	end
+end
 
 	def self.to_csv
 		CSV.generate do |csv|

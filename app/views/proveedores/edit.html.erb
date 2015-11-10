@@ -7,7 +7,7 @@
     <%= form.input :tipo_de_persona, collection: ['PERSONA NATURAL','PERSONA JURIDICA','EXTERIOR', 'GRAN CONTRIBUYENTE','GRAN CONTRIBUYENTE AUTORRETENEDOR', ] %>
     <%= form.input :tipo_de_responsable, collection: ['REGIMEN SIMPLIFICADO','REGIMEN COMUN','EXTERIOR'] %>
     <%= form.input :tipo_de_retencion_iva, collection: ['IVA REGIMEN SIMPLIFICADO','RETENCION REGIMEN COMUN','IVA REGIMEN EXTERIOR'] %>
-     <%= form.input :tipo_de_retencion_ica, collection: ['RETENCION 11.04*1000','RETENCION ICA 9.66*1000 RS','EXTERIOR'] %>
+     <%= form.input :tipo_de_retencion_ica, collection: [0.01104, 0.0966] %>
     <%= form.input :numero_de_documento %>
     <%= form.input :codigo_ciiu %>
     <%= form.input :contacto_financiero %> 

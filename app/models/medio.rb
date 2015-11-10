@@ -9,7 +9,7 @@ class Medio < ActiveRecord::Base
   validates  :nombre, presence: true #:proveedore_id,
  	
  def self.search(search)
-  where("nombre LIKE ? OR nit LIKE ?", "%#{search}%", "%#{search}%")
+  where("nombre LIKE ?", "%#{search}%")
  end
 
  def self.import(file)

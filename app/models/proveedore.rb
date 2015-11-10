@@ -5,7 +5,7 @@ class Proveedore < ActiveRecord::Base
   validates :nombre,  presence: true, uniqueness: true #:numero_de_documento,
   
   def self.search(search)
-  	where("nombre LIKE ? OR nit LIKE ?", "%#{search}%", "%#{search}%")
+  	where("nombre LIKE ? OR numero_de_documento LIKE ?", "%#{search}%", "%#{search}%")
   end
 
   def self.import(file)
