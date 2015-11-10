@@ -10,11 +10,11 @@
         <% if policy(FacturaProveedor).index? %>
           <li><%= link_to 'Facturas Proveedor', factura_proveedors_path %></li>
         <% end %>
-        <% if policy(Pago).index? %>
-          <li><%= link_to 'Pagos', pagos_path %></li>
-        <% end %>
         <% if policy(Gasto).index? %>
           <li><%= link_to 'Gastos', gastos_path %></li>
+        <% end %>
+        <% if policy(Pago).index? %>
+          <li><%= link_to 'Pagos', pagos_path %></li>
         <% end %>
       </ul>
   </div>

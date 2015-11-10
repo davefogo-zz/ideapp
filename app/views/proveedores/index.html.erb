@@ -15,7 +15,6 @@
               <th>Nombre</th>
               <th>Nit</th>
               <th>Pronto Pago</th>
-              <th> % Pronto Pago</th>
               <th>Dias Pronto Pago</th>
               <th>Tipo de Responsable</th>
               <th>Tipo de Persona</th>
@@ -30,8 +29,7 @@
               <tr>
                 <td><%= proveedore.nombre %></td>
                 <td><%= proveedore.numero_de_documento %></td>
-                <td><%= proveedore.pronto_pago %></td>
-                <td><%= number_to_percentage(proveedore.porcentaje_pronto_pago) %></td>
+                <td><%= number_to_percentage((proveedore.pronto_pago * 100), :precision => 0) %></td>
                 <td><%= proveedore.dias_pronto_pago %></td>
                 <td><%= proveedore.tipo_de_responsable %></td>
                 <td><%= proveedore.tipo_de_persona %></td>

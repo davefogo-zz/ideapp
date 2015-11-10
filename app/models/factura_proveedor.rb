@@ -1,7 +1,7 @@
 class FacturaProveedor < ActiveRecord::Base
   belongs_to :ordene
   belongs_to :pago
-  has_many :pago_items
+  belongs_to :pago_item
   belongs_to :proveedore
   before_save :generate_iva_calculation, :generate_pronto_pago_calculation,
    :generate_fecha_vencimiento_calculation
@@ -16,7 +16,7 @@ class FacturaProveedor < ActiveRecord::Base
 
   def generate_fecha_vencimiento_calculation
     self.fecha_recepcion = Time.now
-  	self.fecha_vencimiento = (self.fecha_recepcion + 60.days) if self.importe_pronto_pago.nil?
+  	self.fecha_vencimiento = (self.fecha_recepcion + 60.days) if self.importe_pronto_pago == 0
     self.fecha_vencimiento = (self.fecha_recepcion + 45.days) if self.proveedore.dias_pronto_pago == 45
   	self.fecha_vencimiento = (self.fecha_recepcion + 30.days) if self.proveedore.dias_pronto_pago == 30
   	self.fecha_vencimiento = (self.fecha_recepcion + 15.days) if self.proveedore.dias_pronto_pago == 15
@@ -26,18 +26,19 @@ class FacturaProveedor < ActiveRecord::Base
   :generate_transaccion_intermediacion_iva_pasivo #:generate_transaccion_importe_pronto_pago
 
   def generate_transaccion_proveedor_pasivo
+    self.total = importe + iva
   	self.subcuenta_puc_id = 667
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.total, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
   def generate_transaccion_proveedor_intermediacion_pasivo
-  	self.subcuenta_puc_id = 882
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+  	self.subcuenta_puc_id = 878
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
   def generate_transaccion_intermediacion_iva_pasivo
-  	self.subcuenta_puc_id = 883
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
+  	self.subcuenta_puc_id = 880
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
   #def generate_transaccion_importe_pronto_pago

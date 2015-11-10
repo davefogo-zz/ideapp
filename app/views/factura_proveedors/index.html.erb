@@ -32,9 +32,9 @@
                 <td><%= factura_proveedor.fecha_vencimiento %></td>
                 <td><%= factura_proveedor.ordene_id %></td>
                 <td><%= factura_proveedor.proveedore_id %></td>
-                <td><%= factura_proveedor.importe %></td>
-                <td><%= factura_proveedor.iva %></td>
-                <td><%= factura_proveedor.devolucion %></td>
+                <td><%= number_to_currency(factura_proveedor.importe, :precision => 0) %></td>
+                <td><%= number_to_currency(factura_proveedor.iva, :precision => 0) %></td>
+                <td><%= number_to_currency(factura_proveedor.devolucion, :precision => 0) %></td>
                 <td><%= link_to 'Mostrar', factura_proveedor, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Programar', edit_factura_proveedor_path(factura_proveedor), class: 'btn btn-mini btn-success' %></td>
               </tr>

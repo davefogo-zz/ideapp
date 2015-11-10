@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110004202) do
+ActiveRecord::Schema.define(version: 20151110214301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,11 +170,16 @@ ActiveRecord::Schema.define(version: 20151110004202) do
     t.integer  "importe_pronto_pago",  limit: 8
     t.string   "numero_de_factura"
     t.integer  "factura_proveedor_id"
+    t.integer  "subcuenta_puc_id"
+    t.integer  "pago_item_id"
+    t.integer  "total",                limit: 8
   end
 
   add_index "factura_proveedors", ["factura_proveedor_id"], name: "index_factura_proveedors_on_factura_proveedor_id", using: :btree
   add_index "factura_proveedors", ["ordene_id"], name: "index_factura_proveedors_on_ordene_id", using: :btree
+  add_index "factura_proveedors", ["pago_item_id"], name: "index_factura_proveedors_on_pago_item_id", using: :btree
   add_index "factura_proveedors", ["proveedore_id"], name: "index_factura_proveedors_on_proveedore_id", using: :btree
+  add_index "factura_proveedors", ["subcuenta_puc_id"], name: "index_factura_proveedors_on_subcuenta_puc_id", using: :btree
 
   create_table "facturas", force: :cascade do |t|
     t.datetime "created_at",                     null: false
@@ -236,11 +241,11 @@ ActiveRecord::Schema.define(version: 20151110004202) do
     t.string   "tipo_de_volumen"
     t.string   "cobro"
     t.integer  "medio_id"
-    t.integer  "valor_incnetivo", limit: 8
     t.integer  "ordene_id"
     t.integer  "pago_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "valor_incentivo", limit: 8
   end
 
   add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id", using: :btree
@@ -490,7 +495,9 @@ ActiveRecord::Schema.define(version: 20151110004202) do
   add_foreign_key "factura_items", "subcuenta_pucs"
   add_foreign_key "factura_proveedors", "factura_proveedors"
   add_foreign_key "factura_proveedors", "ordenes"
+  add_foreign_key "factura_proveedors", "pago_items"
   add_foreign_key "factura_proveedors", "proveedores"
+  add_foreign_key "factura_proveedors", "subcuenta_pucs"
   add_foreign_key "facturas", "clientes"
   add_foreign_key "facturas", "presupuestos"
   add_foreign_key "gastos", "clientes"

@@ -25,17 +25,17 @@
 
 <p>
   <strong>Importe:</strong>
-  <%= @factura_proveedor.importe %>
+  <%= number_to_currency(@factura_proveedor.importe, :precision => 0) %>
 </p>
 
 <p>
   <strong>Iva:</strong>
-  <%= @factura_proveedor.iva %>
+  <%= number_to_currency(@factura_proveedor.iva, :precision => 0) %>
 </p>
 
 <p>
   <strong>Pronto Pago:</strong>
-  <%= @factura_proveedor.importe_pronto_pago %>
+  <%= number_to_currency(@factura_proveedor.importe_pronto_pago, :precision => 0) %>
 </p>
 
 

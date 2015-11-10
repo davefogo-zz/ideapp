@@ -14,7 +14,7 @@
 
 <p>
   <strong>Nit:</strong>
-  <%= @pago.proveedore.nit %>
+  <%= @pago.proveedore.numero_de_documento %>
 </p>
 
 <div class="media">
@@ -51,7 +51,7 @@
 <h4 > - Prontos Pagos:<%= number_to_currency(@pago.importe_pronto_pago, :precision => 0) %></h4>
 <h4 >Total Orden de Pago:<%= number_to_currency(@pago.total , :precision => 0) %></h4><br>
 <p>
-  <strong>Pagada:</strong>
+  <strong>Paga:</strong>
   <%= @pago.pagar %>
 </p>
 
