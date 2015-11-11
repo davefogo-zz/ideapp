@@ -421,7 +421,7 @@ ActiveRecord::Schema.define(version: 20151111000054) do
   add_index "recibo_items", ["subcuenta_puc_id"], name: "index_recibo_items_on_subcuenta_puc_id", using: :btree
 
   create_table "subcuenta_pucs", force: :cascade do |t|
-    t.integer  "subcuenta"
+    t.string   "subcuenta"
     t.string   "descripcion"
     t.integer  "cuenta_puc_id"
     t.string   "moneda"
