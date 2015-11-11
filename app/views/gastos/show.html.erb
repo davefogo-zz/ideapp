@@ -15,7 +15,12 @@
 
 <p>
   <strong>Importe:</strong>
-  <%= @gasto.importe %>
+  <%= number_to_currency(@gasto.importe, :precision => 0) %>
+</p>
+
+<p>
+  <strong>Importe Para Pago:</strong>
+  <%= number_to_currency(@gasto.importe_menos_retenciones, :precision => 0) %>
 </p>
 
 <p>

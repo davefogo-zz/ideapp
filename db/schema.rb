@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110214301) do
+ActiveRecord::Schema.define(version: 20151111000054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,8 +199,8 @@ ActiveRecord::Schema.define(version: 20151110214301) do
   create_table "gastos", force: :cascade do |t|
     t.date     "fecha_recepcion"
     t.integer  "proveedore_id"
-    t.integer  "importe",              limit: 8
-    t.integer  "iva",                  limit: 8
+    t.integer  "importe",                   limit: 8
+    t.integer  "iva",                       limit: 8
     t.date     "fecha_de_vencimiento"
     t.integer  "subcuenta_puc_id"
     t.boolean  "asignar_a_cliente"
@@ -208,17 +208,19 @@ ActiveRecord::Schema.define(version: 20151110214301) do
     t.boolean  "compra_de_activo"
     t.integer  "user_id"
     t.integer  "pago_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.decimal  "ret_fte"
     t.decimal  "ret_ica"
     t.boolean  "iva_teo"
-    t.integer  "importe_fte",          limit: 8
-    t.integer  "importe_ica",          limit: 8
-    t.integer  "importe_iva_teo",      limit: 8
+    t.integer  "importe_fte",               limit: 8
+    t.integer  "importe_ica",               limit: 8
+    t.integer  "importe_iva_teo",           limit: 8
     t.boolean  "ret_iva"
-    t.integer  "importe_ret_iva",      limit: 8
+    t.integer  "importe_ret_iva",           limit: 8
     t.boolean  "gasto_pago"
+    t.string   "numero_de_factura"
+    t.integer  "importe_menos_retenciones", limit: 8
   end
 
   add_index "gastos", ["cliente_id"], name: "index_gastos_on_cliente_id", using: :btree
@@ -336,9 +338,11 @@ ActiveRecord::Schema.define(version: 20151110214301) do
     t.integer  "incentivo_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "gasto_id"
   end
 
   add_index "pago_items", ["factura_proveedor_id"], name: "index_pago_items_on_factura_proveedor_id", using: :btree
+  add_index "pago_items", ["gasto_id"], name: "index_pago_items_on_gasto_id", using: :btree
   add_index "pago_items", ["incentivo_id"], name: "index_pago_items_on_incentivo_id", using: :btree
   add_index "pago_items", ["pago_id"], name: "index_pago_items_on_pago_id", using: :btree
   add_index "pago_items", ["subcuenta_puc_id"], name: "index_pago_items_on_subcuenta_puc_id", using: :btree
@@ -517,6 +521,7 @@ ActiveRecord::Schema.define(version: 20151110214301) do
   add_foreign_key "ordenes", "medios"
   add_foreign_key "ordenes", "presupuestos"
   add_foreign_key "pago_items", "factura_proveedors"
+  add_foreign_key "pago_items", "gastos"
   add_foreign_key "pago_items", "incentivos"
   add_foreign_key "pago_items", "pagos"
   add_foreign_key "pago_items", "subcuenta_pucs"

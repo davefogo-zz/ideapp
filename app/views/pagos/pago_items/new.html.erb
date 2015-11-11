@@ -2,7 +2,9 @@
 <h3>Nuevo Item de Pago</h3>
 <div class="form">
     <%= simple_form_for ([@pago, @pago_item]) do |form| %>
-    <%= form.association :factura_proveedor, :label_method => :numero_de_factura, include_blank: false, label: "Factura a Pagar"  %>
+    <%= form.association :factura_proveedor, :label_method => :numero_de_factura, include_blank: true, label: "Factura de Proveedor a Pagar"  %>
+    o
+    <%= form.association :gasto, :label_method => :numero_de_factura, include_blank: true, label: "Factura de Gasto a Pagar"  %>
     <%= form.input :importe %>
     <%= form.input :forma_de_pago, collection: ['Cheque', 'Efectivo', 'Transferencia'] %>
     <%= form.input :banco, collection: ['Banco de Bogota Corriente 8414', 'Bancolombia Corriente 6464', 'Citibank Corriente 0035'] %>

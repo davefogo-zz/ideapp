@@ -1,7 +1,7 @@
 class CreateSubcuentaPucs < ActiveRecord::Migration
   def change
     create_table :subcuenta_pucs do |t|
-      t.integer :subcuenta
+      t.string :subcuenta
       t.string :descripcion
       t.references :cuenta_puc, index: true
       t.string :moneda

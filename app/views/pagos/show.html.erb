@@ -28,17 +28,19 @@
           <th>Forma de Pago</th>
           <th>Importe</th>
           <th>Orden</th>
+          <th>Gasto</th>
         </tr>
       </thead>
         <tbody>
           <% @pago_items.each do |pago_item| %>
             <tr>
               <td><h4><%= pago_item.id %></h4></td>
-              <td><h4><%= pago_item.factura_proveedor.numero_de_factura %></h4></td>
-              <td><h4><%= number_to_currency(pago_item.factura_proveedor.importe, :precision => 0) %></h4></td>
+              <td><h4><%= pago_item.factura_proveedor.try(:numero_de_factura) %></h4></td>
+              <td><h4><%= number_to_currency(pago_item.factura_proveedor.try(:importe), :precision => 0) %></h4></td>
               <td><h4><%= pago_item.forma_de_pago %></h4></td>
               <td><h4><%= number_to_currency(pago_item.importe, :precision => 0) %></h4></td>
-              <td><h4><%= pago_item.factura_proveedor.ordene_id %></h4></td>
+              <td><h4><%= pago_item.factura_proveedor.try(:ordene_id) %></h4></td>
+              <td><h4><%= pago_item.pago.try(:gasto) %></h4></td>
               <td><%= link_to 'Editar', edit_pago_pago_item_path(@pago, pago_item ), class: 'btn btn-mini btn-success' %></td>
               <td><%= link_to 'Destroy', pago_pago_item_path(@pago, pago_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
           <% end %>

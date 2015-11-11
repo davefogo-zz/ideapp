@@ -15,13 +15,16 @@
             <tr>
               <th>Fecha de recepcion</th>
               <th>Fecha de vencimiento</th>
+              <th>Numero de Factura</th>
               <th>Proveedor</th>
               <th>Importe</th>
               <th>IVA</th>
+              <th>Importe Para Pago</th>
               <th>Asignar a cliente</th>
               <th>Cliente</th>
               <th>Gasto aprobado por</th>
               <th>Compra de activo</th>
+              <th>Pago</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -30,13 +33,16 @@
               <tr>
               <td><%= gasto.fecha_recepcion %></td>
               <td><%= gasto.fecha_de_vencimiento %></td>
-              <td><%= gasto.proveedore_id %></td>
+               <td><%= gasto.try(:numero_de_factura) %></td>
+              <td><%= gasto.proveedore.nombre %></td>
               <td><%= gasto.importe %></td>
               <td><%= gasto.iva %></td>
+              <td><%= gasto.importe_menos_retenciones %></td>
               <td><%= gasto.asignar_a_cliente %></td>
               <td><%= gasto.cliente_id %></td>
               <td><%= gasto.user.try(:name) %></td>
               <td><%= gasto.compra_de_activo %></td>
+              <td><%= gasto.try(:gasto_pago) %></td>
               </tr>
             <% end %>
            </tbody>

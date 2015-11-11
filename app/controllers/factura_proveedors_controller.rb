@@ -7,7 +7,7 @@ class FacturaProveedorsController < ApplicationController
     authorize FacturaProveedor
     @search = FacturaProveedorSearch.new(params[:search])
     @factura_proveedors = @search.scope
-    @factura_proveedors = FacturaProveedor.all
+    #@factura_proveedors = FacturaProveedor.all
      respond_to do |format|
       format.html
       format.csv {render text: @factura_proveedors.to_csv }

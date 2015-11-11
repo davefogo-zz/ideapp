@@ -5,6 +5,7 @@
     <%= form.input :fecha_recepcion %>
     <%= form.input :fecha_de_vencimiento %>
     <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: "Proveedor"  %>
+    <%= form.input :numero_de_factura %>
     <%= form.input :gasto_pago %>
     <%= form.association :subcuenta_puc, :label_method => :subcuenta, include_blank: true, label: "Cuenta Contable"  %>
     <%= form.input :ret_fte, label: "Retencion en la Fuente",  collection: [ 0, 0.001, 0.005, 0.01, 0.015, 0.02, 0.025, 0.035, 0.04, 0.06]%>

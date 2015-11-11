@@ -5,13 +5,12 @@ class Gasto < ActiveRecord::Base
 	belongs_to :cliente
 	belongs_to :colaboradore
 	belongs_to :user
-	belongs_to :pago
+	has_many :pago_items
 
 	before_save :transaccion_proveedor_gasto, :activo, :retenciones,  
 	:transaccion_iva_descontable_gasto 
 
-	after_save :transaccion_gasto_proveedor_por_pagar_pasivo, :unless => :gasto_pago?
-
+	after_save :transaccion_gasto_proveedor_por_pagar_pasivo
 	def transaccion_proveedor_gasto
 		Transaccion.create!(gasto_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
 	end
@@ -47,6 +46,7 @@ class Gasto < ActiveRecord::Base
 			self.subcuenta_puc_id = 1716
 			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_iva_teo, subcuenta_puc_id: self.subcuenta_puc_id)
 		end
+		self.importe_menos_retenciones = (importe - importe_fte - importe_ica - importe_iva_teo - importe_ret_iva + iva)
 	end
 
 	def transaccion_iva_descontable_gasto
@@ -55,24 +55,25 @@ class Gasto < ActiveRecord::Base
 	end
 
 	def transaccion_gasto_proveedor_por_pagar_pasivo
-		self.importe_fte =0
-		self.importe_ica =0
-		self.importe_iva_teo =0
-		unless self.ret_fte == 0
-			self.importe_fte = importe * ret_fte
+		if self.gasto_pago == false
+			self.importe_fte =0
+			self.importe_ica =0
+			self.importe_iva_teo =0
+			unless self.ret_fte == 0
+				self.importe_fte = importe * ret_fte
+			end
+			unless self.ret_ica == 0
+				self.importe_ica = importe * ret_ica
+			end
+			if self.ret_iva == true
+				self.importe_ret_iva = iva * 0.15
+			end
+			if self.iva_teo == true
+				self.importe_iva_teo = iva * 0.15
+			end
+			self.subcuenta_puc_id = 669 if self.gasto_pago == false
+			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_menos_retenciones, subcuenta_puc_id: self.subcuenta_puc_id)
 		end
-		unless self.ret_ica == 0
-			self.importe_ica = importe * ret_ica
-		end
-		if self.ret_iva == true
-			self.importe_ret_iva = iva * 0.15
-		end
-		if self.iva_teo == true
-			self.importe_iva_teo = iva * 0.15
-		end
-		self.importe = importe - importe_fte - importe_ica - importe_iva_teo - importe_ret_iva + iva
-		self.subcuenta_puc_id = 669 if self.gasto_pago == false
-		Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
 	end
 
 	def self.import(file)

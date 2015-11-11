@@ -88,6 +88,6 @@ class GastosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gasto_params
-      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :gasto_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo, :gasto_pago, :user_id, :importe_fte, :importe_ica, :importe_iva_teo, :importe_ret_iva, :ret_fte, :ret_ica, :iva_teo, :ret_iva)
+      params.require(:gasto).permit(:fecha_recepcion, :fecha_de_vencimiento, :proveedore_id, :gasto_id, :importe, :iva, :asignar_a_cliente, :cliente_id, :subcuenta_puc_id, :compra_de_activo, :gasto_pago, :user_id, :importe_fte, :importe_ica, :importe_iva_teo, :importe_ret_iva, :ret_fte, :ret_ica, :iva_teo, :ret_iva, :numero_de_factura, :importe_menos_retenciones )
     end
 end
