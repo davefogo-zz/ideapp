@@ -20,7 +20,7 @@ class FacturaItem < ActiveRecord::Base
     self.iva = (subtotal * 0.16)
   end
 
-def generate_transaccion_facturar_proveedor
+  def generate_transaccion_facturar_proveedor
     if cobro_proveedor == 'FACTURAR' or 'FACTURAR & CRUZAR'
     #This callback creates an activo deudores transaccion for the facturacion to a proveedor for a incentivo.
       self.subcuenta_puc_id = 129

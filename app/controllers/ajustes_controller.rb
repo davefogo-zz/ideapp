@@ -51,7 +51,7 @@ class AjustesController < ApplicationController
 
     respond_to do |format|
       if @ajuste.save
-        format.html { redirect_to @ajuste, notice: 'Ajuste creada.' }
+        format.html { redirect_to @ajuste, notice: 'Ajuste creado.' }
         format.json { render :show, status: :created, location: @ajuste }
       else
         format.html { render :new }
@@ -88,8 +88,10 @@ class AjustesController < ApplicationController
   end
 
   def total
+    @search = TotalSearch.new(params[:search])
+    @transaccions = @search.scope
     @ajustes = Ajuste.all
-    @transaccions = Transaccion.all
+
     respond_to do |format|
       format.html
       format.csv {render text: @transaccions.to_csv }
