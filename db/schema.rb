@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111000054) do
+ActiveRecord::Schema.define(version: 20151118230734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,8 +308,6 @@ ActiveRecord::Schema.define(version: 20151111000054) do
     t.string   "formato"
     t.integer  "duracion"
     t.string   "notas"
-    t.integer  "cm"
-    t.integer  "col"
     t.string   "franja"
     t.integer  "subtotal",             limit: 8
     t.boolean  "aprobado_por_cliente"
@@ -319,6 +317,8 @@ ActiveRecord::Schema.define(version: 20151111000054) do
     t.date     "facturado"
     t.integer  "incentivo",            limit: 8
     t.integer  "medio_id"
+    t.decimal  "cm"
+    t.decimal  "col"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
