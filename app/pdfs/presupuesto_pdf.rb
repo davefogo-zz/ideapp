@@ -21,39 +21,45 @@ class PresupuestoPdf < Prawn::Document
 	end
 
 	def presupuesto_id
-		bounding_box([0, 670], :width => 150, :height => 15) do
-		text "Presupuesto No." , size: 10, style: :bold
-		end
-		bounding_box([100, 670], :width => 150, :height => 15) do
-		text " #{@presupuesto.id}" , size: 10
-		end
+			text_box "Presupuesto No." , size: 10, style: :bold,
+					:at => [0, 670],
+					:width => 150,
+					:height => 15
+			text_box " #{@presupuesto.id}" , size: 10,
+					:at => [100, 670], 
+					:width => 150,
+			 		:height => 15
 	end
 
 	def fechas
-  		bounding_box([350, 670], :width => 150, :height => 15) do
-    		text 'Fecha:', size: 10, style: :bold
-		end
-		bounding_box([370, 655], :width => 150, :height => 15) do
-    		text "#{@presupuesto.fecha}", size: 10
-		end
-  	end
+		text_box "Fecha" , size: 10, style: :bold,
+				:at => [350, 670],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.fecha}" , size: 10,
+				:at => [370, 655], 
+				:width => 150,
+		 		:height => 15
+	end
 
-  	def producto
-  		bounding_box([350, 630], :width => 150, :height => 15) do
-    		text 'Producto:', size: 10, style: :bold
-		end
-
-		bounding_box([370, 615], :width => 150, :height => 15) do
-    		text "#{@presupuesto.producto}", size: 10
-		end
-
-		bounding_box([350, 590], :width => 150, :height => 15) do
-    		text 'Ejecutivo:', size: 10, style: :bold
-		end
-		bounding_box([370, 575], :width => 150, :height => 15) do
-    		text "#{@presupuesto.cliente.colaboradore.nombre}", size: 10
-		end
-  	end
+	def producto
+		text_box "Producto:" , size: 10, style: :bold,
+				:at => [350, 630],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.producto}" , size: 10,
+				:at => [370, 615], 
+				:width => 150,
+		 		:height => 15
+		text_box "Ejecutivo:" , size: 10, style: :bold,
+				:at => [350, 590],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.cliente.colaboradore.nombre}" , size: 10,
+				:at => [370, 575], 
+				:width => 150,
+		 		:height => 15
+	end
 
 	def cliente
   		text_box "Ideamos Publicidad LTDA. 860.076.863-6", size: 10, style: :bold,
@@ -79,7 +85,7 @@ class PresupuestoPdf < Prawn::Document
 	end
 
 	def presupuesto_items
-		move_down 20
+		move_down 150
 			table presupuesto_item_rows, :width => 550 do
 				row(0..1000).border_width = 0
 				row(0).font_style = :bold
