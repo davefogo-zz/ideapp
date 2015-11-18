@@ -18,7 +18,6 @@
     <%= form.input :actividad, collection: ['ACTIVO','INACTIVO'] %>
     <%= form.input :notas %>
     <%= form.association :colaboradore, :label_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
-    <%= form.association :colaboradore, :label_method => :nombre, include_blank: true, label: "Ejecutivo"  %>
   	<%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>

@@ -20,12 +20,14 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def ordene_id
-		bounding_box([0, 670], :width => 150, :height => 15) do
-		text "Orden No." , size: 10, style: :bold
-		end
-		bounding_box([50, 670], :width => 150, :height => 15) do
-		text " #{@ordene.id}" , size: 10
-		end
+		text_box "Orden No." , size: 10, style: :bold,
+				:at => [0, 670],
+				:width => 150,
+				:height => 15
+		text_box " #{@ordene.id}" , size: 10,
+				:at => [50, 670], 
+				:width => 150,
+		 		:height => 15
 	end
 
   	def producto
