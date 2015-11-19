@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119180000) do
+ActiveRecord::Schema.define(version: 20151119185245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -318,6 +318,8 @@ ActiveRecord::Schema.define(version: 20151119180000) do
     t.decimal  "cm"
     t.decimal  "col"
     t.string   "color"
+    t.integer  "importe_descuento",    limit: 8
+    t.integer  "area"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree

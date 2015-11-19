@@ -2,7 +2,7 @@ class Presupuestos::OrdenesController < ApplicationController
   # GET /ordenes
   # GET /ordenes.json
   def index
-    @ordene = Ordene.all
+    @ordenes = Ordene.all
     authorize Presupuesto
   end
 
@@ -94,6 +94,6 @@ class Presupuestos::OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordene_params
-      params.require(:ordene).permit(:fecha_orden, :medida, :unidad, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color)
+      params.require(:ordene).permit(:fecha_orden, :medida, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color, :importe_descuento, :area)
     end
 end

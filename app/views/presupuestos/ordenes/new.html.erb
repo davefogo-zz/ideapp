@@ -8,8 +8,8 @@
       <%= form.input :ubicacion %>
       <%= form.input :formato %>
       <%= form.input :color, collection: ['B/N', 'Bicolor', 'Policromia'] %>
-      <%= form.input :cm %>
-      <%= form.input :col %>
+      <%= form.input :cm, input_html: {value: 0}%>
+      <%= form.input :col, input_html: {value: 0}  %>
       <%= form.input :costo_unidad %>
       <%= form.input :descuento %>
       <%= form.input :cantidad %>

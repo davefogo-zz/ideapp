@@ -5,7 +5,6 @@
     <tr>
       <th>Fecha orden</th>
       <th>Medida</th>
-      <th>Unidad</th>
       <th>Costo unidad</th>
       <th>Total</th>
       <th>Presupuesto</th>
@@ -16,7 +15,6 @@
     <% @ordenes.each do |ordene| %>
       <tr>
         <td><%= ordene.fecha_orden %></td>
-        <td><%= ordene.unidad %></td>
         <td><%= ordene.costo_unidad %></td>
         <td><%= ordene.presupuesto %></td>
       </tr>
