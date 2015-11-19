@@ -14,7 +14,6 @@
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Tipo de Medio</th>
               <th>Dirección</th>
               <th>Teléfono</th>
               <th>Proveedor</th>
@@ -30,7 +29,6 @@
           <% @medios.each do |medio| %>
             <tr>
               <td><%= medio.nombre %></td>
-              <td><%= medio.tipo_de_medio %></td>
               <td><%= medio.direccion %></td>
               <td><%= medio.telefono %></td>
               <td><%= medio.proveedore.try(:nombre) %></td>

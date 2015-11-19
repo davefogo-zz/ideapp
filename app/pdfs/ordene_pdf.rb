@@ -20,7 +20,7 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def ordene_id
-		text_box "Orden No." , size: 10, style: :bold,
+		text_box "Item No." , size: 10, style: :bold,
 				:at => [0, 670],
 				:width => 150,
 				:height => 15
@@ -74,12 +74,20 @@ class OrdenePdf < Prawn::Document
 				 :at => [25, 590],
 				 :height => 15,
 				 :width => 200	
-		text_box "Medio:", size: 10, style: :bold,
+		text_box "Proveedor:", size: 10, style: :bold,
 				 :at => [0, 560],
 				 :height => 15,
 				 :width => 200	
+		text_box "#{@ordene.medio.proveedore.nombre}", size:10,
+				 :at => [60, 560],
+				 :height => 15,
+				 :width => 200 
+		text_box "Medio:", size: 10, style: :bold,
+				 :at => [0, 530],
+				 :height => 15,
+				 :width => 200	
 		text_box "#{@ordene.medio.nombre}", size:10,
-				 :at => [50, 560],
+				 :at => [50, 530],
 				 :height => 15,
 				 :width => 200 
 	end
@@ -158,7 +166,7 @@ class OrdenePdf < Prawn::Document
 			 :height => 15,
 			 :width => 200
 		text_box "#{@ordene.cm}", size: 10, style: :bold,
-			 :at => [250, 465],
+			 :at => [300, 465],
 			 :height => 15,
 			 :width => 200
 		text_box "#{@ordene.col}", size: 10, style: :bold,

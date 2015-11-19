@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Listado de Presupuestos</h1>
+  <h1>Listado de Ordenes</h1>
   <div class="pull-right range-query">
      <%= form_tag presupuestos_path, method: :get do %>
         <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
@@ -13,7 +13,7 @@
       <table class="table table-hover">
           <thead>
             <tr>
-              <th>Presupuesto No.</th>
+              <th>Orden No.</th>
               <th>Fecha</th>
               <th>Cliente</th>
               <th>Nit</th>
@@ -21,6 +21,7 @@
               <th>Teléfono</th>
               <th>Titulo</th>
               <th>Producto</th>
+              <th>Proveedor</th>
               <th>Colaborador</th>
               <th colspan="3"></th>
             </tr>
@@ -36,6 +37,7 @@
                 <td><%= presupuesto.cliente.telefono %></td>
                 <td><%= presupuesto.titulo %></td>
                 <td><%= presupuesto.producto %></td>
+                <td><%= presupuesto.proveedore.nombre %></td>
                 <td><%= presupuesto.cliente.colaboradore.try(:nombre) %></td>
                 <td><%= link_to 'Mostrar', presupuesto, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
@@ -49,7 +51,7 @@
 
 <br>
 
-<%= link_to 'Nuevo Presupuesto', new_presupuesto_path , class: 'btn btn-mini btn-default'%>
+<%= link_to 'Nuevo Orden', new_presupuesto_path , class: 'btn btn-mini btn-default'%>
 <br>
 <br>
 <%= form_tag import_presupuestos_path, multipart: true do%>

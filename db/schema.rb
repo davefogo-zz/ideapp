@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118230734) do
+ActiveRecord::Schema.define(version: 20151119180000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,7 +267,6 @@ ActiveRecord::Schema.define(version: 20151118230734) do
     t.string   "direccion"
     t.string   "telefono"
     t.string   "zona"
-    t.string   "tipo_de_medio"
     t.integer  "escala_id"
     t.integer  "iva"
     t.string   "notas"
@@ -294,7 +293,6 @@ ActiveRecord::Schema.define(version: 20151118230734) do
 
   create_table "ordenes", force: :cascade do |t|
     t.date     "fecha_orden"
-    t.string   "unidad"
     t.integer  "costo_unidad",         limit: 8
     t.integer  "presupuesto_id"
     t.datetime "created_at",                     null: false
@@ -319,6 +317,7 @@ ActiveRecord::Schema.define(version: 20151118230734) do
     t.integer  "medio_id"
     t.decimal  "cm"
     t.decimal  "col"
+    t.string   "color"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
@@ -368,12 +367,15 @@ ActiveRecord::Schema.define(version: 20151118230734) do
     t.date     "fecha"
     t.string   "titulo"
     t.string   "producto"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "cliente_id"
+    t.string   "tipo_de_medio"
+    t.integer  "proveedore_id"
   end
 
   add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id", using: :btree
+  add_index "presupuestos", ["proveedore_id"], name: "index_presupuestos_on_proveedore_id", using: :btree
 
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre"
@@ -528,6 +530,7 @@ ActiveRecord::Schema.define(version: 20151118230734) do
   add_foreign_key "pagos", "factura_proveedors"
   add_foreign_key "pagos", "proveedores"
   add_foreign_key "presupuestos", "clientes"
+  add_foreign_key "presupuestos", "proveedores"
   add_foreign_key "recibo_de_cajas", "clientes"
   add_foreign_key "recibo_items", "facturas"
   add_foreign_key "recibo_items", "recibo_de_cajas"

@@ -6,6 +6,7 @@ class Presupuesto < ActiveRecord::Base
   has_one :factura
   validates :fecha, :titulo, :cliente_id, :producto, presence: true
   before_save :subtotal, :iva, :total 
+  belongs_to :proveedore
 
 
    def subtotal

@@ -26,7 +26,7 @@ class PresupuestosController < ApplicationController
       format.html
       format.pdf do
         pdf = PresupuestoPdf.new(@presupuesto, view_context)
-        send_data pdf.render, filename: 'presupuesto#{@presupuesto.id}.pdf',
+        send_data pdf.render, filename: 'orden_#{@presupuesto.id}.pdf',
                               type: 'application/pdf',
                               disposition: 'inline'
       end
@@ -100,6 +100,6 @@ class PresupuestosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def presupuesto_params
-      params.require(:presupuesto).permit(:fecha, :titulo, :producto, :cliente_id, :proveedore_id, :medio_id)
+      params.require(:presupuesto).permit(:fecha, :titulo, :producto, :cliente_id, :proveedore_id, :medio_id, :tipo_de_medio, :proveedore_id)
     end
 end

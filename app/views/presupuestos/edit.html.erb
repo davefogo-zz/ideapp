@@ -3,6 +3,8 @@
 <div class="form">
     <%= simple_form_for @presupuesto do |form| %>
     <%= form.input :fecha %>
+    <%= form.input :tipo_de_medio, collection: [ 'Radio', 'Revista', 'Internet', 'Medios Alternativos', 'Prensa', 'Produccion', 'Tv Cable'] %>
+    <%= form.association :proveedore, :label_method => :nombre, include_blank: false, label: "Proveedor"  %>
     <%= form.association :cliente, :label_method => :nombre, include_blank: false, label: "Cliente"  %>
     <%= form.input :titulo %>
     <%= form.input :producto %>

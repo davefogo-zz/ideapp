@@ -1,10 +1,11 @@
 class PresupuestoPdf < Prawn::Document
 	def initialize(presupuesto, view)
-		super()
+		super(page_layout: :landscape)
 		@presupuesto = presupuesto
 		@view = view
 		logo
 		presupuesto_id
+		ideamos
 		fechas
 		producto
 		cliente
@@ -21,42 +22,69 @@ class PresupuestoPdf < Prawn::Document
 	end
 
 	def presupuesto_id
-			text_box "Presupuesto No." , size: 10, style: :bold,
-					:at => [0, 670],
+			text_box "Orden No." , size: 10, style: :bold,
+					:at => [0, 560],
 					:width => 150,
 					:height => 15
 			text_box " #{@presupuesto.id}" , size: 10,
-					:at => [100, 670], 
+					:at => [60, 560], 
 					:width => 150,
 			 		:height => 15
 	end
 
+	def ideamos
+		text_box "Ideamos Publicidad LTDA. 860.076.863-6", size: 8,
+				 :at => [0, 505],
+				 :height => 15,
+				 :width => 200
+		text_box "Telefono: 3847777", size: 6,
+				 :at => [0, 495],
+				 :height => 15,
+				 :width => 200
+	end
+
 	def fechas
-		text_box "Fecha" , size: 10, style: :bold,
-				:at => [350, 670],
+		text_box "Fecha Orden:" , size: 8, style: :bold,
+				:at => [200, 530],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.fecha}" , size: 10,
-				:at => [370, 655], 
+		text_box " #{@presupuesto.fecha}" , size: 8,
+				:at => [270, 530], 
 				:width => 150,
 		 		:height => 15
 	end
 
 	def producto
-		text_box "Producto:" , size: 10, style: :bold,
-				:at => [350, 630],
+		text_box "Producto:" , size: 8, style: :bold,
+				:at => [500, 530],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.producto}" , size: 10,
-				:at => [370, 615], 
+		text_box " #{@presupuesto.producto}" , size: 8,
+				:at => [520, 615], 
 				:width => 150,
 		 		:height => 15
-		text_box "Ejecutivo:" , size: 10, style: :bold,
-				:at => [350, 590],
+		text_box "Proveedor:" , size: 8, style: :bold,
+				:at => [500, 510],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.cliente.colaboradore.nombre}" , size: 10,
-				:at => [370, 575], 
+		text_box " #{@presupuesto.proveedore.nombre}" , size: 8,
+				:at => [550, 510], 
+				:width => 150,
+		 		:height => 15
+		text_box "Tipo de Medio:" , size: 8, style: :bold,
+				:at => [630, 530],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.tipo_de_medio}" , size: 8,
+				:at => [690, 530], 
+				:width => 150,
+		 		:height => 15
+		text_box "Ejecutivo:" , size: 8, style: :bold,
+				:at => [200, 510],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.cliente.colaboradore.nombre}" , size: 8,
+				:at => [250, 510], 
 				:width => 150,
 		 		:height => 15
 	end
@@ -66,46 +94,47 @@ class PresupuestoPdf < Prawn::Document
 				 :at => [0, 650],
 				 :height => 15,
 				 :width => 200
-		text_box "Cliente:", size: 10, style: :bold,
-				 :at => [0, 635],
+		text_box "Cliente:", size: 8, style: :bold,
+				 :at => [330, 530],
 				 :height => 15,
 				 :width => 200
-		text_box "#{@presupuesto.cliente.nombre}", size: 10,
-				 :at => [20, 620],
+		text_box "#{@presupuesto.cliente.nombre}", size: 8,
+				 :at => [370, 530],
 				 :height => 15,
 				 :width => 200
-		text_box "Nit:", size: 10, style: :bold,
-				 :at => [0, 605],
+		text_box "Nit:", size: 8, style: :bold,
+				 :at => [330, 510],
 				 :height => 15,
 				 :width => 200	
-		text_box "#{@presupuesto.cliente.numero_de_documento}", size:10,
-				 :at => [20, 590],
+		text_box "#{@presupuesto.cliente.numero_de_documento}", size:8,
+				 :at => [350, 510],
 				 :height => 15,
 				 :width => 200	 
 	end
 
 	def presupuesto_items
-		move_down 150
-			table presupuesto_item_rows, :width => 550 do
+		move_down 40
+			table presupuesto_item_rows, :width => 750 do
 				row(0..1000).border_width = 0
 				row(0).font_style = :bold
+				row(0..1000).size = 6
 				self.header = true
 			end
 	end
 
 	def presupuesto_item_rows
-		[['Fecha', 'Medio', 'Cantidad', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
-			[item.fecha_orden, item.medio.nombre, item.cantidad, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
+			[item.fecha_orden, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
 		end	
 	end
 
 	def total
 		move_down 15
-			text "Subtotal #{price(@presupuesto.subtotal)}", style: :bold, :align => :right
+			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :right
 		move_down 5
-			text "Iva #{price(@presupuesto.iva)}", style: :bold, :align => :right	
+			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :right	
 		move_down 5
-			text "Total #{price(@presupuesto.total)}", style: :bold, :align => :right										   
+			text "Total #{price(@presupuesto.total)}",size: 8, style: :bold, :align => :right										   
 	end
 	
 end
