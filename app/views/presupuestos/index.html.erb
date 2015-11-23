@@ -38,7 +38,7 @@
                 <td><%= presupuesto.titulo %></td>
                 <td><%= presupuesto.producto %></td>
                 <td><%= presupuesto.proveedore.nombre %></td>
-                <td><%= presupuesto.cliente.colaboradore.try(:nombre) %></td>
+                <td><%= presupuesto.cliente.colaboradore.nombre %></td>
                 <td><%= link_to 'Mostrar', presupuesto, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
                 <td><%= link_to 'Borrar', presupuesto, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Confirma?' } %></td>

@@ -33,6 +33,12 @@ cargo_list.each do |nombre, departamento_id|
 	Cargo.create(nombre: nombre, departamento_id: departamento_id)
 end
 
+Colaboradore.create("nombre"=>"Volumen", "jefe_inmediato"=>nil, "cedula"=>"124213412342134", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>2, "departamento_id"=>1, "cargo_id"=>181)
+Colaboradore.create("nombre"=>"Nidia Cuellar", "jefe_inmediato"=>nil, "cedula"=>"254523452345", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>3, "departamento_id"=>1, "cargo_id"=>181)
+Colaboradore.create("nombre"=>"Diana Suarez", "jefe_inmediato"=>nil, "cedula"=>"2544235324", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>4, "departamento_id"=>1, "cargo_id"=>181)
+Colaboradore.create("nombre"=>"Maria Paula Solano", "jefe_inmediato"=>nil, "cedula"=>"214523432", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>5, "departamento_id"=>1, "cargo_id"=>181)
+Colaboradore.create("nombre"=>"Constanza Cortes", "jefe_inmediato"=>nil, "cedula"=>"12342134", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>6, "departamento_id"=>1, "cargo_id"=>181)
+
 Clase.create("clase"=>1, "descripcion"=>"ACTIVO")
 Clase.create("clase"=>2, "descripcion"=>"PASIVO")
 Clase.create("clase"=>3, "descripcion"=>"PATRIMONIO")
