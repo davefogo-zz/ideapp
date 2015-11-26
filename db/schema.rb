@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119185245) do
+ActiveRecord::Schema.define(version: 20151126151608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 20151119185245) do
 
   create_table "factura_items", force: :cascade do |t|
     t.integer  "factura_id"
-    t.integer  "ordene_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.date     "fecha_orden"
@@ -150,11 +149,12 @@ ActiveRecord::Schema.define(version: 20151119185245) do
     t.integer  "ret_iva",            limit: 8
     t.integer  "ret_ica",            limit: 8
     t.integer  "ret_fte",            limit: 8
+    t.integer  "orden_item_id"
   end
 
   add_index "factura_items", ["factura_id"], name: "index_factura_items_on_factura_id", using: :btree
   add_index "factura_items", ["medio_id"], name: "index_factura_items_on_medio_id", using: :btree
-  add_index "factura_items", ["ordene_id"], name: "index_factura_items_on_ordene_id", using: :btree
+  add_index "factura_items", ["orden_item_id"], name: "index_factura_items_on_orden_item_id", using: :btree
   add_index "factura_items", ["subcuenta_puc_id"], name: "index_factura_items_on_subcuenta_puc_id", using: :btree
 
   create_table "factura_proveedors", force: :cascade do |t|
@@ -243,15 +243,15 @@ ActiveRecord::Schema.define(version: 20151119185245) do
     t.string   "tipo_de_volumen"
     t.string   "cobro"
     t.integer  "medio_id"
-    t.integer  "ordene_id"
     t.integer  "pago_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "valor_incentivo", limit: 8
+    t.integer  "orden_item_id"
   end
 
   add_index "incentivos", ["medio_id"], name: "index_incentivos_on_medio_id", using: :btree
-  add_index "incentivos", ["ordene_id"], name: "index_incentivos_on_ordene_id", using: :btree
+  add_index "incentivos", ["orden_item_id"], name: "index_incentivos_on_orden_item_id", using: :btree
   add_index "incentivos", ["pago_id"], name: "index_incentivos_on_pago_id", using: :btree
 
   create_table "medios", force: :cascade do |t|
@@ -291,6 +291,38 @@ ActiveRecord::Schema.define(version: 20151119185245) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "orden_items", force: :cascade do |t|
+    t.date     "fecha_item"
+    t.integer  "costo_unidad"
+    t.integer  "factura_id"
+    t.integer  "medio_id"
+    t.integer  "cantidad"
+    t.string   "cobertura"
+    t.string   "referencia_preventa"
+    t.string   "ubicacion"
+    t.decimal  "descuento"
+    t.string   "formato"
+    t.string   "notas"
+    t.integer  "subtotal"
+    t.boolean  "aprobado_por_cliente"
+    t.integer  "iva"
+    t.integer  "total"
+    t.date     "facturado"
+    t.integer  "incentivo"
+    t.decimal  "cm"
+    t.decimal  "col"
+    t.string   "color"
+    t.integer  "importe_descuento"
+    t.integer  "area"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "ordene_id"
+  end
+
+  add_index "orden_items", ["factura_id"], name: "index_orden_items_on_factura_id", using: :btree
+  add_index "orden_items", ["medio_id"], name: "index_orden_items_on_medio_id", using: :btree
+  add_index "orden_items", ["ordene_id"], name: "index_orden_items_on_ordene_id", using: :btree
+
   create_table "ordenes", force: :cascade do |t|
     t.date     "fecha_orden"
     t.integer  "costo_unidad",         limit: 8
@@ -319,7 +351,7 @@ ActiveRecord::Schema.define(version: 20151119185245) do
     t.decimal  "col"
     t.string   "color"
     t.integer  "importe_descuento",    limit: 8
-    t.integer  "area"
+    t.decimal  "area"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
@@ -499,7 +531,7 @@ ActiveRecord::Schema.define(version: 20151119185245) do
   add_foreign_key "departamentos", "colaboradores"
   add_foreign_key "factura_items", "facturas"
   add_foreign_key "factura_items", "medios"
-  add_foreign_key "factura_items", "ordenes"
+  add_foreign_key "factura_items", "orden_items"
   add_foreign_key "factura_items", "subcuenta_pucs"
   add_foreign_key "factura_proveedors", "factura_proveedors"
   add_foreign_key "factura_proveedors", "ordenes"
@@ -515,12 +547,15 @@ ActiveRecord::Schema.define(version: 20151119185245) do
   add_foreign_key "gastos", "users"
   add_foreign_key "grupos", "clases"
   add_foreign_key "incentivos", "medios"
-  add_foreign_key "incentivos", "ordenes"
+  add_foreign_key "incentivos", "orden_items"
   add_foreign_key "incentivos", "pagos"
   add_foreign_key "medios", "escalas"
   add_foreign_key "medios", "ordenes"
   add_foreign_key "medios", "presupuestos"
   add_foreign_key "medios", "proveedores"
+  add_foreign_key "orden_items", "facturas"
+  add_foreign_key "orden_items", "medios"
+  add_foreign_key "orden_items", "ordenes"
   add_foreign_key "ordenes", "facturas"
   add_foreign_key "ordenes", "medios"
   add_foreign_key "ordenes", "presupuestos"

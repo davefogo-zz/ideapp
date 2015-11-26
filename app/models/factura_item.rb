@@ -1,7 +1,7 @@
 class FacturaItem < ActiveRecord::Base
   belongs_to :factura
   belongs_to :medio
-  belongs_to :ordene
+  belongs_to :orden_item
   belongs_to :subcuenta_puc
   has_many :incentivos
  
@@ -32,7 +32,7 @@ class FacturaItem < ActiveRecord::Base
       Transaccion.create!(factura_item_id: self.id, fecha: Time.now, credito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
       #Tgenerate_transaccion_facturar_proveedor_ingreso_operacional, his callback creates an ingreso operacional transaccion for the facturacion to a proveedor for a incentivo.
       
-      #if ordene.cliente.tipo_de_persona = 'GRAN CONTRIBUYENTE AUTORRETENEDOR'
+      #if orden_item.cliente.tipo_de_persona = 'GRAN CONTRIBUYENTE AUTORRETENEDOR'
       #end
     end
   end
@@ -75,10 +75,10 @@ class FacturaItem < ActiveRecord::Base
     if medio.cobro == 'CRUZAR'
       #This callback creates an activo incentivos por cruzar
       self.subcuenta_puc_id = 130
-      Transaccion.create!(factura_item_id: self.id, fecha: Time.now, debito: self.ordene.incentivo, subcuenta_puc_id: self.subcuenta_puc_id)
+      Transaccion.create!(factura_item_id: self.id, fecha: Time.now, debito: self.orden_item.incentivo, subcuenta_puc_id: self.subcuenta_puc_id)
       #This callback creates an ingreso operacional cruce, :generate_transaccion_incentivo_automatico_ingreso_operacional 
       self.subcuenta_puc_id = 1231
-      Transaccion.create!(factura_item_id: self.id, fecha: Time.now, credito: self.ordene.incentivo, subcuenta_puc_id: self.subcuenta_puc_id)
+      Transaccion.create!(factura_item_id: self.id, fecha: Time.now, credito: self.orden_item.incentivo, subcuenta_puc_id: self.subcuenta_puc_id)
     end  
   end
 end

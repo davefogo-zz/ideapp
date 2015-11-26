@@ -1,0 +1,14 @@
+current directory: /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.0.0/gems/json-1.8.2/ext/json
+/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby -r ./siteconf20151125-16880-meh1ss.rb extconf.rb
+creating Makefile
+
+current directory: /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.0.0/gems/json-1.8.2/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.0.0/gems/json-1.8.2/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.0.0/gems/json-1.8.2/ext/json
+make "DESTDIR=" install
+installing default libraries
