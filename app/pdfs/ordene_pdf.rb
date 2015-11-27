@@ -6,9 +6,10 @@ class OrdenePdf < Prawn::Document
 		@view = view
 		logo
 		ordene_id
-		producto
+		ejecutivo
 		cliente
-		orden
+		orden_items
+		total
 	end
 
 	def logo
@@ -20,7 +21,7 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def ordene_id
-		text_box "Item No." , size: 10, style: :bold,
+		text_box "Orden No." , size: 10, style: :bold,
 				:at => [0, 670],
 				:width => 150,
 				:height => 15
@@ -30,20 +31,12 @@ class OrdenePdf < Prawn::Document
 		 		:height => 15
 	end
 
-	def producto
-		text_box "Producto:" , size: 10, style: :bold,
-				:at => [350, 620],
-				:width => 150,
-				:height => 15
-		text_box " #{@presupuesto.producto}" , size: 10,
-				:at => [400, 620], 
-				:width => 150,
-		 		:height => 15
+	def ejecutivo
 		 text_box "Ejecutivo:" , size: 10, style: :bold,
 				:at => [350, 590],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.cliente.colaboradore.nombre}" , size: 10,
+		text_box " #{@presupuesto.cliente.colaboradore.try(:nombre)}" , size: 10,
 				:at => [400, 590], 
 				:width => 150,
 		 		:height => 15
@@ -78,18 +71,35 @@ class OrdenePdf < Prawn::Document
 				 :at => [0, 560],
 				 :height => 15,
 				 :width => 200	
-		text_box "#{@ordene.medio.proveedore.nombre}", size:10,
+		text_box "#{@ordene.proveedore.nombre}", size:10,
 				 :at => [60, 560],
 				 :height => 15,
 				 :width => 200 
-		text_box "Medio:", size: 10, style: :bold,
-				 :at => [0, 530],
-				 :height => 15,
-				 :width => 200	
-		text_box "#{@ordene.medio.nombre}", size:10,
-				 :at => [50, 530],
-				 :height => 15,
-				 :width => 200 
+	end
+
+def orden_items
+		move_down 40
+			table orden_item_rows, :width => 750 do
+				row(0..1000).border_width = 0
+				row(0).font_style = :bold
+				row(0..1000).size = 6
+				self.header = true
+			end
+	end
+
+	def orden_item_rows
+		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Descuento', 'Iva', 'Subtotal','Total']] + @ordene.orden_items.map do |item|
+			[item.fecha_orden, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+		end	
+	end
+
+	def total
+		move_down 15
+			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :right
+		move_down 5
+			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :right	
+		move_down 5
+			text "Total #{price(@presupuesto.total)}",size: 8, style: :bold, :align => :right										   
 	end
 
 	def orden
@@ -97,7 +107,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [0, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.fecha_orden}", size:8,
+		text_box "#{@orden_item.fecha_orden}", size:8,
 			 :at => [0, 495],
 			 :height => 15,
 			 :width => 200	 
@@ -105,7 +115,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [80, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.cantidad}", size:8,
+		text_box "#{@orden_item.cantidad}", size:8,
 			 :at => [80, 495],
 			 :height => 15,
 			 :width => 200	
@@ -113,7 +123,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [150, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.costo_unidad}", size:8,
+		text_box "#{@orden_item.costo_unidad}", size:8,
 			 :at => [150, 495],
 			 :height => 15,
 			 :width => 200	
@@ -121,7 +131,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [250, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.descuento}", size:8,
+		text_box "#{@orden_item.descuento}", size:8,
 			 :at => [250, 495],
 			 :height => 15,
 			 :width => 200	
@@ -129,7 +139,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [330, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.iva}", size:8,
+		text_box "#{@orden_item.iva}", size:8,
 			 :at => [330, 495],
 			 :height => 15,
 			 :width => 200	
@@ -137,7 +147,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [400, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.subtotal}", size:8,
+		text_box "#{@orden_item.subtotal}", size:8,
 			 :at => [400, 495],
 			 :height => 15,
 			 :width => 200	
@@ -145,7 +155,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [500, 510],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.total}", size:8,
+		text_box "#{@orden_item.total}", size:8,
 			 :at => [500, 495],
 			 :height => 15,
 			 :width => 200	
@@ -153,7 +163,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [0, 480],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.ubicacion}", size:8,
+		text_box "#{@orden_item.ubicacion}", size:8,
 			 :at => [0, 465],
 			 :height => 15,
 			 :width => 200	
@@ -165,15 +175,15 @@ class OrdenePdf < Prawn::Document
 			 :at => [250, 480],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.cm}", size: 10, style: :bold,
+		text_box "#{@orden_item.cm}", size: 10, style: :bold,
 			 :at => [300, 465],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.col}", size: 10, style: :bold,
+		text_box "#{@orden_item.col}", size: 10, style: :bold,
 			 :at => [330, 465],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.unidad}", size:8,
+		text_box "#{@orden_item.unidad}", size:8,
 			 :at => [150, 465],
 			 :height => 15,
 			 :width => 200	
@@ -181,7 +191,7 @@ class OrdenePdf < Prawn::Document
 			 :at => [0, 430],
 			 :height => 15,
 			 :width => 200
-		text_box "#{@ordene.notas}", size:8,
+		text_box "#{@orden_item.notas}", size:8,
 			 :at => [40, 430],
 			 :height => 15,
 			 :width => 200	

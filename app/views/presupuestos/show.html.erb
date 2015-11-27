@@ -27,8 +27,8 @@
   <%= @presupuesto.producto %>
 </p>
 <p>
-  <strong>Proveedor:</strong>
-  <%= @presupuesto.proveedore.nombre %>
+  <strong>Tipo de Medio:</strong>
+  <%= @presupuesto.tipo_de_medio %>
 </p>
 <p>
   <strong>Ejecutivo:</strong>
@@ -40,19 +40,10 @@
       <thead>
         <tr>
           <th>Fecha Orden</th>
-          <th>Medio</th>
-          <th>CM</th>
-          <th>COL</th>
-          <th>Cantidad</th>
-          <th>Costo Unidad</th>
-          <th>Ubicacion</th>
-          <th>Formato</th>
-          <th>Color</th>
+          <th>Proveedor</th>
           <th>Ref. Preventa</th>
-          <th>Notas</th>
-          <th>Descuento</th>
-          <th>Iva</th>
           <th>Subtotal</th>
+          <th>Iva</th>
           <th>Total</th>
         </tr>
       </thead>
@@ -63,19 +54,10 @@
 	        <% @ordenes.each do |ordene| %>
 	        <tr>
             <td><h4><%= ordene.fecha_orden %></h4></td>
-            <td><h4><%= ordene.medio.nombre %></h4></td>
-            <td><h4><%= ordene.cm %></h4></td>
-            <td><h4><%= ordene.col  %></h4></td>
-            <td><h4><%= ordene.cantidad  %></h4></td>
-            <td><h4><%= number_to_currency(ordene.costo_unidad, :precision => 0) %></h4></td>
-            <td><h4><%= ordene.ubicacion %></h4></td>
-            <td><h4><%= ordene.formato %></h4></td>
-            <td><h4><%= ordene.color %></h4></td>
+            <td><h4><%= ordene.proveedore.nombre %></h4></td>
             <td><h4><%= ordene.referencia_preventa %></h4></td>
-            <td><h4><%= ordene.notas %></h4></td>
-            <td><h4><%= number_to_percentage((ordene.descuento * 100), :precision =>0 ) %></h4></td>
-            <td><h4><%= ordene.iva %></h4></td>
             <td><h4><%= ordene.subtotal %></h4></td>
+             <td><h4><%= ordene.iva %></h4></td>
             <td><h4><%= ordene.total %></h4></td>
             <td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
@@ -90,7 +72,7 @@
 <h4 >IVA:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
 <h4 >Total Orden:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
 
-<p><%= link_to 'Agregar nuevo item', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
+<p><%= link_to 'Agregar Nueva Orden', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
 <p><%= link_to 'Descargar Orden en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
 <p><%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br></p>
 <p><%= link_to 'Regresar', presupuestos_path %><br></p>

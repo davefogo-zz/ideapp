@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126151608) do
+ActiveRecord::Schema.define(version: 20151127005627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(version: 20151126151608) do
     t.integer  "escala_id"
     t.integer  "iva"
     t.string   "notas"
+    t.string   "tipo_de_medio"
   end
 
   add_index "medios", ["escala_id"], name: "index_medios_on_escala_id", using: :btree
@@ -352,11 +353,13 @@ ActiveRecord::Schema.define(version: 20151126151608) do
     t.string   "color"
     t.integer  "importe_descuento",    limit: 8
     t.decimal  "area"
+    t.integer  "proveedore_id"
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree
   add_index "ordenes", ["medio_id"], name: "index_ordenes_on_medio_id", using: :btree
   add_index "ordenes", ["presupuesto_id"], name: "index_ordenes_on_presupuesto_id", using: :btree
+  add_index "ordenes", ["proveedore_id"], name: "index_ordenes_on_proveedore_id", using: :btree
 
   create_table "pago_items", force: :cascade do |t|
     t.integer  "pago_id"
@@ -559,6 +562,7 @@ ActiveRecord::Schema.define(version: 20151126151608) do
   add_foreign_key "ordenes", "facturas"
   add_foreign_key "ordenes", "medios"
   add_foreign_key "ordenes", "presupuestos"
+  add_foreign_key "ordenes", "proveedores"
   add_foreign_key "pago_items", "factura_proveedors"
   add_foreign_key "pago_items", "gastos"
   add_foreign_key "pago_items", "incentivos"

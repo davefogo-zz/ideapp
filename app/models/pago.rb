@@ -5,6 +5,7 @@ class Pago < ActiveRecord::Base
   has_many :gastos
   has_many :incentivos
   has_many :pago_items, dependent: :destroy
+ 
   after_initialize :calculo_importe_pronto_pago, :calculo_incentivo_total,  :subtotal, :calculo_total
 
   def calculo_importe_pronto_pago

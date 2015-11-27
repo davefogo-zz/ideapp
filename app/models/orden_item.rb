@@ -62,6 +62,3 @@ class OrdenItem < ActiveRecord::Base
       OrdenAnulada.create!(fecha_orden: self.fecha_orden, orden_reemplazada: self.id, costo_unidad: self.costo_unidad, presupuesto: self.presupuesto_id, cantidad: self.cantidad, descuento: self.descuento, iva: self.iva, total: self.total)
     end
 end
-
-
-end

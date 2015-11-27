@@ -12,6 +12,8 @@ class Presupuestos::OrdenesController < ApplicationController
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
     authorize Ordene
     @ordene = Ordene.find(params[:id])
+    @ordenes = @presupuesto.ordenes
+    @orden_items = @ordene.orden_items
     respond_to do |format|
       format.html
       format.pdf do
@@ -94,6 +96,6 @@ class Presupuestos::OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordene_params
-      params.require(:ordene).permit(:fecha_orden, :medida, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color, :importe_descuento, :area)
+      params.require(:ordene).permit(:fecha_orden, :medida, :costo_unidad, :total, :presupuesto_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color, :importe_descuento, :area, :proveedore_id)
     end
 end

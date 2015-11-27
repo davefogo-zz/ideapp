@@ -7,6 +7,7 @@ class PresupuestoPdf < Prawn::Document
 		presupuesto_id
 		ideamos
 		fechas
+		tipo_de_medio
 		producto
 		cliente
 		presupuesto_items
@@ -49,6 +50,17 @@ class PresupuestoPdf < Prawn::Document
 				:width => 150,
 				:height => 15
 		text_box " #{@presupuesto.fecha}" , size: 8,
+				:at => [270, 530], 
+				:width => 150,
+		 		:height => 15
+	end
+
+	def tipo_de_medio
+		text_box "Tipo de Medio:" , size: 8, style: :bold,
+				:at => [200, 530],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.tipo_de_medio}" , size: 8,
 				:at => [270, 530], 
 				:width => 150,
 		 		:height => 15

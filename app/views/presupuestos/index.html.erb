@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>Listado de Ordenes</h1>
+  <h1>Listado de Presupuestos</h1>
   <div class="pull-right range-query">
      <%= form_tag presupuestos_path, method: :get do %>
         <%= text_field_tag 'search[fecha_from]', @search.fecha_from %>
@@ -13,15 +13,13 @@
       <table class="table table-hover">
           <thead>
             <tr>
-              <th>Orden No.</th>
+              <th>Presupuesto No.</th>
               <th>Fecha</th>
+              <th>Tipo de Medio</th>
               <th>Cliente</th>
               <th>Nit</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
               <th>Titulo</th>
               <th>Producto</th>
-              <th>Proveedor</th>
               <th>Colaborador</th>
               <th colspan="3"></th>
             </tr>
@@ -31,14 +29,12 @@
               <tr>
                 <td><%= presupuesto.id %></td>
                 <td><%= presupuesto.fecha %></td>
+                <td><%= presupuesto.tipo_de_medio %></td>
                 <td><%= presupuesto.cliente.nombre %></td>
                 <td><%= presupuesto.cliente.numero_de_documento %></td>
-                <td><%= presupuesto.cliente.direccion_de_facturacion %></td>
-                <td><%= presupuesto.cliente.telefono %></td>
                 <td><%= presupuesto.titulo %></td>
                 <td><%= presupuesto.producto %></td>
-                <td><%= presupuesto.proveedore.nombre %></td>
-                <td><%= presupuesto.cliente.colaboradore.nombre %></td>
+                <td><%= presupuesto.cliente.colaboradore.try(:nombre) %></td>
                 <td><%= link_to 'Mostrar', presupuesto, class: 'btn btn-mini btn-default' %></td>
                 <td><%= link_to 'Editar', edit_presupuesto_path(presupuesto), class: 'btn btn-mini btn-success' %></td>
                 <td><%= link_to 'Borrar', presupuesto, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Confirma?' } %></td>
@@ -51,7 +47,7 @@
 
 <br>
 
-<%= link_to 'Nueva Orden', new_presupuesto_path , class: 'btn btn-mini btn-default'%>
+<%= link_to 'Nuevo Presupuesto', new_presupuesto_path , class: 'btn btn-mini btn-default'%>
 <br>
 <br>
 <%= form_tag import_presupuestos_path, multipart: true do%>

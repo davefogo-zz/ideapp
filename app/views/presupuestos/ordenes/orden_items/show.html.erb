@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha orden:</strong>
+  <%= @orden_item.fecha_orden %>
+</p>
+
+<p>
+  <strong>Medidas (CM x COL):</strong>
+  <%= @orden_item.cm%> x <%= @orden_item.col%>
+</p>
+
+<p>
+  <strong>Unidad:</strong>
+  <%= @orden_item.try(:unidad) %>
+</p>
+
+<p>
+  <strong>Ubicacion:</strong>
+  <%= @orden_item.try(:ubicacion) %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @orden_item.try(:cantidad) %>
+</p>
+
+<p>
+  <strong>Costo unidad:</strong>
+  <%= @orden_item.try(:costo_unidad) %>
+</p>
+
+<p>
+  <strong>Descuento:</strong>
+  <%= @orden_item.try(:descuento) %>
+</p>
+
+<p>
+  <strong>Iva:</strong>
+  <%= @orden_item.try(:iva) %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @orden_item.try(:subtotal) %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @orden_item.try(:total) %>
+</p>
+
+<p>
+  <strong>Presupuesto No.:</strong>
+  <%= @orden_item.presupuesto.id %>
+</p>
+
+<p>
+  <strong>Notas:</strong>
+  <%= @orden_item.notas %>
+</p>
+<p><%= link_to 'Regresar', presupuesto_ordene_path(@ordene) %><br>

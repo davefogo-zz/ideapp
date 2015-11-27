@@ -59,7 +59,9 @@ Rails.application.routes.draw do
   end
   resources :presupuestos do
     collection { post :import }
-    resources :ordenes, controller: 'presupuestos/ordenes'
+    resources :ordenes, controller: 'presupuestos/ordenes' do
+      resources :orden_items, controller: 'presupuestos/ordenes/orden_items'
+    end
   end
 
   resources :escalas

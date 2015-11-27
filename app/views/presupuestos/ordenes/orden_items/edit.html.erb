@@ -1,0 +1,21 @@
+<% content_for :title do %>Editar Orden<% end %>
+<h3>Editar Orden</h3>
+<div class="form">
+   <%= simple_form_for([@ordene, @orden_item) do |form| %>
+      <%= form.association :medio, :label_method => :nombre, include_blank: true, label: 'Medio' %>
+      <%= form.input :fecha_orden %>
+      <%= form.input :referencia_preventa %>
+      <%= form.input :ubicacion %>
+      <%= form.input :formato %>
+      <%= form.input :color, collection: ['B/N', 'Bicolor', 'Policromia'] %>
+      <%= form.input :cm %>
+      <%= form.input :col %>
+      <%= form.input :costo_unidad %>
+      <%= form.input :descuento %>
+      <%= form.input :cantidad %>
+      <%= form.input :notas %>
+      <%= form.input :aprobado_por_cliente %>
+      <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', presupuesto_ordenes_path %>
