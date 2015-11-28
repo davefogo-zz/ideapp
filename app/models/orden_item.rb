@@ -3,7 +3,7 @@ class OrdenItem < ActiveRecord::Base
   belongs_to :medio
   belongs_to :ordene
   has_many :incentivos, dependent: :destroy
-  validates :fecha_orden, :costo_unidad, :presupuesto_id, :medio_id, :cantidad, :descuento, presence: true
+  validates :fecha_item, :costo_unidad, :medio_id, :cantidad, :descuento, presence: true
   
   before_save :calculate_area, :calculate_subtotal, :calculate_iva, :calculate_importe_descuento,  :calculate_incentivo, :calculate_total
   after_save :generate_factura_item, :if => :aprobado_por_cliente?

@@ -41,11 +41,11 @@ class Presupuestos::Ordenes::OrdenItemsController < ApplicationController
     @ordene = Ordene.find(params[:ordene_id])
     authorize @ordene
     @orden_item = OrdenItem.new(ordene_params)
-    @orden_item.presupuesto = @presupuesto
+    @orden_item.ordene = @ordene
 
     respond_to do |format|
       if @orden_item.save
-        format.html { redirect_to @ordene, notice: 'Item de Orden creado.' }
+        format.html { redirect_to presupuesto_ordene_path(@presupuesto, @ordene), notice: 'Item de Orden creado.' }
         format.json { render :show, status: :created, location: @ordene }
       else
         format.html { render :new }
@@ -75,7 +75,6 @@ class Presupuestos::Ordenes::OrdenItemsController < ApplicationController
   # DELETE /ordenes/1
   # DELETE /ordenes/1.json
   def destroy
-    @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.find(params[:ordene_id])
     authorize @ordene
     @orden_item = OrdenItem.find(params[:id])
@@ -94,6 +93,6 @@ class Presupuestos::Ordenes::OrdenItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordene_params
-      params.require(:orden_item).permit(:fecha_orden, :medida, :costo_unidad, :total, :ordene_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color, :importe_descuento, :area)
+      params.require(:orden_item).permit(:fecha_item, :medida, :costo_unidad, :total, :ordene_id, :medio_id, :aprobado_por_cliente, :factura_id, :cantidad, :cobertura, :col, :cm, :descuento, :referencia_preventa, :notas, :ubicacion, :formato, :franja, :incentivo, :color, :importe_descuento, :area)
     end
 end

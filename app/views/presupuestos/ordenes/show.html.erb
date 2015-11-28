@@ -14,7 +14,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Fecha Orden</th>
+          <th>Fecha Item</th>
           <th>Medio</th>
           <th>CM</th>
           <th>COL</th>
@@ -37,7 +37,7 @@
 
           <% @orden_items.each do |orden_item| %>
           <tr>
-            <td><h4><%= orden_item.fecha_orden %></h4></td>
+            <td><h4><%= orden_item.fecha_item %></h4></td>
             <td><h4><%= orden_item.medio.nombre %></h4></td>
             <td><h4><%= orden_item.cm %></h4></td>
             <td><h4><%= orden_item.col  %></h4></td>
@@ -52,9 +52,9 @@
             <td><h4><%= orden_item.iva %></h4></td>
             <td><h4><%= orden_item.subtotal %></h4></td>
             <td><h4><%= orden_item.total %></h4></td>
-            <td><%= link_to 'Editar', edit_presupuesto_ordene_orden_item_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
-            <td><%= link_to 'Mostrar', presupuesto_ordene_orden_item_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
-            <td><%= link_to 'Eliminar', presupuesto_ordene_orden_item_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <td><%= link_to 'Editar', edit_presupuesto_ordene_orden_item_path(@presupuesto, @ordene, orden_item), class: 'btn btn-mini btn-success' %></td>
+            <td><%= link_to 'Mostrar', presupuesto_ordene_orden_item_path(@presupuesto, @ordene, orden_item), class: 'btn btn-mini btn-default' %></td>
+            <td><%= link_to 'Eliminar', presupuesto_ordene_orden_item_path(@presupuesto,@ordene, orden_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
             <% total_general = total_general + orden_item.subtotal%>
           </tr>
           <% end %>
@@ -68,4 +68,4 @@
 <p><%= link_to 'Agregar Nuevo Item', new_presupuesto_ordene_orden_item_path(@presupuesto, @ordene), class: 'btn btn-mini btn-default' %></p>   
 <p><%= link_to 'Descargar Orden en PDF', presupuesto_ordene_path(@presupuesto, @ordene, format: 'pdf') %></p>
 <p><%= link_to 'Editar', edit_presupuesto_path(@ordene) %> <br></p>
-<p><%= link_to 'Regresar', presupuestos_path %><br></p>
+<p><%= link_to 'Regresar', presupuesto_path(@presupuesto) %><br></p>

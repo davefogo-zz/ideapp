@@ -3,6 +3,10 @@
   <%= @presupuesto.fecha %>
 </p>
 <p>
+  <strong>Presupuesto No.</strong>
+  <%= @presupuesto.id %>
+</p>
+<p>
   <strong>Cliente:</strong>
   <%= @presupuesto.cliente.try(:nombre) %>
 </p>
@@ -39,6 +43,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Orden No.</th>
           <th>Fecha Orden</th>
           <th>Proveedor</th>
           <th>Ref. Preventa</th>
@@ -53,12 +58,13 @@
 
 	        <% @ordenes.each do |ordene| %>
 	        <tr>
+            <td><h4><%= ordene.id %></h4></td>
             <td><h4><%= ordene.fecha_orden %></h4></td>
             <td><h4><%= ordene.proveedore.nombre %></h4></td>
             <td><h4><%= ordene.referencia_preventa %></h4></td>
-            <td><h4><%= ordene.subtotal %></h4></td>
-             <td><h4><%= ordene.iva %></h4></td>
-            <td><h4><%= ordene.total %></h4></td>
+            <td><h4><%= number_to_currency(ordene.subtotal, :precision => 0) %></h4></td>
+             <td><h4><%= number_to_currency(ordene.iva, :precision => 0) %></h4></td>
+            <td><h4><%= number_to_currency(ordene.total, :precision => 0) %></h4></td>
             <td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
 						<td><%= link_to 'Eliminar', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
