@@ -11,7 +11,7 @@ class Presupuestos::Ordenes::OrdenItemsController < ApplicationController
   def show
     @presupuesto = Presupuesto.find(params[:presupuesto_id])
     @ordene = Ordene.find(params[:ordene_id])
-    authorize OrdenItem
+    authorize Ordene
     @orden_item = OrdenItem.find(params[:id])
     respond_to do |format|
       format.html

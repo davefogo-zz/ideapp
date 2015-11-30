@@ -89,12 +89,12 @@ def orden_items
 
 	def orden_item_rows
 		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Descuento', 'Iva', 'Subtotal','Total']] + @ordene.orden_items.map do |item|
-			[item.fecha_orden, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+			[item.fecha_item, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
 		end	
 	end
 
 	def total
-		move_down 15
+		move_down 60
 			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :right
 		move_down 5
 			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :right	

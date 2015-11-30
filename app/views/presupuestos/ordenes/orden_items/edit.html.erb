@@ -1,9 +1,9 @@
 <% content_for :title do %>Editar Orden<% end %>
-<h3>Editar Orden</h3>
+<h3>Editar Item de Orden</h3>
 <div class="form">
-   <%= simple_form_for([@ordene, @orden_item) do |form| %>
+   <%= simple_form_for([@presupuesto, @ordene, @orden_item]) do |form| %>
       <%= form.association :medio, :label_method => :nombre, include_blank: true, label: 'Medio' %>
-      <%= form.input :fecha_orden %>
+      <%= form.input :fecha_item %>
       <%= form.input :referencia_preventa %>
       <%= form.input :ubicacion %>
       <%= form.input :formato %>
@@ -18,4 +18,4 @@
       <%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>
-<%= link_to 'Regresar', presupuesto_ordenes_path %>
+<%= link_to 'Regresar', presupuesto_ordene_path(@presupuesto, @ordene) %>

@@ -1,7 +1,11 @@
 <p>
+  <h1>Orden No. <%= @ordene.id %></h1>
+</p>
+<p>
   <strong>Fecha:</strong>
   <%= @ordene.fecha_orden %>
 </p>
+<p>
   <strong>Proveedor:</strong>
   <%= @ordene.proveedore.nombre %>
 </p>
@@ -33,8 +37,6 @@
       </thead>
         <tbody>
           <% total_general = 0 %>
-
-
           <% @orden_items.each do |orden_item| %>
           <tr>
             <td><h4><%= orden_item.fecha_item %></h4></td>
@@ -49,12 +51,11 @@
             <td><h4><%= orden_item.referencia_preventa %></h4></td>
             <td><h4><%= orden_item.notas %></h4></td>
             <td><h4><%= number_to_percentage((orden_item.descuento * 100), :precision =>0 ) %></h4></td>
-            <td><h4><%= orden_item.iva %></h4></td>
-            <td><h4><%= orden_item.subtotal %></h4></td>
-            <td><h4><%= orden_item.total %></h4></td>
+            <td><h4><%= number_to_currency(orden_item.iva , :precision => 0) %></h4></td>
+            <td><h4><%= number_to_currency(orden_item.subtotal, :precision => 0) %></h4></td>
+            <td><h4><%= number_to_currency(orden_item.total, :precision => 0) %></h4></td>
             <td><%= link_to 'Editar', edit_presupuesto_ordene_orden_item_path(@presupuesto, @ordene, orden_item), class: 'btn btn-mini btn-success' %></td>
-            <td><%= link_to 'Mostrar', presupuesto_ordene_orden_item_path(@presupuesto, @ordene, orden_item), class: 'btn btn-mini btn-default' %></td>
-            <td><%= link_to 'Eliminar', presupuesto_ordene_orden_item_path(@presupuesto,@ordene, orden_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <td><%= link_to 'Anular', presupuesto_ordene_orden_item_path(@presupuesto,@ordene, orden_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
             <% total_general = total_general + orden_item.subtotal%>
           </tr>
           <% end %>

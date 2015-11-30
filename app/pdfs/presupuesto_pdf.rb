@@ -23,7 +23,7 @@ class PresupuestoPdf < Prawn::Document
 	end
 
 	def presupuesto_id
-			text_box "Orden No." , size: 10, style: :bold,
+			text_box "Presupuesto No." , size: 10, style: :bold,
 					:at => [0, 560],
 					:width => 150,
 					:height => 15
@@ -75,14 +75,6 @@ class PresupuestoPdf < Prawn::Document
 				:at => [520, 615], 
 				:width => 150,
 		 		:height => 15
-		text_box "Proveedor:" , size: 8, style: :bold,
-				:at => [500, 510],
-				:width => 150,
-				:height => 15
-		text_box " #{@presupuesto.proveedore.nombre}" , size: 8,
-				:at => [550, 510], 
-				:width => 150,
-		 		:height => 15
 		text_box "Tipo de Medio:" , size: 8, style: :bold,
 				:at => [630, 530],
 				:width => 150,
@@ -95,7 +87,7 @@ class PresupuestoPdf < Prawn::Document
 				:at => [200, 510],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.cliente.colaboradore.nombre}" , size: 8,
+		text_box " #{@presupuesto.cliente.colaboradore.try(:nombre)}" , size: 8,
 				:at => [250, 510], 
 				:width => 150,
 		 		:height => 15
@@ -135,8 +127,8 @@ class PresupuestoPdf < Prawn::Document
 	end
 
 	def presupuesto_item_rows
-		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
-			[item.fecha_orden, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+		[['Fecha', 'Proveedor', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
+			[item.fecha_orden, item.proveedore.nombre, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
 		end	
 	end
 

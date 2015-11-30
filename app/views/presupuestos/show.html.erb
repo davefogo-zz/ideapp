@@ -1,10 +1,9 @@
 <p>
-  <strong>Fecha:</strong>
-  <%= @presupuesto.fecha %>
+  <h1>Presupuesto No. <%= @presupuesto.id %></h1>
 </p>
 <p>
-  <strong>Presupuesto No.</strong>
-  <%= @presupuesto.id %>
+  <strong>Fecha:</strong>
+  <%= @presupuesto.fecha %>
 </p>
 <p>
   <strong>Cliente:</strong>
@@ -65,9 +64,8 @@
             <td><h4><%= number_to_currency(ordene.subtotal, :precision => 0) %></h4></td>
              <td><h4><%= number_to_currency(ordene.iva, :precision => 0) %></h4></td>
             <td><h4><%= number_to_currency(ordene.total, :precision => 0) %></h4></td>
-            <td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Mostrar', presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-default' %></td>
-						<td><%= link_to 'Eliminar', presupuesto_ordene_path(@presupuesto, ordene), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <td><%= link_to 'Editar', edit_presupuesto_ordene_path(@presupuesto, ordene), class: 'btn btn-mini btn-success' %></td>
             <% total_general = total_general + ordene.subtotal%>
 	        </tr>
 	        <% end %>
@@ -78,7 +76,7 @@
 <h4 >IVA:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
 <h4 >Total Orden:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
 
-<p><%= link_to 'Agregar Nueva Orden', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
-<p><%= link_to 'Descargar Orden en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
+<p><%= link_to 'Agregar Nueva Presupuesto', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
+<p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
 <p><%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br></p>
 <p><%= link_to 'Regresar', presupuestos_path %><br></p>
