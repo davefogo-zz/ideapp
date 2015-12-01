@@ -4,7 +4,6 @@
   <%= simple_form_for([@presupuesto, @ordene, @orden_item]) do |form| %>
       <%= form.association :medio, :label_method => :nombre, include_blank: true, label: 'Medio' %>
       <%= form.input :fecha_item %>
-      <%= form.input :referencia_preventa %>
       <%= form.input :ubicacion %>
       <%= form.input :formato %>
       <%= form.input :color, collection: ['B/N', 'Bicolor', 'Policromia'] %>
@@ -13,6 +12,8 @@
       <%= form.input :costo_unidad %>
       <%= form.input :descuento %>
       <%= form.input :cantidad %>
+      <%= form.input :orden_manual %>
+      <%= form.input :importe_orden_manual %>
       <%= form.input :notas %>
       <%= form.input :aprobado_por_cliente %>
       <%= form.button :submit, 'Guardar', class: 'submit' %>

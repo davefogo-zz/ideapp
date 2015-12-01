@@ -87,6 +87,6 @@ class FacturaProveedorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factura_proveedor_params
-      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento, :numero_de_factura, :pago_id)
+      params.require(:factura_proveedor).permit(:fecha_recepcion, :ordene_id, :proveedore_id, :importe, :devolucion, :iva, :subcuenta_puc_id, :importe_pronto_pago, :pronto_pago, :fecha_vencimiento, :numero_de_factura, :pago_id, :pago_item)
     end
 end

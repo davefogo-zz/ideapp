@@ -1,20 +1,20 @@
 class FacturaProveedorSearch
-  attr_reader :fecha_vencimiento_from, :fecha_vencimiento_to
+  attr_reader :fecha_recepcion_from, :fecha_recepcion_to
   
   def initialize(params)
     params ||= {}
-    @fecha_vencimiento_from = parsed_fecha_vencimiento(params[:fecha_vencimiento_from], 7.days.ago.to_date.to_s)
-    @fecha_vencimiento_to = parsed_fecha_vencimiento(params[:fecha_vencimiento_to], Date.today.to_s)
+    @fecha_recepcion_from = parsed_fecha_recepcion(params[:fecha_recepcion_from], 7.days.ago.to_date.to_s)
+    @fecha_recepcion_to = parsed_fecha_recepcion(params[:fecha_recepcion_to], Date.today.to_s)
   end
   
   def scope
-    FacturaProveedor.where('fecha_vencimiento BETWEEN ? AND ?', @fecha_vencimiento_from, @fecha_vencimiento_to)
+    FacturaProveedor.where('fecha_recepcion BETWEEN ? AND ?', @fecha_recepcion_from, @fecha_recepcion_to)
   end
   
   private
   
-  def parsed_fecha_vencimiento(fecha_vencimiento_string, default)
-    Date.parse(fecha_vencimiento_string)
+  def parsed_fecha_recepcion(fecha_recepcion_string, default)
+    Date.parse(fecha_recepcion_string)
   rescue ArgumentError, TypeError
     default
   end

@@ -43,14 +43,26 @@ class OrdenItem < ActiveRecord::Base
 
     def generate_factura_item
       if self.facturado.blank?
-      	FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_orden, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, orden_item_id: self.id, descuento: self.descuento, presupuesto_id: self.presupuesto_id, notas: self.notas)
-        if self.medio.cobro == 'FACTURAR'
-        elsif self.medio.cobro == 'FACTURAR & CRUZAR'
+        if self.orden_manual.blank?
+      	 FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_item, costo_unidad: self.costo_unidad, cantidad: self.cantidad, medio_id: self.medio_id, orden_item_id: self.id, descuento: self.descuento, presupuesto_id: self.ordene.presupuesto_id, notas: self.notas)
+          if self.medio.cobro == 'FACTURAR'
+            elsif self.medio.cobro == 'FACTURAR & CRUZAR'
+            self.cantidad = 1
+            self.descuento = 0
+            FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_item, orden_item_id: self.id, presupuesto_id: self.ordene.presupuesto_id, cobro_proveedor: self.medio.cobro, cantidad: self.cantidad, medio_id: self.medio_id, costo_unidad: self.incentivo , descuento: self.descuento)
+            self.facturado = Time.now
+          end
+         else
           self.cantidad = 1
-          self.descuento = 0
-          FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_orden, orden_item_id: self.id, presupuesto_id: self.presupuesto_id, cobro_proveedor: self.medio.cobro, cantidad: self.cantidad, medio_id: self.medio_id, costo_unidad: self.incentivo , descuento: self.descuento)
-        self.facturado = Time.now
-        end
+          FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_item, costo_unidad: self.importe_orden_manual, cantidad: self.cantidad, medio_id: self.medio_id, orden_item_id: self.id, descuento: self.descuento, presupuesto_id: self.ordene.presupuesto_id, notas: self.notas)
+          if self.medio.cobro == 'FACTURAR'
+            elsif self.medio.cobro == 'FACTURAR & CRUZAR'
+            self.cantidad = 1
+            self.descuento = 0
+            FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_item, orden_item_id: self.id, presupuesto_id: self.ordene.presupuesto_id, cobro_proveedor: self.medio.cobro, cantidad: self.cantidad, medio_id: self.medio_id, costo_unidad: self.incentivo , descuento: self.descuento)
+            self.facturado = Time.now
+          end
+        end 
       end
     end
 
@@ -59,6 +71,6 @@ class OrdenItem < ActiveRecord::Base
     end
 
     def generate_orden_anulada
-      OrdenAnulada.create!(fecha_orden: self.fecha_orden, orden_reemplazada: self.id, costo_unidad: self.costo_unidad, presupuesto: self.presupuesto_id, cantidad: self.cantidad, descuento: self.descuento, iva: self.iva, total: self.total)
+      OrdenAnulada.create!(fecha_orden: self.fecha_item, orden_reemplazada: self.id, costo_unidad: self.costo_unidad, presupuesto: self.presupuesto_id, cantidad: self.cantidad, descuento: self.descuento, iva: self.iva, total: self.total)
     end
 end

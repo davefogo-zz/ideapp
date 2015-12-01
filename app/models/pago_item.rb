@@ -1,6 +1,6 @@
 class PagoItem < ActiveRecord::Base
   belongs_to :pago
-  belongs_to :factura_proveedor
+  has_many :factura_proveedor
   belongs_to :subcuenta_puc
   belongs_to :gasto
 

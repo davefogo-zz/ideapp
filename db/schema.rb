@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127005627) do
+ActiveRecord::Schema.define(version: 20151201231737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -315,9 +315,11 @@ ActiveRecord::Schema.define(version: 20151127005627) do
     t.string   "color"
     t.integer  "importe_descuento"
     t.integer  "area"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "ordene_id"
+    t.boolean  "orden_manual"
+    t.integer  "importe_orden_manual", limit: 8
   end
 
   add_index "orden_items", ["factura_id"], name: "index_orden_items_on_factura_id", using: :btree
@@ -354,6 +356,7 @@ ActiveRecord::Schema.define(version: 20151127005627) do
     t.integer  "importe_descuento",    limit: 8
     t.decimal  "area"
     t.integer  "proveedore_id"
+    t.integer  "importe_orden_manual", limit: 8
   end
 
   add_index "ordenes", ["factura_id"], name: "index_ordenes_on_factura_id", using: :btree

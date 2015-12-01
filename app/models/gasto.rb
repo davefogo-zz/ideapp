@@ -28,12 +28,12 @@ class Gasto < ActiveRecord::Base
 		self.importe_iva_teo =0
 		unless self.ret_fte == 0
 			self.importe_fte = importe * ret_fte
-			self.subcuenta_puc_id = 715
+			self.subcuenta_puc_id = 708
 			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_fte, subcuenta_puc_id: self.subcuenta_puc_id)
 		end
 		unless self.ret_ica == 0
 			self.importe_ica = importe * ret_ica
-			self.subcuenta_puc_id = 719
+			self.subcuenta_puc_id = 717
 			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_ica, subcuenta_puc_id: self.subcuenta_puc_id)
 		end
 		if self.ret_iva == true

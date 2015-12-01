@@ -17,8 +17,9 @@
               <th>Item No.</th>
               <th>Presupuesto</th>
               <th>Orden</th>
+              <th>Item de Orden</th>
               <th>Proveedor</th>
-              <th>Facturar Proveedor</th>
+              <th>Cobro Incentivo Proveedor</th>
               <th>Fecha</th>
               <th>Valor</th>
               <th colspan="3"></th>
@@ -29,11 +30,11 @@
               <tr>
                 <td><h4><%= factura_item.factura.try(:id) %></h4></td>
                 <td><h4><%= factura_item.id %></h4></td>
-                <td><h4><%= factura_item.ordene.presupuesto.id %></h4></td>
-                <td><h4><%= factura_item.ordene.id %></h4></td>
-                <td><h4><%= factura_item.ordene.medio.proveedore.nombre %></h4></td>
+                <td><h4><%= factura_item.orden_item.ordene.presupuesto.id %></h4></td>
+                <td><h4><%= factura_item.orden_item.ordene.id %></h4></td>
+                 <td><h4><%= factura_item.orden_item.id %></h4></td>
+                <td><h4><%= factura_item.orden_item.ordene.proveedore.nombre %></h4></td>
                 <td><h4><%= factura_item.cobro_proveedor %></h4></td>
-                
                 <td><h4><%= factura_item.fecha_orden %></h4></td>
                 <td><h4><%= number_to_currency(factura_item.subtotal, :precision => 0) %></h4></td>
                 <td><%= link_to 'Editar', edit_factura_item_path(factura_item), class: 'btn btn-mini btn-success'  %></td>

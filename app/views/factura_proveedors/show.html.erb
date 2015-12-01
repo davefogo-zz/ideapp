@@ -15,7 +15,7 @@
 
 <p>
   <strong>Orden de Pago:</strong>
-  <%= @factura_proveedor.try(:pago_id) %>
+  <%= @factura_proveedor.pago.try(:id) %>
 </p>
 
 <p>

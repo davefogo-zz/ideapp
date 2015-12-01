@@ -1,6 +1,6 @@
 class Pago < ActiveRecord::Base
   belongs_to :proveedore
-  has_many :factura_proveedors
+  has_one :factura_proveedor
   belongs_to :subcuenta_puc
   has_many :gastos
   has_many :incentivos

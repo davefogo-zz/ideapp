@@ -55,9 +55,6 @@
         <% if policy(Proveedore).index? %>
           <li><%= link_to 'Proveedores', proveedores_path %></li>
         <% end %>
-        <% if policy(FacturaProveedor).index? %>
-          <li><%= link_to 'Facturas de Proveedor', factura_proveedors_path %></li>
-        <% end %>
         <% if policy(Volumen).index? %>
           <li><%= link_to 'Incentivos', incentivos_path %></li>
         <% end %>

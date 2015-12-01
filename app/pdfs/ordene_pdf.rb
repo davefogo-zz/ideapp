@@ -78,7 +78,7 @@ class OrdenePdf < Prawn::Document
 	end
 
 def orden_items
-		move_down 40
+		move_down 120
 			table orden_item_rows, :width => 750 do
 				row(0..1000).border_width = 0
 				row(0).font_style = :bold
@@ -94,7 +94,7 @@ def orden_items
 	end
 
 	def total
-		move_down 60
+		move_down 15
 			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :right
 		move_down 5
 			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :right	
