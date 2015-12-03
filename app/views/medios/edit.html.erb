@@ -7,14 +7,6 @@
     <%= form.input :tipo_de_volumen, collection: [ 'Automatico', 'Mensual', 'Bimestral', 'Semestral', 'Anual', 'Anual Grupo'] %>
     <%= form.input :cobro, collection: [ 'Cruce', 'Facturacion' ] %>
     <%= form.association :escala, :label_method => :escala, include_blank: true, label: 'Escala Automatica' %>
-    <%= form.input :escala2, :label_method => :escala, include_blank: true, label: 'Escala 2' %>
-    <%= form.input :rango2 %>
-    <%= form.input :escala3, :label_method => :escala, include_blank: true, label: 'Escala 3' %>
-    <%= form.input :rango3 %>
-    <%= form.input :escala4, :label_method => :escala, include_blank: true, label: 'Escala 4' %>
-    <%= form.input :rango4 %>
-    <%= form.input :escala5, :label_method => :escala, include_blank: true, label: 'Escala 5' %>
-    <%= form.input :rango5 %>
     <%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>
