@@ -27,7 +27,7 @@ class FacturaProveedor < ActiveRecord::Base
 
   def generate_transaccion_proveedor_pasivo
     self.total = importe + iva
-  	self.subcuenta_puc_id = 667
+  	self.subcuenta_puc_id = 666
   	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.total, subcuenta_puc_id: self.subcuenta_puc_id)
   end
 
