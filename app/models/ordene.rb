@@ -8,15 +8,15 @@ class Ordene < ActiveRecord::Base
   
   after_initialize :calculate_subtotal, :calculate_iva, :calculate_total
 
-    def calculate_subtotal
-        self.subtotal = self.orden_items.sum(:subtotal)
-    end   
+  def calculate_subtotal
+      self.subtotal = self.orden_items.sum(:subtotal)
+  end   
 
-    def calculate_iva
-      self.iva = self.orden_items.sum(:iva)
-    end
-    
-    def calculate_total
-      self.total = subtotal + iva
-    end
+  def calculate_iva
+    self.iva = self.orden_items.sum(:iva)
+  end
+  
+  def calculate_total
+    self.total = subtotal + iva
+  end
 end

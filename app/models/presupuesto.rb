@@ -5,20 +5,19 @@ class Presupuesto < ActiveRecord::Base
   has_many :medios, :through => :ordenes
   has_one :factura
   validates :fecha, :titulo, :cliente_id, :producto, presence: true
-  before_save :subtotal, :iva, :total 
-  belongs_to :proveedore
 
+  after_initialize :calculate_subtotal, :calculate_iva, :calculate_total 
 
-   def subtotal
-    self.ordenes.sum(:subtotal)
+   def calculate_subtotal
+    self.subtotal = self.ordenes.sum(:subtotal)
    end
 
-   def iva
-    self.ordenes.sum(:iva)
+   def calculate_iva
+    self.iva = self.ordenes.sum(:iva)
    end
 
-   def total
-    self.ordenes.sum(:total)
+   def calculate_total
+    self.total = subtotal + iva
    end
 
   def self.import(file)

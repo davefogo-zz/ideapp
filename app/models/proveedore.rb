@@ -2,7 +2,6 @@ class Proveedore < ActiveRecord::Base
   has_many :medios, dependent: :destroy
   has_many :transaccions
   has_many :ordenes
-  has_many :presupuestos
   has_many :ajustes
   validates :nombre,  presence: true, uniqueness: true #:numero_de_documento,
   

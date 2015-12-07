@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201231737) do
+ActiveRecord::Schema.define(version: 20151206231611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -407,11 +407,14 @@ ActiveRecord::Schema.define(version: 20151201231737) do
     t.date     "fecha"
     t.string   "titulo"
     t.string   "producto"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "cliente_id"
     t.string   "tipo_de_medio"
     t.integer  "proveedore_id"
+    t.integer  "subtotal",      limit: 8
+    t.integer  "iva",           limit: 8
+    t.integer  "total",         limit: 8
   end
 
   add_index "presupuestos", ["cliente_id"], name: "index_presupuestos_on_cliente_id", using: :btree

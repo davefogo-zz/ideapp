@@ -7,7 +7,6 @@ class PresupuestoPdf < Prawn::Document
 		presupuesto_id
 		ideamos
 		fechas
-		tipo_de_medio
 		producto
 		cliente
 		presupuesto_items
@@ -28,7 +27,7 @@ class PresupuestoPdf < Prawn::Document
 					:width => 150,
 					:height => 15
 			text_box " #{@presupuesto.id}" , size: 10,
-					:at => [60, 560], 
+					:at => [90, 560], 
 					:width => 150,
 			 		:height => 15
 	end
@@ -50,17 +49,6 @@ class PresupuestoPdf < Prawn::Document
 				:width => 150,
 				:height => 15
 		text_box " #{@presupuesto.fecha}" , size: 8,
-				:at => [270, 530], 
-				:width => 150,
-		 		:height => 15
-	end
-
-	def tipo_de_medio
-		text_box "Tipo de Medio:" , size: 8, style: :bold,
-				:at => [200, 530],
-				:width => 150,
-				:height => 15
-		text_box " #{@presupuesto.tipo_de_medio}" , size: 8,
 				:at => [270, 530], 
 				:width => 150,
 		 		:height => 15
@@ -121,24 +109,24 @@ class PresupuestoPdf < Prawn::Document
 			table presupuesto_item_rows, :width => 750 do
 				row(0..1000).border_width = 0
 				row(0).font_style = :bold
-				row(0..1000).size = 6
+				row(0..1000).size = 8
 				self.header = true
 			end
 	end
 
 	def presupuesto_item_rows
-		[['Fecha', 'Proveedor', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
-			[item.fecha_orden, item.proveedore.nombre, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
+		[['Orden','Fecha', 'Proveedor', 'Descuento', 'Iva', 'Subtotal','Total']] + @presupuesto.ordenes.map do |item|
+			[item.id, item.fecha_orden, item.proveedore.nombre, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
 		end	
 	end
 
 	def total
 		move_down 15
-			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :right
+			text "Subtotal #{price(@presupuesto.subtotal)}", size: 8, style: :bold, :align => :left
 		move_down 5
-			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :right	
+			text "Iva #{price(@presupuesto.iva)}", size: 8, style: :bold, :align => :left	
 		move_down 5
-			text "Total #{price(@presupuesto.total)}",size: 8, style: :bold, :align => :right										   
+			text "Total #{price(@presupuesto.total)}",size: 8, style: :bold, :align => :left										   
 	end
 	
 end

@@ -76,7 +76,7 @@
 <h4 >IVA:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
 <h4 >Total Orden:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
 
-<p><%= link_to 'Agregar Nueva Presupuesto', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
+<p><%= link_to 'Agregar Nueva Orden', new_presupuesto_ordene_path(@presupuesto), class: 'btn btn-mini btn-default' %></p>   
 <p><%= link_to 'Descargar Presupuesto en PDF', presupuesto_path(@presupuesto, format: 'pdf') %></p>
 <p><%= link_to 'Editar', edit_presupuesto_path(@presupuesto) %> <br></p>
 <p><%= link_to 'Regresar', presupuestos_path %><br></p>
