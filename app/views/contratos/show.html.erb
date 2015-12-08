@@ -1,0 +1,57 @@
+<p>
+  <strong>Numero de Contrato</strong>
+  <%= @contrato.numero_de_contrato %>
+</p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @contrato.cliente.nombre %>
+</p>
+
+<p>
+  <strong>Proveedor:</strong>
+  <%= @contrato.proveedore.nombre%>
+</p>
+
+<p>
+  <strong>Vigencia:</strong>
+  <%= @contrato.desde %> a <%= @contrato.hasta %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @contrato.descripcion %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @contrato.tipo %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @contrato.monto %>
+</p>
+
+<p>
+  <strong>Iva:</strong>
+  <%= @contrato.iva %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @contrato.total %>
+</p>
+
+<p>
+  <strong>Saldo:</strong>
+  <%= @contrato.saldo %>
+</p>
+
+<p>
+  <strong>Notas:</strong>
+  <%= @contrato.notas %>
+</p>
+
+</p>
+<p><%= link_to 'Regresar', contrato_path %><br>

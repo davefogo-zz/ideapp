@@ -1,0 +1,52 @@
+<div class="row">
+  <h1>Listado de Contratos</h1>
+  </div>
+</div>
+<div class="media">
+  <div class="media-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Numero de Contrato</th>
+          <th>Cliente</th>
+          <th>Proveedor</th>
+          <th>Tipo de Medio</th>
+          <th>Vigencia Desde</th>
+          <th>Vigencia Hasta</th>
+          <th>Descripcion</th>
+          <th>Monto Total</th>
+          <th>Saldo Actual</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @contratos.each do |contrato| %>
+          <tr>
+            <td><%= contrato.numero_de_contrato %></td>
+            <td><%= contrato.cliente.nombre %></td>
+            <td><%= contrato.proveedore.nombre %></td>
+            <td><%= contrato.tipo_de_medio %></td>
+            <td><%= contrato.desde %></td>
+            <td><%= contrato.hasta %></td>
+            <td><%= contrato.descripcion %></td>
+            <td><%= number_to_currency(contrato.monto, :precision => 0) %></td>
+            <td><%= number_to_currency(contrato.saldo, :precision => 0) %></td>
+            <td><%= link_to 'Mostrar', contrato, class: 'btn btn-mini btn-default' %></td> 
+             <td><%= link_to 'Editar', contrato, class: 'btn btn-mini btn-default' %></td> 
+              <td><%= link_to 'Eliminar', contrato, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
+            <% end%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Nuevo Contrato', new_contrato_path %>
+<br>
+<br>
+
+<%= link_to 'Descargar Reporte', contratos_path(format: "csv"), class: 'btn btn-default' %>
+

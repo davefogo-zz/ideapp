@@ -14,6 +14,7 @@
       <%= form.input :cantidad %>
       <%= form.input :orden_manual %>
       <%= form.input :importe_orden_manual %>
+      <%= form.association :contrato, :label_method => :numero_de_contrato, include_blank: true, label: 'Contrato Preventa' %>
       <%= form.input :notas %>
       <%= form.input :aprobado_por_cliente %>
       <%= form.button :submit, 'Guardar', class: 'submit' %>

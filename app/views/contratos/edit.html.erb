@@ -1,0 +1,23 @@
+<% content_for :title do %>Editar Contrato<% end %>
+<h3>Editar Contrato</h3>
+<div class="form">
+  <%= simple_form_for([@contrato]) do |form| %>
+      <%= form.association :cliente, :label_method => :nombre, include_blank: true, label: 'Cliente' %>
+      <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: 'Proveedor' %>
+     <%= form.input :tipo_de_medio, collection: [ 'Radio', 'Revista', 'Internet', 'Medios Alternativos', 'Prensa', 'Produccion', 'Tv Cable'] %>
+      <%= form.input :desde %>
+      <%= form.input :hasta %>
+      <%= form.input :descripcion %>
+      <%= form.input :tipo%>
+      <%= form.input :tipo_de_consumo  %>
+      <%= form.input :tipo_de_control %>
+      <%= form.input :notas %>
+      <%= form.input :monto %>
+      <%= form.input :iva %>
+      <%= form.input :total %>
+      <%= form.input :numero_de_contrato %>
+      <%= form.input :saldo %>
+      <%= form.button :submit, 'Guardar', class: 'submit' %>
+  <% end %>
+</div>
+<%= link_to 'Regresar', contrato_path %>

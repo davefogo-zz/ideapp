@@ -2,6 +2,7 @@ class OrdenItem < ActiveRecord::Base
   belongs_to :factura
   belongs_to :medio
   belongs_to :ordene
+  belongs_to :contrato
   has_many :incentivos, dependent: :destroy
   validates :fecha_item, :costo_unidad, :medio_id, :cantidad, :descuento, presence: true
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206231611) do
+ActiveRecord::Schema.define(version: 20151208002755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,29 @@ ActiveRecord::Schema.define(version: 20151206231611) do
   add_index "colaboradores", ["cargo_id"], name: "index_colaboradores_on_cargo_id", using: :btree
   add_index "colaboradores", ["departamento_id"], name: "index_colaboradores_on_departamento_id", using: :btree
   add_index "colaboradores", ["user_id"], name: "index_colaboradores_on_user_id", using: :btree
+
+  create_table "contratos", force: :cascade do |t|
+    t.integer  "cliente_id"
+    t.integer  "proveedore_id"
+    t.string   "tipo_de_medio"
+    t.date     "desde"
+    t.date     "hasta"
+    t.string   "descripcion"
+    t.string   "tipo"
+    t.string   "tipo_de_consumo"
+    t.string   "tipo_de_control"
+    t.string   "notas"
+    t.integer  "monto",              limit: 8
+    t.integer  "iva",                limit: 8
+    t.integer  "total",              limit: 8
+    t.string   "numero_de_contrato"
+    t.integer  "saldo",              limit: 8
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "contratos", ["cliente_id"], name: "index_contratos_on_cliente_id", using: :btree
+  add_index "contratos", ["proveedore_id"], name: "index_contratos_on_proveedore_id", using: :btree
 
   create_table "cuenta_pucs", force: :cascade do |t|
     t.integer  "cuenta"
@@ -320,8 +343,10 @@ ActiveRecord::Schema.define(version: 20151206231611) do
     t.integer  "ordene_id"
     t.boolean  "orden_manual"
     t.integer  "importe_orden_manual", limit: 8
+    t.integer  "contrato_id"
   end
 
+  add_index "orden_items", ["contrato_id"], name: "index_orden_items_on_contrato_id", using: :btree
   add_index "orden_items", ["factura_id"], name: "index_orden_items_on_factura_id", using: :btree
   add_index "orden_items", ["medio_id"], name: "index_orden_items_on_medio_id", using: :btree
   add_index "orden_items", ["ordene_id"], name: "index_orden_items_on_ordene_id", using: :btree
@@ -536,6 +561,8 @@ ActiveRecord::Schema.define(version: 20151206231611) do
   add_foreign_key "colaboradores", "cargos"
   add_foreign_key "colaboradores", "departamentos"
   add_foreign_key "colaboradores", "users"
+  add_foreign_key "contratos", "clientes"
+  add_foreign_key "contratos", "proveedores"
   add_foreign_key "cuenta_pucs", "grupos"
   add_foreign_key "departamentos", "colaboradores"
   add_foreign_key "factura_items", "facturas"
@@ -562,6 +589,7 @@ ActiveRecord::Schema.define(version: 20151206231611) do
   add_foreign_key "medios", "ordenes"
   add_foreign_key "medios", "presupuestos"
   add_foreign_key "medios", "proveedores"
+  add_foreign_key "orden_items", "contratos"
   add_foreign_key "orden_items", "facturas"
   add_foreign_key "orden_items", "medios"
   add_foreign_key "orden_items", "ordenes"

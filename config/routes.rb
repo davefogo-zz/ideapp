@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   resources :escalas
   resources :incentivos
+  resources :contratos
  
 
 end
