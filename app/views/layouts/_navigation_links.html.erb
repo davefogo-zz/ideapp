@@ -30,6 +30,9 @@
         <% if policy(Presupuesto).index? %>
           <li><%= link_to 'Presupuestos', presupuestos_path %></li>
         <% end %> 
+         <% if policy(Contrato).index? %>
+          <li><%= link_to 'Contratos Preventa', contratos_path %></li>
+        <% end %> 
       </ul>
   </div>
 <div class='btn-group pull-right right-nav'>
