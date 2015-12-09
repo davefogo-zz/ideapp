@@ -29,10 +29,10 @@
             <td><%= contrato.desde %></td>
             <td><%= contrato.hasta %></td>
             <td><%= contrato.descripcion %></td>
-            <td><%= number_to_currency(contrato.monto, :precision => 0) %></td>
+            <td><%= number_to_currency(contrato.total, :precision => 0) %></td>
             <td><%= number_to_currency(contrato.saldo, :precision => 0) %></td>
             <td><%= link_to 'Mostrar', contrato, class: 'btn btn-mini btn-default' %></td> 
-            <td><%= link_to 'Editar', contrato, class: 'btn btn-mini btn-default' %></td> 
+            <td><%= link_to 'Editar', edit_contrato_path(contrato), class: 'btn btn-mini btn-success' %></td> 
             <td><%= link_to 'Eliminar', contrato, method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
           </tr>
         <% end %>
