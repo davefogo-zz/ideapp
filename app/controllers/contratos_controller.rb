@@ -1,6 +1,5 @@
 class ContratosController < ApplicationController
   before_action :set_contrato, only: [:show, :edit, :update, :destroy]
-
   # GET /contratos
   # GET /contratos.json
   def index
@@ -10,7 +9,6 @@ class ContratosController < ApplicationController
       format.html
       format.csv {render text: @contratos.to_csv }
     end
-
   end
 
   # GET /contratos/1
@@ -20,7 +18,6 @@ class ContratosController < ApplicationController
     authorize @contrato
     respond_to do |format|
       format.html
-      end
     end
   end
 
@@ -70,7 +67,7 @@ class ContratosController < ApplicationController
   # DELETE /contratos/1.json
   def destroy
     @contrato.destroy
-    authorize @contrato
+    authorize @contrato 
     respond_to do |format|
       format.html { redirect_to contratos_url, notice: 'Contrato eliminado.' }
       format.json { head :no_content }
