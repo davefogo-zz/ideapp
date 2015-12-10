@@ -8,12 +8,12 @@
     <%= form.input :numero_de_factura %>
     <%= form.input :gasto_pago %>
     <%= form.association :subcuenta_puc, :label_method => :subcuenta, include_blank: true, label: "Cuenta Contable"  %>
-    <%= form.input :ret_fte, label: "Retencion en la Fuente",  collection: [ 0, 0.001, 0.005, 0.01, 0.015, 0.02, 0.025, 0.035, 0.04, 0.06]%>
-    <%= form.input :ret_ica, label: "Retencion de ICA", collection: [ 0, 4.14/1000, 6.9/1000, 7.0/1000, 11.04/1000, 13.8/1000 ]%>
-    <%= form.input :ret_iva, label: "Retencion IVA"  %>
+    <%= form.input :ret_fte, label: "Retencion en la Fuente",  collection: [ 0, 0.001, 0.005, 0.01, 0.015, 0.02, 0.025, 0.035, 0.04, 0.06], :default => 0%>
+    <%= form.input :ret_ica, label: "Retencion de ICA", collection: [ 0, 4.14/1000, 6.9/1000, 7.0/1000, 11.04/1000, 13.8/1000], :default => 0 %>
+    <%= form.input :ret_iva, label: "Retencion IVA" %>
     <%= form.input :iva_teo, label: "IVA Teorico"  %>
     <%= form.input :importe %>
-    <%= form.input :iva %>
+    <%= form.input :iva, :default => 0  %>
     <%= form.association :user, :label_method => :name, include_blank: true, label: "Aprobado por:"  %>
     <%= form.input :compra_de_activo %>
     <%= form.input :asignar_a_cliente %>
