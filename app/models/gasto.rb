@@ -26,6 +26,7 @@ class Gasto < ActiveRecord::Base
 		self.importe_ica =0
 		self.importe_ret_iva =0
 		self.importe_iva_teo =0
+		self.iva = 0
 		unless self.ret_fte == 0
 			self.importe_fte = importe * ret_fte
 			self.subcuenta_puc.subcuenta = 236540

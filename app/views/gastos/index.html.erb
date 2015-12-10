@@ -35,9 +35,9 @@
               <td><%= gasto.fecha_de_vencimiento %></td>
                <td><%= gasto.try(:numero_de_factura) %></td>
               <td><%= gasto.proveedore.nombre %></td>
-              <td><%= gasto.importe %></td>
-              <td><%= gasto.iva %></td>
-              <td><%= gasto.importe_menos_retenciones %></td>
+              <td><%= number_to_currency(gasto.importe, :precision => 0) %></td>
+              <td><%= number_to_currency(gasto.iva, :precision => 0) %></td>
+              <td><%= number_to_currency(gasto.importe_menos_retenciones, :precision => 0) %></td>
               <td><%= gasto.asignar_a_cliente %></td>
               <td><%= gasto.cliente_id %></td>
               <td><%= gasto.user.try(:name) %></td>
