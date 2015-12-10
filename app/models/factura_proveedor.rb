@@ -28,17 +28,17 @@ class FacturaProveedor < ActiveRecord::Base
   def generate_transaccion_proveedor_pasivo
     self.total = importe + iva
   	self.subcuenta_puc_id = 666
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.total, subcuenta_puc_id: self.subcuenta_puc_id)
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, credito: self.total, subcuenta_puc_id: self.subcuenta_puc_id, numero_de_documento: self.proveedore.numero_de_documento)
   end
 
   def generate_transaccion_proveedor_intermediacion_pasivo
   	self.subcuenta_puc_id = 878
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id)
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.importe, subcuenta_puc_id: self.subcuenta_puc_id, numero_de_documento: self.proveedore.numero_de_documento)
   end
 
   def generate_transaccion_intermediacion_iva_pasivo
   	self.subcuenta_puc_id = 880
-  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id)
+  	Transaccion.create!(factura_proveedor_id: self.id, fecha: Time.now, debito: self.iva, subcuenta_puc_id: self.subcuenta_puc_id, numero_de_documento: self.proveedore.numero_de_documento)
   end
 
   #def generate_transaccion_importe_pronto_pago

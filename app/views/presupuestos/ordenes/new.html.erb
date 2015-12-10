@@ -4,7 +4,6 @@
   <%= simple_form_for([@presupuesto, @ordene]) do |form| %>
       <%= form.association :proveedore, :label_method => :nombre, include_blank: true, label: 'Proveedor' %>
       <%= form.input :fecha_orden %>
-      <%= form.input :referencia_preventa %>
       <%= form.button :submit, 'Guardar', class: 'submit' %>
   <% end %>
 </div>

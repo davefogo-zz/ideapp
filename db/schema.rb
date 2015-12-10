@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208002755) do
+ActiveRecord::Schema.define(version: 20151209234424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -518,6 +518,7 @@ ActiveRecord::Schema.define(version: 20151208002755) do
     t.integer  "recibo_item_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "numero_de_documento"
   end
 
   add_index "transaccions", ["ajuste_id"], name: "index_transaccions_on_ajuste_id", using: :btree

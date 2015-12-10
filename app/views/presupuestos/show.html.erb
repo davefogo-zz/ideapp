@@ -45,7 +45,6 @@
           <th>Orden No.</th>
           <th>Fecha Orden</th>
           <th>Proveedor</th>
-          <th>Ref. Preventa</th>
           <th>Subtotal</th>
           <th>Iva</th>
           <th>Total</th>
@@ -60,7 +59,6 @@
             <td><h4><%= ordene.id %></h4></td>
             <td><h4><%= ordene.fecha_orden %></h4></td>
             <td><h4><%= ordene.proveedore.nombre %></h4></td>
-            <td><h4><%= ordene.referencia_preventa %></h4></td>
             <td><h4><%= number_to_currency(ordene.subtotal, :precision => 0) %></h4></td>
              <td><h4><%= number_to_currency(ordene.iva, :precision => 0) %></h4></td>
             <td><h4><%= number_to_currency(ordene.total, :precision => 0) %></h4></td>

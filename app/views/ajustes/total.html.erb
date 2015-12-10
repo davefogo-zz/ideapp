@@ -15,6 +15,7 @@
       <thead>
         <tr>
           <th>Fecha</th>
+          <th>Numero de Documento</th>
           <th>Codigo</th>
           <th>Cuenta</th>
           <th>Debito</th>
@@ -27,6 +28,7 @@
         <% @transaccions.each do |transaccion| %>
           <tr>
             <td><%= transaccion.fecha %></td>
+            <td><%= transaccion.try(:numero_de_documento) %></td>
             <td><%= transaccion.subcuenta_puc.try(:subcuenta) %></td>
             <td><%= transaccion.subcuenta_puc.try(:descripcion) %></td>
             <td><%= number_to_currency(transaccion.debito, :precision => 0) %></td>
