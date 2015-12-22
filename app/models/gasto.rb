@@ -72,7 +72,7 @@ class Gasto < ActiveRecord::Base
 			if self.iva_teo == true
 				self.importe_iva_teo = iva * 0.15
 			end
-			self.subcuenta_puc_id = 669 if self.gasto_pago == false
+			self.subcuenta_puc_id = 668 if self.gasto_pago == false
 			Transaccion.create!(gasto_id: self.id, fecha: Time.now, credito: self.importe_menos_retenciones, subcuenta_puc_id: self.subcuenta_puc_id, numero_de_documento: self.proveedore.numero_de_documento)
 		end
 	end

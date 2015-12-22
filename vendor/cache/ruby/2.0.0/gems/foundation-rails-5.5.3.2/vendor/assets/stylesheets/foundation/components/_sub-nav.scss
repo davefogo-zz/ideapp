@@ -60,7 +60,7 @@ $sub-nav-item-divider-margin: rem-calc(12) !default;
   $active-bg-hover: $sub-nav-active-bg-hover) {
   display: block;
   margin: $sub-nav-list-margin;
-  overflow: hidden;
+  overflow: auto;
   padding-top: $sub-nav-list-padding-top;
   width: auto;
 

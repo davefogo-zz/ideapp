@@ -24,7 +24,7 @@ $flex-video-widescreen-padding-bottom: 56.34% !default;
 @mixin flex-video-container {
   height: 0;
   margin-bottom: $flex-video-margin-bottom;
-  overflow: hidden;
+  overflow: auto;
   padding-bottom: $flex-video-padding-bottom;
   padding-top: $flex-video-padding-top;
   position: relative;

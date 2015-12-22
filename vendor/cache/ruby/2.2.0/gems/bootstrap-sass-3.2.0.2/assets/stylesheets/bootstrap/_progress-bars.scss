@@ -25,7 +25,7 @@
 
 // Outer container
 .progress {
-  overflow: hidden;
+  overflow: auto;
   height: $line-height-computed;
   margin-bottom: $line-height-computed;
   background-color: $progress-bg;

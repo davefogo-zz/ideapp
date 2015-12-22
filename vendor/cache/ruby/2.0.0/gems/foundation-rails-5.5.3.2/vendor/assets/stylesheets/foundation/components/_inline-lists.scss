@@ -19,7 +19,7 @@ $inline-list-default-float-list-margin: rem-calc(22) !default;
 $inline-list-padding: 0 !default;
 
 // We use this to control the overflow of the inline list.
-$inline-list-overflow: hidden !default;
+$inline-list-overflow: auto !default;
 
 // We use this to control the list items
 $inline-list-display: block !default;

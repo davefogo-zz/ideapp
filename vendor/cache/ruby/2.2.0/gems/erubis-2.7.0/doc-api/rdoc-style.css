@@ -188,14 +188,14 @@ div.method-source-code {
     margin: 1em;
     padding: 0.5em;
     border: 1px dashed #999;
-    overflow: hidden;
+    overflow: auto;
 }
 
-div.method-source-code pre { color: #ffdead; overflow: hidden; }
+div.method-source-code pre { color: #ffdead; overflow: auto; }
 
 /* --- Ruby keyword styles --------------------- */
 
-.standalone-code { background: #221111; color: #ffdead; overflow: hidden; }
+.standalone-code { background: #221111; color: #ffdead; overflow: auto; }
 
 .ruby-constant  { color: #7fffd4; background: transparent; }
 .ruby-keyword { color: #00ffff; background: transparent; }

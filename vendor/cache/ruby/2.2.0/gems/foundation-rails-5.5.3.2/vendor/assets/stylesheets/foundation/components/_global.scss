@@ -271,7 +271,7 @@ $base-line-height: 1.5 !default;
 @mixin element-invisible {
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
-  overflow: hidden;
+  overflow: auto;
   position: absolute !important;
   width: 1px;
 }

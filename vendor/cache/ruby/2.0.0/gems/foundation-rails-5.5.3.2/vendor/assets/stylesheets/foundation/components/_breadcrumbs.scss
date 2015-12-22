@@ -47,7 +47,7 @@ $crumb-slash-position: 1px !default;
   display: block;
   list-style: none;
   margin-#{$default-float}: 0;
-  overflow: hidden;
+  overflow: auto;
   padding: $crumb-padding;
 
   // We control which background color and border come through.

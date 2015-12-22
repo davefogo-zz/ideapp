@@ -73,7 +73,7 @@ $clearing-carousel-thumb-active-border: 1px solid rgb(255,255,255) !default;
       position: relative;
       z-index: 998;
       height: 100%;
-      overflow: hidden;
+      overflow: auto;
       margin: 0;
     }
 
@@ -204,7 +204,7 @@ $clearing-carousel-thumb-active-border: 1px solid rgb(255,255,255) !default;
               width: $clearing-carousel-thumb-width;
               min-height: inherit;
               float: $default-float;
-              overflow: hidden;
+              overflow: auto;
               margin-#{$opposite-direction}: 0;
               padding: 0;
               position: relative;
@@ -238,7 +238,7 @@ $clearing-carousel-thumb-active-border: 1px solid rgb(255,255,255) !default;
 
         .visible-img {
           background: $clearing-img-bg;
-          overflow: hidden;
+          overflow: auto;
           height: $clearing-active-img-height;
         }
       }

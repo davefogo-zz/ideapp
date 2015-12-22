@@ -60,7 +60,7 @@
   font-size: 1em !important;
 }
 .syntaxhighlighter.source {
-  overflow: hidden !important;
+  overflow: auto !important;
 }
 .syntaxhighlighter .bold {
   font-weight: bold !important;
@@ -94,7 +94,7 @@
   border: none !important;
   background: white !important;
   padding-left: 1em !important;
-  overflow: hidden !important;
+  overflow: auto !important;
   white-space: pre !important;
 }
 .syntaxhighlighter table td.gutter .line {

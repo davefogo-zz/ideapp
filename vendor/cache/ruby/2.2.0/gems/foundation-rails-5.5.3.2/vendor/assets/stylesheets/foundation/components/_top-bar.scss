@@ -158,7 +158,7 @@ $topbar-dropdown-arrows: true !default; //Set false to remove the \00bb >> text 
       height: $topbar-height;
       line-height: $topbar-height;
       margin-bottom: $topbar-margin-bottom;
-      overflow: hidden;
+      overflow: auto;
       position: relative;
 
       // Topbar Global list Styles

@@ -29,7 +29,7 @@ $button-group-border-width: 1px !default;
   @if $float {
     float: #{$default-float};
     margin-#{$opposite-direction}: $button-bar-margin-opposite;
-    & div { overflow: hidden; }
+    & div { overflow: auto; }
   }
 }
 

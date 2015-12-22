@@ -118,7 +118,7 @@ $orbit-timer-hide-for-small: true !default;
 
 
     .orbit-container {
-      overflow: hidden;
+      overflow: auto;
       width: 100%;
       position: relative;
       background: $orbit-container-bg;
@@ -291,7 +291,7 @@ $orbit-timer-hide-for-small: true !default;
     .orbit-bullets-container { text-align: center; }
     .orbit-bullets {
       margin: 0 auto 30px auto;
-      overflow: hidden;
+      overflow: auto;
       position: relative;
       top: 10px;
       float: none;

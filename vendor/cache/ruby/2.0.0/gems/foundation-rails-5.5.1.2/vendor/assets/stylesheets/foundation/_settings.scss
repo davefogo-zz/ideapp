@@ -664,7 +664,7 @@ $include-html-global-classes: $include-html-classes;
 // $input-prefix-border-color: scale-color($white, $lightness: -20%);
 // $input-prefix-border-size: 1px;
 // $input-prefix-border-type: solid;
-// $input-prefix-overflow: hidden;
+// $input-prefix-overflow: auto;
 // $input-prefix-font-color: $oil;
 // $input-prefix-font-color-alt: $white;
 
@@ -725,7 +725,7 @@ $include-html-global-classes: $include-html-classes;
 // $inline-list-padding: 0;
 
 // We use this to control the overflow of the inline list.
-// $inline-list-overflow: hidden;
+// $inline-list-overflow: auto;
 
 // We use this to control the list items
 // $inline-list-display: block;
