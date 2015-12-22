@@ -32,12 +32,28 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def ejecutivo
-		 text_box "Ejecutivo:" , size: 10, style: :bold,
+		text_box "Titulo:" , size: 10, style: :bold,
 				:at => [220, 500],
 				:width => 150,
 				:height => 15
-		text_box " #{@presupuesto.cliente.colaboradore.try(:nombre)}" , size: 10,
+		text_box " #{@presupuesto.titulo}" , size: 10,
 				:at => [280, 500], 
+				:width => 150,
+		 		:height => 15
+		text_box "Ejecutivo:" , size: 10, style: :bold,
+				:at => [450, 500],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.cliente.colaboradore.try(:nombre)}" , size: 10,
+				:at => [510, 500], 
+				:width => 150,
+		 		:height => 15
+		text_box "Producto:" , size: 10, style: :bold,
+				:at => [220, 470],
+				:width => 150,
+				:height => 15
+		text_box " #{@presupuesto.producto}" , size: 10,
+				:at => [280, 470], 
 				:width => 150,
 		 		:height => 15
 	end
@@ -86,7 +102,7 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def orden_items
-		move_down 50
+		move_down 60
 			table orden_item_rows, :width => 750 do
 				row(0..1000).border_width = 0
 				row(0).font_style = :bold
