@@ -29,9 +29,9 @@
           <th>Color</th>
           <th>Ref. Preventa</th>
           <th>Notas</th>
+          <th>Subtotal</th>
           <th>Descuento</th>
           <th>Iva</th>
-          <th>Subtotal</th>
           <th>Total</th>
         </tr>
       </thead>
@@ -50,9 +50,9 @@
             <td><h4><%= orden_item.color %></h4></td>
             <td><h4><%= orden_item.referencia_preventa %></h4></td>
             <td><h4><%= orden_item.notas %></h4></td>
-            <td><h4><%= number_to_percentage((orden_item.descuento * 100), :precision =>0 ) %></h4></td>
-            <td><h4><%= number_to_currency(orden_item.iva , :precision => 0) %></h4></td>
             <td><h4><%= number_to_currency(orden_item.subtotal, :precision => 0) %></h4></td>
+            <td><h4><%= number_to_currency(orden_item.importe_descuento, :precision =>0 ) %></h4></td>
+            <td><h4><%= number_to_currency(orden_item.iva , :precision => 0) %></h4></td>
             <td><h4><%= number_to_currency(orden_item.total, :precision => 0) %></h4></td>
             <td><%= link_to 'Editar', edit_presupuesto_ordene_orden_item_path(@presupuesto, @ordene, orden_item), class: 'btn btn-mini btn-success' %></td>
             <td><%= link_to 'Anular', presupuesto_ordene_orden_item_path(@presupuesto,@ordene, orden_item), method: :delete, data: { confirm: 'Confirma?' }, class: 'btn btn-mini btn-danger' %></td>
@@ -60,13 +60,13 @@
           </tr>
           <% end %>
       </tbody>
-    </table> 
+    </table>
 
 <h4 >Subtotal :<%= number_to_currency(total_general, :precision => 0) %></h4>
 <h4 >IVA:<%= number_to_currency(iva =total_general * 0.16, :precision => 0) %></h4>
 <h4 >Total Orden:<%= number_to_currency(total_general + iva, :precision => 0) %></h4><br>
 
-<p><%= link_to 'Agregar Nuevo Item', new_presupuesto_ordene_orden_item_path(@presupuesto, @ordene), class: 'btn btn-mini btn-default' %></p>   
+<p><%= link_to 'Agregar Nuevo Item', new_presupuesto_ordene_orden_item_path(@presupuesto, @ordene), class: 'btn btn-mini btn-default' %></p>
 <p><%= link_to 'Descargar Orden en PDF', presupuesto_ordene_path(@presupuesto, @ordene, format: 'pdf') %></p>
 <p><%= link_to 'Editar', edit_presupuesto_path(@ordene) %> <br></p>
 <p><%= link_to 'Regresar', presupuesto_path(@presupuesto) %><br></p>

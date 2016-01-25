@@ -12,12 +12,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Users/davefogo/.rbenv/versions/2.2.3/include/ruby-2.2.0
+topdir = /Users/davefogo/.rvm/rubies/ruby-2.2.1/include/ruby-2.2.0
 hdrdir = $(topdir)
-arch_hdrdir = /Users/davefogo/.rbenv/versions/2.2.3/include/ruby-2.2.0/x86_64-darwin15
+arch_hdrdir = /Users/davefogo/.rvm/rubies/ruby-2.2.1/include/ruby-2.2.0/x86_64-darwin14
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/Users/davefogo/.rbenv/versions/2.2.3
+prefix = $(DESTDIR)/Users/davefogo/.rvm/rubies/ruby-2.2.1
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -31,8 +31,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20151125-92827-sgv582
-sitelibdir = $(DESTDIR)./.gem.20151125-92827-sgv582
+sitearchdir = $(DESTDIR)./.gem.20160125-30050-1ct2kds
+sitelibdir = $(DESTDIR)./.gem.20160125-30050-1ct2kds
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -54,7 +54,7 @@ oldincludedir = $(DESTDIR)/usr/include
 includedir = $(prefix)/include
 localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
-sysconfdir = $(prefix)/etc
+sysconfdir = $(DESTDIR)/etc
 datadir = $(datarootdir)
 datarootdir = $(prefix)/share
 libexecdir = $(exec_prefix)/libexec
@@ -63,8 +63,8 @@ bindir = $(exec_prefix)/bin
 archdir = $(rubyarchdir)
 
 
-CC = clang
-CXX = clang++
+CC = gcc
+CXX = g++
 LIBRUBY = $(LIBRUBY_A)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
 LIBRUBYARG_SHARED = 
@@ -79,14 +79,14 @@ optflags = -O3 -fno-fast-math
 debugflags = -ggdb3
 warnflags = -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wshorten-64-to-32 -Wimplicit-function-declaration -Wdivision-by-zero -Wdeprecated-declarations -Wextra-tokens
 CCDLFLAGS = -fno-common
-CFLAGS   = $(CCDLFLAGS)  -O3 -Wno-error=shorten-64-to-32  -pipe  -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
+CFLAGS   = $(CCDLFLAGS) -O3 -I/Users/haven/.sm/pkg/active/include -fPIC -mmacosx-version-min=10.7 -pipe  -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28/include -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/include/libxml2 -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/include/libxml2 -I/Users/davefogo/.rbenv/versions/2.2.3/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags) -DNOKOGIRI_LIBXML2_PATH\=\"/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2\" -DNOKOGIRI_LIBXML2_PATCHES\=\"0001-Revert-Missing-initialization-for-the-catalog-module.patch\ 0002-Fix-missing-entities-after-CVE-2014-3660-fix.patch\ 0003-Stop-parsing-on-entities-boundaries-errors.patch\ 0004-Cleanup-conditional-section-error-handling.patch\ 0005-CVE-2015-1819-Enforce-the-reader-to-run-in-constant-.patch\ 0006-Another-variation-of-overflow-in-Conditional-section.patch\ 0007-Fix-an-error-in-previous-Conditional-section-patch.patch\ 0008-CVE-2015-8035-Fix-XZ-compression-support-loop.patch\ 0010-Fix-parsering-short-unclosed-comment-uninitialized-access.patch\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28\" -DNOKOGIRI_LIBXSLT_PATCHES\=\"0001-Adding-doc-update-related-to-1.1.28.patch\ 0002-Fix-a-couple-of-places-where-f-printf-parameters-wer.patch\ 0003-Initialize-pseudo-random-number-generator-with-curre.patch\ 0004-EXSLT-function-str-replace-is-broken-as-is.patch\ 0006-Fix-str-padding-to-work-with-UTF-8-strings.patch\ 0007-Separate-function-for-predicate-matching-in-patterns.patch\ 0008-Fix-direct-pattern-matching.patch\ 0009-Fix-certain-patterns-with-predicates.patch\ 0010-Fix-handling-of-UTF-8-strings-in-EXSLT-crypto-module.patch\ 0013-Memory-leak-in-xsltCompileIdKeyPattern-error-path.patch\ 0014-Fix-for-bug-436589.patch\ 0015-Fix-mkdir-for-mingw.patch\ 0016-Fix-for-type-confusion-in-preprocessing-attributes.patch\"
+CPPFLAGS = -DHAVE_XMLPARSEDOC -DHAVE_XSLTPARSESTYLESHEETDOC -DHAVE_EXSLTFUNCREGISTER -DHAVE_XMLHASFEATURE -DHAVE_XMLFIRSTELEMENTCHILD -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETPARSERSTRUCTUREDERRORS -DHAVE_XMLRELAXNGSETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS -DHAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28/include -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/include/libxml2 -I/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/include/libxml2 -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags) -DNOKOGIRI_LIBXML2_PATH\=\"/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2\" -DNOKOGIRI_LIBXML2_PATCHES\=\"0001-Revert-Missing-initialization-for-the-catalog-module.patch\ 0002-Fix-missing-entities-after-CVE-2014-3660-fix.patch\ 0003-Stop-parsing-on-entities-boundaries-errors.patch\ 0004-Cleanup-conditional-section-error-handling.patch\ 0005-CVE-2015-1819-Enforce-the-reader-to-run-in-constant-.patch\ 0006-Another-variation-of-overflow-in-Conditional-section.patch\ 0007-Fix-an-error-in-previous-Conditional-section-patch.patch\ 0008-CVE-2015-8035-Fix-XZ-compression-support-loop.patch\ 0010-Fix-parsering-short-unclosed-comment-uninitialized-access.patch\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28\" -DNOKOGIRI_LIBXSLT_PATCHES\=\"0001-Adding-doc-update-related-to-1.1.28.patch\ 0002-Fix-a-couple-of-places-where-f-printf-parameters-wer.patch\ 0003-Initialize-pseudo-random-number-generator-with-curre.patch\ 0004-EXSLT-function-str-replace-is-broken-as-is.patch\ 0006-Fix-str-padding-to-work-with-UTF-8-strings.patch\ 0007-Separate-function-for-predicate-matching-in-patterns.patch\ 0008-Fix-direct-pattern-matching.patch\ 0009-Fix-certain-patterns-with-predicates.patch\ 0010-Fix-handling-of-UTF-8-strings-in-EXSLT-crypto-module.patch\ 0013-Memory-leak-in-xsltCompileIdKeyPattern-error-path.patch\ 0014-Fix-for-bug-436589.patch\ 0015-Fix-mkdir-for-mingw.patch\ 0016-Fix-for-type-confusion-in-preprocessing-attributes.patch\"
 CXXFLAGS = $(CCDLFLAGS) $(cxxflags) $(ARCH_FLAG)
-ldflags  = -L. -L/Users/davefogo/.rbenv/versions/2.2.3/lib  -fstack-protector
+ldflags  = -L. -L/Users/haven/.sm/pkg/active/lib -fPIC -Bstatic -lz -fstack-protector
 dldflags = -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
-ARCH_FLAG = 
+ARCH_FLAG =  -arch x86_64
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -dynamic -bundle
 LDSHAREDXX = $(CXX) -dynamic -bundle
@@ -100,7 +100,7 @@ RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-darwin15
+arch = x86_64-darwin14
 sitearch = $(arch)
 ruby_version = 2.2.0
 ruby = $(bindir)/$(RUBY_BASE_NAME)
@@ -111,7 +111,7 @@ RM = rm -f
 RM_RF = $(RUBY) -run -e rm -- -rf
 RMDIRS = rmdir -p
 MAKEDIRS = mkdir -p
-INSTALL = /usr/bin/install -c
+INSTALL = /usr/bin/install
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
 COPY = cp
@@ -121,8 +121,8 @@ TOUCH = exit >
 
 preload = 
 
-libpath = /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/lib /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28/lib . $(libdir)
-LIBPATH =  -L/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/lib -L/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28/lib -L. -L$(libdir)
+libpath = /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/lib /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28/lib . $(libdir)
+LIBPATH =  -L/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/lib -L/Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28/lib -L. -L$(libdir)
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -133,7 +133,7 @@ extout =
 extout_prefix = 
 target_prefix = /nokogiri
 LOCAL_LIBS = 
-LIBS =  /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/lib/libxml2.a /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin15.0.0/libxml2/2.9.2/lib/libxml2.a -llzma -lpthread -ldl -lobjc  
+LIBS =  /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/lib/libxml2.a /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/davefogo/Workspace/ideapp/vendor/cache/ruby/2.2.0/gems/nokogiri-1.6.6.4/ports/x86_64-apple-darwin14.1.0/libxml2/2.9.2/lib/libxml2.a -llzma -lpthread -ldl -lobjc  
 ORIG_SRCS = html_document.c html_element_description.c html_entity_lookup.c html_sax_parser_context.c html_sax_push_parser.c nokogiri.c xml_attr.c xml_attribute_decl.c xml_cdata.c xml_comment.c xml_document.c xml_document_fragment.c xml_dtd.c xml_element_content.c xml_element_decl.c xml_encoding_handler.c xml_entity_decl.c xml_entity_reference.c xml_io.c xml_libxml2_hacks.c xml_namespace.c xml_node.c xml_node_set.c xml_processing_instruction.c xml_reader.c xml_relax_ng.c xml_sax_parser.c xml_sax_parser_context.c xml_sax_push_parser.c xml_schema.c xml_syntax_error.c xml_text.c xml_xpath_context.c xslt_stylesheet.c
 SRCS = $(ORIG_SRCS) 
 OBJS = html_document.o html_element_description.o html_entity_lookup.o html_sax_parser_context.o html_sax_push_parser.o nokogiri.o xml_attr.o xml_attribute_decl.o xml_cdata.o xml_comment.o xml_document.o xml_document_fragment.o xml_dtd.o xml_element_content.o xml_element_decl.o xml_encoding_handler.o xml_entity_decl.o xml_entity_reference.o xml_io.o xml_libxml2_hacks.o xml_namespace.o xml_node.o xml_node_set.o xml_processing_instruction.o xml_reader.o xml_relax_ng.o xml_sax_parser.o xml_sax_parser_context.o xml_sax_push_parser.o xml_schema.o xml_syntax_error.o xml_text.o xml_xpath_context.o xslt_stylesheet.o

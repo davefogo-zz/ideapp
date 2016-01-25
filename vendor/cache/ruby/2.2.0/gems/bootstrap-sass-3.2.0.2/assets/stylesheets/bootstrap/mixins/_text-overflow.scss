@@ -2,7 +2,7 @@
 // Requires inline-block or block for proper styling
 
 @mixin text-overflow() {
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

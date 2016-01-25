@@ -12,10 +12,10 @@ Gem::Specification.new do |s|
   s.description = "Font Metrics Parser for the Prawn PDF generator"
   s.email = ["gregory.t.brown@gmail.com", "brad@bradediger.com", "dnelson@bluejade.com", "greenberg@entryway.net", "jimmy@deefa.com"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.3")
-  s.rubygems_version = "2.4.5.1"
+  s.rubygems_version = "2.4.6"
   s.summary = "TrueType Font Metrics Parser"
 
-  s.installed_by_version = "2.4.5.1" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.4.6" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

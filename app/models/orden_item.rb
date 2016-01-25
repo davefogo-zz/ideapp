@@ -5,7 +5,7 @@ class OrdenItem < ActiveRecord::Base
   belongs_to :contrato
   has_many :incentivos, dependent: :destroy
   validates :fecha_item, :costo_unidad, :medio_id, :cantidad, :descuento, presence: true
-  
+
   before_save :calculate_area, :calculate_subtotal, :calculate_iva, :calculate_importe_descuento,  :calculate_incentivo, :calculate_total
   after_save :generate_factura_item, :if => :aprobado_por_cliente?
   before_destroy :generate_orden_anulada
@@ -23,13 +23,13 @@ class OrdenItem < ActiveRecord::Base
     end
 
     def calculate_subtotal
-      if area == 0 
-        self.subtotal = (costo_unidad * cantidad) 
+      if area == 0
+        self.subtotal = costo_unidad * cantidad
         else
-        self.subtotal = (area * costo_unidad * cantidad)
+        self.subtotal = area * costo_unidad * cantidad
       end
-    end   
-    
+    end
+
     def calculate_total
       self.total = subtotal - importe_descuento + iva
     end
@@ -63,7 +63,7 @@ class OrdenItem < ActiveRecord::Base
             FacturaItem.create!(ubicacion: self.ubicacion, fecha_orden: self.fecha_item, orden_item_id: self.id, presupuesto_id: self.ordene.presupuesto_id, cobro_proveedor: self.medio.cobro, cantidad: self.cantidad, medio_id: self.medio_id, costo_unidad: self.incentivo , descuento: self.descuento)
             self.facturado = Time.now
           end
-        end 
+        end
       end
     end
 

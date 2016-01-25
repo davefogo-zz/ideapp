@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.files = ["bin/foreman"]
   s.homepage = "http://github.com/ddollar/foreman"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5.1"
+  s.rubygems_version = "2.4.6"
   s.summary = "Process manager for applications with multiple components"
 
-  s.installed_by_version = "2.4.5.1" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.4.6" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
