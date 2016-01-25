@@ -37,7 +37,7 @@ class OrdenePdf < Prawn::Document
 				:width => 150,
 				:height => 15
 		text_box " #{@presupuesto.titulo}" , size: 10,
-				:at => [280, 500], 
+				:at => [280, 500],
 				:width => 150,
 		 		:height => 15
 		text_box "Ejecutivo:" , size: 10, style: :bold,
@@ -45,7 +45,7 @@ class OrdenePdf < Prawn::Document
 				:width => 150,
 				:height => 15
 		text_box " #{@presupuesto.cliente.colaboradore.try(:nombre)}" , size: 10,
-				:at => [510, 500], 
+				:at => [510, 500],
 				:width => 150,
 		 		:height => 15
 		text_box "Producto:" , size: 10, style: :bold,
@@ -53,7 +53,7 @@ class OrdenePdf < Prawn::Document
 				:width => 150,
 				:height => 15
 		text_box " #{@presupuesto.producto}" , size: 10,
-				:at => [280, 470], 
+				:at => [280, 470],
 				:width => 150,
 		 		:height => 15
 	end
@@ -78,27 +78,27 @@ class OrdenePdf < Prawn::Document
 		text_box "Nit:", size: 10, style: :bold,
 				 :at => [220, 530],
 				 :height => 15,
-				 :width => 200	
+				 :width => 200
 		text_box "#{@presupuesto.cliente.numero_de_documento}", size:10,
 				 :at => [260, 530],
 				 :height => 15,
-				 :width => 200	
+				 :width => 200
 		text_box "Proveedor:",  size: 10, style: :bold,
 				 :at =>  [450, 560],
 				 :height => 15,
-				 :width => 200	
+				 :width => 200
 		text_box "#{@ordene.proveedore.nombre}", size:10,
 				 :at =>  [510, 560],
 				 :height => 15,
-				 :width => 200 
+				 :width => 200
 		text_box "Nit:",  size: 10, style: :bold,
 				 :at =>  [450, 530],
 				 :height => 15,
-				 :width => 200	
+				 :width => 200
 		text_box "#{@ordene.proveedore.numero_de_documento}", size:10,
 				 :at =>  [500, 530],
 				 :height => 15,
-				 :width => 200 
+				 :width => 200
 	end
 
 	def orden_items
@@ -112,17 +112,17 @@ class OrdenePdf < Prawn::Document
 	end
 
 	def orden_item_rows
-		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Descuento', 'Iva', 'Subtotal','Total']] + @ordene.orden_items.map do |item|
-			[item.fecha_item, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, item.descuento, price(item.iva), price(item.subtotal), price(item.total)]
-		end	
+		[['Fecha', 'Medio', 'Cm', 'Col', 'Cantidad', 'Costo Unidad', 'Ubicacion', 'Formato', 'Color', 'Ref. Preventa', 'Notas', 'Subtotal', 'Descuento', 'Iva', 'Total']] + @ordene.orden_items.map do |item|
+			[item.fecha_item, item.medio.nombre, item.cm, item.col, item.cantidad, price(item.costo_unidad), item.ubicacion, item.formato, item.color, item.referencia_preventa, item.notas, price(item.subtotal), price(item.importe_descuento), price(item.iva), price(item.total)]
+		end
 	end
 
 	def total
 		move_down 15
 			text "Subtotal #{price(@ordene.subtotal)}", size: 8, style: :bold, :align => :right
 		move_down 5
-			text "Iva #{price(@ordene.iva)}", size: 8, style: :bold, :align => :right	
+			text "Iva #{price(@ordene.iva)}", size: 8, style: :bold, :align => :right
 		move_down 5
-			text "Total #{price(@ordene.total)}",size: 8, style: :bold, :align => :right										   
+			text "Total #{price(@ordene.total)}",size: 8, style: :bold, :align => :right
 	end
 end
