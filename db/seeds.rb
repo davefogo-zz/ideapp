@@ -1,18 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#create departeamentos
 Departamento.create(nombre: "Comercial")
 Departamento.create(nombre: "Digital")
 Departamento.create(nombre: "Finanzas")
 Departamento.create(nombre: "Gerencia")
 
+#create cargos
 cargo_list = [
 	[ "Gerente General", 4 ],
-	[ "Gerente", 3 ],
+	[ "Gerente Financiero", 3 ],
 	[ "Gerente", 2 ],
 	[ "Gerente de Planeacion y Estrategia", 1 ],
 	[ "Contador", 3 ],
@@ -33,12 +28,23 @@ cargo_list.each do |nombre, departamento_id|
 	Cargo.create(nombre: nombre, departamento_id: departamento_id)
 end
 
+#create users
+User.create(email: "davfor@ideamos.co", password: "password", first_name: "Luis David", last_name: "Forero", role: 0)
+User.create(email: "vol@ideamos.co", password: "password", first_name: "Volumen", last_name: "Volumen", role: 1)
+User.create(email: "nidcue@ideamos.co", password: "password", first_name: "Nidia", last_name: "Cuellar", role: 1)
+User.create(email: "diasua@ideamos.co", password: "password", first_name: "Diana", last_name: "Suarez", role: 1)
+User.create(email: "marsol@ideamos.co", password: "password", first_name: "Maria Paula", last_name: "Solano", role: 1)
+User.create(email: "concor@ideamos.co", password: "password", first_name: "Constanza", last_name: "Cortes", role: 1)
+
+#create colaboradores
+Colaboradore.create(nombre: "David Forero", cedula: "1020732006", telefono_empresa: "3847777", telefono_personal: "3043262122", direccion: "Calle 73 No. 0-69 Este, Apto 401", user_id: 1,  departamento_id: 3, cargo_id: 3)
 Colaboradore.create("nombre"=>"Volumen", "jefe_inmediato"=>nil, "cedula"=>"124213412342134", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>2, "departamento_id"=>1, "cargo_id"=>1)
 Colaboradore.create("nombre"=>"Nidia Cuellar", "jefe_inmediato"=>nil, "cedula"=>"254523452345", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>3, "departamento_id"=>1, "cargo_id"=>1)
 Colaboradore.create("nombre"=>"Diana Suarez", "jefe_inmediato"=>nil, "cedula"=>"2544235324", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>4, "departamento_id"=>1, "cargo_id"=>1)
 Colaboradore.create("nombre"=>"Maria Paula Solano", "jefe_inmediato"=>nil, "cedula"=>"214523432", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>5, "departamento_id"=>1, "cargo_id"=>1)
 Colaboradore.create("nombre"=>"Constanza Cortes", "jefe_inmediato"=>nil, "cedula"=>"12342134", "telefono_empresa"=>"", "telefono_personal"=>"", "direccion"=>"", "user_id"=>6, "departamento_id"=>1, "cargo_id"=>4)
 
+#create clases
 Clase.create("clase"=>1, "descripcion"=>"ACTIVO")
 Clase.create("clase"=>2, "descripcion"=>"PASIVO")
 Clase.create("clase"=>3, "descripcion"=>"PATRIMONIO")
@@ -49,6 +55,7 @@ Clase.create("clase"=>7, "descripcion"=>"COSTOS DE PRODUCCION O DE OPERACION")
 Clase.create("clase"=>8, "descripcion"=>"CUENTAS DE ORDEN DEUDORAS")
 Clase.create("clase"=>9, "descripcion"=>"CUENTAS DE ORDEN ACREEDORAS")
 
+#create grupos
 Grupo.create("grupo"=>11, "descripcion"=>"DISPONIBLE", "clase_id"=>1)
 Grupo.create("grupo"=>12, "descripcion"=>"INVERSIONES", "clase_id"=>1)
 Grupo.create("grupo"=>13, "descripcion"=>"DEUDORES", "clase_id"=>1)
@@ -102,6 +109,7 @@ Grupo.create("grupo"=>94, "descripcion"=>"RESPONSABILIDADES CONTINGENTES POR CON
 Grupo.create("grupo"=>95, "descripcion"=>"ACREEDORAS FISCALES POR CONTRA (DB)", "clase_id"=>9)
 Grupo.create("grupo"=>96, "descripcion"=>"ACREEDORAS DE CONTROL POR CONTRA (DB)", "clase_id"=>9)
 
+#create cuentasPuc
 CuentaPuc.create("cuenta"=>1105, "descripcion"=>"CAJA", "grupo_id"=>1)
 CuentaPuc.create("cuenta"=>1110, "descripcion"=>"BANCOS", "grupo_id"=>1)
 CuentaPuc.create("cuenta"=>1115, "descripcion"=>"REMESAS EN TRANSITO", "grupo_id"=>1)
